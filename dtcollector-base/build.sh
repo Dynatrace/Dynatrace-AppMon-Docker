@@ -17,7 +17,7 @@ TAG=${DYNATRACE_VERSION}-`date +%Y%m%d-%H%M%S`
 echo "Building Docker image"
 sudo docker build -t centic9/dtcollector-base:${TAG} .
 if [ $? -ne 0 ];then
-	echo "Failed to build image"
+	echo "Failed to build Docker image"
 	exit 1
 fi
 

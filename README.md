@@ -1,5 +1,5 @@
-dockerfiles
-===========
+Docker containers for dynaTrace components
+==========================================
 
 This repository contains a collection of Docker build contexts for components of dynaTrace.
 
