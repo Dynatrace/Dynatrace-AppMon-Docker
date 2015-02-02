@@ -11,7 +11,11 @@ Please feel free to contribute.
 
 ## dynaTrace Collector Docker images
 
-### Base dynaTrace Collector image
+#### Fork the repository
+
+	git clone <repo>
+
+### Build the base dynaTrace Collector image
 
 #### Download the dynaTrace Collector 
 
