@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- ATTENTION - THIS IS AN AUTOMATICALLY GENERATED FILE -->
+<!-- Manual changes can cause severe problems and system instability -->
+<!-- Apply manual changes only if you have received explicit instructions from dynaTrace Support -->
+<dynatrace version="6.0.0.7042">
+  <collectorconfig memento.version="6.0.0.7042" usetunnel="false" agentport="9997" useproxy="false" authstring="" serverport="6699" groupname="" proxyport="8080" embedded="false" compress="true" proxyhost="" useproxyauthentication="false" proxyusername="" usepreemtiveproxyauth="true" name="dynaTrace Collector via Docker" watchdogtimeout="10" agentaddress="" serveraddress="localhost" tunnel="http://localhost:8021/tunnel">
+    <agentlistenaddressconfig>
+      <listenaddress agentport="9997" agentaddress="" />
+    </agentlistenaddressconfig>
+    <loggingconfig append="true" correlationmaxbytes="31457280" console="INFO" level="INFO" maxfiles="5" correlationmaxfiles="2" path="../log/collector/dynaTrace Collector" html="false" maxbytes="10485760" />
+    <buffers agentbuffersize="32768" />
+    <protocoldumps maxnumberdumps="100" />
+    <collectorserversharedconfig>
+      <ipheaders>
+        <header header="rproxy_remote_address" />
+        <header header="True-Client-IP" />
+        <header header="X-Client-Ip" />
+        <header header="X-Forwarded-For" />
+        <header header="X-Http-Client-Ip" />
+      </ipheaders>
+      <hostheaders>
+        <header header="X-Forwarded-Host" />
+        <header header="X-Host" />
+        <header header="Host" />
+      </hostheaders>
+    </collectorserversharedconfig>
+  </collectorconfig>
+</dynatrace>
