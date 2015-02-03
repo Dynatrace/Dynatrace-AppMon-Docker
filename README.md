@@ -13,7 +13,7 @@ Please feel free to contribute.
 
 #### Fork the repository
 
-	git clone <repo>
+	git clone https://github.com/dynaTrace/dynatrace-docker.git
 
 ### Build the base dynaTrace Collector image
 
