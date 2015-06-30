@@ -7,7 +7,7 @@ if [ ! -f dynatrace-${DYNATRACE_VERSION}.0.*-linux-x64.jar ];then
 	exit 1
 fi
 
-if [ ! -d dynatrace-${DYNATRACE_VERSION}.0 ];then
+if [ ! -d dynatrace-${DYNATRACE_VERSION} ];then
 	echo Extracting dynaTrace installation package dynatrace-${DYNATRACE_VERSION}.0.*-linux-x64.jar
 	echo -e "Y\nY" | java -jar dynatrace-${DYNATRACE_VERSION}.0.*-linux-x64.jar
 fi
@@ -15,12 +15,12 @@ fi
 TAG=${DYNATRACE_VERSION}-`date +%Y%m%d-%H%M%S`
 
 echo "Building Docker image"
-sudo docker build -t dynaTrace/dtcollector-base:${TAG} .
+sudo docker build -t dynatrace/dtcollector-base:${TAG} .
 if [ $? -ne 0 ];then
 	echo "Failed to build Docker image"
 	exit 1
 fi
 
 echo "Pushing image with tag ${TAG} to Docker registry, using dynaTrace version ${DYNATRACE_VERSION}"
-sudo docker tag dynaTrace/dtcollector-base:${TAG} dynaTrace/dtcollector-base:${DYNATRACE_VERSION}-latest
-sudo docker tag dynaTrace/dtcollector-base:${TAG} dynaTrace/dtcollector-base:latest
+sudo docker tag dynatrace/dtcollector-base:${TAG} dynatrace/dtcollector-base:${DYNATRACE_VERSION}-latest
+sudo docker tag dynatrace/dtcollector-base:${TAG} dynatrace/dtcollector-base:latest

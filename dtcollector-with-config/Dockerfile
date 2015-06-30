@@ -1,4 +1,4 @@
-FROM centic9/dtcollector-base:6.1-latest
+FROM dynatrace/dtcollector-base:6.2-latest
 
 MAINTAINER Dominik Stadler "dominik.stadler@dynatrace.com"
 

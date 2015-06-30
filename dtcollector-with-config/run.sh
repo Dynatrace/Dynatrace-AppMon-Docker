@@ -1,5 +1,5 @@
 #! /bin/bash
 
-mkdir -p /tmp/dynatrace/log/dtcollector_with_config
-sudo docker run --hostname="dtcollector-with-config" -p 9994:9998 --name=dtcollector_with_config -d -v /tmp/dynatrace/dtcollector_with_config/log:/dynatrace/log dynaTrace/dtcollector_with_config "$@" && \
-echo Started configured dynaTrace Collector, exposing Agent connections on port 9994
+mkdir -p /tmp/dynatrace/dtcollector-with-config/log
+sudo docker run --hostname="dtcollector-with-config" -p 9993:9998 --name=dtcollector-with-config -d -v /tmp/dynatrace/dtcollector-with-config/log:/dynatrace/log dynatrace/dtcollector-with-config "$@" && \
+echo Started configured dynaTrace Collector, exposing Agent connections on port 9993

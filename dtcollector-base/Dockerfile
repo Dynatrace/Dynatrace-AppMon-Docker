@@ -3,7 +3,7 @@ FROM java:7
 MAINTAINER Dominik Stadler "dominik.stadler@dynatrace.com"
 
 # Define version of the Collector in the base image, can be overridden later
-ENV DT_VERSION 6.1.0
+ENV DT_VERSION 6.2
 
 RUN mkdir dynatrace
 
