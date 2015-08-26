@@ -1,0 +1,30 @@
+FROM tomcat:8
+
+ENV DT_JAVA_AGENT_ENV_VAR_NAME              "CATALINA_OPTS"
+ENV DT_JAVA_AGENT_ENV_VAR_FILE_NAME         "/usr/local/tomcat/bin/catalina.sh"
+ENV DT_JAVA_AGENT_ENV_VAR_FILE_INSERT_AFTER "#!/bin/sh"
+ENV DT_JAVA_AGENT_NAME                      "dynatrace-tomcat-agent"
+ENV DT_JAVA_AGENT_COLLECTOR_HOST            "localhost"
+ENV DT_JAVA_AGENT_COLLECTOR_PORT            "9998"
+
+ENV ANSIBLE_DEPS "python python-dev python-pip"
+ENV ANSIBLE_ROLE "Dynatrace-Java-Agent"
+
+RUN echo "---\n\
+- hosts: all\n\
+  roles:\n\
+  - role: dynatrace.${ANSIBLE_ROLE}\n\
+    dynatrace_java_agent_env_var_name:              ${DT_JAVA_AGENT_ENV_VAR_NAME}\n\
+    dynatrace_java_agent_env_var_file_name:         ${DT_JAVA_AGENT_ENV_VAR_FILE_NAME}\n\
+    dynatrace_java_agent_env_var_file_insert_after: '${DT_JAVA_AGENT_ENV_VAR_FILE_INSERT_AFTER}'\n\
+    dynatrace_java_agent_name:                      ${DT_JAVA_AGENT_NAME}\n\
+    dynatrace_java_agent_collector_hostname:        ${DT_JAVA_AGENT_COLLECTOR_HOST}\n\
+    dynatrace_java_agent_collector_port:            ${DT_JAVA_AGENT_COLLECTOR_PORT}\n\
+    dynatrace_agents_linux_installer_file_url:        http://10.0.2.2/dynatrace/dynatrace-agents.jar"\
+> /tmp/ansible-playbook.yml
+
+RUN apt-get update && apt-get install -y sudo ${ANSIBLE_DEPS} && pip install ansible && \
+    ansible-galaxy install dynatrace.${ANSIBLE_ROLE} -p /tmp/roles && \
+    ansible-playbook -i localhost, -c local /tmp/ansible-playbook.yml && \
+    pip uninstall -y ansible && apt-get remove --purge -y ${ANSIBLE_DEPS} && \
+    rm -rf /var/lib/apt/lists/*
