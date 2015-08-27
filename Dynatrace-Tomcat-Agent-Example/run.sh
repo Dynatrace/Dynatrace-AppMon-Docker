@@ -14,6 +14,7 @@ docker run \
   -P \
   -v ${DT_AGENT_LOG_DIR}:/opt/dynatrace/log \
   -d \
+  --link dtcollector \
   dynatrace/tomcat-agent-example \
   "$@"
 
