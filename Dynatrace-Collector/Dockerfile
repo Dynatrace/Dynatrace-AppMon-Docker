@@ -19,7 +19,7 @@ RUN apt-get update && \
     ansible-playbook -i localhost, -c local /tmp/ansible-playbook.yml && \
     pip uninstall -y ansible && \
     apt-get remove --purge -y ${ANSIBLE_DEPS} $(apt-mark showauto) && \
-    rm -rf /var/lib/apt/lists/*
+    rm -rf /var/lib/apt/lists/* /tmp/*
 
 WORKDIR /opt/dynatrace
 
