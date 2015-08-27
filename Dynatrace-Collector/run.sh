@@ -15,14 +15,16 @@ DT_COLLECTOR_JVM_XMX="2G"
 DT_COLLECTOR_JVM_PERM_SIZE="128m"
 DT_COLLECTOR_JVM_MAX_PERM_SIZE="128m"
 
+IMAGE_NAME=$DT_COLLECTOR_NAME
+
 
 echo "Creating shared log directory at ${DT_COLLECTOR_LOG_DIR}"
 mkdir -p ${DT_COLLECTOR_LOG_DIR}
 
 echo "Starting the Dynatrace Collector with Agent connections on port ${DT_COLLECTOR_AGENT_PORT}"
 docker run \
-  --name=${DT_COLLECTOR_NAME} \
-  --hostname=${DT_COLLECTOR_NAME} \
+  --name ${IMAGE_NAME} \
+  --hostname ${IMAGE_NAME} \
   -p localhost:${DT_COLLECTOR_LOCAL_AGENT_PORT}:${DT_COLLECTOR_AGENT_PORT} \
   -v ${DT_COLLECTOR_LOG_DIR}:/opt/dynatrace/log/collector/${DT_COLLECTOR_NAME} \
   -d \

@@ -1,15 +1,16 @@
 #!/bin/bash
 
-DT_AGENT_NAME="dynatrace-tomcat-agent"
-DT_AGENT_LOG_DIR="/tmp/log/${DT_AGENT_NAME}"
+IMAGE_NAME="dynatrace-tomcat-agent-example"
+DT_AGENT_LOG_DIR="/tmp/log/${IMAGE_NAME}"
+
 
 echo "Creating shared log directory at ${DT_AGENT_LOG_DIR}"
 mkdir -p ${DT_AGENT_LOG_DIR}
 
 echo "Starting an Apache Tomcat with Dynatrace Agent"
 docker run \
-  --name=${DT_AGENT_NAME} \
-  --hostname=${DT_AGENT_NAME} \
+  --name ${IMAGE_NAME} \
+  --hostname ${IMAGE_NAME} \
   -P \
   -v ${DT_AGENT_LOG_DIR}:/opt/dynatrace/log \
   -d \
