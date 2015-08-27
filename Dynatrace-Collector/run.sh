@@ -25,7 +25,7 @@ echo "Starting the Dynatrace Collector with Agent connections on port ${DT_COLLE
 docker run \
   --name ${IMAGE_NAME} \
   --hostname ${IMAGE_NAME} \
-  -p localhost:${DT_COLLECTOR_LOCAL_AGENT_PORT}:${DT_COLLECTOR_AGENT_PORT} \
+  -p 127.0.0.1:${DT_COLLECTOR_LOCAL_AGENT_PORT}:${DT_COLLECTOR_AGENT_PORT} \
   -v ${DT_COLLECTOR_LOG_DIR}:/opt/dynatrace/log/collector/${DT_COLLECTOR_NAME} \
   -d \
   dynatrace/collector \
