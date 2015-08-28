@@ -3,7 +3,7 @@
 DT_COLLECTOR_NAME="dtcollector"
 DT_COLLECTOR_LOG_DIR="/tmp/log/${DT_COLLECTOR_NAME}"
 
-DT_COLLECTOR_SERVER="localhost:6698"
+DT_COLLECTOR_SERVER="127.0.0.1:6698"
 DT_COLLECTOR_AGENT_PORT="9998"
 DT_COLLECTOR_LOCAL_AGENT_PORT=$DT_COLLECTOR_AGENT_PORT
 
@@ -39,6 +39,6 @@ docker run \
   "$@"
 
 if [ $? -ne 0 ]; then
-	echo "Failed to start the Dynatrace Collector."
-	exit 1
+  echo "Failed to start the Dynatrace Collector."
+  exit 1
 fi

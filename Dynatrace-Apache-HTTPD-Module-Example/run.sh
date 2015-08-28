@@ -20,6 +20,6 @@ docker run \
   "$@"
 
 if [ $? -ne 0 ]; then
-	echo "Failed to start Apache HTTPD."
-	exit 1
+  echo "Failed to start Apache HTTPD."
+  exit 1
 fi

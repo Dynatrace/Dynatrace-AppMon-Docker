@@ -19,6 +19,6 @@ docker run \
   "$@"
 
 if [ $? -ne 0 ]; then
-	echo "Failed to start Apache Tomcat."
-	exit 1
+  echo "Failed to start Apache Tomcat."
+  exit 1
 fi
