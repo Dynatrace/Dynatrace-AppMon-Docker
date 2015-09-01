@@ -5,7 +5,7 @@ MAINTAINER Martin Etmajer <martin.etmajer@dynatrace.com>
 ENV DT_JAVA_AGENT_ENV_VAR_NAME              "CATALINA_OPTS"
 ENV DT_JAVA_AGENT_ENV_VAR_FILE_NAME         "/usr/local/tomcat/bin/catalina.sh"
 ENV DT_JAVA_AGENT_ENV_VAR_FILE_INSERT_AFTER "#!/bin/sh"
-ENV DT_JAVA_AGENT_NAME                      "dynatrace-tomcat-agent"
+ENV DT_JAVA_AGENT_NAME                      "tomcat-agent"
 ENV DT_JAVA_AGENT_COLLECTOR_HOST            "dtcollector"
 ENV DT_JAVA_AGENT_COLLECTOR_PORT            "9998"
 
