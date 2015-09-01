@@ -34,4 +34,4 @@ RUN apt-get update && \
     apt-get remove --purge -y ${ANSIBLE_DEPS} && \
     rm -rf /var/lib/apt/lists/* /tmp/*
 
-CMD ["sh", "-c", "/etc/init.d/dynaTraceWebServerAgent start && httpd-foreground"]
+CMD ["sh", "-c", "/etc/init.d/dynaTraceWebServerAgent start; httpd-foreground"]
