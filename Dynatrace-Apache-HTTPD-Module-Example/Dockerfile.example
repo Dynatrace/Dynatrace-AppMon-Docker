@@ -4,7 +4,7 @@ MAINTAINER Martin Etmajer <martin.etmajer@dynatrace.com>
 
 ENV APACHE_CONF_PATH "/usr/local/apache2/conf/httpd.conf"
 
-ENV DT_WSAGENT_NAME           "dtwsagent"
+ENV DT_WSAGENT_NAME           "apache-wsagent"
 ENV DT_WSAGENT_COLLECTOR_HOST "dtcollector"
 ENV DT_WSAGENT_COLLECTOR_PORT "9998"
 ENV DT_WSAGENT_PATH           "/opt/dynatrace/agent/lib64/libdtagent.so"
