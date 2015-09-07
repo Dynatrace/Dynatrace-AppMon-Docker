@@ -1,8 +1,8 @@
 # Dynatrace-Docker
 
-A collection of Dockerfiles and accompanying scripts for building and running components of the Dynatrace Application Monitoring solution inside Docker.
+A collection of Dockerfiles and accompanying scripts for building and running components of the [Dynatrace Application Monitoring](http://www.dynatrace.com/en_us/application-performance-management/products/application-monitoring.html) solution inside Docker.
 
-## Components
+## Dynatrace Components
 
 Each component contains at least:
 
@@ -11,6 +11,10 @@ Each component contains at least:
 - a `run.sh` which runs a container from an image via `docker run`
 
 Please take a look at each for more information.
+
+## How to Monitor your Dockerized Applications?
+
+The `Dynatrace-Docker-Examples` directory contains a growing number examples and best practices on how to monitor your Dockerized application with Dynatrace.
 
 ## License
 
