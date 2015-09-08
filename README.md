@@ -14,7 +14,7 @@ Please take a look at each sub-directory for more information.
 
 ## How to Monitor your Dockerized Applications?
 
-The `Dynatrace-Docker-Examples` directory contains a growing number examples and best practices on how to monitor your Dockerized application with Dynatrace.
+The `Dynatrace-Docker-Examples` directory contains a growing number of examples and best practices on how to monitor your Dockerized application with Dynatrace.
 
 ## License
 
