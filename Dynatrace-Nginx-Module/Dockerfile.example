@@ -10,7 +10,7 @@ ENV DT_WSAGENT_PATH           "/opt/dynatrace/agent/lib64/libdtagent.so"
 ENV ANSIBLE_DEPS "python python-dev python-pip"
 ENV ANSIBLE_ROLE "Dynatrace-WebServer-Agent"
 
-ENV NGINX_DEPS "nginx-dbg gdb elfutils bc"
+ENV NGINX_AGENT_DEPS "nginx-dbg gdb elfutils bc"
 
 RUN echo "---\n\
 - hosts: all\n\
@@ -23,7 +23,7 @@ RUN echo "---\n\
 > /tmp/ansible-playbook.yml
 
 RUN apt-get update && \
-    apt-get install -y sudo ${ANSIBLE_DEPS} ${NGINX_DEPS} && \
+    apt-get install -y sudo ${ANSIBLE_DEPS} ${NGINX_AGENT_DEPS} && \
     pip install ansible && \
     ansible-galaxy install dynatrace.${ANSIBLE_ROLE} -p /tmp/roles && \
     ansible-playbook -i localhost, -c local /tmp/ansible-playbook.yml && \
