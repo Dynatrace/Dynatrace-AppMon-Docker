@@ -1,6 +1,6 @@
 # Dynatrace-Docker
 
-This is a documentation of examples and best practices on monitoring Dockerized applications with the [Dynatrace Application Monitoring](http://www.dynatrace.com/en_us/application-performance-management/products/application-monitoring.html) solution.
+This is a documentation of examples and best practices on monitoring Dockerized applications with the [Dynatrace Application Monitoring](http://www.dynatrace.com/en/products/application-monitoring.html) solution.
 
 ## Option I: Inheritance
 
@@ -31,18 +31,18 @@ With the inheritance-based approach, you would simply take any of the examples w
 The examples in this project follow the same process when it comes to building a particular Docker image: instead of scripting the environment inside a *Dockerfile*, we follow a more integrated approach using [Ansible](http://www.ansible.com) inside our Dockerfiles, which basically looks as follows:
 
 1) Install Ansible  
-2) Fetch roles (instruction sets) from [Ansible Galaxy](TODO)  
-3) Create an [Ansible Playbook]() that puts the roles in order and parameterizes them  
+2) Fetch roles (instruction sets) from [Ansible Galaxy](https://galaxy.ansible.com/)  
+3) Create an [Ansible Playbook](http://docs.ansible.com/ansible/playbooks_intro.html) that puts the roles in order and parameterizes them  
 4) Execute the playbook and the roles therein (run the installation)  
 5) Clean up everything!
 
-Apart from keeping it nice and [DRY](https://en.m.wikipedia.org/wiki/Don%27t_repeat_yourself), there is another key aspect to it: *Ansible roles can be automatically tested, while Dockerfiles cannot.* In [Testing Ansible Roles with Test Kitchen, Serverspec and RSpec]() I explain how a test-driven approach to infrastructure- and deployment automation can be achieved.
+Apart from keeping it nice and [DRY](https://en.wikipedia.org/wiki/Don%27t_repeat_yourself), there is another key aspect to it: *Ansible roles can be automatically tested, while Dockerfiles cannot.* In [Testing Ansible Roles with Test Kitchen, Serverspec and RSpec](http://www.slideshare.net/MartinEtmajer/testing-ansible-roles-with-test-kitchen-serverspec-and-rspec-48185017) I explain how a test-driven approach to infrastructure- and deployment automation can be achieved.
 
 ## Option II: Composition
 
 Another, much less intrusive way to integrate the Dynatrace Agent into your existing Docker infrastructure can be achieved basically as follows:
 
-1) Install the Dynatrace Agent on your Docker hosts. Our [Chef](), [Puppet]() and [Ansible]() offerings may come in handy here. Using any of these will leave you with the Dynatrace Agent available under `/opt/dynatrace`.  
+1) Install the Dynatrace Agent on your Docker hosts. Our [Chef](https://github.com/dynatrace/Dynatrace-Chef), [Puppet](https://github.com/dynatrace/Dynatrace-Puppet) and [Ansible](https://github.com/dynatrace/Dynatrace-Ansible) offerings may come in handy here. Using any of these will leave you with the Dynatrace Agent available under `/opt/dynatrace`.  
 
 2) Set `/opt/dynatrace` on your host as a mount point inside your containers via `docker run`'s `-v` or `--volume=` option. The following example will leave you with the agent mounted at `/dynatrace` inside the container run from the image `user/foo`:
 
@@ -65,3 +65,5 @@ LoadModule via command line?
 **Example: NGINX**
 
 LD_PRELOAD_PATH=...
+
+[![analytics](https://www.google-analytics.com/collect?v=1&t=pageview&_s=1&dl=https%3A%2F%2Fgithub.com%2FdynaTrace&dp=%2FDynatrace-Docker-Examples&dt=Dynatrace-Docker-Examples&_u=Dynatrace~&cid=github.com%2FdynaTrace&tid=UA-54510554-5&aip=1)]()
