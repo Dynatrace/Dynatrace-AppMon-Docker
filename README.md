@@ -54,7 +54,7 @@ docker run \
   user/foo
 ```
 
-3) Pair the agent with your particular technology. Leverage Docker's ability to override container defaults for running software specified via [`CMD`](https://docs.docker.com/reference/builder/#cmd) in the technology's Dockerfile via `docker run`:
+3) Pair the agent with your particular technology. Leverage Docker's ability to override container defaults for running software specified via [`CMD`](https://docs.docker.com/reference/builder/#cmd) in the technology's Dockerfile via `docker run`. That is, instead of just running a process inside Docker, we take care of the pairing at the same time:
 
 ### Java Applications
 
