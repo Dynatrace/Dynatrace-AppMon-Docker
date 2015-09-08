@@ -66,7 +66,7 @@ The Dynatrace Java Agent loads into a process by providing a valid `-agentpath` 
 docker run \
   --volume /opt/dynatrace:/opt/dynatrace \
   --env CATALINA_OPTS=-agentpath:/opt/dynatrace/agent/lib64/libdtagent.so=name=tomcat-agent,collector=dtcollector \
-  `tomcat`
+  tomcat
 ```
 
 ### Apache HTTPD
@@ -74,13 +74,13 @@ docker run \
 ```
 docker run \
   --volume /opt/dynatrace:/opt/dynatrace \
-  `httpd` \
+  httpd \
   sh -c "/opt/dynatrace/init.d/dynaTraceWebServerAgent start; \
          echo LoadModule dtagent_module /opt/dynatrace/agent/lib64/libdtagent.so >> conf/httpd.conf; \
          httpd-foreground"
 ```
 
-This example requires you to configure the `Name` and `Server` directives in your host's `/opt/dynatrace/agent/conf/dtwsagent.ini` for the agent name and collector host, respectively.
+This example requires you to configure the `Name` and `Server` directives in your host's `/opt/dynatrace/agent/conf/dtwsagent.ini` for the *agent name* and *collector host*, respectively.
 
 ### NGINX
 
@@ -88,16 +88,16 @@ This example requires you to configure the `Name` and `Server` directives in you
 docker run \
   --volume /opt/dynatrace:/opt/dynatrace \
   --env LD_PRELOAD=/opt/dynatrace/agent/lib64/libdtagent.so \
-  `nginx` \
+  nginx \
   sh -c "apt-get update && apt-get install -y nginx-dbg gdb elfutils bc; \
          /opt/dynatrace/init.d/dynaTraceWebServerAgent start; \
          nginx -g 'daemon off;'"
 ```
 
-This example requires you to configure the `Name` and `Server` directives in your host's `/opt/dynatrace/agent/conf/dtwsagent.ini` for the agent name and collector host, respectively. Additionally, a couple of packages required to instrument NGINX are installed ad-hoc.
+This example requires you to configure the `Name` and `Server` directives in your host's `/opt/dynatrace/agent/conf/dtwsagent.ini` for the *agent name* and *collector host*, respectively. 
 
 ## Conclusion
 
-Both options are used by customers of ours and both have their respective pros and cons. The biggest advantage of enforcing composition though is that the *agent name* (which determines how the Dynatrace Agent groups into your monitoring profiles) and the *collector host* can be determined at run-time.
+Both options are used by customers of ours and both have their respective pros and cons. The biggest advantage of enforcing *composition over inheritance* though is that the *agent name* (which determines how the Dynatrace Agent groups into your monitoring profiles) and the *collector host* can be determined at run-time.
 
 [![analytics](https://www.google-analytics.com/collect?v=1&t=pageview&_s=1&dl=https%3A%2F%2Fgithub.com%2FdynaTrace&dp=%2FDynatrace-Docker-Examples&dt=Dynatrace-Docker-Examples&_u=Dynatrace~&cid=github.com%2FdynaTrace&tid=UA-54510554-5&aip=1)]()
