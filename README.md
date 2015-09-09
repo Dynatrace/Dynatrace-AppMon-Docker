@@ -10,7 +10,7 @@ Each component contains at least:
 - a `build.sh` which builds an image from the Dockerfile via `docker build`
 - a `run.sh` which runs a container from an image via `docker run`
 
-Please take a look at each sub-directory for more information.
+All Dynatrace components are made available on the [Docker Hub](https://hub.docker.com/u/dynatrace/).
 
 ## How to Monitor your Dockerized Applications?
 
