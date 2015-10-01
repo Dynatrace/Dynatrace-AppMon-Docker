@@ -10,7 +10,7 @@ ENV DT_WSAGENT_COLLECTOR_PORT "9998"
 ENV DT_WSAGENT_PATH           "/opt/dynatrace/agent/lib64/libdtagent.so"
 
 ENV ANSIBLE_DEPS "python python-dev python-pip"
-ENV ANSIBLE_ROLE "Dynatrace-Apache-HTTPServer-Agent"
+ENV ANSIBLE_ROLE "Dynatrace-Apache-HTTPD-Agent"
 
 RUN echo "---\n\
 - hosts: all\n\
