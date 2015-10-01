@@ -1,0 +1,10 @@
+dtcollector:
+  container_name: dtcollector
+  image: dynatrace/collector
+  hostname: dtcollector
+  volumes:
+    - /tmp/log/dtcollector:/opt/dynatrace/log/collector/dtcollector
+  ports:
+    - "9998:9998"
+  command: -instance dtcollector -listen 9998 -server localhost:6698 -Xms2G -Xmx2G -XX:PermSize=128m -XX:MaxPermSize=128m
+
