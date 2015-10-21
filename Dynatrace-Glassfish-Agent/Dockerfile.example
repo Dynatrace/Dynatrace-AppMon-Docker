@@ -17,7 +17,7 @@ RUN echo "---\n\
     dynatrace_glassfish_agent_glassfish_domain_xml_file: ${DT_GLASSFISH_AGENT_GLASSFISH_DOMAIN_XML_FILE}\n\
     dynatrace_glassfish_agent_name:                      ${DT_GLASSFISH_AGENT_NAME}\n\
     dynatrace_glassfish_agent_collector_hostname:        ${DT_GLASSFISH_AGENT_COLLECTOR_HOST}\n\
-    dynatrace_glassfish_agent_collector_port:            ${DT_GLASSFISH_AGENT_COLLECTOR_PORT}\
+    dynatrace_glassfish_agent_collector_port:            ${DT_GLASSFISH_AGENT_COLLECTOR_PORT}"\
 > /tmp/ansible-playbook.yml
 
 RUN apt-get update && \

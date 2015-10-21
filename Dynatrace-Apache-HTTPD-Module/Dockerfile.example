@@ -21,7 +21,7 @@ RUN echo "---\n\
     dynatrace_apache_agent_do_patch_apache_initd_script: no\n\
     dynatrace_apache_agent_name:                         ${DT_WSAGENT_NAME}\n\
     dynatrace_wsagent_collector_hostname:                ${DT_WSAGENT_COLLECTOR_HOST}\n\
-    dynatrace_wsagent_collector_port:                    ${DT_WSAGENT_COLLECTOR_PORT}\
+    dynatrace_wsagent_collector_port:                    ${DT_WSAGENT_COLLECTOR_PORT}"\
 > /tmp/ansible-playbook.yml
 
 RUN apt-get update && \
