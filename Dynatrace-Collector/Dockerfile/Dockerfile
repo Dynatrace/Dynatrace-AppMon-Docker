@@ -8,8 +8,7 @@ ENV ANSIBLE_ROLE "Dynatrace-Collector"
 RUN echo "---\n\
 - hosts: all\n\
   roles:\n\
-  - role: dynatrace.${ANSIBLE_ROLE}\n\
-    dynatrace_collector_linux_installer_file_url: http://10.0.2.2/dynatrace/dynatrace-collector.jar"\
+  - role: dynatrace.${ANSIBLE_ROLE}\
 > /tmp/ansible-playbook.yml
 
 RUN apt-get update && \
