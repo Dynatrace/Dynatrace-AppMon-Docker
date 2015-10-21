@@ -98,6 +98,6 @@ This example requires you to configure the `Name` and `Server` directives in you
 
 ## Conclusion
 
-Both options are used by customers of ours and both have their respective pros and cons. The biggest advantage of enforcing *composition over inheritance* though is that the *agent name* (which determines how the Dynatrace Agent groups into your monitoring profiles) and the *collector host* can be determined at run-time.
+Both the inheritance- and composition-based approaches are used by customers of ours and both have their respective pros and cons. One particular advantage of enforcing composition over inheritance is that all agent properties: the *agent name* (which determines how the Dynatrace Agent groups into your monitoring profiles) and the *collector host* can be determined at run-time. On the other hand, if you are looking for a solution that has the Dynatrace Agent readily built into a particular technology's image with nothing for you to care about at runtime, or if a technology does not support the injection of our agent at runtime, the inheritance-based approach is the way to go.
 
 [![analytics](https://www.google-analytics.com/collect?v=1&t=pageview&_s=1&dl=https%3A%2F%2Fgithub.com%2FdynaTrace&dp=%2FDynatrace-Docker-Examples&dt=Dynatrace-Docker-Examples&_u=Dynatrace~&cid=github.com%2FdynaTrace&tid=UA-54510554-5&aip=1)]()
