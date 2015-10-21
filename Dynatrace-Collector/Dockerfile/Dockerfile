@@ -8,7 +8,7 @@ ENV ANSIBLE_ROLE "Dynatrace-Collector"
 RUN echo "---\n\
 - hosts: all\n\
   roles:\n\
-  - role: dynatrace.${ANSIBLE_ROLE}\
+  - role: dynatrace.${ANSIBLE_ROLE}"\
 > /tmp/ansible-playbook.yml
 
 RUN apt-get update && \
