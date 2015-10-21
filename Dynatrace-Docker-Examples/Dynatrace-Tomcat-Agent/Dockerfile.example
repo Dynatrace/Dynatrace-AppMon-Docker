@@ -21,7 +21,7 @@ RUN echo "---\n\
     dynatrace_java_agent_env_var_file_insert_after: '${DT_JAVA_AGENT_ENV_VAR_FILE_INSERT_AFTER}'\n\
     dynatrace_java_agent_name:                      ${DT_JAVA_AGENT_NAME}\n\
     dynatrace_java_agent_collector_hostname:        ${DT_JAVA_AGENT_COLLECTOR_HOST}\n\
-    dynatrace_java_agent_collector_port:            ${DT_JAVA_AGENT_COLLECTOR_PORT}\
+    dynatrace_java_agent_collector_port:            ${DT_JAVA_AGENT_COLLECTOR_PORT}"\
 > /tmp/ansible-playbook.yml
 
 RUN apt-get update && \
