@@ -18,8 +18,7 @@ RUN echo "---\n\
   - role: dynatrace.${ANSIBLE_ROLE}\n\
     dynatrace_wsagent_name:                     ${DT_WSAGENT_NAME}\n\
     dynatrace_wsagent_collector_hostname:       ${DT_WSAGENT_COLLECTOR_HOST}\n\
-    dynatrace_wsagent_collector_port:           ${DT_WSAGENT_COLLECTOR_PORT}\n\
-    dynatrace_wsagent_linux_installer_file_url: http://10.0.2.2/dynatrace/dynatrace-wsagent.tar"\
+    dynatrace_wsagent_collector_port:           ${DT_WSAGENT_COLLECTOR_PORT}\
 > /tmp/ansible-playbook.yml
 
 RUN apt-get update && \
