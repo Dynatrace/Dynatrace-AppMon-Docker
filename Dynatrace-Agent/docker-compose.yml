@@ -1,0 +1,7 @@
+dtagent:
+  container_name: "${DT_AGENT_NAME}"
+  hostname: "docker-${DT_AGENT_NAME}"
+  image: dynatrace/agent
+  volumes:
+    - /opt/dynatrace
+    - "/tmp/log/dynatrace/agents/${DT_AGENT_NAME}:/opt/dynatrace/log/agent"
