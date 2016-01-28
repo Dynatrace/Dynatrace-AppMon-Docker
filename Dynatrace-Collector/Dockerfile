@@ -1,25 +1,37 @@
-FROM debian:8
+FROM debian:wheezy
 
 MAINTAINER Martin Etmajer <martin.etmajer@dynatrace.com>
 
-ENV ANSIBLE_DEPS "python python-dev python-pip"
-ENV ANSIBLE_ROLE "Dynatrace-Collector"
+ENV DT_COLLECTOR_VERSION    "6.2"
+ENV DT_COLLECTOR_FILE_NAME  "dynatrace-collector-linux-x86.jar"
+ENV DT_COLLECTOR_URL        "http://downloads.dynatracesaas.com/${DT_COLLECTOR_VERSION}/${DT_COLLECTOR_FILE_NAME}"
 
-RUN echo "---\n\
-- hosts: all\n\
-  roles:\n\
-  - role: dynatrace.${ANSIBLE_ROLE}"\
-> /tmp/ansible-playbook.yml
+ENV DT_COLLECTOR_HOME       "/opt/dynatrace"
+ENV DT_COLLECTOR_AGENT_PORT "9998"
+
+ENV DT_INSTALL_DEPS         "curl openjdk-7-jre-headless"
 
 RUN apt-get update && \
-    apt-get install -y sudo ${ANSIBLE_DEPS} && \
-    pip install ansible && \
-    ansible-galaxy install dynatrace.${ANSIBLE_ROLE} -p /tmp/roles && \
-    ansible-playbook -i localhost, -c local /tmp/ansible-playbook.yml && \
-    pip uninstall -y ansible && \
-    apt-get remove --purge -y ${ANSIBLE_DEPS} $(apt-mark showauto) && \
+    apt-get install -y --no-install-recommends ${DT_INSTALL_DEPS} && \
+    curl -L -o /tmp/${DT_COLLECTOR_FILE_NAME} ${DT_COLLECTOR_URL} && \
+    java -jar /tmp/${DT_COLLECTOR_FILE_NAME} -b 64 -t ${DT_COLLECTOR_HOME} -y && \
+    apt-get remove --purge -y ${DT_INSTALL_DEPS} $(apt-mark showauto) && \
     rm -rf /var/lib/apt/lists/* /tmp/*
 
-WORKDIR /opt/dynatrace
+COPY build/run-process.sh /
 
-ENTRYPOINT ["./dtcollector"]
+# Dynatrace Agents (TCP)
+EXPOSE 9998
+
+ENV WAIT_FOR_CMD_URL          "https://gist.githubusercontent.com/metmajer/efec724d96cbaa20afb8/raw/36055e2f699b984c1bd009da9541679f83cfe89a/wait-for-cmd.sh"
+ENV WAIT_FOR_CMD_INSTALL_DEPS "curl"
+ENV WAIT_FOR_CMD_RUNTIME_DEPS "netcat"
+
+RUN apt-get update && \
+    apt-get install -y ${WAIT_FOR_CMD_INSTALL_DEPS} ${WAIT_FOR_CMD_RUNTIME_DEPS} && \
+    curl -L -o /usr/local/bin/wait-for-cmd.sh ${WAIT_FOR_CMD_URL} && \
+    chmod +x /usr/local/bin/wait-for-cmd.sh && \
+    apt-get remove --purge -y ${WAIT_FOR_CMD_INSTALL_DEPS} && \
+    rm -rf /var/lib/apt/lists/* /tmp/*
+
+CMD /run-process.sh

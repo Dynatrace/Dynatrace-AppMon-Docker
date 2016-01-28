@@ -1,10 +1,11 @@
 dtcollector:
-  container_name: dtcollector
+  container_name: "${DT_COLLECTOR_NAME}"
+  hostname: "docker-${DT_COLLECTOR_NAME}"
   image: dynatrace/collector
-  hostname: dtcollector
+  external_links:
+    - dtserver
+  environment:
+    DT_COLLECTOR_NAME: "${DT_COLLECTOR_NAME}"
+    DT_COLLECTOR_HOST_NAME: "docker-${DT_COLLECTOR_NAME}"
   volumes:
-    - /tmp/log/dtcollector:/opt/dynatrace/log/collector/dtcollector
-  ports:
-    - "9998:9998"
-  command: -instance dtcollector -listen 9998 -server localhost:6698 -Xms2G -Xmx2G -XX:PermSize=128m -XX:MaxPermSize=128m
-
+    - "/tmp/log/dynatrace/collectors/${DT_COLLECTOR_NAME}:/opt/dynatrace/log/collector/${DT_COLLECTOR_NAME}"

@@ -1,5 +1,117 @@
 # Dynatrace-Collector
 
-The following directory contains a `docker-compose.yml` file for running the [Dynatrace Collector](https://community.dynatrace.com/community/display/DOCDT62/Architecture) Docker Image from the [Docker Hub](https://hub.docker.com/r/dynatrace/collector/) via `docker-compose`.
+This project contains files for running and building the [Dynatrace Collector](http://www.dynatrace.com/en/products/application-monitoring.html) in Docker. Ready-made images are available on the [Docker Hub](https://hub.docker.com/r/dynatrace/collector/).
 
-[![analytics](https://www.google-analytics.com/collect?v=1&t=pageview&_s=1&dl=https%3A%2F%2Fgithub.com%2FdynaTrace&dp=%2FDynatrace-Docker%2FDynatrace-Collector%2FDdocker-compose&dt=Dynatrace-Docker%2FDynatrace-Collector%2FDdocker-compose&_u=Dynatrace~&cid=github.com%2FdynaTrace&tid=UA-54510554-5&aip=1)]()
+## Option 1: Run a container via `run-container.sh`
+
+The `run-container.sh` script runs a Docker container using `docker run` and additionally shows by example how the `dynatrace/collector` Docker image can be effectively configured at runtime. Please make sure to validate these settings to match your environment, as described below:
+
+### Configuration
+
+You can override the default configuration by providing the following *environment variables* to the script. Please examine the [Dynatrace Collector Configuration](https://community.dynatrace.com/community/display/DOCDT62/Collector+Configuration) page for more information on the various settings.
+
+| Environment Variable      | Defaults                        | Description
+|:--------------------------|:--------------------------------|:-----------
+| DT_COLLECTOR_NAME         | "dtcollector"                   | A name that applies to both the collector and the container instance.
+| DT_COLLECTOR_HOST_NAME    | "docker-${DT_COLLECTOR_NAME}"   | A hostname that applies to the container instance (within Docker).
+| DT_COLLECTOR_HOST_LOG_DIR | "/tmp/log/${DT_COLLECTOR_NAME}" | A directory on the host the collector logs shall be mapped to.
+| DT_COLLECTOR_SERVER       | null                            | The "hostname:port" to a server the collector shall connect to. Auto-discovered if the collector is linked to an instance of `dynatrace/server` with alias `dtserver`.
+
+The following *environment variables* together form the memory configuration of the Dynatrace Collector, as described in the [Memory Configuration](https://community.dynatrace.com/community/display/DOCDT62/Collector+Configuration#CollectorConfiguration-MemoryConfiguration) section of the [Dynatrace Collector Configuration](https://community.dynatrace.com/community/display/DOCDT62/Collector+Configuration) page:
+
+| Environment Variable           | Defaults | Description
+|:-------------------------------|:---------|:-----------
+| DT_COLLECTOR_JVM_XMS           | "2G"     | The collector's minimum Java heap size.
+| DT_COLLECTOR_JVM_XMX           | "2G"     | The collector's maximum Java heap size.
+| DT_COLLECTOR_JVM_PERM_SIZE     | "128m"   | The collector's minimum Java permanent generation size.
+| DT_COLLECTOR_JVM_MAX_PERM_SIZE | "128m"   | The collector's maximum Java permanent generation size.
+
+### Example
+
+Creates a Dockerized Dynatrace Collector instance named `dtcollector` which connects to a *Dockerized Dynatrace Server* instance with name and link alias `dtserver`:
+
+```
+./run-container.sh
+```
+
+### Example
+
+Creates a Dockerized Dynatrace Collector instance named `dtcollector-1` which connects to *AcmeCo's Dynatrace Server* instance running at `dtserver.acmeco.internal:6698`. Make sure to remove `--link dtserver` from `run-container.sh` beforehand:
+
+```
+DT_COLLECTOR_NAME=dtcollector-1 \
+DT_COLLECTOR_SERVER=dtserver.acmeco.internal:6698 \
+./run-container.sh
+```
+<br>
+
+---
+**TL;DR**: you can quickly spawn a Dynatrace Collector instance with an anticipated set of default configurations by invoking:
+
+```
+./run-container.sh
+```
+---
+<br>
+
+## Option 2: Run a container via `docker-compose.yml`
+
+[Docker Compose](https://docs.docker.com/compose/) is a tool for defining and running multi-container applications, where an application's services are configured in `docker-compose.yml` files. Typically, you would run an application via `docker-compose [-f docker-compose.yml] up`.
+
+### Configuration
+
+While running applications via Docker Compose can be convenient, configuration comes with a drawback: the appreciation of environment variables from the *compose host* in `docker-compose.yml` files has only been added in Docker 1.9. Unfortunately, this doesn't allow you to selectively override sensible defaults in these files from the environment as yet, but instead requires you to specify them each time you run `docker-compose`.
+
+Therefore, for the moment, we have decided to limit the number of supported environment variables to those which we regard most volatile. Please examine the [Dynatrace Collector Configuration](https://community.dynatrace.com/community/display/DOCDT62/Collector+Configuration) page for more information on the various settings.
+
+| Environment Variable | Defaults | Description
+|:---------------------|:---------|:-----------
+| DT_COLLECTOR_NAME    | n/a      | A name that applies to both the collector and the container instance.
+
+### Example
+
+Creates a Dockerized Dynatrace Collector instance named `dtcollector` which connects to a *Dockerized Dynatrace Server* instance with name and link alias `dtserver`:
+
+```
+DT_COLLECTOR_NAME=dtcollector docker-compose up
+```
+
+### Example
+
+Creates a Dockerized Dynatrace Collector instance named `dtcollector-1` which connects to *AcmeCo's Dynatrace Server* instance running at `dtserver.acmeco.internal:6698`. Make sure to add a proper `DT_COLLECTOR_SERVER` to the `environment` section and remove the `external_links` section from `docker-compose.yml` beforehand:
+
+```
+DT_COLLECTOR_NAME=dtcollector-1 docker-compose up
+```
+<br>
+
+---
+**TL;DR**: you can quickly spawn a Dynatrace Collector instance with an anticipated set of default configurations by invoking:
+
+```
+DT_COLLECTOR_NAME=dtcollector docker-compose up
+```
+---
+<br>
+
+## Build an image via `build-image.sh`
+
+While we strongly recommend using our ready-made images on the [Docker Hub](https://hub.docker.com/r/dynatrace/collector/), you can build your own by executing `build-image.sh`.
+
+## Dockerized Dynatrace Components
+
+See the following Dockerized Dynatrace components and examples for more information:
+
+- [Dockerized Dynatrace Server](https://github.com/dynaTrace/Dynatrace-Docker/tree/master/Dynatrace-Server)
+- [Dockerized Dynatrace Collector](https://github.com/dynaTrace/Dynatrace-Docker/tree/master/Dynatrace-Collector)
+- [Dockerized Dynatrace Agent](https://github.com/dynaTrace/Dynatrace-Docker/tree/master/Dynatrace-Agent) and [Examples](https://github.com/dynaTrace/Dynatrace-Docker/tree/master/Dynatrace-Agent-Examples)
+- [Dockerized Dynatrace Web Server Agent](https://github.com/dynaTrace/Dynatrace-Docker/tree/master/Dynatrace-WebServer-Agent) and [Examples](https://github.com/dynaTrace/Dynatrace-Docker/tree/master/Dynatrace-WebServer-Agent-Examples)
+
+## Problems? Questions? Suggestions?
+
+This offering is [Dynatrace Community Supported](https://community.dynatrace.com/community/display/DL/Support+Levels#SupportLevels-Communitysupported/NotSupportedbyDynatrace(providedbyacommunitymember)). Feel free to share any problems, questions and suggestions with your peers on the Dynatrace Community's [Application Monitoring & UEM Forum](https://answers.dynatrace.com/spaces/146/index.html).
+
+## License
+
+Licensed under the MIT License. See the LICENSE file for details.
+[![analytics](https://www.google-analytics.com/collect?v=1&t=pageview&_s=1&dl=https%3A%2F%2Fgithub.com%2FdynaTrace&dp=%2FDynatrace-Docker%2FDynatrace-Collector&dt=Dynatrace-Docker%2FDynatrace-Collector&_u=Dynatrace~&cid=github.com%2FdynaTrace&tid=UA-54510554-5&aip=1)]()
