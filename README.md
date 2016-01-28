@@ -1,20 +1,19 @@
 # Dynatrace-Docker
 
-A collection of `Dockerfiles` and accompanying scripts for building and running components of the [Dynatrace Application Monitoring](http://www.dynatrace.com/en_us/application-performance-management/products/application-monitoring.html) solution inside Docker.
+The home of Dockerized components of the [Dynatrace Application Monitoring](http://www.dynatrace.com/en/products/application-monitoring.html) enterprise solution. All components are available on the [Docker Hub](https://hub.docker.com/u/dynatrace/).
 
-## Dynatrace Components
+## How to Monitor your Dockerized Application?
 
-Each component contains at least:
+Please check out the following links for more information:
 
-- a `Dockerfile` containing instructions to containerize a Dynatrace component
-- a `build.sh` which builds an image from the Dockerfile via `docker build`
-- a `run.sh` which runs a container from an image via `docker run`
+- [Dockerized Dynatrace Server](https://github.com/dynaTrace/Dynatrace-Docker/tree/master/Dynatrace-Server)
+- [Dockerized Dynatrace Collector](https://github.com/dynaTrace/Dynatrace-Docker/tree/master/Dynatrace-Collector)
+- [Dockerized Dynatrace Agent](https://github.com/dynaTrace/Dynatrace-Docker/tree/master/Dynatrace-Agent) and [Examples](https://github.com/dynaTrace/Dynatrace-Docker/tree/master/Dynatrace-Agent-Examples)
+- [Dockerized Dynatrace Web Server Agent](https://github.com/dynaTrace/Dynatrace-Docker/tree/master/Dynatrace-WebServer-Agent) and [Examples](https://github.com/dynaTrace/Dynatrace-Docker/tree/master/Dynatrace-WebServer-Agent-Examples)
 
-All Dynatrace components are made available on the [Docker Hub](https://hub.docker.com/u/dynatrace/).
+## Problems? Questions? Suggestions?
 
-## How to Monitor your Dockerized Applications?
-
-The `Dynatrace-Docker-Examples` directory contains a growing number of examples and best practices on how to monitor your Dockerized application with Dynatrace.
+This offering is [Dynatrace Community Supported](https://community.dynatrace.com/community/display/DL/Support+Levels#SupportLevels-Communitysupported/NotSupportedbyDynatrace(providedbyacommunitymember)). Feel free to share any problems, questions and suggestions with your peers on the Dynatrace Community's [Application Monitoring & UEM Forum](https://answers.dynatrace.com/spaces/146/index.html).
 
 ## License
 
