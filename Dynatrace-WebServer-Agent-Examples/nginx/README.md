@@ -1,3 +1,5 @@
+![NGINX Logo](https://github.com/dynaTrace/Dynatrace-Docker/blob/images/nginx-logo.png)
+
 # Dynatrace WebServer Agent Example: NGINX
 
 This project contains exemplary integrations of the [Dynatrace Application Monitoring](http://www.dynatrace.com/en/products/application-monitoring.html) enterprise solution with a [Dockerized NGINX](https://hub.docker.com/_/nginx/) process for deep end-to-end application monitoring.
