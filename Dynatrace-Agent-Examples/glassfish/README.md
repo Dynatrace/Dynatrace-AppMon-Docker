@@ -1,3 +1,5 @@
+![GlassFish Logo](https://github.com/dynaTrace/Dynatrace-Docker/blob/images/glassfish-logo.png)
+
 # Dynatrace Agent Example: GlassFish
 
 This project contains exemplary integrations of the [Dynatrace Application Monitoring](http://www.dynatrace.com/en/products/application-monitoring.html) enterprise solution with a [Dockerized GlassFish](https://hub.docker.com/_/glassfish/) process for deep end-to-end application monitoring.
