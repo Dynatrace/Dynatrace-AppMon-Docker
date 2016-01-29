@@ -1,3 +1,5 @@
+![Apache Tomcat Logo](https://github.com/dynaTrace/Dynatrace-Docker/blob/images/apache-tomcat-logo.png)
+
 # Dynatrace Agent Example: Apache Tomcat
 
 This project contains exemplary integrations of the [Dynatrace Application Monitoring](http://www.dynatrace.com/en/products/application-monitoring.html) enterprise solution with a [Dockerized Apache Tomcat](https://hub.docker.com/_/tomcat/) process for deep end-to-end application monitoring.
