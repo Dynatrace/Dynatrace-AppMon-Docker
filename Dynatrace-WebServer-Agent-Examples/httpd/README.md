@@ -1,3 +1,5 @@
+![Apache HTTPD Logo](https://github.com/dynaTrace/Dynatrace-Docker/blob/images/apache-httpd-logo.png)
+
 # Dynatrace WebServer Agent Example: Apache HTTPD
 
 This project contains exemplary integrations of the [Dynatrace Application Monitoring](http://www.dynatrace.com/en/products/application-monitoring.html) enterprise solution with a [Dockerized Apache HTTPD](https://hub.docker.com/_/httpd/) process for deep end-to-end application monitoring.
