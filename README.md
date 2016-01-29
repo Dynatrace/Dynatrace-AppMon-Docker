@@ -1,3 +1,5 @@
+![Docker Logo](https://github.com/dynaTrace/Dynatrace-Docker/blob/images/docker-logo.png)
+
 # Dynatrace-Docker
 
 The home of Dockerized components of the [Dynatrace Application Monitoring](http://www.dynatrace.com/en/products/application-monitoring.html) enterprise solution. All components are available on the [Docker Hub](https://hub.docker.com/u/dynatrace/).
