@@ -1,3 +1,5 @@
+![Docker Logo](https://github.com/dynaTrace/Dynatrace-Docker/blob/images/docker-logo.png)
+
 # Dynatrace-Collector
 
 This project contains files for running and building the [Dynatrace Collector](http://www.dynatrace.com/en/products/application-monitoring.html) in Docker. Ready-made images are available on the [Docker Hub](https://hub.docker.com/r/dynatrace/collector/).

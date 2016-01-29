@@ -1,3 +1,5 @@
+![Docker Logo](https://github.com/dynaTrace/Dynatrace-Docker/blob/images/docker-logo.png)
+
 # Dynatrace-WebServer-Agent
 
 This project contains files for running and building the [Dynatrace WebServer Agent](http://www.dynatrace.com/en/products/application-monitoring.html) (master agent) in Docker. Ready-made images are available on the [Docker Hub](https://hub.docker.com/r/dynatrace/wsagent/). Please refer to the [Dynatrace Web Server Agent Examples](https://github.com/dynaTrace/Dynatrace-Docker/tree/master/Dynatrace-WebServer-Agent-Examples) project for exemplary integrations into Dockerized web server processes.
