@@ -1,3 +1,5 @@
+![Java Logo](https://github.com/dynaTrace/Dynatrace-Docker/blob/images/java-logo.png)
+
 # Dynatrace Agent Example: Java Process
 
 This project contains exemplary integrations of the [Dynatrace Application Monitoring](http://www.dynatrace.com/en/products/application-monitoring.html) enterprise solution with a Dockerized Java process for deep end-to-end application monitoring.
