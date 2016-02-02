@@ -49,7 +49,7 @@ docker run --rm \
   <strong>--ipc container:dtwsagent</strong> \
   --publish-all \
   httpd \
-  sh -c "(<strong>sleep 1 && \${DTWSAGENT_ENV_SOCAT_HOME}/attach-to-wsagent-master.sh &</strong>) && \
+  sh -c "(<strong>sleep 1 && \${DTWSAGENT_ENV_DT_WSAGENT_HOME}/attach-to-wsagent-master.sh &</strong>) && \
          (<strong>echo LoadModule ${HTTPD_LOAD_MODULE} >> conf/httpd.conf</strong>) && \
          httpd-foreground"
 </code></pre>

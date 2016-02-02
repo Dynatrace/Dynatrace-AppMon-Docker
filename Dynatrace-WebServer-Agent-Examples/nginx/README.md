@@ -47,7 +47,7 @@ docker run --rm \
   <strong>--ipc container:dtwsagent</strong> \
   --publish-all \
   nginx \
-  sh -c "(<strong>sleep 1 && \${DTWSAGENT_ENV_SOCAT_HOME}/attach-wsagent-slave.sh &</strong>) && \
+  sh -c "(<strong>sleep 1 && \${DTWSAGENT_ENV_DT_WSAGENT_HOME}/attach-wsagent-slave.sh &</strong>) && \
          <strong>LD_PRELOAD=\${DTWSAGENT_ENV_DT_WSAGENT_LIB64}</strong> nginx"
 </code></pre>
 

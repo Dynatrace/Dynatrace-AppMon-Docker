@@ -18,7 +18,7 @@ DT_WSAGENT_COLLECTOR=${DT_WSAGENT_COLLECTOR:-"${DT_WSAGENT_COLLECTOR_HOST_NAME}:
 wait-for-cmd.sh "nc -z ${DT_WSAGENT_COLLECTOR_HOST_NAME} ${DT_WSAGENT_COLLECTOR_PORT}" 360
 
 # Assert that incoming slave agents are accepted only after dtwsagent has started.
-(wait-for-cmd.sh "nc -uz 127.0.0.1 ${DT_WSAGENT_SLAVE_AGENT_PORT}" 60 && ${SOCAT_HOME}/accept-wsagent-slaves.sh) &
+(wait-for-cmd.sh "nc -uz 127.0.0.1 ${DT_WSAGENT_SLAVE_AGENT_PORT}" 60 && ${DT_WSAGENT_HOME}/accept-wsagent-slaves.sh) &
 
 sed -i -r "s/^#?Name dtwsagent/Name ${DT_WSAGENT_NAME}/;s/^#?Server localhost/Server ${DT_WSAGENT_COLLECTOR}/;s/^#?Loglevel info/Loglevel ${DT_WSAGENT_LOG_LEVEL}/" ${DT_WSAGENT_INI} && \
 ${DT_WSAGENT_BIN64}

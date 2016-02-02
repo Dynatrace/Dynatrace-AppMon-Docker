@@ -25,6 +25,8 @@ RUN apt-get update && \
     rm -rf /var/lib/apt/lists/* /tmp/*
 
 COPY build/run-process.sh /
+COPY build/attach-to-wsagent-master.sh ${DT_WSAGENT_HOME}
+COPY build/accept-wsagent-slaves.sh ${DT_WSAGENT_HOME}
 
 # Dynatrace Web Server Slave Agents
 EXPOSE 8001/udp
@@ -45,7 +47,5 @@ ENV SOCAT_HOME "/opt/dynatrace/socat"
 RUN mkdir -p ${SOCAT_HOME}
 
 COPY build/linux/x86_64/socat ${SOCAT_HOME}
-COPY build/accept-wsagent-slaves.sh ${SOCAT_HOME}
-COPY build/attach-to-wsagent-master.sh ${SOCAT_HOME}
 
 CMD /run-process.sh
