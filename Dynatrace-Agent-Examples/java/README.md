@@ -33,8 +33,8 @@ With the Dynatrace Agent and the Dynatrace Collector running in Docker, using th
 Finally, we provide the `-agentpath` declaration to the invocation of the actual Java process ([see here for the original Dockerfile](https://github.com/dynaTrace/Dynatrace-Docker/tree/master/Dynatrace-Agent-Examples/java/Dockerfile)):
 
 <pre><code>#!/bin/bash
-JAVA_DT_AGENT_NAME="java-agent"
-JAVA_DT_AGENT_PATH="-agentpath:\${DTAGENT_ENV_DT_AGENT_LIB64}=name=${JAVA_DT_AGENT_NAME},collector=\${DTCOLLECTOR_ENV_DT_COLLECTOR_HOST_NAME}"
+DT_AGENT_NAME=${JAVA_DT_AGENT_NAME:-"java-agent"}
+DT_AGENT_PATH="-agentpath:\${DTAGENT_ENV_LIB64}=name=${DT_AGENT_NAME},collector=\${DTCOLLECTOR_ENV_HOST_NAME}"
 
 echo "Starting Java - Example"
 docker run --rm \
@@ -43,7 +43,7 @@ docker run --rm \
   <strong>--link dtcollector</strong> \
   <strong>--volumes-from dtagent</strong> \
   dynatrace/java-example \
-  sh -c "java <strong>${JAVA_DT_AGENT_PATH}</strong> JavaTest"
+  sh -c "java <strong>${DT_AGENT_PATH}</strong> JavaTest"
 </code></pre>
 
 ## Dockerized Dynatrace Components

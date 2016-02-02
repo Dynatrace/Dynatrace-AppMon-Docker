@@ -39,7 +39,7 @@ With the Dynatrace Web Server Agent running in Docker, using the `dynatrace/wsag
 Finally, we place the `LoadModule` declaration inside Apache HTTPD's `httpd.conf` and invoke the actual web server process ([see here for the original Dockerfile](https://github.com/docker-library/httpd/blob/1f1f7d39d5fe5aebeedea6872786b4e3ce0ebcc9/2.4/Dockerfile)):
 
 <pre><code>#!/bin/bash
-HTTPD_LOAD_MODULE="dtagent_module \${DTWSAGENT_ENV_DT_WSAGENT_LIB64}"
+HTTPD_LOAD_MODULE="dtagent_module \${DTWSAGENT_ENV_LIB64}"
 
 echo "Starting Apache HTTPD - Example"
 docker run --rm \
@@ -49,7 +49,7 @@ docker run --rm \
   <strong>--ipc container:dtwsagent</strong> \
   --publish-all \
   httpd \
-  sh -c "(<strong>sleep 1 && \${DTWSAGENT_ENV_DT_WSAGENT_HOME}/attach-to-wsagent-master.sh &</strong>) && \
+  sh -c "(<strong>sleep 1 && \${DTWSAGENT_ENV_DT}/attach-to-wsagent-master.sh &</strong>) && \
          (<strong>echo LoadModule ${HTTPD_LOAD_MODULE} >> conf/httpd.conf</strong>) && \
          httpd-foreground"
 </code></pre>

@@ -1,23 +1,23 @@
 #!/bin/bash
-DT_WSAGENT_NAME=${DT_WSAGENT_NAME:-"dtwsagent"}
-DT_WSAGENT_HOST_NAME=${DT_WSAGENT_HOST_NAME:-"docker-${DT_WSAGENT_NAME}"}
-DT_WSAGENT_HOST_LOG_DIR=${DT_WSAGENT_HOST_LOG_DIR:-"/tmp/log/dynatrace/wsagents/${DT_WSAGENT_NAME}"}
-DT_WSAGENT_LOG_LEVEL=${DT_WSAGENT_LOG_LEVEL:-"info"}
-DT_WSAGENT_COLLECTOR=${DT_WSAGENT_COLLECTOR}
+NAME=${DT_WSAGENT_NAME:-"dtwsagent"}
+HOST_NAME=${DT_WSAGENT_HOST_NAME:-"docker-${NAME}"}
+HOST_LOG_DIR=${DT_WSAGENT_HOST_LOG_DIR:-"/tmp/log/dynatrace/wsagents/${NAME}"}
+LOG_LEVEL=${DT_WSAGENT_LOG_LEVEL:-"info"}
+COLLECTOR=${DT_WSAGENT_COLLECTOR}
 
-echo "Creating Dynatrace WebServer Agent log directory at ${DT_WSAGENT_HOST_LOG_DIR}"
-mkdir -p ${DT_WSAGENT_HOST_LOG_DIR}
+echo "Creating Dynatrace Web Server Agent log directory at ${HOST_LOG_DIR}"
+mkdir -p ${HOST_LOG_DIR}
 
-echo "Starting the Dynatrace WebServer Agent: ${DT_WSAGENT_NAME}"
+echo "Starting the Dynatrace Web Server Agent: ${NAME}"
 docker run \
-  --name ${DT_WSAGENT_NAME} \
-  --hostname ${DT_WSAGENT_HOST_NAME} \
+  --name ${NAME} \
+  --hostname ${HOST_NAME} \
   --link dtcollector \
-  --env DT_WSAGENT_NAME="${DT_WSAGENT_NAME}" \
-  --env DT_WSAGENT_HOST_NAME="${DT_WSAGENT_HOST_NAME}" \
-  --env DT_WSAGENT_LOG_LEVEL="${DT_WSAGENT_LOG_LEVEL}" \
-  --env DT_WSAGENT_COLLECTOR="${DT_WSAGENT_COLLECTOR}" \
+  --env NAME="${NAME}" \
+  --env HOST_NAME="${HOST_NAME}" \
+  --env LOG_LEVEL="${LOG_LEVEL}" \
+  --env COLLECTOR="${COLLECTOR}" \
   --volume /opt/dynatrace \
-  --volume ${DT_WSAGENT_HOST_LOG_DIR}:/opt/dynatrace/log \
+  --volume ${HOST_LOG_DIR}:/opt/dynatrace/log \
   --publish-all \
   dynatrace/wsagent

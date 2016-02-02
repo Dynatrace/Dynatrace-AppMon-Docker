@@ -5,7 +5,7 @@ dtcollector:
   external_links:
     - dtserver
   environment:
-    DT_COLLECTOR_NAME: "${DT_COLLECTOR_NAME}"
-    DT_COLLECTOR_HOST_NAME: "docker-${DT_COLLECTOR_NAME}"
+    NAME: "${DT_COLLECTOR_NAME}"
+    HOST_NAME: "docker-${DT_COLLECTOR_NAME}"
   volumes:
     - "/tmp/log/dynatrace/collectors/${DT_COLLECTOR_NAME}:/opt/dynatrace/log/collector/${DT_COLLECTOR_NAME}"

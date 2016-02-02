@@ -33,11 +33,11 @@ With the Dynatrace Agent and the Dynatrace Collector running in Docker, using th
 Finally, we invoke the actual application process ([see here for the original Dockerfile](https://github.com/docker-library/tomcat/blob/e36c4044b7ece1361f124aaf3560c2efd888b62f/8-jre8/Dockerfile)):
 
 <pre><code>#!/bin/bash
-GLASSFISH_DOMAIN_XML_FILE=${GLASSFISH_DOMAIN_XML_FILE}
+GF_DOMAIN_XML_FILE=${GF_DOMAIN_XML_FILE}
 
-GLASSFISH_DT_AGENT_NAME=${GLASSFISH_DT_AGENT_NAME:-"glassfish-agent"}
-GLASSFISH_DT_AGENT_PATH="-agentpath:\${DTAGENT_ENV_DT_AGENT_LIB64}=name=${GLASSFISH_DT_AGENT_NAME},collector=\${DTCOLLECTOR_ENV_DT_COLLECTOR_HOST_NAME}:\${DTCOLLECTOR_ENV_DT_COLLECTOR_AGENT_PORT}"
-GLASSFISH_DT_AGENT_INSTALL_DEPS="xmlstarlet"
+DT_AGENT_NAME=${GF_DT_AGENT_NAME:-"glassfish-agent"}
+DT_AGENT_PATH="-agentpath:\${DTAGENT_ENV_LIB64}=name=${DT_AGENT_NAME},collector=\${DTCOLLECTOR_ENV_HOST_NAME}"
+DT_AGENT_INSTALL_DEPS="xmlstarlet"
 
 echo "Starting GlassFish - Example"
 docker run --rm \
@@ -47,12 +47,12 @@ docker run --rm \
   <strong>--volumes-from dtagent</strong> \
   --publish-all \
   glassfish \
-  sh -c "apt-get update && apt-get install ${GLASSFISH_DT_AGENT_INSTALL_DEPS} && \
-         <strong>xmlstarlet ed -L -s '//java-config' -t elem -n 'jvm-options' -v '${GLASSFISH_DT_AGENT_PATH}' ${GLASSFISH_DOMAIN_XML_FILE}</strong> && \
-         <strong>xmlstarlet ed -L -d '//java-config/jvm-options[text()=${GLASSFISH_DT_AGENT_PATH}]' ${GLASSFISH_DOMAIN_XML_FILE}</strong> && \
-         apt-get remove --purge -y ${GLASSFISH_DT_AGENT_INSTALL_DEPS} && \
+  sh -c "apt-get update && apt-get install ${DT_AGENT_INSTALL_DEPS} && \
+         <strong>xmlstarlet ed -L -s '//java-config' -t elem -n 'jvm-options' -v '${DT_AGENT_PATH}' ${GF_DOMAIN_XML_FILE}</strong> && \
+         <strong>xmlstarlet ed -L -d '//java-config/jvm-options[text()=${DT_AGENT_PATH}]' ${GF_DOMAIN_XML_FILE}</strong> && \
+         apt-get remove --purge -y ${DT_AGENT_INSTALL_DEPS} && \
          rm -rf /var/lib/apt/lists/* /tmp/* && \
-         asadmin start-domain --verbose"
+         asadmin start-domain -v"
 </code></pre>
 
 ## Dockerized Dynatrace Components

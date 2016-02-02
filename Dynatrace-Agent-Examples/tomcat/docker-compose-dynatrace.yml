@@ -3,9 +3,9 @@ dtserver:
   hostname: "docker-${DT_SERVER_NAME}"
   image: dynatrace/server
   environment:
-    DT_SERVER_NAME: "${DT_SERVER_NAME}"
-    DT_SERVER_HOST_NAME: "docker-${DT_SERVER_NAME}"
-    DT_SERVER_LICENSE_KEY_FILE_URL: "${DT_SERVER_LICENSE_KEY_FILE_URL}"
+    NAME: "${DT_SERVER_NAME}"
+    HOST_NAME: "docker-${DT_SERVER_NAME}"
+    LICENSE_KEY_FILE_URL: "${DT_SERVER_LICENSE_KEY_FILE_URL}"
   volumes:
     - "/tmp/log/dynatrace/servers/${DT_SERVER_NAME}:/opt/dynatrace/log/server/${DT_SERVER_NAME}"
   ports:
@@ -19,8 +19,8 @@ dtcollector:
   links:
     - dtserver
   environment:
-    DT_COLLECTOR_NAME: "${DT_COLLECTOR_NAME}"
-    DT_COLLECTOR_HOST_NAME: "docker-${DT_COLLECTOR_NAME}"
+    NAME: "${DT_COLLECTOR_NAME}"
+    HOST_NAME: "docker-${DT_COLLECTOR_NAME}"
   volumes:
     - "/tmp/log/dynatrace/collectors/${DT_COLLECTOR_NAME}:/opt/dynatrace/log/collector/${DT_COLLECTOR_NAME}"
 

@@ -2,31 +2,31 @@ FROM debian:wheezy
 
 MAINTAINER Martin Etmajer <martin.etmajer@dynatrace.com>
 
-ENV DT_WSAGENT_VERSION          "6.2"
-ENV DT_WSAGENT_FILE_NAME        "dynatrace-wsagent-linux-x64.tar"
-ENV DT_WSAGENT_URL              "http://downloads.dynatracesaas.com/${DT_WSAGENT_VERSION}/${DT_WSAGENT_FILE_NAME}"
+ENV VERSION             "6.2"
+ENV INSTALLER_FILE_NAME "dynatrace-wsagent-linux-x64.tar"
+ENV INSTALLER_URL       "http://downloads.dynatracesaas.com/${VERSION}/${INSTALLER_FILE_NAME}"
 
-ENV DT_WSAGENT_HOME             "/opt/dynatrace"
-ENV DT_WSAGENT_BIN64            "${DT_WSAGENT_HOME}/agent/lib64/dtwsagent"
-ENV DT_WSAGENT_LIB64            "${DT_WSAGENT_HOME}/agent/lib64/libdtagent.so"
-ENV DT_WSAGENT_INI              "${DT_WSAGENT_HOME}/agent/conf/dtwsagent.ini"
-ENV DT_WSAGENT_SLAVE_AGENT_PORT "8001"
+ENV DT                  "/opt/dynatrace"
+ENV BIN64               "${DT}/agent/lib64/dtwsagent"
+ENV INI                 "${DT}/agent/conf/dtwsagent.ini"
+ENV LIB64               "${DT}/agent/lib64/libdtagent.so"
+ENV SLAVE_AGENT_PORT    "8001"
 
-ENV DT_INSTALL_DEPS             "curl"
+ENV INSTALL_DEPS        "curl"
 
 RUN apt-get update && \
-    apt-get install -y ${DT_INSTALL_DEPS} && \
-    curl -L -o /tmp/${DT_WSAGENT_FILE_NAME} ${DT_WSAGENT_URL} && \
+    apt-get install -y ${INSTALL_DEPS} && \
+    curl -L -o /tmp/${INSTALLER_FILE_NAME} ${INSTALLER_URL} && \
     cd /tmp && \
-    tar xf ./${DT_WSAGENT_FILE_NAME} && \
+    tar xf ./${INSTALLER_FILE_NAME} && \
     sh ./dynatrace-wsagent-*.sh && \
-    mv ./dynatrace-${DT_WSAGENT_VERSION} ${DT_WSAGENT_HOME} && \
-    apt-get remove --purge -y ${DT_INSTALL_DEPS} $(apt-mark showauto) && \
+    mv ./dynatrace-${VERSION} ${DT} && \
+    apt-get remove --purge -y ${INSTALL_DEPS} $(apt-mark showauto) && \
     rm -rf /var/lib/apt/lists/* /tmp/*
 
 COPY build/run-process.sh /
-COPY build/attach-to-wsagent-master.sh ${DT_WSAGENT_HOME}
-COPY build/accept-wsagent-slaves.sh ${DT_WSAGENT_HOME}
+COPY build/attach-to-wsagent-master.sh ${DT}
+COPY build/accept-wsagent-slaves.sh ${DT}
 
 # Dynatrace Web Server Slave Agents
 EXPOSE 8001/udp

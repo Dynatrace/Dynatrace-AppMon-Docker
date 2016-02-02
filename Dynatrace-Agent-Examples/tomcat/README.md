@@ -33,8 +33,8 @@ With the Dynatrace Agent and the Dynatrace Collector running in Docker, using th
 Finally, we override Tomcat's `CATALINA_OPTS` before we invoke the actual application process ([see here for the original Dockerfile](https://github.com/docker-library/tomcat/blob/e36c4044b7ece1361f124aaf3560c2efd888b62f/8-jre8/Dockerfile)):
 
 <pre><code>#!/bin/bash
-TOMCAT_DT_AGENT_NAME=${TOMCAT_DT_AGENT_NAME:-"tomcat-agent"}
-TOMCAT_DT_AGENT_PATH="-agentpath:\${DTAGENT_ENV_DT_AGENT_LIB64}=name=${TOMCAT_DT_AGENT_NAME},collector=\${DTCOLLECTOR_ENV_DT_COLLECTOR_HOST_NAME}:\${DTCOLLECTOR_ENV_DT_COLLECTOR_AGENT_PORT}"
+DT_AGENT_NAME=${TOMCAT_DT_AGENT_NAME:-"tomcat-agent"}
+DT_AGENT_PATH="-agentpath:\${DTAGENT_ENV_LIB64}=name=${TOMCAT_DT_AGENT_NAME},collector=\${DTCOLLECTOR_ENV_HOST_NAME}"
 
 echo "Starting Apache Tomcat - Example"
 docker run --rm \
@@ -44,7 +44,7 @@ docker run --rm \
   <strong>--volumes-from dtagent</strong> \
   --publish-all \
   tomcat \
-  sh -c "<strong>CATALINA_OPTS=${TOMCAT_DT_AGENT_PATH}</strong> catalina.sh run"
+  sh -c "<strong>CATALINA_OPTS=${DT_AGENT_PATH}</strong> catalina.sh run"
 </code></pre>
 
 ## Dockerized Dynatrace Components

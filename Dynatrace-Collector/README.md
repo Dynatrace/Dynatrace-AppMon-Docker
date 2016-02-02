@@ -80,7 +80,7 @@ DT_COLLECTOR_NAME=dtcollector docker-compose up
 
 ### Example
 
-Creates a Dockerized Dynatrace Collector instance named `dtcollector-1` which connects to *AcmeCo's Dynatrace Server* instance running at `dtserver.acmeco.internal:6698`. Make sure to add a proper `DT_COLLECTOR_SERVER` to the `environment` section and remove the `external_links` section from `docker-compose.yml` beforehand:
+Creates a Dockerized Dynatrace Collector instance named `dtcollector-1` which connects to *AcmeCo's Dynatrace Server* instance running at `dtserver.acmeco.internal:6698`. Make sure to add a proper `SERVER` address to the `environment` section and remove the `external_links` section from `docker-compose.yml` beforehand:
 
 ```
 DT_COLLECTOR_NAME=dtcollector-1 docker-compose up

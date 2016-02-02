@@ -2,20 +2,20 @@ FROM debian:wheezy
 
 MAINTAINER Martin Etmajer <martin.etmajer@dynatrace.com>
 
-ENV DT_COLLECTOR_VERSION    "6.2"
-ENV DT_COLLECTOR_FILE_NAME  "dynatrace-collector-linux-x86.jar"
-ENV DT_COLLECTOR_URL        "http://downloads.dynatracesaas.com/${DT_COLLECTOR_VERSION}/${DT_COLLECTOR_FILE_NAME}"
+ENV VERSION             "6.2"
+ENV INSTALLER_FILE_NAME "dynatrace-collector-linux-x86.jar"
+ENV INSTALLER_URL       "http://downloads.dynatracesaas.com/${VERSION}/${INSTALLER_FILE_NAME}"
 
-ENV DT_COLLECTOR_HOME       "/opt/dynatrace"
-ENV DT_COLLECTOR_AGENT_PORT "9998"
+ENV DT                  "/opt/dynatrace"
+ENV AGENT_PORT          "9998"
 
-ENV DT_INSTALL_DEPS         "curl openjdk-7-jre-headless"
+ENV INSTALL_DEPS        "curl openjdk-7-jre-headless"
 
 RUN apt-get update && \
-    apt-get install -y --no-install-recommends ${DT_INSTALL_DEPS} && \
-    curl -L -o /tmp/${DT_COLLECTOR_FILE_NAME} ${DT_COLLECTOR_URL} && \
-    java -jar /tmp/${DT_COLLECTOR_FILE_NAME} -b 64 -t ${DT_COLLECTOR_HOME} -y && \
-    apt-get remove --purge -y ${DT_INSTALL_DEPS} $(apt-mark showauto) && \
+    apt-get install -y --no-install-recommends ${INSTALL_DEPS} && \
+    curl -L -o /tmp/${INSTALLER_FILE_NAME} ${INSTALLER_URL} && \
+    java -jar /tmp/${INSTALLER_FILE_NAME} -b 64 -t ${DT} -y && \
+    apt-get remove --purge -y ${INSTALL_DEPS} $(apt-mark showauto) && \
     rm -rf /var/lib/apt/lists/* /tmp/*
 
 COPY build/run-process.sh /

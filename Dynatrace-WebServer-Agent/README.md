@@ -74,7 +74,7 @@ DT_WSAGENT_NAME=dtwsagent docker-compose up
 
 ### Example
 
-Creates a Dockerized Dynatrace WebServer Agent instance named `dtwsagent-1` which connects to *AcmeCo's Dynatrace Server* instance running at `dtcollector.acmeco.internal:9998`. Make sure to add a proper `DT_WSAGENT_COLLECTOR` to the `environment` section and remove the `external_links` section from `docker-compose.yml` beforehand:
+Creates a Dockerized Dynatrace WebServer Agent instance named `dtwsagent-1` which connects to *AcmeCo's Dynatrace Server* instance running at `dtcollector.acmeco.internal:9998`. Make sure to add a proper `COLLECTOR` address to the `environment` section and remove the `external_links` section from `docker-compose.yml` beforehand:
 
 ```
 DT_WSAGENT_COLLECTOR=dtwsagent-1 docker-compose up
