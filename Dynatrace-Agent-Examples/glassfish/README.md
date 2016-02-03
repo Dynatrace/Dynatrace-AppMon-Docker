@@ -4,25 +4,25 @@
 
 This project contains exemplary integrations of the [Dynatrace Application Monitoring](http://www.dynatrace.com/en/products/application-monitoring.html) enterprise solution with a [Dockerized GlassFish](https://hub.docker.com/_/glassfish/) process for deep end-to-end application monitoring.
 
-## Installing Dynatrace
+## How to install Dynatrace?
 
-If you do not have Dynatrace installed already, you could quickly bring up a Dockerized Dynatrace installation by using the enclosed [Docker Compose](https://docs.docker.com/compose/) file `docker-compose-dynatrace.yml` like so:
+If you do not have Dynatrace installed already, you can quickly bring up an entire Dockerized Dynatrace environment by using [Docker Compose](https://docs.docker.com/compose/) with the [provided `docker-compose.yml` file](https://github.com/dynaTrace/Dynatrace-Docker/blob/master/docker-compose.yml) like so:
 
 ```
-DT_AGENT_NAME=dtagent \
 DT_COLLECTOR_NAME=dtcollector \
 DT_SERVER_NAME=dtserver \
 DT_SERVER_LICENSE_KEY_FILE_URL=http://repo.internal/dtlicense.key \
-docker-compose -f docker-compose-dynatrace.yml up
+DT_AGENT_NAME=dtagent \
+docker-compose up
 ```
 
-The example runs an instance of type `dynatrace/server`. This image has been designed to run in low-traffic, resource-constrained **demo and trial environments**. Dynatrace does not support its use in production or pre-production grade environments of any kind.
+**Note**: the example runs an instance of type `dynatrace/server`. This image has been designed to run in low-traffic, resource-constrained **demo and trial environments**. Dynatrace does not support its use in production or pre-production grade environments of any kind.
 
 ### Licensing
 
-In the example above, you have to let `DT_SERVER_LICENSE_KEY_FILE_URL` point to a valid Dynatrace License Key file. If you don't have a license yet, you can [obtain a Dynatrace Free Trial License here](http://bit.ly/dttrial-docker-github). And, you don't need to have your license file hosted by a server: if you are running on a developer machine, [Netcat](https://en.wikipedia.org/wiki/Netcat) can conveniently serve it from your command line via `nc -l 80 < dtlicense.key`.
+In the example above, you have to let `DT_SERVER_LICENSE_KEY_FILE_URL` point to a valid Dynatrace License Key file. If you don't have a license yet, you can [obtain a Dynatrace Free Trial License here](http://bit.ly/dttrial-docker-github). However, you don't need to have your license file hosted by a server: if you can run a console, [Netcat](https://en.wikipedia.org/wiki/Netcat) can conveniently serve it for you via `nc -l 80 < dtlicense.key`.
 
-## Instrumenting a Dockerized GlassFish Process
+## How to instrument a Dockerized GlassFish process?
 
 With the Dynatrace Agent and the Dynatrace Collector running in Docker, using the `dynatrace/agent` and `dynatrace/collector` images, respectively, we can now easily instrument an application process without having to alter that process' Docker image. Instead, we manipulate its runtime environment by:
 
@@ -55,7 +55,7 @@ docker run --rm \
          asadmin start-domain -v"
 </code></pre>
 
-## Dockerized Dynatrace Components
+## Additional Information
 
 See the following Dockerized Dynatrace components and examples for more information:
 
@@ -71,4 +71,4 @@ This offering is [Dynatrace Community Supported](https://community.dynatrace.com
 ## License
 
 Licensed under the MIT License. See the LICENSE file for details.
-[![analytics](https://www.google-analytics.com/collect?v=1&t=pageview&_s=1&dl=https%3A%2F%2Fgithub.com%2FdynaTrace&dp=%2FDynatrace-Docker%2FDynatrace-Agent-Examples%2Ftomcat&dt=Dynatrace-Docker%2FDynatrace-Docker%2FDynatrace-Agent-Examples%2Ftomcat&_u=Dynatrace~&cid=github.com%2FdynaTrace&tid=UA-54510554-5&aip=1)]()
+[![analytics](https://www.google-analytics.com/collect?v=1&t=pageview&_s=1&dl=https%3A%2F%2Fgithub.com%2FdynaTrace&dp=%2FDynatrace-Docker%2FDynatrace-Agent-Examples%2Fglassfish&dt=Dynatrace-Docker%2FDynatrace-Agent-Examples%2Fglassfish&_u=Dynatrace~&cid=github.com%2FdynaTrace&tid=UA-54510554-5&aip=1)]()

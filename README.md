@@ -4,14 +4,36 @@
 
 The home of Dockerized components of the [Dynatrace Application Monitoring](http://www.dynatrace.com/en/products/application-monitoring.html) enterprise solution. All components are available on the [Docker Hub](https://hub.docker.com/u/dynatrace/).
 
-## How to Monitor your Dockerized Application?
+## How to install Dynatrace?
 
-Please check out the following links for more information:
+You can quickly bring up an entire Dockerized Dynatrace environment by using [Docker Compose](https://docs.docker.com/compose/) with the provided `docker-compose.yml` file like so:
+
+```
+DT_COLLECTOR_NAME=dtcollector \
+DT_SERVER_NAME=dtserver \
+DT_SERVER_LICENSE_KEY_FILE_URL=http://repo.internal/dtlicense.key \
+DT_WSAGENT_NAME=dtwsagent \
+DT_AGENT_NAME=dtagent \
+docker-compose up
+```
+
+See the following Dockerized Dynatrace components for more information:
 
 - [Dockerized Dynatrace Server](https://github.com/dynaTrace/Dynatrace-Docker/tree/master/Dynatrace-Server)
 - [Dockerized Dynatrace Collector](https://github.com/dynaTrace/Dynatrace-Docker/tree/master/Dynatrace-Collector)
-- [Dockerized Dynatrace Agent](https://github.com/dynaTrace/Dynatrace-Docker/tree/master/Dynatrace-Agent) and [Examples](https://github.com/dynaTrace/Dynatrace-Docker/tree/master/Dynatrace-Agent-Examples)
-- [Dockerized Dynatrace Web Server Agent](https://github.com/dynaTrace/Dynatrace-Docker/tree/master/Dynatrace-WebServer-Agent) and [Examples](https://github.com/dynaTrace/Dynatrace-Docker/tree/master/Dynatrace-WebServer-Agent-Examples)
+- [Dockerized Dynatrace Agent](https://github.com/dynaTrace/Dynatrace-Docker/tree/master/Dynatrace-Agent)
+- [Dockerized Dynatrace Web Server Agent](https://github.com/dynaTrace/Dynatrace-Docker/tree/master/Dynatrace-WebServer-Agent)
+
+### Licensing
+
+In the example above, you have to let `DT_SERVER_LICENSE_KEY_FILE_URL` point to a valid Dynatrace License Key file. If you don't have a license yet, you can [obtain a Dynatrace Free Trial License here](http://bit.ly/dttrial-docker-github). However, you don't need to have your license file hosted by a server: if you can run a console, [Netcat](https://en.wikipedia.org/wiki/Netcat) can conveniently serve it for you via `nc -l 80 < dtlicense.key`.
+
+## How to Monitor your Dockerized Application?
+
+See the following integration examples for more information:
+
+- [Dynatrace Agent: Examples](https://github.com/dynaTrace/Dynatrace-Docker/tree/master/Dynatrace-Agent-Examples)
+- [Dynatrace Web Server Agent: Examples](https://github.com/dynaTrace/Dynatrace-Docker/tree/master/Dynatrace-WebServer-Agent-Examples)
 
 ## Problems? Questions? Suggestions?
 
