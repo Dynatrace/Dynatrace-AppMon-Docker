@@ -88,6 +88,10 @@ docker-compose up
 ---
 <br>
 
+### Licensing
+
+In the examples above, you have to let `DT_SERVER_LICENSE_KEY_FILE_URL` point to a valid Dynatrace License Key file. If you don't have a license yet, you can [obtain a Dynatrace Free Trial License here](http://bit.ly/dttrial-docker-github). And, you don't need to have your license file hosted by a server: if you are running on a developer machine, [Netcat](https://en.wikipedia.org/wiki/Netcat) can conveniently serve it from your command line via `nc -l 80 < dtlicense.key`.
+
 ## Build an image via `build-image.sh`
 
 While we strongly recommend using our ready-made images on the [Docker Hub](https://hub.docker.com/r/dynatrace/server/), you can build your own by executing `build-image.sh`.
