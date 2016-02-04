@@ -31,13 +31,13 @@ HTTPD_LOAD_MODULE="dtagent_module \${DTWSAGENT_ENV_LIB64}"
 echo "Starting Apache HTTPD - Example"
 docker run --rm \
   --name httpd-example \
-  <strong>--volumes-from dtwsagent</strong> \                                                  # 1)
-  <strong>--link dtwsagent</strong> \                                                          # 2)
-  <strong>--ipc container:dtwsagent</strong> \                                                 # 3)
+  <strong>--volumes-from dtwsagent</strong> \                                                  # <strong>1)</strong>
+  <strong>--link dtwsagent</strong> \                                                          # <strong>2)</strong>
+  <strong>--ipc container:dtwsagent</strong> \                                                 # <strong>3)</strong>
   --publish-all \
   httpd \
-  sh -c "(<strong>sleep 1 && \${DTWSAGENT_ENV_DT}/attach-to-wsagent-master.sh &</strong>) && \ # 4)
-         (<strong>echo LoadModule ${HTTPD_LOAD_MODULE} >> conf/httpd.conf</strong>) && \       # 5)
+  sh -c "(<strong>sleep 1 && \${DTWSAGENT_ENV_DT}/attach-to-wsagent-master.sh &</strong>) && \ # <strong>4)</strong>
+         (<strong>echo LoadModule ${HTTPD_LOAD_MODULE} >> conf/httpd.conf</strong>) && \       # <strong>5)</strong>
          httpd-foreground"
 </code></pre>
 
