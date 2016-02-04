@@ -2,8 +2,8 @@
 echo "Starting NGINX - Example"
 docker run --rm \
   --name nginx-example \
-  --link dtwsagent \
   --volumes-from dtwsagent \
+  --link dtwsagent \
   --ipc container:dtwsagent \
   --publish-all \
   nginx \

@@ -8,7 +8,7 @@ This project contains exemplary integrations of the [Dynatrace Application Monit
 
 ## How to install Dynatrace?
 
-If you do not have Dynatrace installed already, you can quickly bring up an entire Dockerized Dynatrace environment by using [Docker Compose](https://docs.docker.com/compose/) with the [provided `docker-compose.yml` file](https://github.com/dynaTrace/Dynatrace-Docker/blob/master/docker-compose.yml) like so:
+You can quickly bring up an entire Dockerized Dynatrace environment by using [Docker Compose](https://docs.docker.com/compose/) with the [provided `docker-compose.yml` file](https://github.com/dynaTrace/Dynatrace-Docker/blob/master/docker-compose.yml) like so:
 
 ```
 DT_SERVER_LICENSE_KEY_FILE_URL=http://repo.internal/dtlicense.key \
@@ -19,21 +19,11 @@ docker-compose up
 
 ### Licensing
 
-In the example above, you have to let `DT_SERVER_LICENSE_KEY_FILE_URL` point to a valid Dynatrace License Key file. If you don't have a license yet, you can [obtain a Dynatrace Free Trial License here](http://bit.ly/dttrial-docker-github). However, you don't need to have your license file hosted by a server: if you can run a console, [Netcat](https://en.wikipedia.org/wiki/Netcat) can conveniently serve it for you via `nc -l 80 < dtlicense.key`.
+In the example above, you have to let `DT_SERVER_LICENSE_KEY_FILE_URL` point to a valid Dynatrace License Key file. If you don't have a license yet, you can [obtain a Dynatrace Free Trial License here](http://bit.ly/dttrial-docker-github). However, you don't need to have your license file hosted by a server: if you can run a console, [Netcat](https://en.wikipedia.org/wiki/Netcat) can conveniently serve it for you on port `80` via `sudo nc -l 80 < dtlicense.key`.
 
 ## How to instrument a Dockerized Apache HTTPD process?
 
-With the Dynatrace Web Server Agent running in Docker, using the `dynatrace/wsagent` image, we can now easily instrument a web server process without having to alter that process' Docker image. Instead, we manipulate its runtime environment by:
-
-1) mounting the agent installation directory into the web server process' container via `--volumes-from dtwsagent`. This allows the master agent to share configuration data with its slave agents.
-
-2) linking the web server process' container with the `dtwsagent` container via `--link dtwsagent`. This way, we inherit the linked container's environment variables and can, with that, quickly deduce a correct `LoadModule` declaration -- without having to know about the details.
-
-3) sharing the `dtwsagent`'s IPC namespace via `--ipc container:dtwsagent`. This allows the master and slaves to shared a shared memory segment despite being separated into two distinct containers.
-
-4) attaching to the `dtwsagent` by invoking `attach-to-wsagent-master.sh`. This enables the master and slaves to communicate via UDP. Additionally, we want to make sure that the script executes in the background only after the web server process has started (hence the speculative `sleep 1` below).
-
-Finally, we place the `LoadModule` declaration inside Apache HTTPD's `httpd.conf` and invoke the actual web server process ([see here for the original Dockerfile](https://github.com/docker-library/httpd/blob/1f1f7d39d5fe5aebeedea6872786b4e3ce0ebcc9/2.4/Dockerfile)):
+With the Dockerized Dynatrace environment running, we can now easily instrument an application process without having to alter that process' Docker image. Here is what an examplary integration in `run-container.sh` looks like:
 
 <pre><code>#!/bin/bash
 HTTPD_LOAD_MODULE="dtagent_module \${DTWSAGENT_ENV_LIB64}"
@@ -41,15 +31,27 @@ HTTPD_LOAD_MODULE="dtagent_module \${DTWSAGENT_ENV_LIB64}"
 echo "Starting Apache HTTPD - Example"
 docker run --rm \
   --name httpd-example \
-  <strong>--link dtwsagent</strong> \
-  <strong>--volumes-from dtwsagent</strong> \
-  <strong>--ipc container:dtwsagent</strong> \
+  <strong>--volumes-from dtwsagent</strong> \                                                  # 1)
+  <strong>--link dtwsagent</strong> \                                                          # 2)
+  <strong>--ipc container:dtwsagent</strong> \                                                 # 3)
   --publish-all \
   httpd \
-  sh -c "(<strong>sleep 1 && \${DTWSAGENT_ENV_DT}/attach-to-wsagent-master.sh &</strong>) && \
-         (<strong>echo LoadModule ${HTTPD_LOAD_MODULE} >> conf/httpd.conf</strong>) && \
+  sh -c "(<strong>sleep 1 && \${DTWSAGENT_ENV_DT}/attach-to-wsagent-master.sh &</strong>) && \ # 4)
+         (<strong>echo LoadModule ${HTTPD_LOAD_MODULE} >> conf/httpd.conf</strong>) && \       # 5)
          httpd-foreground"
 </code></pre>
+
+### Behind the Scenes
+
+1) We mount the agent installation directory from the `dtwsagent` container into the web server process' container via `--volumes-from dtwsagent`. This is required to share configuration information between the master and the slave agents.
+
+2) **Convenience**: We link the web server process' container against the `dtwsagent` container via `--link dtwsagent`. This way, we inherit the other container's environment variables `DTWSAGENT_ENV_DT` and `DTWSAGENT_ENV_LIB64` and can thus quickly deduce a `LoadModule` declaration without having to know much about the environment.
+
+3) We share the `dtwsagent`'s IPC namespace via `--ipc container:dtwsagent`. This is required to allow the master and the slave agents to communicate via a shared memory segment across containers on the same host.
+
+4) We attach to the master agent by invoking `attach-to-wsagent-master.sh`, which has been shared by the `dtwsagent` container in step **1)**. This is required to allow the master and the slave agents to communicate via UDP. Additionally, we fork the script into the background only after the web server process and the slave agent have started in the foreground in step **5)** with a speculative `sleep 1`.
+
+5) We place a `LoadModule` declaration inside Apache's `httpd.conf` before we invoke the actual web server process ([see here for the original Dockerfile](https://github.com/docker-library/httpd/blob/1f1f7d39d5fe5aebeedea6872786b4e3ce0ebcc9/2.4/Dockerfile)).
 
 ## Additional Information
 

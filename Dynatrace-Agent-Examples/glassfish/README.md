@@ -6,7 +6,7 @@ This project contains exemplary integrations of the [Dynatrace Application Monit
 
 ## How to install Dynatrace?
 
-If you do not have Dynatrace installed already, you can quickly bring up an entire Dockerized Dynatrace environment by using [Docker Compose](https://docs.docker.com/compose/) with the [provided `docker-compose.yml` file](https://github.com/dynaTrace/Dynatrace-Docker/blob/master/docker-compose.yml) like so:
+You can quickly bring up an entire Dockerized Dynatrace environment by using [Docker Compose](https://docs.docker.com/compose/) with the [provided `docker-compose.yml` file](https://github.com/dynaTrace/Dynatrace-Docker/blob/master/docker-compose.yml) like so:
 
 ```
 DT_SERVER_LICENSE_KEY_FILE_URL=http://repo.internal/dtlicense.key \
@@ -17,20 +17,14 @@ docker-compose up
 
 ### Licensing
 
-In the example above, you have to let `DT_SERVER_LICENSE_KEY_FILE_URL` point to a valid Dynatrace License Key file. If you don't have a license yet, you can [obtain a Dynatrace Free Trial License here](http://bit.ly/dttrial-docker-github). However, you don't need to have your license file hosted by a server: if you can run a console, [Netcat](https://en.wikipedia.org/wiki/Netcat) can conveniently serve it for you via `nc -l 80 < dtlicense.key`.
+In the example above, you have to let `DT_SERVER_LICENSE_KEY_FILE_URL` point to a valid Dynatrace License Key file. If you don't have a license yet, you can [obtain a Dynatrace Free Trial License here](http://bit.ly/dttrial-docker-github). However, you don't need to have your license file hosted by a server: if you can run a console, [Netcat](https://en.wikipedia.org/wiki/Netcat) can conveniently serve it for you on port `80` via `sudo nc -l 80 < dtlicense.key`.
 
 ## How to instrument a Dockerized GlassFish process?
 
-With the Dynatrace Agent and the Dynatrace Collector running in Docker, using the `dynatrace/agent` and `dynatrace/collector` images, respectively, we can now easily instrument an application process without having to alter that process' Docker image. Instead, we manipulate its runtime environment by:
-
-1) mounting the agent installation directory into the application process' container via `--volumes-from dtagent`.
-
-2) linking the application process' container with the `dtagent` and `dtcollector` containers via `--link dtagent` and `--link dtcollector`, respectively. This way, we inherit the linked containers' environment variables and can, with that, quickly deduce a correct `-agentpath` declaration -- without having to know about the details. Note that we rely on the `xmlstarlet` package to correctly configure GlassFish through one of its `domain.xml` files.
-
-Finally, we invoke the actual application process ([see here for the original Dockerfile](https://github.com/docker-library/tomcat/blob/e36c4044b7ece1361f124aaf3560c2efd888b62f/8-jre8/Dockerfile)):
+With the Dockerized Dynatrace environment running, we can now easily instrument an application process without having to alter that process' Docker image. Here is what an examplary integration in `run-container.sh` looks like:
 
 <pre><code>#!/bin/bash
-GF_DOMAIN_XML_FILE=${GF_DOMAIN_XML_FILE}
+GF_DOMAIN_XML_FILE="glassfish/domains/domain1/config/domain.xml"
 
 DT_AGENT_NAME=${GF_DT_AGENT_NAME:-"glassfish-agent"}
 DT_AGENT_PATH="-agentpath:\${DTAGENT_ENV_LIB64}=name=${DT_AGENT_NAME},collector=\${DTCOLLECTOR_ENV_HOST_NAME}"
@@ -39,18 +33,28 @@ DT_AGENT_INSTALL_DEPS="xmlstarlet"
 echo "Starting GlassFish - Example"
 docker run --rm \
   --name glassfish-example \
-  <strong>--link dtagent</strong> \
-  <strong>--link dtcollector</strong> \
-  <strong>--volumes-from dtagent</strong> \
+  <strong>--volumes-from dtagent</strong> \ # <strong>1)</strong>
+  <strong>--link dtagent</strong> \         # <strong>2)</strong>
+  <strong>--link dtcollector</strong> \     # <strong>2)</strong>
   --publish-all \
   glassfish \
-  sh -c "apt-get update && apt-get install ${DT_AGENT_INSTALL_DEPS} && \
-         <strong>xmlstarlet ed -L -s '//java-config' -t elem -n 'jvm-options' -v '${DT_AGENT_PATH}' ${GF_DOMAIN_XML_FILE}</strong> && \
-         <strong>xmlstarlet ed -L -d '//java-config/jvm-options[text()=${DT_AGENT_PATH}]' ${GF_DOMAIN_XML_FILE}</strong> && \
-         apt-get remove --purge -y ${DT_AGENT_INSTALL_DEPS} && \
-         rm -rf /var/lib/apt/lists/* /tmp/* && \
-         asadmin start-domain -v"
+  sh -c "apt-get update && apt-get install ${DT_AGENT_INSTALL_DEPS} && \                                               # <strong>3)</strong>
+         <strong>xmlstarlet ed -L -s '//java-config' -t elem -n 'jvm-options' -v '${DT_AGENT_PATH}' ${GF_DOMAIN_XML_FILE}</strong> && \ # <strong>3)</strong>
+         <strong>xmlstarlet ed -L -d '//java-config/jvm-options[text()=${DT_AGENT_PATH}]' ${GF_DOMAIN_XML_FILE}</strong> && \           # <strong>3)</strong>
+         apt-get remove --purge -y ${DT_AGENT_INSTALL_DEPS} && \                                                       # <strong>3)</strong>
+         rm -rf /var/lib/apt/lists/* /tmp/* && \                                                                       # <strong>3)</strong>
+         asadmin start-domain -v                                                                                       # <strong>4)</strong>
 </code></pre>
+
+### Behind the Scenes
+
+1) We mount the agent installation directory from the `dtagent` container into the application process' container via `--volumes-from dtagent`.
+
+2) **Convenience**: We link the application process' container against the `dtcollector` and `dtagent` containers via `--link dtcollector` and `--link dtagent`, respectively. This way, we inherit the other containers' environment variables `DTCOLLECTOR_ENV_HOST_NAME` and `DTAGENT_ENV_LIB64` and can thus quickly deduce an `-agentpath` declaration without having to know much about the environment.
+
+3) We use the `xmlstarlet` package to configure GlassFish with the Dynatrace Agent through one of its `domain.xml` files and cleanly uninstall the package again afterwards. Unfortunately, with GlassFish, we cannot pass the `-agentpath JVM Option` via `JAVA_OPTS`.
+
+4) We invoke the actual application process ([see here for the original Dockerfile](https://github.com/docker-library/tomcat/blob/e36c4044b7ece1361f124aaf3560c2efd888b62f/8-jre8/Dockerfile)).
 
 ## Additional Information
 

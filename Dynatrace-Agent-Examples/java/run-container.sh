@@ -5,8 +5,8 @@ DT_AGENT_PATH="-agentpath:\${DTAGENT_ENV_LIB64}=name=${DT_AGENT_NAME},collector=
 echo "Starting Java - Example"
 docker run --rm \
   --name java-example \
-  --link dtagent \
-  --link dtcollector \
   --volumes-from dtagent \
+  --link dtcollector \
+  --link dtagent \
   dynatrace/java-example \
   sh -c "java ${DT_AGENT_PATH} JavaTest"

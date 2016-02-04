@@ -8,9 +8,9 @@ DT_AGENT_INSTALL_DEPS="xmlstarlet"
 echo "Starting GlassFish - Example"
 docker run --rm \
   --name glassfish-example \
+  --volumes-from dtagent \
   --link dtagent \
   --link dtcollector \
-  --volumes-from dtagent \
   --publish-all \
   glassfish \
   sh -c "apt-get update && apt-get install -y ${DT_AGENT_INSTALL_DEPS} && \

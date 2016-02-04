@@ -4,8 +4,8 @@ HTTPD_LOAD_MODULE="dtagent_module \${DTWSAGENT_ENV_LIB64}"
 echo "Starting Apache HTTPD - Example"
 docker run --rm \
   --name httpd-example \
-  --link dtwsagent \
   --volumes-from dtwsagent \
+  --link dtwsagent \
   --ipc container:dtwsagent \
   --publish-all \
   httpd \
