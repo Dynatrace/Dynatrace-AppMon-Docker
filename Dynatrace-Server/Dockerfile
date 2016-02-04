@@ -42,5 +42,7 @@ EXPOSE 8020
 EXPOSE 8021
 # Dynatrace Web UI (HTTPS)
 EXPOSE 9911
+# Dynatrace Agents (TCP)
+EXPOSE 9998
 
 CMD /pull-license-key-file.sh ; /run-process.sh
