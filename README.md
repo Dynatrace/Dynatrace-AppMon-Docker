@@ -9,11 +9,7 @@ The home of Dockerized components of the [Dynatrace Application Monitoring](http
 You can quickly bring up an entire Dockerized Dynatrace environment by using [Docker Compose](https://docs.docker.com/compose/) with the provided `docker-compose.yml` file like so:
 
 ```
-DT_COLLECTOR_NAME=dtcollector \
-DT_SERVER_NAME=dtserver \
 DT_SERVER_LICENSE_KEY_FILE_URL=http://repo.internal/dtlicense.key \
-DT_WSAGENT_NAME=dtwsagent \
-DT_AGENT_NAME=dtagent \
 docker-compose up
 ```
 

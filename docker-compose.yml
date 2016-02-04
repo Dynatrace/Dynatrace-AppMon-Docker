@@ -1,47 +1,47 @@
 dtserver:
-  container_name: "${DT_SERVER_NAME}"
-  hostname: "docker-${DT_SERVER_NAME}"
+  container_name: "dtserver"
+  hostname: "docker-dtserver"
   image: dynatrace/server
   environment:
-    NAME: "${DT_SERVER_NAME}"
-    HOST_NAME: "docker-${DT_SERVER_NAME}"
+    NAME: "dtserver"
+    HOST_NAME: "docker-dtserver"
     LICENSE_KEY_FILE_URL: "${DT_SERVER_LICENSE_KEY_FILE_URL}"
   volumes:
-    - "/tmp/log/dynatrace/servers/${DT_SERVER_NAME}:/opt/dynatrace/log/server/${DT_SERVER_NAME}"
+    - "/tmp/log/dynatrace/servers/dtserver:/opt/dynatrace/log/server/dtserver"
   ports:
     - "2021" # Dynatrace Clients (TCP with SSL)
     - "8021" # Dynatrace Web Server (HTTPS)
     - "9911" # Dynatrace Web UI (HTTPS)
 
 dtcollector:
-  container_name: "${DT_COLLECTOR_NAME}"
-  hostname: "docker-${DT_COLLECTOR_NAME}"
+  container_name: "dtcollector"
+  hostname: "docker-dtcollector"
   image: dynatrace/collector
   links:
     - dtserver
   environment:
-    NAME: "${DT_COLLECTOR_NAME}"
-    HOST_NAME: "docker-${DT_COLLECTOR_NAME}"
+    NAME: "dtcollector"
+    HOST_NAME: "docker-dtcollector"
   volumes:
-    - "/tmp/log/dynatrace/collectors/${DT_COLLECTOR_NAME}:/opt/dynatrace/log/collector/${DT_COLLECTOR_NAME}"
+    - "/tmp/log/dynatrace/collectors/dtcollector:/opt/dynatrace/log/collector/dtcollector"
 
 dtwsagent:
-  container_name: "${DT_WSAGENT_NAME}"
-  hostname: "docker-${DT_WSAGENT_NAME}"
+  container_name: "dtwsagent"
+  hostname: "docker-dtwsagent"
   image: dynatrace/wsagent
   links:
     - dtcollector
   environment:
-    NAME: "${DT_WSAGENT_NAME}"
-    HOST_NAME: "docker-${DT_WSAGENT_NAME}"
+    NAME: "dtwsagent"
+    HOST_NAME: "docker-dtwsagent"
   volumes:
     - /opt/dynatrace
-    - "/tmp/log/dynatrace/wsagents/${DT_WSAGENT_NAME}:/opt/dynatrace/log"
+    - "/tmp/log/dynatrace/wsagents/dtwsagent:/opt/dynatrace/log"
 
 dtagent:
-  container_name: "${DT_AGENT_NAME}"
-  hostname: "docker-${DT_AGENT_NAME}"
+  container_name: "dtagent"
+  hostname: "docker-dtagent"
   image: dynatrace/agent
   volumes:
     - /opt/dynatrace
-    - "/tmp/log/dynatrace/agents/${DT_AGENT_NAME}:/opt/dynatrace/log/agent"
+    - "/tmp/log/dynatrace/agents/dtagent:/opt/dynatrace/log/agent"

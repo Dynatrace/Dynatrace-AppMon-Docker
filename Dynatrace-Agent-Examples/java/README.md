@@ -9,10 +9,7 @@ This project contains exemplary integrations of the [Dynatrace Application Monit
 If you do not have Dynatrace installed already, you can quickly bring up an entire Dockerized Dynatrace environment by using [Docker Compose](https://docs.docker.com/compose/) with the [provided `docker-compose.yml` file](https://github.com/dynaTrace/Dynatrace-Docker/blob/master/docker-compose.yml) like so:
 
 ```
-DT_COLLECTOR_NAME=dtcollector \
-DT_SERVER_NAME=dtserver \
 DT_SERVER_LICENSE_KEY_FILE_URL=http://repo.internal/dtlicense.key \
-DT_AGENT_NAME=dtagent \
 docker-compose up
 ```
 
@@ -22,7 +19,7 @@ docker-compose up
 
 In the example above, you have to let `DT_SERVER_LICENSE_KEY_FILE_URL` point to a valid Dynatrace License Key file. If you don't have a license yet, you can [obtain a Dynatrace Free Trial License here](http://bit.ly/dttrial-docker-github). However, you don't need to have your license file hosted by a server: if you can run a console, [Netcat](https://en.wikipedia.org/wiki/Netcat) can conveniently serve it for you via `nc -l 80 < dtlicense.key`.
 
-## How to instrumenting a Dockerized Java process?
+## How to instrument a Dockerized Java process?
 
 With the Dynatrace Agent and the Dynatrace Collector running in Docker, using the `dynatrace/agent` and `dynatrace/collector` images, respectively, we can now easily instrument an application process without having to alter that process' Docker image. Instead, we manipulate its runtime environment by:
 
