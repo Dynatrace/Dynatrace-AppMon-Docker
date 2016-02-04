@@ -11,3 +11,4 @@ dtserver:
   ports:
     - "2021" # Dynatrace Clients (TCP with SSL)
     - "8021" # Dynatrace Web Server (HTTPS)
+    - "9911" # Dynatrace Web UI (HTTPS)
