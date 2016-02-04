@@ -1,0 +1,439 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- ATTENTION - THIS IS AN AUTOMATICALLY GENERATED FILE -->
+<!-- Manual changes can cause severe problems and system instability -->
+<!-- Apply manual changes only if you have received explicit instructions from dynaTrace Support -->
+<dynatrace version="6.2.0.1239">
+  <serverconfig memento.version="6.2.0.1239">
+    <collectorconfig usetunnel="false" useproxy="false" authstring="" serverport="6698" groupname="" communicationport="8041" proxyport="8080" embedded="true" compress="true" communicationssl="true" useproxyauthentication="false" proxyhost="" proxyusername="" usepreemtiveproxyauth="true" name="Embedded dynaTrace Collector" watchdogtimeout="10" selfmoncollector="false" serveraddress="localhost" tunnel="http://localhost:8033/tunnel">
+      <agentlistenaddressconfig>
+        <listenaddress agentport="9998" agentaddress="" />
+      </agentlistenaddressconfig>
+      <loggingconfig append="true" correlationmaxbytes="31457280" console="INFO" level="INFO" maxfiles="5" correlationmaxfiles="2" path="../../../log/collector/dtserver" html="false" maxbytes="10485760" />
+      <buffers agentbuffersize="32768" />
+      <protocoldumps maxnumberdumps="100" />
+    </collectorconfig>
+    <directories>
+      <storedsessions path="sessions/stored" />
+      <temp path="temp" />
+      <reports path="reports" />
+    </directories>
+    <settings>
+      <collector requirecompression="false" collectoraddress="" collectorport="6698" collectorssladdress="" collectorsslport="6699" allowcollectorconnections="true" collectorauthstring="" requiressl="false" />
+      <client clientssladdress="" clientport="2020" clientsslport="2021" clientaddress="" requiressl="true" />
+      <frontend frontendsslport="2031" frontendaddress="localhost" frontendrequiressl="true" frontendport="2030" />
+      <server tunnelenabled="true" optimizeforthroughput="true" lastvalidedition="NO_EDITION" upperdeletiontriggerlimit="-1" collectortunnelenabled="true" continuoussessionrecording="true" lowerdeletiontriggerlimit="5120" collectortunneladdress="" fqdn="docker-dtserver" tunneladdress="" id="-1642670682" tunnelport="8023" jmxexportmanagement="false" jmxexportmonitoring="false" autodashboardsupport="true" jmxport="1099" runtimerevision="3" instancename="dtserver" name="docker-dtserver - dtserver" watchdogtimeout="10" collectortunnelport="8033" selfmonitoringenabled="true" agentbasedselfmonitoringenabled="true" hascollector="false" />
+      <purepath maxnodes="10000" />
+      <buffers pathwriter="524288" pathreader="1048576" measurementwriter="32768">
+        <recentlystoredpaths maxsize="250000" maxage="300000" />
+      </buffers>
+      <oopanalyzer port="7788" address="" logpath="../../../log/analysisserver" />
+      <profilebackups maxbackupfiles="10" />
+    </settings>
+    <loggingconfig append="true" correlationmaxbytes="31457280" console="INFO" level="INFO" maxfiles="5" correlationmaxfiles="2" path="../../../log/server/dtserver" html="false" maxbytes="10485760" />
+    <http externalhttpsport="-1" httpport="8020" externalhostname="" webservicesenabled="true" httpsport="8021" webserveraddress="" externalhttpport="-1" webserverenabled="true" webserveraddressssl="" requiressl="false" />
+    <webstart tunnelenabled="false" proxyauthusername="" proxyautodetectionenabled="false" proxyport="-1" tunnelssl="false" proxyenabled="false" tunneladdress="docker-dtserver" tunnelport="8023" anonymouswebstartenabled="true" validationtimestamp="0" webstartenabled="true" proxyaddress="" proxyauthenabled="false" />
+    <agentcommandlineblacklist>
+      <entry message="Potential conflicting jvm option found: -Xdebug" regex=".*(?i)-Xdebug.*" severity="severe" shutdown="false" />
+      <entry message="Potential conflicting jvm option found: Mercury Diagnostics" regex=".*(?i)-Xbootclasspath/p.*(JavaProbe\\classes\\boot|JavaProbe/classes/boot).*" severity="warning" shutdown="false" />
+      <entry message="Potential conflicting jvm option found: Wily" regex=".*(?i)-Xbootclasspath/p.*(\\connectors\\AP.jar|/connectors/AP.jar).*" severity="warning" shutdown="false" />
+      <entry message="Potential conflicting jvm option found: Wily" regex=".*(?i)-Xbootclasspath/p.*(\\Agent.jar|/Agent.jar).*" severity="warning" shutdown="false" />
+      <entry message="Potential conflicting jvm option found: Wily" regex=".*(?i)-Dcom.wily.introscope.agentProfile.*" severity="warning" shutdown="false" />
+      <entry message="Potential conflicting jvm option found: -Xmanagement" regex=".*(?i)-Xmanagement.*" severity="warning" shutdown="false" />
+      <entry message="Potential conflicting jvm option found: HProf" regex=".*(?i)-agentlib:hprof.*" severity="warning" shutdown="false" />
+      <entry message="Potential conflicting jvm option found: HProf" regex=".*(?i)-Xrunhprof.*" severity="warning" shutdown="false" />
+      <entry message="Potential conflicting jvm option found: JProfiler" regex=".*(?i)-agentlib:jprofilerti.*" severity="warning" shutdown="false" />
+      <entry message="Potential conflicting jvm option found: JProbe" regex=".*(?i)-Xbootclasspath/p.*(\\jpagent.jar|/jpagent.jar).*" severity="warning" shutdown="false" />
+      <entry message="Potential conflicting jvm option found: JProbe" regex=".*(?i)-Xrunjprobeagent.*" severity="warning" shutdown="false" />
+      <entry message="Potential conflicting jvm option found: BEA / Clear App" regex=".*(?i)-Xbootclasspath/p.*(\\jagent.*.jar|/jagent.*.jar).*" severity="warning" shutdown="false" />
+      <entry message="Potential conflicting jvm option found: IBM / ITCAM" regex=".*(?i)-Xbootclasspath/p.*(\\.*probe-bootstrap.jar|/.*probe-bootstrap.jar).*" severity="warning" shutdown="false" />
+    </agentcommandlineblacklist>
+    <plugins>
+      <loggingconfig append="true" correlationmaxbytes="31457280" console="WARNING" level="INFO" maxfiles="5" correlationmaxfiles="2" path="../log" html="false" maxbytes="10485760" />
+      <plugintypeconfig loglevel="INFO" sourcebundlename="com.dynatrace.diagnostics.plugin.VMwareHostSystemPerfPlugin" bundleversion="6.2.0.1239" name="VMware Host System Performance Monitor" active="true" key="com.dynatrace.diagnostics.plugins.vmware.VMwareHostSystemPerfMonitor">
+        <property multiline="false" inputstate="2" type="string" key="username" />
+        <property inputstate="2" type="password" key="password" />
+        <property multiline="false" inputstate="2" type="string" key="serviceUrl" />
+        <pluginrole plugintype="2" sourcebundlename="com.dynatrace.diagnostics.plugin.VMwareHostSystemPerfPlugin" bundleversion="6.2.0.1239" key="com.dynatrace.diagnostics.plugins.vmware.VMwareHostSystemPerfPluginMonitor" />
+      </plugintypeconfig>
+      <plugintypeconfig loglevel="INFO" sourcebundlename="c.d.d.autoupdate.client.linux.gtk.x86_6.2.0.1239" bundleversion="6.2.0.1239" name="Webstart Client Linux 32bit" active="true" key="c.d.d.autoupdate.client.linux.gtk.x86_6.2.0.1239">
+        <pluginrole plugintype="8" sourcebundlename="c.d.d.autoupdate.client.linux.gtk.x86_6.2.0.1239" bundleversion="6.2.0.1239" key="c.d.d.autoupdate.client.linux.gtk.x86_6.2.0.1239.role" />
+      </plugintypeconfig>
+      <plugintypeconfig loglevel="INFO" sourcebundlename="com.dynatrace.diagnostics.plugin.SnmpMonitor" bundleversion="6.2.0.1239" name="SNMP Monitor Plugin" active="true" key="com.dynatrace.diagnostics.plugins.snmp.SnmpMonitorPlugin">
+        <property inputstate="2" type="host" key="host" />
+        <property inputstate="2" type="long" key="port" />
+        <property inputstate="2" type="list" key="version" />
+        <property inputstate="2" type="list" key="community" />
+        <property inputstate="2" type="long" key="timeout" />
+        <pluginrole plugintype="2" sourcebundlename="com.dynatrace.diagnostics.plugin.SnmpMonitor" bundleversion="6.2.0.1239" key="com.dynatrace.diagnostics.plugins.snmp.SnmpMonitor" />
+      </plugintypeconfig>
+      <plugintypeconfig loglevel="INFO" sourcebundlename="com.dynatrace.diagnostics.plugin.VMwareComputeRespourcePerfPlugin" bundleversion="6.2.0.1239" name="VMware Compute Resource Performance Monitor" active="true" key="com.dynatrace.diagnostics.plugins.vmware.VMwareComputeResourcePerfMonitor">
+        <property multiline="false" inputstate="2" type="string" key="computeResource" />
+        <property multiline="false" inputstate="2" type="string" key="username" />
+        <property inputstate="2" type="password" key="password" />
+        <property multiline="false" inputstate="2" type="string" key="serviceUrl" />
+        <pluginrole plugintype="2" sourcebundlename="com.dynatrace.diagnostics.plugin.VMwareComputeRespourcePerfPlugin" bundleversion="6.2.0.1239" key="com.dynatrace.diagnostics.plugins.vmware.VMwareComputeResourcePerfPluginMonitor" />
+      </plugintypeconfig>
+      <plugintypeconfig loglevel="INFO" sourcebundlename="com.dynatrace.diagnostics.plugin.PerfMon" bundleversion="6.2.0.1239" name="Windows Performance Monitor" active="true" key="com.dynatrace.diagnostics.plugins.PerfMonitor">
+        <property inputstate="2" type="boolean" key="translation" />
+        <pluginrole plugintype="2" sourcebundlename="com.dynatrace.diagnostics.plugin.PerfMon" bundleversion="6.2.0.1239" key="com.dynatrace.diagnostics.plugins.PerfPluginMonitor" />
+      </plugintypeconfig>
+      <plugintypeconfig loglevel="INFO" sourcebundlename="com.dynatrace.diagnostics.plugin.SnmpActionV2" bundleversion="6.2.0.1239" name="SNMP Action Plugin V2" active="true" key="com.dynatrace.diagnostics.plugins.snmp.SnmpActionPluginV2">
+        <property multiline="false" inputstate="2" type="string" key="host" />
+        <property inputstate="2" type="long" key="port" />
+        <property inputstate="2" type="list" key="version" />
+        <property inputstate="2" type="list" key="community" />
+        <property inputstate="2" type="long" key="octets" />
+        <pluginrole plugintype="1" sourcebundlename="com.dynatrace.diagnostics.plugin.SnmpActionV2" bundleversion="6.2.0.1239" key="com.dynatrace.diagnostics.plugins.snmp.SnmpActionV2" />
+      </plugintypeconfig>
+      <plugintypeconfig loglevel="INFO" sourcebundlename="com.dynatrace.diagnostics.plugin.Vmstat" bundleversion="6.2.0.1239" name="Unix System Monitor" active="true" key="com.dynatrace.diagnostics.plugin.UnixSystemMonitor">
+        <property inputstate="2" type="list" key="method" />
+        <property inputstate="2" type="list" key="authMethod" />
+        <property multiline="false" inputstate="2" type="string" key="port" />
+        <property multiline="false" inputstate="2" type="string" key="serverUsername" />
+        <property inputstate="2" type="password" key="serverPassword" />
+        <property inputstate="2" type="password" key="publickeyPassphrase" />
+        <property multiline="false" inputstate="2" type="string" key="publicKey" />
+        <property inputstate="2" type="boolean" key="customize" />
+        <property multiline="false" inputstate="2" type="string" key="CPU selected" />
+        <property multiline="false" inputstate="2" type="string" key="NIC selected" />
+        <property multiline="false" inputstate="2" type="string" key="Partition selected" />
+        <pluginrole plugintype="2" sourcebundlename="com.dynatrace.diagnostics.plugin.Vmstat" bundleversion="6.2.0.1239" key="com.dynatrace.diagnostics.plugin.UnixSystemMonitor.Monitor" />
+      </plugintypeconfig>
+      <plugintypeconfig loglevel="INFO" sourcebundlename="com.dynatrace.diagnostics.plugin.VMwarePoolResourcePerfPlugin" bundleversion="6.2.0.1239" name="VMware Resource Pool Performance Monitor" active="true" key="com.dynatrace.diagnostics.plugins.vmware.VMwareResourcePoolPerfMonitor">
+        <property multiline="false" inputstate="2" type="string" key="resourcePool" />
+        <property multiline="false" inputstate="2" type="string" key="username" />
+        <property inputstate="2" type="password" key="password" />
+        <property multiline="false" inputstate="2" type="string" key="serviceUrl" />
+        <pluginrole plugintype="2" sourcebundlename="com.dynatrace.diagnostics.plugin.VMwarePoolResourcePerfPlugin" bundleversion="6.2.0.1239" key="com.dynatrace.diagnostics.plugins.vmware.VMwareResourcePoolPerfPluginMonitor" />
+      </plugintypeconfig>
+      <plugintypeconfig loglevel="INFO" sourcebundlename="c.d.d.autoupdate.client.linux.gtk.x86_64_6.2.0.1239" bundleversion="6.2.0.1239" name="Webstart Client Linux 64bit" active="true" key="c.d.d.autoupdate.client.linux.gtk.x86_64_6.2.0.1239">
+        <pluginrole plugintype="8" sourcebundlename="c.d.d.autoupdate.client.linux.gtk.x86_64_6.2.0.1239" bundleversion="6.2.0.1239" key="c.d.d.autoupdate.client.linux.gtk.x86_64_6.2.0.1239.role" />
+      </plugintypeconfig>
+      <plugintypeconfig loglevel="INFO" sourcebundlename="c.d.d.autoupdate.client.windows.win32.x86_6.2.0.1239" bundleversion="6.2.0.1239" name="Webstart Client Windows 32bit" active="true" key="c.d.d.autoupdate.client.windows.win32.x86_6.2.0.1239">
+        <pluginrole plugintype="8" sourcebundlename="c.d.d.autoupdate.client.windows.win32.x86_6.2.0.1239" bundleversion="6.2.0.1239" key="c.d.d.autoupdate.client.windows.win32.x86_6.2.0.1239.role" />
+      </plugintypeconfig>
+      <plugintypeconfig loglevel="INFO" sourcebundlename="com.dynatrace.diagnostics.plugin.VMwareVirtualMachinePerfPlugin" bundleversion="6.2.0.1239" name="VMware Virtual Machine Performance Monitor" active="true" key="com.dynatrace.diagnostics.plugins.vmware.VMwareVirtualMachinePerfMonitor">
+        <property multiline="false" inputstate="2" type="string" key="virtualMachine" />
+        <property multiline="false" inputstate="2" type="string" key="username" />
+        <property inputstate="2" type="password" key="password" />
+        <property multiline="false" inputstate="2" type="string" key="serviceUrl" />
+        <property inputstate="2" type="boolean" key="compureCPUbyHost" />
+        <pluginrole plugintype="2" sourcebundlename="com.dynatrace.diagnostics.plugin.VMwareVirtualMachinePerfPlugin" bundleversion="6.2.0.1239" key="com.dynatrace.diagnostics.plugins.vmware.VMwareVirtualMachinePerfPluginMonitor" />
+      </plugintypeconfig>
+      <plugintypeconfig loglevel="INFO" sourcebundlename="com.dynatrace.diagnostics.plugin.UrlMonitor" bundleversion="6.2.0.1239" name="URL Monitor" active="true" key="com.dynatrace.diagnostics.plugins.UrlPlugin">
+        <property inputstate="2" type="url" key="url" />
+        <property inputstate="2" type="list" key="protocol" />
+        <property inputstate="2" type="host" key="host" />
+        <property inputstate="2" type="long" key="httpPort" />
+        <property inputstate="2" type="long" key="httpsPort" />
+        <property multiline="false" inputstate="2" type="string" key="path" />
+        <property inputstate="2" type="list" key="method" />
+        <property multiline="false" inputstate="2" type="string" key="postData" />
+        <property inputstate="2" type="list" key="httpVersion" />
+        <property multiline="false" inputstate="2" type="string" key="userAgent" />
+        <property inputstate="2" type="long" key="maxRedirects" />
+        <property inputstate="2" type="list" key="matchContent" />
+        <property multiline="false" inputstate="2" type="string" key="searchString" />
+        <property inputstate="2" type="long" key="compareBytes" />
+        <property inputstate="2" type="boolean" key="serverAuth" />
+        <property multiline="false" inputstate="2" type="string" key="serverUsername" />
+        <property inputstate="2" type="password" key="serverPassword" />
+        <property inputstate="2" type="long" key="timeout" />
+        <property inputstate="2" type="boolean" key="useProxy" />
+        <property multiline="false" inputstate="2" type="string" key="proxyHost" />
+        <property inputstate="2" type="long" key="proxyPort" />
+        <property inputstate="2" type="boolean" key="proxyAuth" />
+        <property multiline="false" inputstate="2" type="string" key="proxyUsername" />
+        <property inputstate="2" type="password" key="proxyPassword" />
+        <property inputstate="2" type="boolean" key="structuredUrl" />
+        <property inputstate="2" type="boolean" key="dtTagging" />
+        <property multiline="false" inputstate="2" type="string" key="dtTimerName" />
+        <property inputstate="2" type="boolean" key="ignoreCertificate" />
+        <pluginrole plugintype="2" sourcebundlename="com.dynatrace.diagnostics.plugin.UrlMonitor" bundleversion="6.2.0.1239" key="com.dynatrace.diagnostics.plugins.UrlPluginMonitor" />
+      </plugintypeconfig>
+      <plugintypeconfig loglevel="INFO" sourcebundlename="c.d.d.autoupdate.client.macosx.cocoa.x86_64_6.2.0.1239" bundleversion="6.2.0.1239" name="Webstart Client Mac OS X 64bit" active="true" key="c.d.d.autoupdate.client.macosx.cocoa.x86_64_6.2.0.1239">
+        <pluginrole plugintype="8" sourcebundlename="c.d.d.autoupdate.client.macosx.cocoa.x86_64_6.2.0.1239" bundleversion="6.2.0.1239" key="c.d.d.autoupdate.client.macosx.cocoa.x86_64_6.2.0.1239.role" />
+      </plugintypeconfig>
+      <plugintypeconfig loglevel="INFO" sourcebundlename="com.dynatrace.diagnostics.plugin.Actions" bundleversion="6.2.0.1239" name="Memory Dump Action Plugin" active="true" key="com.dynatrace.diagnostics.plugin.MemoryDumpAction">
+        <property inputstate="2" type="list" key="dumptype" />
+        <property inputstate="2" type="long" key="count" />
+        <property inputstate="2" type="long" key="interval" />
+        <property inputstate="2" type="boolean" key="deletionlock" />
+        <property inputstate="2" type="boolean" key="dogc" />
+        <property inputstate="2" type="boolean" key="capturestrings" />
+        <property inputstate="2" type="boolean" key="captureprimitives" />
+        <property inputstate="2" type="boolean" key="autopostprocess" />
+        <pluginrole plugintype="1" sourcebundlename="com.dynatrace.diagnostics.plugin.Actions" bundleversion="6.2.0.1239" key="com.dynatrace.diagnostics.plugin.MemoryDumpAction.action" />
+      </plugintypeconfig>
+      <plugintypeconfig loglevel="INFO" sourcebundlename="com.dynatrace.diagnostics.plugin.Actions" bundleversion="6.2.0.1239" name="Thread Dump Action Plugin" active="true" key="com.dynatrace.diagnostics.plugin.ThreadDumpAction">
+        <property inputstate="2" type="long" key="count" />
+        <property inputstate="2" type="long" key="interval" />
+        <property inputstate="2" type="boolean" key="deletionlock" />
+        <pluginrole plugintype="1" sourcebundlename="com.dynatrace.diagnostics.plugin.Actions" bundleversion="6.2.0.1239" key="com.dynatrace.diagnostics.plugin.ThreadDumpAction.action" />
+      </plugintypeconfig>
+      <plugintypeconfig loglevel="INFO" sourcebundlename="com.dynatrace.diagnostics.plugin.Actions" bundleversion="6.2.0.1239" name="Activate Configuration Action Plugin" active="true" key="com.dynatrace.diagnostics.plugin.ActivateConfigurationAction">
+        <property multiline="false" inputstate="2" type="string" key="configname" />
+        <pluginrole plugintype="1" sourcebundlename="com.dynatrace.diagnostics.plugin.Actions" bundleversion="6.2.0.1239" key="com.dynatrace.diagnostics.plugin.ActivateConfigurationAction.action" />
+      </plugintypeconfig>
+      <plugintypeconfig loglevel="INFO" sourcebundlename="com.dynatrace.diagnostics.plugin.Actions" bundleversion="6.2.0.1239" name="CPU Sampling Action Plugin" active="true" key="com.dynatrace.diagnostics.plugin.SamplingAction">
+        <property inputstate="2" type="list" key="samplingRate" />
+        <property inputstate="2" type="long" key="duration" />
+        <property inputstate="2" type="boolean" key="deletionlock" />
+        <pluginrole plugintype="1" sourcebundlename="com.dynatrace.diagnostics.plugin.Actions" bundleversion="6.2.0.1239" key="com.dynatrace.diagnostics.plugin.SamplingAction.action" />
+      </plugintypeconfig>
+      <plugintypeconfig loglevel="INFO" sourcebundlename="com.dynatrace.diagnostics.plugin.Actions" bundleversion="6.2.0.1239" name="Store Session Action Plugin" active="true" key="com.dynatrace.diagnostics.plugin.StoreSessionAction">
+        <property inputstate="2" type="long" key="minutesPast" />
+        <property inputstate="2" type="long" key="minutesFuture" />
+        <property inputstate="2" type="list" key="recordingOption" />
+        <property inputstate="2" type="boolean" key="deletionlock" />
+        <property inputstate="2" type="boolean" key="appendTimestamp" />
+        <pluginrole plugintype="1" sourcebundlename="com.dynatrace.diagnostics.plugin.Actions" bundleversion="6.2.0.1239" key="com.dynatrace.diagnostics.plugin.StoreSessionAction.action" />
+      </plugintypeconfig>
+      <plugintypeconfig loglevel="INFO" sourcebundlename="c.d.d.autoupdate.client.windows.win32.x86_64_6.2.0.1239" bundleversion="6.2.0.1239" name="Webstart Client Windows 64bit" active="true" key="c.d.d.autoupdate.client.windows.win32.x86_64_6.2.0.1239">
+        <pluginrole plugintype="8" sourcebundlename="c.d.d.autoupdate.client.windows.win32.x86_64_6.2.0.1239" bundleversion="6.2.0.1239" key="c.d.d.autoupdate.client.windows.win32.x86_64_6.2.0.1239.role" />
+      </plugintypeconfig>
+      <plugintypeconfig loglevel="INFO" sourcebundlename="c.d.d.autoupdate.client.common_6.2.0.1239" bundleversion="6.2.0.1239" name="Webstart Client Common" active="true" key="c.d.d.autoupdate.client.common_6.2.0.1239">
+        <pluginrole plugintype="8" sourcebundlename="c.d.d.autoupdate.client.common_6.2.0.1239" bundleversion="6.2.0.1239" key="c.d.d.autoupdate.client.common_6.2.0.1239.role" />
+      </plugintypeconfig>
+      <plugintypeconfig loglevel="INFO" sourcebundlename="com.dynatrace.diagnostics.plugin.VMwareHostSystemPerfPlugin" bundleversion="6.2.0.1239" name="VMware Host System - CPU Performance" active="true" key="com.dynatrace.diagnostics.plugins.vmware.VMwareHostSystemPerfMonitor.monitor.cpuperformance">
+        <pluginrole plugintype="32" sourcebundlename="com.dynatrace.diagnostics.plugin.VMwareHostSystemPerfPlugin" bundleversion="6.2.0.1239" key="com.dynatrace.diagnostics.plugins.vmware.VMwareHostSystemPerfMonitor.monitor.cpuperformance" />
+      </plugintypeconfig>
+      <plugintypeconfig loglevel="INFO" sourcebundlename="com.dynatrace.diagnostics.plugin.VMwareHostSystemPerfPlugin" bundleversion="6.2.0.1239" name="VMware Host System - CPU Resource Utilization" active="true" key="com.dynatrace.diagnostics.plugins.vmware.VMwareHostSystemPerfMonitor.monitor.cpuresourceutilization">
+        <pluginrole plugintype="32" sourcebundlename="com.dynatrace.diagnostics.plugin.VMwareHostSystemPerfPlugin" bundleversion="6.2.0.1239" key="com.dynatrace.diagnostics.plugins.vmware.VMwareHostSystemPerfMonitor.monitor.cpuresourceutilization" />
+      </plugintypeconfig>
+      <plugintypeconfig loglevel="INFO" sourcebundlename="com.dynatrace.diagnostics.plugin.VMwareHostSystemPerfPlugin" bundleversion="6.2.0.1239" name="VMware Host System - Memory Performance" active="true" key="com.dynatrace.diagnostics.plugins.vmware.VMwareHostSystemPerfMonitor.monitor.memoryperformance">
+        <pluginrole plugintype="32" sourcebundlename="com.dynatrace.diagnostics.plugin.VMwareHostSystemPerfPlugin" bundleversion="6.2.0.1239" key="com.dynatrace.diagnostics.plugins.vmware.VMwareHostSystemPerfMonitor.monitor.memoryperformance" />
+      </plugintypeconfig>
+      <plugintypeconfig loglevel="INFO" sourcebundlename="com.dynatrace.diagnostics.plugin.VMwareHostSystemPerfPlugin" bundleversion="6.2.0.1239" name="VMware Host System - Network Performance" active="true" key="com.dynatrace.diagnostics.plugins.vmware.VMwareHostSystemPerfMonitor.monitor.networkperformance">
+        <pluginrole plugintype="32" sourcebundlename="com.dynatrace.diagnostics.plugin.VMwareHostSystemPerfPlugin" bundleversion="6.2.0.1239" key="com.dynatrace.diagnostics.plugins.vmware.VMwareHostSystemPerfMonitor.monitor.networkperformance" />
+      </plugintypeconfig>
+      <plugintypeconfig loglevel="INFO" sourcebundlename="com.dynatrace.diagnostics.plugin.VMwareHostSystemPerfPlugin" bundleversion="6.2.0.1239" name="VMware Host System - Disk Performance" active="true" key="com.dynatrace.diagnostics.plugins.vmware.VMwareHostSystemPerfMonitor.monitor.diskperformance">
+        <pluginrole plugintype="32" sourcebundlename="com.dynatrace.diagnostics.plugin.VMwareHostSystemPerfPlugin" bundleversion="6.2.0.1239" key="com.dynatrace.diagnostics.plugins.vmware.VMwareHostSystemPerfMonitor.monitor.diskperformance" />
+      </plugintypeconfig>
+      <plugintypeconfig loglevel="INFO" sourcebundlename="com.dynatrace.diagnostics.plugin.VMwareHostSystemPerfPlugin" bundleversion="6.2.0.1239" name="VMware Host System - System Performance" active="true" key="com.dynatrace.diagnostics.plugins.vmware.VMwareHostSystemPerfMonitor.monitor.systemperformance">
+        <pluginrole plugintype="32" sourcebundlename="com.dynatrace.diagnostics.plugin.VMwareHostSystemPerfPlugin" bundleversion="6.2.0.1239" key="com.dynatrace.diagnostics.plugins.vmware.VMwareHostSystemPerfMonitor.monitor.systemperformance" />
+      </plugintypeconfig>
+      <plugintypeconfig loglevel="INFO" sourcebundlename="com.dynatrace.diagnostics.plugin.VMwareHostSystemPerfPlugin" bundleversion="6.2.0.1239" name="VMware Host System - Cluster Services Metrics" active="true" key="com.dynatrace.diagnostics.plugins.vmware.VMwareHostSystemPerfMonitor.monitor.clusterservicesmetrics">
+        <pluginrole plugintype="32" sourcebundlename="com.dynatrace.diagnostics.plugin.VMwareHostSystemPerfPlugin" bundleversion="6.2.0.1239" key="com.dynatrace.diagnostics.plugins.vmware.VMwareHostSystemPerfMonitor.monitor.clusterservicesmetrics" />
+      </plugintypeconfig>
+      <plugintypeconfig loglevel="INFO" sourcebundlename="com.dynatrace.diagnostics.plugin.SnmpMonitor" bundleversion="6.2.0.1239" name="com.dynatrace.diagnostics.plugins.metricgroup.snmp.RFC1213-MIB" active="true" key="com.dynatrace.diagnostics.plugins.metricgroup.snmp.RFC1213-MIB">
+        <pluginrole plugintype="32" sourcebundlename="com.dynatrace.diagnostics.plugin.SnmpMonitor" bundleversion="6.2.0.1239" key="com.dynatrace.diagnostics.plugins.metricgroup.snmp.RFC1213-MIB" />
+      </plugintypeconfig>
+      <plugintypeconfig loglevel="INFO" sourcebundlename="com.dynatrace.diagnostics.plugin.VMwareComputeRespourcePerfPlugin" bundleversion="6.2.0.1239" name="VMware Compute Resource - CPU Performance" active="true" key="com.dynatrace.diagnostics.plugins.vmware.VMwareComputeResourcePerfMonitor.monitor.cpuperformance">
+        <pluginrole plugintype="32" sourcebundlename="com.dynatrace.diagnostics.plugin.VMwareComputeRespourcePerfPlugin" bundleversion="6.2.0.1239" key="com.dynatrace.diagnostics.plugins.vmware.VMwareComputeResourcePerfMonitor.monitor.cpuperformance" />
+      </plugintypeconfig>
+      <plugintypeconfig loglevel="INFO" sourcebundlename="com.dynatrace.diagnostics.plugin.VMwareComputeRespourcePerfPlugin" bundleversion="6.2.0.1239" name="VMware Compute Resource - Memory Performance" active="true" key="com.dynatrace.diagnostics.plugins.vmware.VMwareComputeResourcePerfMonitor.monitor.memoryperformance">
+        <pluginrole plugintype="32" sourcebundlename="com.dynatrace.diagnostics.plugin.VMwareComputeRespourcePerfPlugin" bundleversion="6.2.0.1239" key="com.dynatrace.diagnostics.plugins.vmware.VMwareComputeResourcePerfMonitor.monitor.memoryperformance" />
+      </plugintypeconfig>
+      <plugintypeconfig loglevel="INFO" sourcebundlename="com.dynatrace.diagnostics.plugin.VMwareComputeRespourcePerfPlugin" bundleversion="6.2.0.1239" name="VMware Compute Resource - Cluster Services Metrics" active="true" key="com.dynatrace.diagnostics.plugins.vmware.VMwareComputeResourcePerfMonitor.monitor.clusterservicesmetrics">
+        <pluginrole plugintype="32" sourcebundlename="com.dynatrace.diagnostics.plugin.VMwareComputeRespourcePerfPlugin" bundleversion="6.2.0.1239" key="com.dynatrace.diagnostics.plugins.vmware.VMwareComputeResourcePerfMonitor.monitor.clusterservicesmetrics" />
+      </plugintypeconfig>
+      <plugintypeconfig loglevel="INFO" sourcebundlename="com.dynatrace.diagnostics.plugin.PerfMon" bundleversion="6.2.0.1239" name="Windows CPU Usage" active="true" key="com.dynatrace.diagnostics.pdk.monitormetricgroup.cpu">
+        <pluginrole plugintype="32" sourcebundlename="com.dynatrace.diagnostics.plugin.PerfMon" bundleversion="6.2.0.1239" key="com.dynatrace.diagnostics.pdk.monitormetricgroup.cpu" />
+      </plugintypeconfig>
+      <plugintypeconfig loglevel="INFO" sourcebundlename="com.dynatrace.diagnostics.plugin.PerfMon" bundleversion="6.2.0.1239" name="Windows Memory Usage" active="true" key="com.dynatrace.diagnostics.pdk.monitormetricgroup.memory">
+        <pluginrole plugintype="32" sourcebundlename="com.dynatrace.diagnostics.plugin.PerfMon" bundleversion="6.2.0.1239" key="com.dynatrace.diagnostics.pdk.monitormetricgroup.memory" />
+      </plugintypeconfig>
+      <plugintypeconfig loglevel="INFO" sourcebundlename="com.dynatrace.diagnostics.plugin.PerfMon" bundleversion="6.2.0.1239" name="Windows Disk Usage" active="true" key="com.dynatrace.diagnostics.pdk.monitormetricgroup.disk">
+        <pluginrole plugintype="32" sourcebundlename="com.dynatrace.diagnostics.plugin.PerfMon" bundleversion="6.2.0.1239" key="com.dynatrace.diagnostics.pdk.monitormetricgroup.disk" />
+      </plugintypeconfig>
+      <plugintypeconfig loglevel="INFO" sourcebundlename="com.dynatrace.diagnostics.plugin.PerfMon" bundleversion="6.2.0.1239" name="Windows Network Usage" active="true" key="com.dynatrace.diagnostics.pdk.monitormetricgroup.network">
+        <pluginrole plugintype="32" sourcebundlename="com.dynatrace.diagnostics.plugin.PerfMon" bundleversion="6.2.0.1239" key="com.dynatrace.diagnostics.pdk.monitormetricgroup.network" />
+      </plugintypeconfig>
+      <plugintypeconfig loglevel="INFO" sourcebundlename="com.dynatrace.diagnostics.plugin.PerfMon" bundleversion="6.2.0.1239" name="Windows Performance Monitor" active="true" key="com.dynatrace.diagnostics.plugins.Windows Performance Monitor">
+        <pluginrole plugintype="32" sourcebundlename="com.dynatrace.diagnostics.plugin.PerfMon" bundleversion="6.2.0.1239" key="com.dynatrace.diagnostics.plugins.Windows Performance Monitor" />
+      </plugintypeconfig>
+      <plugintypeconfig loglevel="INFO" sourcebundlename="com.dynatrace.diagnostics.plugin.Vmstat" bundleversion="6.2.0.1239" name="Unix Memory Usage" active="true" key="com.dynatrace.diagnostics.plugin.UnixSystemMonitor.RAMUtilizationMetricGroup">
+        <pluginrole plugintype="32" sourcebundlename="com.dynatrace.diagnostics.plugin.Vmstat" bundleversion="6.2.0.1239" key="com.dynatrace.diagnostics.plugin.UnixSystemMonitor.RAMUtilizationMetricGroup" />
+      </plugintypeconfig>
+      <plugintypeconfig loglevel="INFO" sourcebundlename="com.dynatrace.diagnostics.plugin.Vmstat" bundleversion="6.2.0.1239" name="Unix Memory" active="true" key="com.dynatrace.diagnostics.plugin.UnixSystemMonitor.RAMMetricGroup">
+        <pluginrole plugintype="32" sourcebundlename="com.dynatrace.diagnostics.plugin.Vmstat" bundleversion="6.2.0.1239" key="com.dynatrace.diagnostics.plugin.UnixSystemMonitor.RAMMetricGroup" />
+      </plugintypeconfig>
+      <plugintypeconfig loglevel="INFO" sourcebundlename="com.dynatrace.diagnostics.plugin.Vmstat" bundleversion="6.2.0.1239" name="Unix CPU Usage" active="true" key="com.dynatrace.diagnostics.plugin.UnixSystemMonitor.CPUMetricGroup">
+        <pluginrole plugintype="32" sourcebundlename="com.dynatrace.diagnostics.plugin.Vmstat" bundleversion="6.2.0.1239" key="com.dynatrace.diagnostics.plugin.UnixSystemMonitor.CPUMetricGroup" />
+      </plugintypeconfig>
+      <plugintypeconfig loglevel="INFO" sourcebundlename="com.dynatrace.diagnostics.plugin.Vmstat" bundleversion="6.2.0.1239" name="Unix Process" active="true" key="com.dynatrace.diagnostics.plugin.UnixSystemMonitor.ProcessMetricGroup">
+        <pluginrole plugintype="32" sourcebundlename="com.dynatrace.diagnostics.plugin.Vmstat" bundleversion="6.2.0.1239" key="com.dynatrace.diagnostics.plugin.UnixSystemMonitor.ProcessMetricGroup" />
+      </plugintypeconfig>
+      <plugintypeconfig loglevel="INFO" sourcebundlename="com.dynatrace.diagnostics.plugin.Vmstat" bundleversion="6.2.0.1239" name="Unix Filesystem Usage" active="true" key="com.dynatrace.diagnostics.plugin.UnixSystemMonitor.MemoryUtilizationMetricGroup">
+        <pluginrole plugintype="32" sourcebundlename="com.dynatrace.diagnostics.plugin.Vmstat" bundleversion="6.2.0.1239" key="com.dynatrace.diagnostics.plugin.UnixSystemMonitor.MemoryUtilizationMetricGroup" />
+      </plugintypeconfig>
+      <plugintypeconfig loglevel="INFO" sourcebundlename="com.dynatrace.diagnostics.plugin.Vmstat" bundleversion="6.2.0.1239" name="Unix Filesystem" active="true" key="com.dynatrace.diagnostics.plugin.UnixSystemMonitor.MemoryMetricGroup">
+        <pluginrole plugintype="32" sourcebundlename="com.dynatrace.diagnostics.plugin.Vmstat" bundleversion="6.2.0.1239" key="com.dynatrace.diagnostics.plugin.UnixSystemMonitor.MemoryMetricGroup" />
+      </plugintypeconfig>
+      <plugintypeconfig loglevel="INFO" sourcebundlename="com.dynatrace.diagnostics.plugin.Vmstat" bundleversion="6.2.0.1239" name="Unix Network" active="true" key="com.dynatrace.diagnostics.plugin.UnixSystemMonitor.NetworkMetricGroup">
+        <pluginrole plugintype="32" sourcebundlename="com.dynatrace.diagnostics.plugin.Vmstat" bundleversion="6.2.0.1239" key="com.dynatrace.diagnostics.plugin.UnixSystemMonitor.NetworkMetricGroup" />
+      </plugintypeconfig>
+      <plugintypeconfig loglevel="INFO" sourcebundlename="com.dynatrace.diagnostics.plugin.VMwarePoolResourcePerfPlugin" bundleversion="6.2.0.1239" name="VMware Resource Pool - CPU Performance" active="true" key="com.dynatrace.diagnostics.plugins.vmware.VMwareResourcePoolPerfMonitor.monitor.cpuperformance">
+        <pluginrole plugintype="32" sourcebundlename="com.dynatrace.diagnostics.plugin.VMwarePoolResourcePerfPlugin" bundleversion="6.2.0.1239" key="com.dynatrace.diagnostics.plugins.vmware.VMwareResourcePoolPerfMonitor.monitor.cpuperformance" />
+      </plugintypeconfig>
+      <plugintypeconfig loglevel="INFO" sourcebundlename="com.dynatrace.diagnostics.plugin.VMwarePoolResourcePerfPlugin" bundleversion="6.2.0.1239" name="VMware Resource Pool - Memory Performance" active="true" key="com.dynatrace.diagnostics.plugins.vmware.VMwareResourcePoolPerfMonitor.monitor.memoryperformance">
+        <pluginrole plugintype="32" sourcebundlename="com.dynatrace.diagnostics.plugin.VMwarePoolResourcePerfPlugin" bundleversion="6.2.0.1239" key="com.dynatrace.diagnostics.plugins.vmware.VMwareResourcePoolPerfMonitor.monitor.memoryperformance" />
+      </plugintypeconfig>
+      <plugintypeconfig loglevel="INFO" sourcebundlename="com.dynatrace.diagnostics.plugins.metricgroup.snmp.HEALTH-MONITOR-SUNMANAGEMENTCENTER-MIB" bundleversion="1.0.0" name="com.dynatrace.diagnostics.plugins.metricgroup.snmp.HEALTH-MONITOR-SUNMANAGEMENTCENTER-MIB" active="true" key="com.dynatrace.diagnostics.plugins.metricgroup.snmp.HEALTH-MONITOR-SUNMANAGEMENTCENTER-MIB">
+        <pluginrole plugintype="32" sourcebundlename="com.dynatrace.diagnostics.plugins.metricgroup.snmp.HEALTH-MONITOR-SUNMANAGEMENTCENTER-MIB" bundleversion="1.0.0" key="com.dynatrace.diagnostics.plugins.metricgroup.snmp.HEALTH-MONITOR-SUNMANAGEMENTCENTER-MIB" />
+      </plugintypeconfig>
+      <plugintypeconfig loglevel="INFO" sourcebundlename="com.dynatrace.diagnostics.plugins.metricgroup.snmp.HP-UNIX" bundleversion="1.0.0" name="com.dynatrace.diagnostics.plugins.metricgroup.snmp.HP-UNIX" active="true" key="com.dynatrace.diagnostics.plugins.metricgroup.snmp.HP-UNIX">
+        <pluginrole plugintype="32" sourcebundlename="com.dynatrace.diagnostics.plugins.metricgroup.snmp.HP-UNIX" bundleversion="1.0.0" key="com.dynatrace.diagnostics.plugins.metricgroup.snmp.HP-UNIX" />
+      </plugintypeconfig>
+      <plugintypeconfig loglevel="INFO" sourcebundlename="com.dynatrace.diagnostics.plugin.VMwareVirtualMachinePerfPlugin" bundleversion="6.2.0.1239" name="VMware Virtual Machine - CPU Performance" active="true" key="com.dynatrace.diagnostics.plugins.vmware.VMwareVirtualMachinePerfMonitor.monitor.cpuperformance">
+        <pluginrole plugintype="32" sourcebundlename="com.dynatrace.diagnostics.plugin.VMwareVirtualMachinePerfPlugin" bundleversion="6.2.0.1239" key="com.dynatrace.diagnostics.plugins.vmware.VMwareVirtualMachinePerfMonitor.monitor.cpuperformance" />
+      </plugintypeconfig>
+      <plugintypeconfig loglevel="INFO" sourcebundlename="com.dynatrace.diagnostics.plugin.VMwareVirtualMachinePerfPlugin" bundleversion="6.2.0.1239" name="VMware Virtual Machine - CPU Resource Utilization" active="true" key="com.dynatrace.diagnostics.plugins.vmware.VMwareVirtualMachinePerfMonitor.monitor.cpuresourceutilization">
+        <pluginrole plugintype="32" sourcebundlename="com.dynatrace.diagnostics.plugin.VMwareVirtualMachinePerfPlugin" bundleversion="6.2.0.1239" key="com.dynatrace.diagnostics.plugins.vmware.VMwareVirtualMachinePerfMonitor.monitor.cpuresourceutilization" />
+      </plugintypeconfig>
+      <plugintypeconfig loglevel="INFO" sourcebundlename="com.dynatrace.diagnostics.plugin.VMwareVirtualMachinePerfPlugin" bundleversion="6.2.0.1239" name="VMware Virtual Machine - Memory Performance" active="true" key="com.dynatrace.diagnostics.plugins.vmware.VMwareVirtualMachinePerfMonitor.monitor.memoryperformance">
+        <pluginrole plugintype="32" sourcebundlename="com.dynatrace.diagnostics.plugin.VMwareVirtualMachinePerfPlugin" bundleversion="6.2.0.1239" key="com.dynatrace.diagnostics.plugins.vmware.VMwareVirtualMachinePerfMonitor.monitor.memoryperformance" />
+      </plugintypeconfig>
+      <plugintypeconfig loglevel="INFO" sourcebundlename="com.dynatrace.diagnostics.plugin.VMwareVirtualMachinePerfPlugin" bundleversion="6.2.0.1239" name="VMware Virtual Machine - Network Performance" active="true" key="com.dynatrace.diagnostics.plugins.vmware.VMwareVirtualMachinePerfMonitor.monitor.networkperformance">
+        <pluginrole plugintype="32" sourcebundlename="com.dynatrace.diagnostics.plugin.VMwareVirtualMachinePerfPlugin" bundleversion="6.2.0.1239" key="com.dynatrace.diagnostics.plugins.vmware.VMwareVirtualMachinePerfMonitor.monitor.networkperformance" />
+      </plugintypeconfig>
+      <plugintypeconfig loglevel="INFO" sourcebundlename="com.dynatrace.diagnostics.plugin.VMwareVirtualMachinePerfPlugin" bundleversion="6.2.0.1239" name="VMware Virtual Machine - Disk Performance" active="true" key="com.dynatrace.diagnostics.plugins.vmware.VMwareVirtualMachinePerfMonitor.monitor.diskperformance">
+        <pluginrole plugintype="32" sourcebundlename="com.dynatrace.diagnostics.plugin.VMwareVirtualMachinePerfPlugin" bundleversion="6.2.0.1239" key="com.dynatrace.diagnostics.plugins.vmware.VMwareVirtualMachinePerfMonitor.monitor.diskperformance" />
+      </plugintypeconfig>
+      <plugintypeconfig loglevel="INFO" sourcebundlename="com.dynatrace.diagnostics.plugin.VMwareVirtualMachinePerfPlugin" bundleversion="6.2.0.1239" name="VMware Virtual Machine - System Performance" active="true" key="com.dynatrace.diagnostics.plugins.vmware.VMwareVirtualMachinePerfMonitor.monitor.systemperformance">
+        <pluginrole plugintype="32" sourcebundlename="com.dynatrace.diagnostics.plugin.VMwareVirtualMachinePerfPlugin" bundleversion="6.2.0.1239" key="com.dynatrace.diagnostics.plugins.vmware.VMwareVirtualMachinePerfMonitor.monitor.systemperformance" />
+      </plugintypeconfig>
+      <plugintypeconfig loglevel="INFO" sourcebundlename="com.dynatrace.diagnostics.plugin.UrlMonitor" bundleversion="6.2.0.1239" name="URL Monitor" active="true" key="com.dynatrace.diagnostics.plugins.UrlPluginMonitorMetricGroup">
+        <pluginrole plugintype="32" sourcebundlename="com.dynatrace.diagnostics.plugin.UrlMonitor" bundleversion="6.2.0.1239" key="com.dynatrace.diagnostics.plugins.UrlPluginMonitorMetricGroup" />
+      </plugintypeconfig>
+      <plugintypeconfig loglevel="INFO" sourcebundlename="com.dynatrace.diagnostics.plugins.metricgroup.CustomJMXMetricGroup" bundleversion="1.0.0" name="Custom JMX" active="true" key="com.dynatrace.diagnostics.plugins.metricgroup.CustomJMXMetricGroup">
+        <pluginrole plugintype="64" sourcebundlename="com.dynatrace.diagnostics.plugins.metricgroup.CustomJMXMetricGroup" bundleversion="1.0.0" key="com.dynatrace.diagnostics.plugins.metricgroup.CustomJMXMetricGroup" />
+      </plugintypeconfig>
+      <plugintypeconfig loglevel="INFO" sourcebundlename="com.dynatrace.diagnostics.plugins.metricgroup.DotNetNetworking" bundleversion="1.0.0" name=".NET Networking" active="true" key="com.dynatrace.diagnostics.plugins.metricgroup.DotNetNetworking">
+        <pluginrole plugintype="64" sourcebundlename="com.dynatrace.diagnostics.plugins.metricgroup.DotNetNetworking" bundleversion="1.0.0" key="com.dynatrace.diagnostics.plugins.metricgroup.DotNetNetworking" />
+      </plugintypeconfig>
+      <plugintypeconfig loglevel="INFO" sourcebundlename="com.dynatrace.diagnostics.plugins.metricgroup.JBoss" bundleversion="1.0.0" name="JBoss" active="true" key="com.dynatrace.diagnostics.plugins.metricgroup.JBoss">
+        <pluginrole plugintype="64" sourcebundlename="com.dynatrace.diagnostics.plugins.metricgroup.JBoss" bundleversion="1.0.0" key="com.dynatrace.diagnostics.plugins.metricgroup.JBoss" />
+      </plugintypeconfig>
+      <plugintypeconfig loglevel="INFO" sourcebundlename="com.dynatrace.diagnostics.plugins.metricgroup.AspDotNet" bundleversion="1.0.0" name="ASP.NET" active="true" key="com.dynatrace.diagnostics.plugins.metricgroup.AspDotNet">
+        <pluginrole plugintype="64" sourcebundlename="com.dynatrace.diagnostics.plugins.metricgroup.AspDotNet" bundleversion="1.0.0" key="com.dynatrace.diagnostics.plugins.metricgroup.AspDotNet" />
+      </plugintypeconfig>
+      <plugintypeconfig loglevel="INFO" sourcebundlename="com.dynatrace.diagnostics.plugins.metricgroup.hidden.JBossConnectionPool" bundleversion="1.0.0" name="JBossConnectionPool" active="true" key="com.dynatrace.diagnostics.plugins.metricgroup.JBossConnectionPool">
+        <pluginrole plugintype="64" sourcebundlename="com.dynatrace.diagnostics.plugins.metricgroup.hidden.JBossConnectionPool" bundleversion="1.0.0" key="com.dynatrace.diagnostics.plugins.metricgroup.JBossConnectionPool" />
+      </plugintypeconfig>
+      <plugintypeconfig loglevel="INFO" sourcebundlename="com.dynatrace.diagnostics.plugins.metricgroup.Tomcat" bundleversion="1.0.0" name="Tomcat" active="true" key="com.dynatrace.diagnostics.plugins.metricgroup.Tomcat">
+        <pluginrole plugintype="64" sourcebundlename="com.dynatrace.diagnostics.plugins.metricgroup.Tomcat" bundleversion="1.0.0" key="com.dynatrace.diagnostics.plugins.metricgroup.Tomcat" />
+      </plugintypeconfig>
+      <plugintypeconfig loglevel="INFO" sourcebundlename="com.dynatrace.diagnostics.plugins.metricgroup.WebLogic" bundleversion="1.0.0" name="WebLogic 9+" active="true" key="com.dynatrace.diagnostics.plugins.metricgroup.WebLogic">
+        <pluginrole plugintype="64" sourcebundlename="com.dynatrace.diagnostics.plugins.metricgroup.WebLogic" bundleversion="1.0.0" key="com.dynatrace.diagnostics.plugins.metricgroup.WebLogic" />
+      </plugintypeconfig>
+      <plugintypeconfig loglevel="INFO" sourcebundlename="com.dynatrace.diagnostics.plugins.metricgroup.hidden.JBoss7ConnectionPool" bundleversion="1.0.0" name="JBoss7ConnectionPool" active="true" key="com.dynatrace.diagnostics.plugins.metricgroup.JBoss7ConnectionPool">
+        <pluginrole plugintype="64" sourcebundlename="com.dynatrace.diagnostics.plugins.metricgroup.hidden.JBoss7ConnectionPool" bundleversion="1.0.0" key="com.dynatrace.diagnostics.plugins.metricgroup.JBoss7ConnectionPool" />
+      </plugintypeconfig>
+      <plugintypeconfig loglevel="INFO" sourcebundlename="com.dynatrace.diagnostics.plugins.metricgroup.AdoDotNet" bundleversion="1.0.0" name="ADO.NET" active="true" key="com.dynatrace.diagnostics.plugins.metricgroup.AdoDotNet">
+        <pluginrole plugintype="64" sourcebundlename="com.dynatrace.diagnostics.plugins.metricgroup.AdoDotNet" bundleversion="1.0.0" key="com.dynatrace.diagnostics.plugins.metricgroup.AdoDotNet" />
+      </plugintypeconfig>
+      <plugintypeconfig loglevel="INFO" sourcebundlename="com.dynatrace.diagnostics.plugins.metricgroup.hidden.WebLogicConnectionPool" bundleversion="1.0.0" name="WebLogicConnectionPool" active="true" key="com.dynatrace.diagnostics.plugins.metricgroup.WebLogicConnectionPool">
+        <pluginrole plugintype="64" sourcebundlename="com.dynatrace.diagnostics.plugins.metricgroup.hidden.WebLogicConnectionPool" bundleversion="1.0.0" key="com.dynatrace.diagnostics.plugins.metricgroup.WebLogicConnectionPool" />
+      </plugintypeconfig>
+      <plugintypeconfig loglevel="INFO" sourcebundlename="com.dynatrace.diagnostics.plugins.metricgroup.DotNetClr" bundleversion="1.0.0" name=".NET Common Language Runtime" active="true" key="com.dynatrace.diagnostics.plugins.metricgroup.DotNetClr">
+        <pluginrole plugintype="64" sourcebundlename="com.dynatrace.diagnostics.plugins.metricgroup.DotNetClr" bundleversion="1.0.0" key="com.dynatrace.diagnostics.plugins.metricgroup.DotNetClr" />
+      </plugintypeconfig>
+      <plugintypeconfig loglevel="INFO" sourcebundlename="com.dynatrace.diagnostics.plugins.metricgroup.hidden.WebSphereConnectionPool" bundleversion="1.0.0" name="WebSphereConnectionPool" active="true" key="com.dynatrace.diagnostics.plugins.metricgroup.hidden.WebSphereConnectionPool">
+        <pluginrole plugintype="64" sourcebundlename="com.dynatrace.diagnostics.plugins.metricgroup.hidden.WebSphereConnectionPool" bundleversion="1.0.0" key="com.dynatrace.diagnostics.plugins.metricgroup.hidden.WebSphereConnectionPool" />
+      </plugintypeconfig>
+      <plugintypeconfig loglevel="INFO" sourcebundlename="com.dynatrace.diagnostics.plugins.metricgroup.CustomPerfmonMetricGroup" bundleversion="1.0.0" name="Custom Windows Performance Counter" active="true" key="com.dynatrace.diagnostics.plugins.metricgroup.CustomPerfmonMetricGroup">
+        <pluginrole plugintype="64" sourcebundlename="com.dynatrace.diagnostics.plugins.metricgroup.CustomPerfmonMetricGroup" bundleversion="1.0.0" key="com.dynatrace.diagnostics.plugins.metricgroup.CustomPerfmonMetricGroup" />
+      </plugintypeconfig>
+      <plugintypeconfig loglevel="INFO" sourcebundlename="com.dynatrace.diagnostics.plugins.metricgroup.WebSphere" bundleversion="1.0.0" name="WebSphere" active="true" key="com.dynatrace.diagnostics.plugins.metricgroup.WebSphere">
+        <pluginrole plugintype="64" sourcebundlename="com.dynatrace.diagnostics.plugins.metricgroup.WebSphere" bundleversion="1.0.0" key="com.dynatrace.diagnostics.plugins.metricgroup.WebSphere" />
+      </plugintypeconfig>
+      <plugintypeconfig loglevel="INFO" sourcebundlename="com.dynatrace.diagnostics.plugins.metricgroup.WebLogic8" bundleversion="1.0.0" name="WebLogic 8" active="true" key="com.dynatrace.diagnostics.plugins.metricgroup.WebLogic8">
+        <pluginrole plugintype="64" sourcebundlename="com.dynatrace.diagnostics.plugins.metricgroup.WebLogic8" bundleversion="1.0.0" key="com.dynatrace.diagnostics.plugins.metricgroup.WebLogic8" />
+      </plugintypeconfig>
+    </plugins>
+    <oopanalyzerconfig port="7788" usessl="false" address="127.0.0.1" usecompression="true" />
+    <mailserver port="25" address="" subject="[dynaTrace] " verificationemail="" userid="" ssl="false" bounce="">
+      <from type="Unresolved" />
+    </mailserver>
+    <actioncenter />
+    <continuousrecordingmigration ignore_warnings_in_actioncenter="false" removed_existing_continuousrecording_tasks="false" />
+    <collectorserversharedconfig>
+      <ipheaders>
+        <header header="rproxy_remote_address" />
+        <header header="True-Client-IP" />
+        <header header="X-Client-Ip" />
+        <header header="X-Forwarded-For" />
+        <header header="X-Http-Client-Ip" />
+      </ipheaders>
+      <hostheaders>
+        <header header="X-Forwarded-Host" />
+        <header header="X-Host" />
+        <header header="Host" />
+      </hostheaders>
+    </collectorserversharedconfig>
+    <gomezconvergenceconfig username="" convergenceserverid="0" accountid="" url="https://uem.gomeznetworks.com/uemdatareceiver/rest/datareceiver" integrationenabled="false" />
+    <confidentialstringconfiguration stringstoobfuscate="MethodArgumentValue,MethodReturnValue,LoggingMessage,ExceptionMessage,MessagingContent,ClientIPAdress,ServletURI,ServletQueryString,ServletParameters,ASPNetURI,ASPNetQueryString,ASPNetParameters,ClientSideRequestUri,ClientSideQueryString,SQLBindKeys,SQLBindValues,SQLConnectionProperties,dynaTraceIncidents,UEMVisitTag,Unknown" />
+    <serverexport exportauthenticationenabled="false" exportbulksize="100" exporturl="" exportuntrustedssl="false" exportenabled="false" exportauthenticationuser="" />
+    <fixpackconfirmations />
+    <storagequota />
+    <analysiscacheconfiguration numworkers="1" buildcacheonstartup="false" enabled="true" timerinterval="60000">
+      <analyzerconfigurations>
+        <analyzerconfiguration enabled="true" analyzertype="visitsummary" requiredrilldowndata="false">
+          <analysiscachetimeslotconfiguration>
+            <resolution timeframe="1h" resolution="5m" />
+            <resolution timeframe="6h" resolution="30m" />
+            <resolution timeframe="2d" resolution="3h" />
+            <resolution timeframe="14d" resolution="1d" />
+            <resolution timeframe="570d" resolution="7d" />
+          </analysiscachetimeslotconfiguration>
+        </analyzerconfiguration>
+        <analyzerconfiguration enabled="true" analyzertype="visitsummary" requiredrilldowndata="false" splitby="application">
+          <analysiscachetimeslotconfiguration>
+            <resolution timeframe="1h" resolution="5m" />
+            <resolution timeframe="6h" resolution="30m" />
+            <resolution timeframe="2d" resolution="3h" />
+            <resolution timeframe="14d" resolution="1d" />
+            <resolution timeframe="570d" resolution="7d" />
+          </analysiscachetimeslotconfiguration>
+        </analyzerconfiguration>
+        <analyzerconfiguration enabled="true" analyzertype="useractionsummary" requiredrilldowndata="false">
+          <analysiscachetimeslotconfiguration>
+            <resolution timeframe="1h" resolution="5m" />
+            <resolution timeframe="6h" resolution="30m" />
+            <resolution timeframe="2d" resolution="3h" />
+            <resolution timeframe="14d" resolution="1d" />
+            <resolution timeframe="570d" resolution="7d" />
+          </analysiscachetimeslotconfiguration>
+        </analyzerconfiguration>
+        <analyzerconfiguration enabled="true" analyzertype="useractionsummary" requiredrilldowndata="false" splitby="application">
+          <analysiscachetimeslotconfiguration>
+            <resolution timeframe="1h" resolution="5m" />
+            <resolution timeframe="6h" resolution="30m" />
+            <resolution timeframe="2d" resolution="3h" />
+            <resolution timeframe="14d" resolution="1d" />
+            <resolution timeframe="570d" resolution="7d" />
+          </analysiscachetimeslotconfiguration>
+        </analyzerconfiguration>
+        <analyzerconfiguration enabled="true" analyzertype="com.dynatrace.diagnostics.eue.error.analyzer.EndUserErrorAnalyzer" requiredrilldowndata="true">
+          <analysiscachetimeslotconfiguration>
+            <resolution timeframe="1d" resolution="10m" />
+            <resolution timeframe="14d" resolution="1h" />
+          </analysiscachetimeslotconfiguration>
+        </analyzerconfiguration>
+        <analyzerconfiguration enabled="true" analyzertype="com.dynatrace.diagnostics.adm.ADMAnalyzer" requiredrilldowndata="false">
+          <analysiscachetimeslotconfiguration>
+            <resolution timeframe="1h" resolution="5m" />
+            <resolution timeframe="6h" resolution="30m" />
+            <resolution timeframe="2d" resolution="3h" />
+            <resolution timeframe="14d" resolution="1d" />
+            <resolution timeframe="570d" resolution="7d" />
+          </analysiscachetimeslotconfiguration>
+        </analyzerconfiguration>
+      </analyzerconfigurations>
+    </analysiscacheconfiguration>
+    <webui webuihttpsport="9911" webuienabled="true" />
+  </serverconfig>
+  <environmentdescriptor memento.version="6.2.0.1239">
+    <os arch="amd64" name="Linux" version="4.1.12-boot2docker" />
+    <vm vendor="Oracle Corporation" name="Java HotSpot(TM) 64-Bit Server VM" version="24.80-b11" />
+  </environmentdescriptor>
+  <repositoryconfig memento.version="6.2.0.1239" lowduration="-1" highduration="1209600000" deletefromhigh="true" midduration="5184000000" querytimeout="7200">
+    <repository>
+      <database name="dynaTrace62" dbms="embedded" />
+      <credential user="dynaTrace" />
+      <connection port="53337" usessl="false" host="localhost" ignorewarnnonproduction="false" useurl="false" connectonstartup="true" embededdatapath="instances/dtserver/repository" url="" autopurge_measures="true" />
+    </repository>
+  </repositoryconfig>
+</dynatrace>

@@ -26,6 +26,7 @@ RUN sed -i '/^-memory/,/^unsupported/c\-memory\ndemo' ${DT}/dtserver.ini && \
 
 COPY build/pull-license-key-file.sh /
 COPY build/run-process.sh /
+COPY build/defaults/server.config.xml ${DT}/server/conf
 
 # Dynatrace Clients (TCP)
 EXPOSE 2020
