@@ -26,10 +26,11 @@ In the example above, you have to let `DT_SERVER_LICENSE_KEY_FILE_URL` point to 
 
 ## How to Monitor your Dockerized Application?
 
-See the following integration examples for more information:
+See the following integrations for more information:
 
 - [Dockerized Dynatrace Agent: Examples](https://github.com/dynaTrace/Dynatrace-Docker/tree/master/Dynatrace-Agent-Examples)
 - [Dockerized Dynatrace Web Server Agent: Examples](https://github.com/dynaTrace/Dynatrace-Docker/tree/master/Dynatrace-WebServer-Agent-Examples)
+- [Dockerized easyTravel Application](https://github.com/dynaTrace/Dynatrace-easyTravel-Docker)
 
 ## Problems? Questions? Suggestions?
 
