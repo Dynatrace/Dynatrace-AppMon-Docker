@@ -27,6 +27,6 @@ docker run \
   --env JVM_XMX="${JVM_XMX}" \
   --env JVM_PERM_SIZE="${JVM_PERM_SIZE}" \
   --env JVM_MAX_PERM_SIZE="${JVM_MAX_PERM_SIZE}" \
-  --volume ${HOST_LOG_DIR}:/opt/dynatrace/log/collector/${NAME} \
+  --volume ${HOST_LOG_DIR}:/dynatrace/log/collector/${NAME} \
   --publish-all \
   dynatrace/collector

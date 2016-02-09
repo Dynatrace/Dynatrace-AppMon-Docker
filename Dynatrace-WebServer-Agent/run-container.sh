@@ -17,7 +17,7 @@ docker run \
   --env HOST_NAME="${HOST_NAME}" \
   --env LOG_LEVEL="${LOG_LEVEL}" \
   --env COLLECTOR="${COLLECTOR}" \
-  --volume /opt/dynatrace \
-  --volume ${HOST_LOG_DIR}:/opt/dynatrace/log \
+  --volume /dynatrace \
+  --volume ${HOST_LOG_DIR}:/dynatrace/log \
   --publish-all \
   dynatrace/wsagent

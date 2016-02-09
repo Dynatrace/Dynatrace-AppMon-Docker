@@ -6,7 +6,7 @@ ENV VERSION             "6.2"
 ENV INSTALLER_FILE_NAME "dynatrace-server-linux-x86.jar"
 ENV INSTALLER_URL       "http://downloads.dynatracesaas.com/${VERSION}/${INSTALLER_FILE_NAME}"
 
-ENV DT                  "/opt/dynatrace"
+ENV DT                  "/dynatrace"
 ENV COLLECTOR_PORT      "6698"
 ENV COLLECTOR_PORT_SSL  "6699"
 

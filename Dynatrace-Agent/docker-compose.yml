@@ -3,5 +3,5 @@ dtagent:
   hostname: "docker-${DT_AGENT_NAME}"
   image: dynatrace/agent
   volumes:
-    - /opt/dynatrace
-    - "/tmp/log/dynatrace/agents/${DT_AGENT_NAME}:/opt/dynatrace/log/agent"
+    - /dynatrace
+    - "/tmp/log/dynatrace/agents/${DT_AGENT_NAME}:/dynatrace/log/agent"

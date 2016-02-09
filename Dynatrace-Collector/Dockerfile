@@ -6,7 +6,7 @@ ENV VERSION             "6.2"
 ENV INSTALLER_FILE_NAME "dynatrace-collector-linux-x86.jar"
 ENV INSTALLER_URL       "http://downloads.dynatracesaas.com/${VERSION}/${INSTALLER_FILE_NAME}"
 
-ENV DT                  "/opt/dynatrace"
+ENV DT                  "/dynatrace"
 ENV AGENT_PORT          "9998"
 
 ENV INSTALL_DEPS        "curl openjdk-7-jre-headless"

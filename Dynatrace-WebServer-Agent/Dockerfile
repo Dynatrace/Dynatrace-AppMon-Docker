@@ -6,7 +6,7 @@ ENV VERSION             "6.2"
 ENV INSTALLER_FILE_NAME "dynatrace-wsagent-linux-x64.tar"
 ENV INSTALLER_URL       "http://downloads.dynatracesaas.com/${VERSION}/${INSTALLER_FILE_NAME}"
 
-ENV DT                  "/opt/dynatrace"
+ENV DT                  "/dynatrace"
 ENV BIN64               "${DT}/agent/lib64/dtwsagent"
 ENV INI                 "${DT}/agent/conf/dtwsagent.ini"
 ENV LIB64               "${DT}/agent/lib64/libdtagent.so"
@@ -42,7 +42,7 @@ RUN apt-get update && \
     apt-get remove --purge -y ${WAIT_FOR_CMD_INSTALL_DEPS} && \
     rm -rf /var/lib/apt/lists/* /tmp/*
 
-ENV SOCAT_HOME "/opt/dynatrace/socat"
+ENV SOCAT_HOME "${DT}/socat"
 
 RUN mkdir -p ${SOCAT_HOME}
 

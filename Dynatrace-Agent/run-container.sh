@@ -8,6 +8,6 @@ mkdir -p ${HOST_LOG_DIR}
 echo "Starting the Dynatrace Agent: ${NAME}"
 docker run \
   --name ${NAME} \
-  --volume /opt/dynatrace \
-  --volume ${HOST_LOG_DIR}:/opt/dynatrace/log/agent \
+  --volume /dynatrace \
+  --volume ${HOST_LOG_DIR}:/dynatrace/log/agent \
   dynatrace/agent
