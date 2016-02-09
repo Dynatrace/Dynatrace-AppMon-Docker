@@ -25,8 +25,9 @@ RUN apt-get update && \
     rm -rf /var/lib/apt/lists/* /tmp/*
 
 COPY build/run-process.sh /
-COPY build/attach-to-wsagent-master.sh ${DT}
 COPY build/accept-wsagent-slaves.sh ${DT}
+COPY build/attach-to-wsagent-master.sh ${DT}
+COPY build/linux/x86_64/socat ${DT}
 
 # Dynatrace Web Server Slave Agents
 EXPOSE 8001/udp
@@ -41,11 +42,5 @@ RUN apt-get update && \
     chmod +x /usr/local/bin/wait-for-cmd.sh && \
     apt-get remove --purge -y ${WAIT_FOR_CMD_INSTALL_DEPS} && \
     rm -rf /var/lib/apt/lists/* /tmp/*
-
-ENV SOCAT_HOME "${DT}/socat"
-
-RUN mkdir -p ${SOCAT_HOME}
-
-COPY build/linux/x86_64/socat ${SOCAT_HOME}
 
 CMD /run-process.sh
