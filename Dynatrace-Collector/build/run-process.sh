@@ -15,7 +15,7 @@ SERVER_COLLECTOR_PORT=${DTSERVER_ENV_COLLECTOR_PORT:-"6698"}
 SERVER=${SERVER:-"${SERVER_HOST_NAME}:${SERVER_COLLECTOR_PORT}"}
 
 # Wait for the server to start serving collectors.
-wait-for-cmd.sh "nc -z ${SERVER_HOST_NAME} ${SERVER_COLLECTOR_PORT}" 360
+wait-for-cmd.sh "nc -z `echo ${SERVER} | sed 's/:/ /'`" 360
 
 JVM_XMS=${JVM_XMS:-"2G"}
 JVM_XMX=${JVM_XMX:-"2G"}
@@ -23,9 +23,9 @@ JVM_PERM_SIZE=${JVM_PERM_SIZE:-"128m"}
 JVM_MAX_PERM_SIZE=${JVM_MAX_PERM_SIZE:-"128m"}
 
 ${DT}/dtcollector -instance ${NAME} \
-                    -listen ${AGENT_PORT} \
-                    -server ${SERVER} \
-                    -Xms${JVM_XMS} \
-                    -Xmx${JVM_XMX} \
-                    -XX:PermSize=${JVM_PERM_SIZE} \
-                    -XX:MaxPermSize=${JVM_MAX_PERM_SIZE}
+                  -listen ${AGENT_PORT} \
+                  -server ${SERVER} \
+                  -Xms${JVM_XMS} \
+                  -Xmx${JVM_XMX} \
+                  -XX:PermSize=${JVM_PERM_SIZE} \
+                  -XX:MaxPermSize=${JVM_MAX_PERM_SIZE}
