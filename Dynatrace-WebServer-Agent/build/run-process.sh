@@ -15,7 +15,7 @@ COLLECTOR_PORT=${DTCOLLECTOR_ENV_AGENT_PORT:-"9998"}
 COLLECTOR=${COLLECTOR:-"${COLLECTOR_HOST_NAME}:${COLLECTOR_PORT}"}
 
 # Wait for the collector to start serving agents.
-wait-for-cmd.sh "nc -z ${COLLECTOR_HOST_NAME} ${COLLECTOR_PORT}" 360
+wait-for-cmd.sh "nc -z `echo ${COLLECTOR} | sed 's/:/ /'`" 360
 
 # Assert that incoming slave agents are accepted only after dtwsagent has started.
 (wait-for-cmd.sh "nc -uz 127.0.0.1 ${SLAVE_AGENT_PORT}" 60 && ${DT}/accept-wsagent-slaves.sh) &
