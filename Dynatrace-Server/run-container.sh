@@ -16,4 +16,4 @@ docker run \
   --env LICENSE_KEY_FILE_URL="${LICENSE_KEY_FILE_URL}" \
   --volume ${HOST_LOG_DIR}:/dynatrace/log/server/${NAME} \
   --publish-all \
-  dynatrace/server
+  dynatrace/server:6.2

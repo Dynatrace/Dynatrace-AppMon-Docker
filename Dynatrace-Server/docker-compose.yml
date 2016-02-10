@@ -1,7 +1,7 @@
 dtserver:
   container_name: "${DT_SERVER_NAME}"
   hostname: "docker-${DT_SERVER_NAME}"
-  image: dynatrace/server
+  image: "dynatrace/server:6.2"
   environment:
     NAME: "${DT_SERVER_NAME}"
     HOST_NAME: "docker-${DT_SERVER_NAME}"

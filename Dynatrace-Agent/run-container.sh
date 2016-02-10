@@ -10,4 +10,4 @@ docker run \
   --name ${NAME} \
   --volume /dynatrace \
   --volume ${HOST_LOG_DIR}:/dynatrace/log/agent \
-  dynatrace/agent
+  dynatrace/agent:6.2

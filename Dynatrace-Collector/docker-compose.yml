@@ -1,7 +1,7 @@
 dtcollector:
   container_name: "${DT_COLLECTOR_NAME}"
   hostname: "docker-${DT_COLLECTOR_NAME}"
-  image: dynatrace/collector
+  image: "dynatrace/collector:6.2"
   external_links:
     - dtserver
   environment:

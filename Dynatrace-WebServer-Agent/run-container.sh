@@ -20,4 +20,4 @@ docker run \
   --volume /dynatrace \
   --volume ${HOST_LOG_DIR}:/dynatrace/log \
   --publish-all \
-  dynatrace/wsagent
+  dynatrace/wsagent:6.2

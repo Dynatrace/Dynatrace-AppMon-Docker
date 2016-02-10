@@ -1,7 +1,7 @@
 dtserver:
   container_name: "dtserver"
   hostname: "docker-dtserver"
-  image: dynatrace/server
+  image: "dynatrace/server:6.2"
   environment:
     NAME: "dtserver"
     HOST_NAME: "docker-dtserver"
@@ -16,7 +16,7 @@ dtserver:
 dtwsagent:
   container_name: "dtwsagent"
   hostname: "docker-dtwsagent"
-  image: dynatrace/wsagent
+  image: "dynatrace/wsagent:6.2"
   links:
     - dtserver:dtcollector
   environment:
@@ -29,7 +29,7 @@ dtwsagent:
 dtagent:
   container_name: "dtagent"
   hostname: "docker-dtagent"
-  image: dynatrace/agent
+  image: "dynatrace/agent:6.2"
   volumes:
     - /dynatrace
     - "/tmp/log/dynatrace/agents/dtagent:/dynatrace/log/agent"
