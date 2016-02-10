@@ -27,6 +27,7 @@ RUN apt-get update && \
 COPY build/run-process.sh /
 COPY build/accept-wsagent-slaves.sh ${DT}
 COPY build/attach-to-wsagent-master.sh ${DT}
+ADD build/dtnginx-offsets/dtnginx_offsets.json.tar.gz ${DT}/agent/conf
 COPY build/linux/x86_64/socat ${DT}
 
 # Dynatrace Web Server Slave Agents
