@@ -7,6 +7,7 @@ ENV INSTALLER_FILE_NAME "dynatrace-agent-unix.jar"
 ENV INSTALLER_URL       "http://downloads.dynatracesaas.com/${VERSION}/${INSTALLER_FILE_NAME}"
 
 ENV DT                  "/dynatrace"
+ENV LIB32               "${DT}/agent/lib/libdtagent.so"
 ENV LIB64               "${DT}/agent/lib64/libdtagent.so"
 
 ENV INSTALL_DEPS        "curl openjdk-7-jre-headless"
