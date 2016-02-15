@@ -22,6 +22,7 @@ dtwsagent:
   environment:
     NAME: "dtwsagent"
     HOST_NAME: "docker-dtwsagent"
+    COLLECTOR: "docker-dtserver:9998"
   volumes:
     - /dynatrace
     - "/tmp/log/dynatrace/wsagents/dtwsagent:/dynatrace/log"
