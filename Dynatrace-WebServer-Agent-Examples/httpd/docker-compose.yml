@@ -1,0 +1,15 @@
+httpd:
+  container_name: httpd
+  image: httpd
+  ports:
+  - 80
+  volumes_from:
+  - dtwsagent
+  external_links:
+  - dtwsagent
+  ipc: container:dtwsagent
+  command: >
+    sh -c " \
+      /dynatrace/attach-to-wsagent-master.sh && \
+      (echo LoadModule dtagent_module /dynatrace/agent/lib64/libdtagent.so >> conf/httpd.conf) && \
+      httpd-foreground"

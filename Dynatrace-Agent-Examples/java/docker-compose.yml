@@ -1,0 +1,10 @@
+java:
+  container_name: java-example
+  build: .
+  volumes_from:
+  - dtagent
+  external_links:
+  - dtcollector
+  environment:
+    JAVA_OPTS: "-agentpath:/dynatrace/agent/lib64/libdtagent.so=name=java-agent,collector=docker-dtcollector"
+  command: sh -c "java $${JAVA_OPTS} JavaTest"

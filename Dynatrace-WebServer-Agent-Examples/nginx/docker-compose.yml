@@ -1,0 +1,13 @@
+nginx:
+  container_name: nginx
+  image: nginx
+  ports:
+  - 80
+  volumes_from:
+  - dtwsagent
+  external_links:
+  - dtwsagent
+  ipc: container:dtwsagent
+  environment:
+    LD_PRELOAD: "/dynatrace/agent/lib64/libdtagent.so"
+  command: sh -c "/dynatrace/attach-to-wsagent-master.sh && nginx -g 'daemon off;'"
