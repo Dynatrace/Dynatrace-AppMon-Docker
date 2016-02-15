@@ -1,3 +1,3 @@
 #!/bin/bash
-${DT}/dtserver -bg
-${DT}/dtfrontendserver
+${DT}/dtfrontendserver -bg
+${DT}/dtserver
