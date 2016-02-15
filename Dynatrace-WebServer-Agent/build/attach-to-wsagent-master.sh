@@ -16,4 +16,4 @@ WSAGENT_SLAVE_AGENT_PORT=${DTWSAGENT_ENV_SLAVE_AGENT_PORT:-"${WSAGENT_SLAVE_AGEN
 WSAGENT=${WSAGENT:-"${WSAGENT_HOST_NAME}:${WSAGENT_SLAVE_AGENT_PORT}"}
 
 # socat forwards incoming slaves to the dtwsagent's host.
-${DT}/socat udp-listen:`echo ${WSAGENT} | cut -d':' -f2`,fork udp:${WSAGENT}
+(sleep 1 && ${DT}/socat udp-listen:`echo ${WSAGENT} | cut -d':' -f2`,fork udp:${WSAGENT}) &

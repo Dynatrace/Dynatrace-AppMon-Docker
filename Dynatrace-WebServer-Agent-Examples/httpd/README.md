@@ -31,13 +31,13 @@ HTTPD_LOAD_MODULE="dtagent_module \${DTWSAGENT_ENV_LIB64}"
 echo "Starting Apache HTTPD - Example"
 docker run --rm \
   --name httpd-example \
-  <strong>--volumes-from dtwsagent</strong> \                                                  # <strong>1)</strong>
-  <strong>--link dtwsagent</strong> \                                                          # <strong>2)</strong>
-  <strong>--ipc container:dtwsagent</strong> \                                                 # <strong>3)</strong>
+  <strong>--volumes-from dtwsagent</strong> \                                            # <strong>1)</strong>
+  <strong>--link dtwsagent</strong> \                                                    # <strong>2)</strong>
+  <strong>--ipc container:dtwsagent</strong> \                                           # <strong>3)</strong>
   --publish-all \
   httpd \
-  sh -c "(<strong>sleep 1 && \${DTWSAGENT_ENV_DT}/attach-to-wsagent-master.sh &</strong>) && \ # <strong>4)</strong>
-         (<strong>echo LoadModule ${HTTPD_LOAD_MODULE} >> conf/httpd.conf</strong>) && \       # <strong>5)</strong>
+  sh -c "<strong>\${DTWSAGENT_ENV_DT}/attach-to-wsagent-master.sh</strong> && \          # <strong>4)</strong>
+         (<strong>echo LoadModule ${HTTPD_LOAD_MODULE} >> conf/httpd.conf</strong>) && \ # <strong>5)</strong>
          httpd-foreground"
 </code></pre>
 
@@ -49,7 +49,7 @@ docker run --rm \
 
 3) We share the `dtwsagent`'s IPC namespace via `--ipc container:dtwsagent`. This is required to allow the master and the slave agents to communicate via a shared memory segment across containers on the same host.
 
-4) We attach to the master agent by invoking `attach-to-wsagent-master.sh`, which has been shared by the `dtwsagent` container in step **1)**. This is required to allow the master and the slave agents to communicate via UDP. Additionally, we fork the script into the background only after the web server process and the slave agent have started in the foreground in step **5)** with a speculative `sleep 1`.
+4) We attach to the master agent by invoking `attach-to-wsagent-master.sh`, which has been shared by the `dtwsagent` container in step **1)**. This is required to allow the master and the slave agents to communicate via UDP.
 
 5) We place a `LoadModule` declaration inside Apache's `httpd.conf` before we invoke the actual web server process ([see here for the original Dockerfile](https://github.com/docker-library/httpd/blob/1f1f7d39d5fe5aebeedea6872786b4e3ce0ebcc9/2.4/Dockerfile)).
 
