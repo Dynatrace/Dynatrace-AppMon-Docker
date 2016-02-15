@@ -6,9 +6,12 @@ dtserver:
     NAME: "${DT_SERVER_NAME}"
     HOST_NAME: "docker-${DT_SERVER_NAME}"
     LICENSE_KEY_FILE_URL: "${DT_SERVER_LICENSE_KEY_FILE_URL}"
+  ports:
+    - "2020:2020" # Dynatrace Clients (TCP)
+    - "2021:2021" # Dynatrace Clients (TCP with SSL)
+    - "8020:8020" # Dynatrace Web Server (HTTP)
+    - "8021:8021" # Dynatrace Web Server (HTTPS)
+    - "9911:9911" # Dynatrace Web UI (HTTPS)
+    - "9998:9998" # Dynatrace Agents (TCP)
   volumes:
     - "/tmp/log/dynatrace/servers/${DT_SERVER_NAME}:/dynatrace/log/server/${DT_SERVER_NAME}"
-  ports:
-    - "2021" # Dynatrace Clients (TCP with SSL)
-    - "8021" # Dynatrace Web Server (HTTPS)
-    - "9911" # Dynatrace Web UI (HTTPS)
