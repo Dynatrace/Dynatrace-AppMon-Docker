@@ -10,7 +10,7 @@ body {
   color: #606c71; }
 
 a {
-  color: #1e6bb8;
+  color: #6ea634;
   text-decoration: none; }
   a:hover {
     text-decoration: underline; }
@@ -223,10 +223,6 @@ a {
   padding-top: 2rem;
   margin-top: 2rem;
   border-top: solid 1px #eff0f1; }
-
-.site-footer a {
-  color: #35b86c;
-}
 
 .site-footer-owner {
   display: block;
