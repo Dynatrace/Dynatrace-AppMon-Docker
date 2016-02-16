@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="UTF-8">
+    <title>Dynatrace in Docker by dynaTrace</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="stylesheets/normalize.css" media="screen">
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="stylesheets/github-light.css" media="screen">
+  </head>
+  <body>
+    <section class="page-header">
+      <h1 class="project-name">Dynatrace in Docker</h1>
+      <h2 class="project-tagline">The home of Dockerized components of the Dynatrace Application Monitoring enterprise solution.</h2>
+      <a href="https://github.com/dynaTrace/Dynatrace-Docker" class="btn">View on GitHub</a>
+      <a href="https://github.com/dynaTrace/Dynatrace-Docker/zipball/master" class="btn">Download .zip</a>
+      <a href="https://github.com/dynaTrace/Dynatrace-Docker/tarball/master" class="btn">Download .tar.gz</a>
+    </section>
+
+    <section class="main-content">
+      <h1>
+<a id="dynatrace-docker" class="anchor" href="#dynatrace-docker" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Dynatrace-Docker</h1>
+
+<p>The home of Dockerized components of the <a href="http://www.dynatrace.com/en/products/application-monitoring.html">Dynatrace Application Monitoring</a> enterprise solution. All components are available on the <a href="https://hub.docker.com/u/dynatrace/">Docker Hub</a>.</p>
+
+<h2>
+<a id="how-to-install-dynatrace" class="anchor" href="#how-to-install-dynatrace" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>How to install Dynatrace?</h2>
+
+<p>You can quickly bring up an entire Dockerized Dynatrace environment by using <a href="https://docs.docker.com/compose/">Docker Compose</a> with the provided <code>docker-compose.yml</code> file like so:</p>
+
+<pre><code>DT_SERVER_LICENSE_KEY_FILE_URL=http://repo.internal/dtlicense.key \
+docker-compose up
+</code></pre>
+
+<p>See the following Dockerized Dynatrace components for more information:</p>
+
+<ul>
+<li><a href="https://github.com/dynaTrace/Dynatrace-Docker/tree/master/Dynatrace-Server">Dockerized Dynatrace Server</a></li>
+<li><a href="https://github.com/dynaTrace/Dynatrace-Docker/tree/master/Dynatrace-Collector">Dockerized Dynatrace Collector</a></li>
+<li><a href="https://github.com/dynaTrace/Dynatrace-Docker/tree/master/Dynatrace-Agent">Dockerized Dynatrace Agent</a></li>
+<li><a href="https://github.com/dynaTrace/Dynatrace-Docker/tree/master/Dynatrace-WebServer-Agent">Dockerized Dynatrace Web Server Agent</a></li>
+</ul>
+
+<h3>
+<a id="licensing" class="anchor" href="#licensing" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Licensing</h3>
+
+<p>In the example above, you have to let <code>DT_SERVER_LICENSE_KEY_FILE_URL</code> point to a valid Dynatrace License Key file. If you don't have a license yet, you can <a href="http://bit.ly/dttrial-docker-github">obtain a Dynatrace Free Trial License here</a>. However, you don't need to have your license file hosted by a server: if you can run a console, <a href="https://en.wikipedia.org/wiki/Netcat">Netcat</a> can conveniently serve it for you on port <code>80</code> via <code>sudo nc -l 80 &lt; dtlicense.key</code>.</p>
+
+<h2>
+<a id="how-to-monitor-your-dockerized-application" class="anchor" href="#how-to-monitor-your-dockerized-application" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>How to Monitor your Dockerized Application?</h2>
+
+<p>See the following integrations for more information:</p>
+
+<ul>
+<li><a href="https://github.com/dynaTrace/Dynatrace-Docker/tree/master/Dynatrace-Agent-Examples">Dockerized Dynatrace Agent: Examples</a></li>
+<li><a href="https://github.com/dynaTrace/Dynatrace-Docker/tree/master/Dynatrace-WebServer-Agent-Examples">Dockerized Dynatrace Web Server Agent: Examples</a></li>
+<li><a href="https://github.com/dynaTrace/Dynatrace-easyTravel-Docker">Dockerized easyTravel Application</a></li>
+</ul>
+
+<h2>
+<a id="problems-questions-suggestions" class="anchor" href="#problems-questions-suggestions" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Problems? Questions? Suggestions?</h2>
+
+<p>This offering is <a href="https://community.dynatrace.com/community/display/DL/Support+Levels#SupportLevels-Communitysupported/NotSupportedbyDynatrace(providedbyacommunitymember)">Dynatrace Community Supported</a>. Feel free to share any problems, questions and suggestions with your peers on the Dynatrace Community's <a href="https://answers.dynatrace.com/spaces/146/index.html">Application Monitoring &amp; UEM Forum</a>.</p>
+
+<h2>
+<a id="license" class="anchor" href="#license" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>License</h2>
+
+<p>Licensed under the MIT License. See the LICENSE file for details.</p>
+
+      <footer class="site-footer">
+        <span class="site-footer-owner"><a href="https://github.com/dynaTrace/Dynatrace-Docker">Dynatrace in Docker</a> is maintained by <a href="https://github.com/dynaTrace">dynaTrace</a>.</span>
+
+        <span class="site-footer-credits">This page was generated by <a href="https://pages.github.com">GitHub Pages</a> using the <a href="https://github.com/jasonlong/cayman-theme">Cayman theme</a> by <a href="https://twitter.com/jasonlong">Jason Long</a>.</span>
+      </footer>
+
+    </section>
+
+            <script type="text/javascript">
+            var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+            document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+          </script>
+          <script type="text/javascript">
+            try {
+              var pageTracker = _gat._getTracker("UA-54510554-5");
+            pageTracker._trackPageview();
+            } catch(err) {}
+          </script>
+
+  </body>
+</html>
