@@ -70,6 +70,17 @@ a {
   .page-header {
     padding: 2rem 1rem; } }
 
+.company-logo {
+  position: relative;
+  top: -20px;
+  width: 100px;
+  height: 100px;
+  background-image: url('../images/dynatrace-logo.png');
+  background-size: 100%;
+  background-repeat: no-repeat;
+  background-position: center center;
+  margin: 0 auto; }
+
 .project-name {
   margin-top: 0;
   margin-bottom: 0.1rem; }
