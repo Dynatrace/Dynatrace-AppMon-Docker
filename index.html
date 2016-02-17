@@ -18,65 +18,45 @@
       <a href="https://github.com/dynaTrace/Dynatrace-Docker/archive/v6.2.zip" class="btn">Download for v6.2 .zip</a>
       <a href="https://github.com/dynaTrace/Dynatrace-Docker/archive/v6.2.tar.gz" class="btn">Download for v6.2 .tar.gz</a>
     </section>
-
     <section class="main-content">
-<p class="technology-logo"><img src="https://raw.githubusercontent.com/dynaTrace/Dynatrace-Docker/gh-pages/images/docker-logo.png" alt="Docker Logo"></p>
-
-<h1>
-<a id="dynatrace-docker" class="anchor" href="#dynatrace-docker" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Dynatrace-Docker</h1>
-
-<p>The home of Dockerized components of the <a href="http://www.dynatrace.com/en/products/application-monitoring.html">Dynatrace Application Monitoring</a> enterprise solution. All components are available on the <a href="https://hub.docker.com/u/dynatrace/">Docker Hub</a>.</p>
-
-<h2>
-<a id="how-to-install-dynatrace" class="anchor" href="#how-to-install-dynatrace" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>How to install Dynatrace?</h2>
-
-<p>You can quickly bring up an entire Dockerized Dynatrace environment by using <a href="https://docs.docker.com/compose/">Docker Compose</a> with the provided <code>docker-compose.yml</code> file like so:</p>
-
-<pre><code>DT_SERVER_LICENSE_KEY_FILE_URL=http://repo.internal/dtlicense.key \
-docker-compose up
-</code></pre>
-
-<p>See the following Dockerized Dynatrace components for more information:</p>
-
-<ul>
-<li><a href="https://github.com/dynaTrace/Dynatrace-Docker/tree/master/Dynatrace-Server">Dockerized Dynatrace Server</a></li>
-<li><a href="https://github.com/dynaTrace/Dynatrace-Docker/tree/master/Dynatrace-Collector">Dockerized Dynatrace Collector</a></li>
-<li><a href="https://github.com/dynaTrace/Dynatrace-Docker/tree/master/Dynatrace-Agent">Dockerized Dynatrace Agent</a></li>
-<li><a href="https://github.com/dynaTrace/Dynatrace-Docker/tree/master/Dynatrace-WebServer-Agent">Dockerized Dynatrace Web Server Agent</a></li>
-</ul>
-
-<h3>
-<a id="licensing" class="anchor" href="#licensing" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Licensing</h3>
-
-<p>In the example above, you have to let <code>DT_SERVER_LICENSE_KEY_FILE_URL</code> point to a valid Dynatrace License Key file. If you don't have a license yet, you can <a href="http://bit.ly/dttrial-docker-github">obtain a Dynatrace Free Trial License here</a>. However, you don't need to have your license file hosted by a server: if you can run a console, <a href="https://en.wikipedia.org/wiki/Netcat">Netcat</a> can conveniently serve it for you on port <code>80</code> via <code>sudo nc -l 80 &lt; dtlicense.key</code>.</p>
-
-<h2>
-<a id="how-to-monitor-your-dockerized-application" class="anchor" href="#how-to-monitor-your-dockerized-application" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>How to Monitor your Dockerized Application?</h2>
-
-<p>See the following integrations for more information:</p>
-
-<ul>
-<li><a href="https://github.com/dynaTrace/Dynatrace-Docker/tree/master/Dynatrace-Agent-Examples">Dockerized Dynatrace Agent: Examples</a></li>
-<li><a href="https://github.com/dynaTrace/Dynatrace-Docker/tree/master/Dynatrace-WebServer-Agent-Examples">Dockerized Dynatrace Web Server Agent: Examples</a></li>
-<li><a href="https://github.com/dynaTrace/Dynatrace-easyTravel-Docker">Dockerized easyTravel Application</a></li>
-</ul>
-
-<h2>
-<a id="problems-questions-suggestions" class="anchor" href="#problems-questions-suggestions" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Problems? Questions? Suggestions?</h2>
-
-<p>This offering is <a href="https://community.dynatrace.com/community/display/DL/Support+Levels#SupportLevels-Communitysupported/NotSupportedbyDynatrace(providedbyacommunitymember)">Dynatrace Community Supported</a>. Feel free to share any problems, questions and suggestions with your peers on the Dynatrace Community's <a href="https://answers.dynatrace.com/spaces/146/index.html">Application Monitoring &amp; UEM Forum</a>.</p>
-
-<h2>
-<a id="license" class="anchor" href="#license" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>License</h2>
-
-<p>Licensed under the MIT License. See the <a href="https://github.com/dynaTrace/Dynatrace-Docker/blob/master/LICENSE">LICENSE</a> file for details.
-<img src="https://www.google-analytics.com/collect?v=1&amp;t=pageview&amp;_s=1&amp;dl=http%3A%2F%2Fdynatrace.github.io%2FDynatrace-Docker&amp;dp=%2FDynatrace-Docker&amp;dt=Dynatrace-Docker&amp;_u=Dynatrace%7E&amp;cid=dynatrace.github.io&amp;tid=UA-54510554-5&amp;aip=1" alt="analytics"></p>
-
-      <footer class="site-footer">
-        <span class="site-footer-owner"><a href="https://github.com/dynaTrace/Dynatrace-Docker">Dynatrace-Docker</a> is maintained by <a href="https://github.com/dynaTrace">Dynatrace</a>.</span>
-      </footer>
-
-    </section>
-
-  </body>
+      <p class="technology-logo"><img src="https://raw.githubusercontent.com/dynaTrace/Dynatrace-Docker/gh-pages/images/docker-logo.png" alt="Docker Logo"></p>
+      <h1>
+      <a id="dynatrace-docker" class="anchor" href="#dynatrace-docker" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Dynatrace-Docker</h1>
+      <p>The home of Dockerized components of the <a href="http://www.dynatrace.com/en/products/application-monitoring.html">Dynatrace Application Monitoring</a> enterprise solution. All components are available on the <a href="https://hub.docker.com/u/dynatrace/">Docker Hub</a>.</p>
+      <h2>
+      <a id="how-to-install-dynatrace" class="anchor" href="#how-to-install-dynatrace" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>How to install Dynatrace?</h2>
+      <p>You can quickly bring up an entire Dockerized Dynatrace environment by using <a href="https://docs.docker.com/compose/">Docker Compose</a> with the provided <code>docker-compose.yml</code> file like so:</p>
+      <pre><code>DT_SERVER_LICENSE_KEY_FILE_URL=http://repo.internal/dtlicense.key \
+        docker-compose up
+      </code></pre>
+      <p>See the following Dockerized Dynatrace components for more information:</p>
+      <ul>
+        <li><a href="https://github.com/dynaTrace/Dynatrace-Docker/tree/master/Dynatrace-Server">Dockerized Dynatrace Server</a></li>
+        <li><a href="https://github.com/dynaTrace/Dynatrace-Docker/tree/master/Dynatrace-Collector">Dockerized Dynatrace Collector</a></li>
+        <li><a href="https://github.com/dynaTrace/Dynatrace-Docker/tree/master/Dynatrace-Agent">Dockerized Dynatrace Agent</a></li>
+        <li><a href="https://github.com/dynaTrace/Dynatrace-Docker/tree/master/Dynatrace-WebServer-Agent">Dockerized Dynatrace Web Server Agent</a></li>
+      </ul>
+      <h3>
+      <a id="licensing" class="anchor" href="#licensing" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Licensing</h3>
+      <p>In the example above, you have to let <code>DT_SERVER_LICENSE_KEY_FILE_URL</code> point to a valid Dynatrace License Key file. If you don't have a license yet, you can <a href="http://bit.ly/dttrial-docker-github">obtain a Dynatrace Free Trial License here</a>. However, you don't need to have your license file hosted by a server: if you can run a console, <a href="https://en.wikipedia.org/wiki/Netcat">Netcat</a> can conveniently serve it for you on port <code>80</code> via <code>sudo nc -l 80 &lt; dtlicense.key</code>.</p>
+      <h2>
+      <a id="how-to-monitor-your-dockerized-application" class="anchor" href="#how-to-monitor-your-dockerized-application" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>How to Monitor your Dockerized Application?</h2>
+      <p>See the following integrations for more information:</p>
+      <ul>
+        <li><a href="https://github.com/dynaTrace/Dynatrace-Docker/tree/master/Dynatrace-Agent-Examples">Dockerized Dynatrace Agent: Examples</a></li>
+        <li><a href="https://github.com/dynaTrace/Dynatrace-Docker/tree/master/Dynatrace-WebServer-Agent-Examples">Dockerized Dynatrace Web Server Agent: Examples</a></li>
+        <li><a href="https://github.com/dynaTrace/Dynatrace-easyTravel-Docker">Dockerized easyTravel Application</a></li>
+      </ul>
+      <h2>
+      <a id="problems-questions-suggestions" class="anchor" href="#problems-questions-suggestions" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Problems? Questions? Suggestions?</h2>
+      <p>This offering is <a href="https://community.dynatrace.com/community/display/DL/Support+Levels#SupportLevels-Communitysupported/NotSupportedbyDynatrace(providedbyacommunitymember)">Dynatrace Community Supported</a>. Feel free to share any problems, questions and suggestions with your peers on the Dynatrace Community's <a href="https://answers.dynatrace.com/spaces/146/index.html">Application Monitoring &amp; UEM Forum</a>.</p>
+      <h2>
+      <a id="license" class="anchor" href="#license" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>License</h2>
+      <p>Licensed under the MIT License. See the <a href="https://github.com/dynaTrace/Dynatrace-Docker/blob/master/LICENSE">LICENSE</a> file for details.
+    <img src="https://www.google-analytics.com/collect?v=1&amp;t=pageview&amp;_s=1&amp;dl=http%3A%2F%2Fdynatrace.github.io%2FDynatrace-Docker&amp;dp=%2FDynatrace-Docker&amp;dt=Dynatrace-Docker&amp;_u=Dynatrace%7E&amp;cid=dynatrace.github.io&amp;tid=UA-54510554-5&amp;aip=1" alt="analytics"></p>
+    <footer class="site-footer">
+      <span class="site-footer-owner"><a href="https://github.com/dynaTrace/Dynatrace-Docker">Dynatrace-Docker</a> is maintained by <a href="https://github.com/dynaTrace">Dynatrace</a>.</span>
+    </footer>
+  </section>
+</body>
 </html>
