@@ -73,8 +73,8 @@ a {
 .company-logo {
   position: relative;
   top: -20px;
-  width: 100px;
-  height: 100px;
+  width: 120px;
+  height: 120px;
   background-image: url('../images/dynatrace-logo.png');
   background-size: 100%;
   background-repeat: no-repeat;
