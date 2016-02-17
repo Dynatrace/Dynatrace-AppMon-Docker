@@ -32,6 +32,8 @@ See the following integrations for more information:
 - [Dockerized Dynatrace Web Server Agent: Examples](https://github.com/dynaTrace/Dynatrace-Docker/tree/master/Dynatrace-WebServer-Agent-Examples)
 - [Dockerized easyTravel Application](https://github.com/dynaTrace/Dynatrace-easyTravel-Docker)
 
+![Dockerized Application](https://github.com/dynaTrace/Dynatrace-Docker/blob/images/dockerized-application.png)
+
 ## How to Monitor your Docker Containers?
 
 Want to see all your Docker Metrics in one place? See the [Dynatrace Docker Monitor Plugin](https://community.dynatrace.com/community/display/DL/Docker+Monitor+Plugin) for more information.
