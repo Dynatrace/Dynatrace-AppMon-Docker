@@ -4,6 +4,10 @@
 
 The home of Dockerized components of the [Dynatrace Application Monitoring](http://www.dynatrace.com/en/ecosystem/docker.html) enterprise solution. All components are available on the [Docker Hub](https://hub.docker.com/u/dynatrace/).
 
+## What is Dynatrace?
+
+[Dynatrace Application Monitoring](http://www.dynatrace.com/en/products/application-monitoring.html), with its [PurePath technology](http://www.dynatrace.com/en_us/application-performance-management/products/purepath-technology.html), is the leading application monitoring solution -- trusted by more than 7500 customers around the globe. It supports all your major technology stacks and integrates into your Continuous Delivery pipelines to allow you to build world-class, high-quality software.
+
 ## How to install Dynatrace?
 
 You can quickly bring up an entire Dockerized Dynatrace environment by using [Docker Compose](https://docs.docker.com/compose/) with the provided `docker-compose.yml` file like so:
