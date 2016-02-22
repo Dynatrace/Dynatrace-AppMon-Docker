@@ -10,23 +10,20 @@ ENV DT                  "/dynatrace"
 ENV COLLECTOR_PORT      "6698"
 ENV COLLECTOR_PORT_SSL  "6699"
 
-ENV INSTALL_DEPS        "openjdk-7-jre-headless"
-ENV RUNTIME_DEPS        "curl"
-
-RUN apt-get update && \
-    apt-get install -y --no-install-recommends ${INSTALL_DEPS} ${RUNTIME_DEPS} && \
-    curl -L -o /tmp/${INSTALLER_FILE_NAME} ${INSTALLER_URL} && \
-    java -jar /tmp/${INSTALLER_FILE_NAME} -b 64 -t ${DT} -y && \
-    apt-get remove --purge -y ${INSTALL_DEPS} && \
-    rm -rf /var/lib/apt/lists/* /tmp/*
-
-RUN sed -i '/^-memory/,/^unsupported/c\-memory\ndemo' ${DT}/dtserver.ini && \
-    sed -i '/^-memory/,/^unsupported/c\-memory\ndemo' ${DT}/dtfrontendserver.ini && \
-    echo '-Dcom.dynatrace.diagnostics.filestore.numStorageThreads=1' >> ${DT}/dtserver.ini 
-
-COPY build/pull-license-key-file.sh /
-COPY build/run-process.sh /
-COPY build/defaults/server.config.xml ${DT}/server/conf
+ENV  DT_INSTALL_DEPS "openjdk-7-jre-headless"
+ENV  DT_RUNTIME_DEPS "curl"
+COPY build/scripts/pull-license-key-file.sh /
+COPY build/scripts/run-process.sh /
+RUN  apt-get update && \
+     apt-get install -y --no-install-recommends ${DT_INSTALL_DEPS} ${DT_RUNTIME_DEPS} && \
+     curl -L -o /tmp/${INSTALLER_FILE_NAME} ${INSTALLER_URL} && \
+     java -jar /tmp/${INSTALLER_FILE_NAME} -b 64 -t ${DT} -y && \
+     apt-get remove --purge -y ${DT_INSTALL_DEPS} && \
+     rm -rf /var/lib/apt/lists/* /tmp/*
+RUN  sed -i '/^-memory/,/^unsupported/c\-memory\ndemo' ${DT}/dtserver.ini && \
+     sed -i '/^-memory/,/^unsupported/c\-memory\ndemo' ${DT}/dtfrontendserver.ini && \
+     echo '-Dcom.dynatrace.diagnostics.filestore.numStorageThreads=1' >> ${DT}/dtserver.ini 
+COPY build/config/server.config.xml ${DT}/server/conf
 
 # Dynatrace Clients (TCP)
 EXPOSE 2020

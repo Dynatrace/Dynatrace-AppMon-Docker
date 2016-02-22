@@ -1,4 +1,4 @@
-FROM alpine:3.3
+FROM debian:wheezy
 
 MAINTAINER Martin Etmajer <martin.etmajer@dynatrace.com>
 
@@ -10,12 +10,12 @@ ENV DT                  "/dynatrace"
 ENV LIB32               "${DT}/agent/lib/libdtagent.so"
 ENV LIB64               "${DT}/agent/lib64/libdtagent.so"
 
-ENV INSTALL_DEPS        "curl openjdk8-jre-base"
-
-RUN apk add --no-cache ${INSTALL_DEPS} && \
+ENV DT_INSTALL_DEPS "curl openjdk-7-jre-headless"
+RUN apt-get update && \
+    apt-get install -y --no-install-recommends ${DT_INSTALL_DEPS} && \
     curl -L -o /tmp/${INSTALLER_FILE_NAME} ${INSTALLER_URL} && \
     java -jar /tmp/${INSTALLER_FILE_NAME} -b 64 -t ${DT} -y && \
-    apk del ${INSTALL_DEPS} && \
-    rm -rf /tmp/*
+    apt-get remove --purge -y ${DT_INSTALL_DEPS} $(apt-mark showauto) && \
+    rm -rf /var/lib/apt/lists/* /tmp/*
 
 CMD while true; do sleep 1; done

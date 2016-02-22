@@ -1,5 +1,5 @@
 #!/bin/bash
-DOCKER_FILE=${1:-Dockerfile}
+DOCKER_FILE=Dockerfile
 DOCKER_IMAGE_NAME=dynatrace/agent
 DOCKER_IMAGE_TAG=6.2
 

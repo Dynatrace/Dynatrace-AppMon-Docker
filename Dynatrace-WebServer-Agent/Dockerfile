@@ -12,36 +12,29 @@ ENV INI                 "${DT}/agent/conf/dtwsagent.ini"
 ENV LIB64               "${DT}/agent/lib64/libdtagent.so"
 ENV SLAVE_AGENT_PORT    "8001"
 
-ENV INSTALL_DEPS        "curl"
+ENV  DT_INSTALL_DEPS "curl"
+COPY build/scripts/run-process.sh /
+RUN  apt-get update && \
+     apt-get install -y ${DT_INSTALL_DEPS} && \
+     curl -L -o /tmp/${INSTALLER_FILE_NAME} ${INSTALLER_URL} && \
+     cd /tmp && \
+     tar xf ./${INSTALLER_FILE_NAME} && \
+     sh ./dynatrace-wsagent-*.sh && \
+     mv ./dynatrace-${VERSION} ${DT} && \
+     apt-get remove --purge -y ${DT_INSTALL_DEPS} $(apt-mark showauto) && \
+     rm -rf /var/lib/apt/lists/* /tmp/*
+ADD  build/bin/dtnginx_offsets.json.tar.gz ${DT}/agent/conf
+COPY build/bin/socat ${DT}
+COPY build/scripts/accept-wsagent-slaves.sh ${DT}
+COPY build/scripts/attach-to-wsagent-master.sh ${DT}
 
-RUN apt-get update && \
-    apt-get install -y ${INSTALL_DEPS} && \
-    curl -L -o /tmp/${INSTALLER_FILE_NAME} ${INSTALLER_URL} && \
-    cd /tmp && \
-    tar xf ./${INSTALLER_FILE_NAME} && \
-    sh ./dynatrace-wsagent-*.sh && \
-    mv ./dynatrace-${VERSION} ${DT} && \
-    apt-get remove --purge -y ${INSTALL_DEPS} $(apt-mark showauto) && \
-    rm -rf /var/lib/apt/lists/* /tmp/*
-
-COPY build/run-process.sh /
-COPY build/accept-wsagent-slaves.sh ${DT}
-COPY build/attach-to-wsagent-master.sh ${DT}
-ADD build/dtnginx-offsets/dtnginx_offsets.json.tar.gz ${DT}/agent/conf
-COPY build/linux/x86_64/socat ${DT}
+ENV  WAIT_FOR_CMD_RUNTIME_DEPS "netcat"
+COPY build/scripts/wait-for-cmd.sh /usr/local/bin
+RUN  apt-get update && \
+     apt-get install -y ${WAIT_FOR_CMD_RUNTIME_DEPS} && \
+     rm -rf /var/lib/apt/lists/* /tmp/*
 
 # Dynatrace Web Server Slave Agents
 EXPOSE 8001/udp
-
-ENV WAIT_FOR_CMD_URL          "https://gist.githubusercontent.com/metmajer/efec724d96cbaa20afb8/raw/36055e2f699b984c1bd009da9541679f83cfe89a/wait-for-cmd.sh"
-ENV WAIT_FOR_CMD_INSTALL_DEPS "curl"
-ENV WAIT_FOR_CMD_RUNTIME_DEPS "netcat"
-
-RUN apt-get update && \
-    apt-get install -y ${WAIT_FOR_CMD_INSTALL_DEPS} ${WAIT_FOR_CMD_RUNTIME_DEPS} && \
-    curl -L -o /usr/local/bin/wait-for-cmd.sh ${WAIT_FOR_CMD_URL} && \
-    chmod +x /usr/local/bin/wait-for-cmd.sh && \
-    apt-get remove --purge -y ${WAIT_FOR_CMD_INSTALL_DEPS} && \
-    rm -rf /var/lib/apt/lists/* /tmp/*
 
 CMD /run-process.sh
