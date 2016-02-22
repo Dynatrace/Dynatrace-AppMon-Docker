@@ -18,7 +18,7 @@ COLLECTOR=${COLLECTOR:-"${COLLECTOR_HOST_NAME}:${COLLECTOR_PORT}"}
 wait-for-cmd.sh "nc -z `echo ${COLLECTOR} | sed 's/:/ /'`" 360
 
 # Assert that incoming slave agents are accepted only after dtwsagent has started.
-(wait-for-cmd.sh "nc -uz 127.0.0.1 ${SLAVE_AGENT_PORT}" 60 && ${DT}/accept-wsagent-slaves.sh) &
+(wait-for-cmd.sh "nc -uz 127.0.0.1 ${SLAVE_AGENT_PORT}" 60 && sleep 1 && ${DT}/accept-wsagent-slaves.sh) &
 
 sed -i -r "s/^#?Name dtwsagent/Name ${NAME}/;s/^#?Server localhost/Server ${COLLECTOR}/;s/^#?Loglevel info/Loglevel ${LOG_LEVEL}/" ${INI} && \
 ${BIN64}
