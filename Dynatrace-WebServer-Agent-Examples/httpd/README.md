@@ -1,10 +1,8 @@
 ![Apache HTTPD Logo](https://github.com/dynaTrace/Dynatrace-Docker/blob/images/apache-httpd-logo.png)
 
-# Dynatrace WebServer Agent Example: Apache HTTPD
+# Dynatrace Web Server Agent Example: Apache HTTPD
 
 This project contains exemplary integrations of the [Dynatrace Application Monitoring](http://www.dynatrace.com/en/products/application-monitoring.html) enterprise solution with a [Dockerized Apache HTTPD](https://hub.docker.com/_/httpd/) process for deep end-to-end application monitoring.
-
-**Note**: the Dynatrace Web Server Agent (master agent) process inside `dynatrace/wsagent` is tightly coupled to the web server modules (slave agents) which are loaded into web server processes. Due to high latency sensitivity, these counterparts must always run on the same host.
 
 ## How to install Dynatrace?
 
@@ -32,26 +30,29 @@ echo "Starting Apache HTTPD - Example"
 docker run --rm \
   --name httpd-example \
   <strong>--volumes-from dtwsagent</strong> \                                            # <strong>1)</strong>
-  <strong>--link dtwsagent</strong> \                                                    # <strong>2)</strong>
-  <strong>--ipc container:dtwsagent</strong> \                                           # <strong>3)</strong>
+  <strong>--link dtcollector</strong> \                                                  # <strong>2)</strong>
+  <strong>--link dtwsagent</strong> \                                                    # <strong>3)</strong>
+  <strong>--env AGENT_NAME=httpd-agent</strong> \                                        # <strong>4)</strong>
   --publish-all \
   httpd \
-  sh -c "<strong>\${DTWSAGENT_ENV_DT}/attach-to-wsagent-master.sh</strong> && \          # <strong>4)</strong>
-         (<strong>echo LoadModule ${HTTPD_LOAD_MODULE} >> conf/httpd.conf</strong>) && \ # <strong>5)</strong>
+  sh -c "<strong>\${DTWSAGENT_ENV_DT}/run-wsagent-master.sh</strong> && \                # <strong>5)</strong>
+         (<strong>echo LoadModule ${HTTPD_LOAD_MODULE} >> conf/httpd.conf</strong>) && \ # <strong>6)</strong>
          httpd-foreground"
 </code></pre>
 
 ### Behind the Scenes
 
-1) We mount the agent installation directory from the `dtwsagent` container into the web server process' container via `--volumes-from dtwsagent`. This is required to share configuration information between the master and the slave agents.
+1) We mount the agent installation directory from the `dtwsagent` container into the web server process' container via `--volumes-from dtwsagent`.
 
-2) **Convenience**: We link the web server process' container against the `dtwsagent` container via `--link dtwsagent`. This way, we inherit the other container's environment variables `DTWSAGENT_ENV_DT` and `DTWSAGENT_ENV_LIB64` and can thus quickly deduce a `LoadModule` declaration without having to know much about the environment.
+2) **Convenience**: We link the web server process' container against the `dtcollector` container via `--link dtcollector`. This way, we inherit the other container's environment so that we can auto-discover the location of the Dynatrace Collector in Docker.
 
-3) We share the `dtwsagent`'s IPC namespace via `--ipc container:dtwsagent`. This is required to allow the master and the slave agents to communicate via a shared memory segment across containers on the same host.
+3) **Convenience**: We link the web server process' container against the `dtwsagent` container via `--link dtwsagent`. This way, we inherit the other container's environment variables `DTWSAGENT_ENV_DT` and `DTWSAGENT_ENV_LIB64` and can thus quickly deduce a `LoadModule` declaration without having to know much about the environment.
 
-4) We attach to the master agent by invoking `attach-to-wsagent-master.sh`, which has been shared by the `dtwsagent` container in step **1)**. This is required to allow the master and the slave agents to communicate via UDP.
+4) We set the `dtwsagent`'s name to `httpd-agent`, thereby overriding the default value of `dtwsagent`.
 
-5) We place a `LoadModule` declaration inside Apache's `httpd.conf` before we invoke the actual web server process ([see here for the original Dockerfile](https://github.com/docker-library/httpd/blob/1f1f7d39d5fe5aebeedea6872786b4e3ce0ebcc9/2.4/Dockerfile)).
+5) We run to the Dynatrace Web Server Agent (master agent) process by invoking `run-wsagent-master.sh`, which has been shared by the `dtwsagent` container in step **1)**. The master agent relays application monitoring data from the web server process to the Dynatrace Collector.
+
+6) We place a `LoadModule` declaration inside Apache's `httpd.conf` before we invoke the actual web server process ([see here for the original Dockerfile](https://github.com/docker-library/httpd/blob/1f1f7d39d5fe5aebeedea6872786b4e3ce0ebcc9/2.4/Dockerfile)).
 
 ## Additional Information
 

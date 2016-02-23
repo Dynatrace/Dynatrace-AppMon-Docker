@@ -4,8 +4,6 @@
 
 This project contains exemplary integrations of the [Dynatrace Application Monitoring](http://www.dynatrace.com/en/products/application-monitoring.html) enterprise solution with a [Dockerized NGINX](https://hub.docker.com/_/nginx/) process for deep end-to-end application monitoring.
 
-**Note**: the Dynatrace Web Server Agent (master agent) process inside `dynatrace/wsagent` is tightly coupled to the web server modules (slave agents) which are loaded into web server processes. Due to high latency sensitivity, these counterparts must always run on the same host.
-
 ## How to install Dynatrace?
 
 You can quickly bring up an entire Dockerized Dynatrace environment by using [Docker Compose](https://docs.docker.com/compose/) with the [provided `docker-compose.yml` file](https://github.com/dynaTrace/Dynatrace-Docker/blob/master/docker-compose.yml) like so:
@@ -29,26 +27,29 @@ With the Dockerized Dynatrace environment running, we can now easily instrument 
 echo "Starting NGINX - Example"
 docker run --rm \
   --name nginx-example \
-  <strong>--volumes-from dtwsagent</strong> \                                   # <strong>1)</strong>
-  <strong>--link dtwsagent</strong> \                                           # <strong>2)</strong>
-  <strong>--ipc container:dtwsagent</strong> \                                  # <strong>3)</strong>
+  <strong>--volumes-from dtwsagent</strong> \                             # <strong>1)</strong>
+  <strong>--link dtcollector</strong> \                                   # <strong>2)</strong>
+  <strong>--link dtwsagent</strong> \                                     # <strong>3)</strong>
+  <strong>--env AGENT_NAME=nginx-agent</strong> \                         # <strong>4)</strong>
   --publish-all \
   nginx \
-  sh -c "<strong>\${DTWSAGENT_ENV_DT}/attach-to-wsagent-master.sh</strong> && \ # <strong>4)</strong>
-          <strong>LD_PRELOAD=\${DTWSAGENT_ENV_LIB64}</strong> nginx"            # <strong>5)</strong>
+  sh -c "<strong>\${DTWSAGENT_ENV_DT}/run-wsagent-master.sh</strong> && \ # <strong>4)</strong>
+          <strong>LD_PRELOAD=\${DTWSAGENT_ENV_LIB64}</strong> nginx"      # <strong>5)</strong>
 </code></pre>
 
 ### Behind the Scenes
 
-1) We mount the agent installation directory from the `dtwsagent` container into the web server process' container via `--volumes-from dtwsagent`. This is required to share configuration information between the master and the slave agents.
+1) We mount the agent installation directory from the `dtwsagent` container into the web server process' container via `--volumes-from dtwsagent`.
 
-2) **Convenience**: We link the web server process' container against the `dtwsagent` container via `--link dtwsagent`. This way, we inherit the other container's environment variables `DTWSAGENT_ENV_DT` and `DTWSAGENT_ENV_LIB64` and can thus quickly deduce an `LD_PRELOAD` declaration without having to know much about the environment.
+2) **Convenience**: We link the web server process' container against the `dtcollector` container via `--link dtcollector`. This way, we inherit the other container's environment so that we can auto-discover the location of the Dynatrace Collector in Docker.
 
-3) We share the `dtwsagent`'s IPC namespace via `--ipc container:dtwsagent`. This is required to allow the master and the slave agents to communicate via a shared memory segment across containers on the same host.
+3) **Convenience**: We link the web server process' container against the `dtwsagent` container via `--link dtwsagent`. This way, we inherit the other container's environment variables `DTWSAGENT_ENV_DT` and `DTWSAGENT_ENV_LIB64` and can thus quickly deduce an `LD_PRELOAD` declaration without having to know much about the environment.
 
-4) We attach to the master agent by invoking `attach-to-wsagent-master.sh`, which has been shared by the `dtwsagent` container in step **1)**. This is required to allow the master and the slave agents to communicate via UDP.
+4) We set the `dtwsagent`'s name to `nginx-agent`, thereby overriding the default value of `dtwsagent`.
 
-5) We set `LD_PRELOAD` before we invoke the actual application process ([see here for the original Dockerfile](https://github.com/nginxinc/docker-nginx/blob/a8b6da8425c4a41a5dedb1fb52e429232a55ad41/Dockerfile)).
+5) We attach to the master agent by invoking `attach-to-wsagent-master.sh`, which has been shared by the `dtwsagent` container in step **1)**. This is required to allow the master and the slave agents to communicate via UDP.
+
+6) We set `LD_PRELOAD` before we invoke the actual application process ([see here for the original Dockerfile](https://github.com/nginxinc/docker-nginx/blob/a8b6da8425c4a41a5dedb1fb52e429232a55ad41/Dockerfile)).
 
 ## Additional Information
 

@@ -32,11 +32,6 @@ dtwsagent:
   container_name: "dtwsagent"
   hostname: "docker-dtwsagent"
   image: "dynatrace/wsagent:6.2"
-  links:
-    - dtcollector
-  environment:
-    NAME: "dtwsagent"
-    HOST_NAME: "docker-dtwsagent"
   volumes:
     - /dynatrace
     - "/tmp/log/dynatrace/wsagents/dtwsagent:/dynatrace/log"

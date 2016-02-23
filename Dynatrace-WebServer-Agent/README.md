@@ -4,8 +4,6 @@
 
 This project contains files for running and building the [Dynatrace WebServer Agent](http://www.dynatrace.com/en/products/application-monitoring.html) (master agent) in Docker. Ready-made images are available on the [Docker Hub](https://hub.docker.com/r/dynatrace/wsagent/). Please refer to the [Dynatrace Web Server Agent Examples](https://github.com/dynaTrace/Dynatrace-Docker/tree/master/Dynatrace-WebServer-Agent-Examples) project for exemplary integrations into Dockerized web server processes.
 
-**Note**: the Dynatrace Web Server Agent (master agent) process inside `dynatrace/wsagent` is tightly coupled to the web server modules (slave agents) which are loaded into web server processes. Due to high latency sensitivity, these counterparts must always run on the same host.
-
 ## Option 1: Run a container via `run-container.sh`
 
 The `run-container.sh` script runs a Docker container using `docker run` and additionally shows by example how the `dynatrace/wsagent` Docker image can be effectively configured at runtime. Please make sure to validate these settings to match your environment, as described below:
@@ -16,15 +14,12 @@ You can override the default configuration by providing the following *environme
 
 | Environment Variable    | Defaults                      | Description
 |:------------------------|:------------------------------|:-----------
-| DT_WSAGENT_NAME         | "dtwsagent"                   | A name that applies to both the agent and the container instance.
-| DT_WSAGENT_HOST_NAME    | "docker-${DT_WSAGENT_NAME}"   | A hostname that applies to the container instance (within Docker).
+| DT_WSAGENT_NAME         | "dtwsagent"                   | A name that applies to the container instance.
 | DT_WSAGENT_HOST_LOG_DIR | "/tmp/log/${DT_WSAGENT_NAME}" | A directory on the host the agent logs shall be mapped to.
-| DT_WSAGENT_LOG_LEVEL    | "info"                        | The log level to be maintained by the agent process.
-| DT_WSAGENT_COLLECTOR    | null                          | The "hostname:port" to a collector the agent shall connect to. Auto-discovered if the agent is linked to an instance of `dynatrace/collector` with alias `dtcollector.
 
 ### Example
 
-Creates a Dockerized Dynatrace WebServer Agent instance named `dtwsagent` which connects to a *Dockerized Dynatrace Collector* instance with name and link alias `dtcollector`:
+Creates a Dockerized Dynatrace Web Server Agent instance named `dtwsagent`:
 
 ```
 ./run-container.sh
@@ -32,17 +27,15 @@ Creates a Dockerized Dynatrace WebServer Agent instance named `dtwsagent` which 
 
 ### Example
 
-Creates a Dockerized Dynatrace WebServer Agent instance named `dtwsagent-1` which connects to *AcmeCo's Dynatrace Collector* instance running at `dtcollector.acmeco.internal:9998`. Make sure to remove `--link dtcollector` from `run-container.sh` beforehand:
+Creates a Dockerized Dynatrace Web Server Agent instance named `nginx-wsagent`:
 
 ```
-DT_WSAGENT_NAME=dtwsagent-1 \
-DT_WSAGENT_COLLECTOR=dtcollector.acmeco.internal:9998 \
-./run-container.sh
+DT_WSAGENT_NAME=nginx-wsagent ./run-container.sh
 ```
 <br>
 
 ---
-**TL;DR**: you can quickly spawn a Dynatrace WebServer Agent instance with an anticipated set of default configurations by invoking:
+**TL;DR**: you can quickly spawn a Dynatrace Web Server Agent instance with an anticipated set of default configurations by invoking:
 
 ```
 ./run-container.sh
@@ -62,11 +55,11 @@ Therefore, for the moment, we have decided to limit the number of supported envi
 
 | Environment Variable | Defaults | Description
 |:---------------------|:---------|:-----------
-| DT_WSAGENT_NAME      | n/a      | A name that applies to both the agent and the container instance.
+| DT_WSAGENT_NAME      | n/a      | A name that applies to the container instance.
 
 ### Example
 
-Creates a Dockerized Dynatrace WebServer Agent instance named `dtwsagent` which connects to a *Dockerized Dynatrace Collector* instance with name and link alias `dtcollector`:
+Creates a Dockerized Dynatrace Web Server Agent instance named `dtwsagent`:
 
 ```
 DT_WSAGENT_NAME=dtwsagent docker-compose up
@@ -74,15 +67,15 @@ DT_WSAGENT_NAME=dtwsagent docker-compose up
 
 ### Example
 
-Creates a Dockerized Dynatrace WebServer Agent instance named `dtwsagent-1` which connects to *AcmeCo's Dynatrace Server* instance running at `dtcollector.acmeco.internal:9998`. Make sure to add a proper `COLLECTOR` address to the `environment` section and remove the `external_links` section from `docker-compose.yml` beforehand:
+Creates a Dockerized Dynatrace Web Server Agent instance named `nginx-wsagent`:
 
 ```
-DT_WSAGENT_COLLECTOR=dtwsagent-1 docker-compose up
+DT_WSAGENT_COLLECTOR=nginx-wsagent docker-compose up
 ```
 <br>
 
 ---
-**TL;DR**: you can quickly spawn a Dynatrace WebServer Agent instance with an anticipated set of default configurations by invoking:
+**TL;DR**: you can quickly spawn a Dynatrace Web Server Agent instance with an anticipated set of default configurations by invoking:
 
 ```
 DT_WSAGENT_NAME=dtwsagent docker-compose up

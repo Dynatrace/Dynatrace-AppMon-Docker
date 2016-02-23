@@ -2,11 +2,6 @@ dtwsagent:
   container_name: "${DT_WSAGENT_NAME}"
   hostname: "docker-${DT_WSAGENT_NAME}"
   image: "dynatrace/wsagent:6.2"
-  external_links:
-    - dtcollector
-  environment:
-    NAME: "${DT_WSAGENT_NAME}"
-    HOST_NAME: "docker-${DT_WSAGENT_NAME}"
   volumes:
     - /dynatrace
     - "/tmp/log/dynatrace/wsagents/${DT_WSAGENT_NAME}:/dynatrace/log"

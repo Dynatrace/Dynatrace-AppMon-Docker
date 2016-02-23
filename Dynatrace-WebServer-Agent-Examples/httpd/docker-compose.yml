@@ -6,10 +6,12 @@ httpd:
   volumes_from:
   - dtwsagent
   external_links:
+  - dtcollector
   - dtwsagent
-  ipc: container:dtwsagent
+  environment:
+    AGENT_NAME: httpd-agent
   command: >
     sh -c " \
-      /dynatrace/attach-to-wsagent-master.sh && \
+      /dynatrace/run-wsagent-master.sh && \
       (echo LoadModule dtagent_module /dynatrace/agent/lib64/libdtagent.so >> conf/httpd.conf) && \
       httpd-foreground"

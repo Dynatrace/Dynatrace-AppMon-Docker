@@ -13,7 +13,6 @@ ENV LIB64               "${DT}/agent/lib64/libdtagent.so"
 ENV SLAVE_AGENT_PORT    "8001"
 
 ENV  DT_INSTALL_DEPS "curl"
-COPY build/scripts/run-process.sh /
 RUN  apt-get update && \
      apt-get install -y ${DT_INSTALL_DEPS} && \
      curl -L -o /tmp/${INSTALLER_FILE_NAME} ${INSTALLER_URL} && \
@@ -24,17 +23,6 @@ RUN  apt-get update && \
      apt-get remove --purge -y ${DT_INSTALL_DEPS} $(apt-mark showauto) && \
      rm -rf /var/lib/apt/lists/* /tmp/*
 ADD  build/bin/dtnginx_offsets.json.tar.gz ${DT}/agent/conf
-COPY build/bin/socat ${DT}
-COPY build/scripts/accept-wsagent-slaves.sh ${DT}
-COPY build/scripts/attach-to-wsagent-master.sh ${DT}
+COPY build/scripts/run-wsagent-master.sh ${DT}
 
-ENV  WAIT_FOR_CMD_RUNTIME_DEPS "netcat"
-COPY build/scripts/wait-for-cmd.sh /usr/local/bin
-RUN  apt-get update && \
-     apt-get install -y ${WAIT_FOR_CMD_RUNTIME_DEPS} && \
-     rm -rf /var/lib/apt/lists/* /tmp/*
-
-# Dynatrace Web Server Slave Agents
-EXPOSE 8001/udp
-
-CMD /run-process.sh
+CMD while true; do sleep 1; done
