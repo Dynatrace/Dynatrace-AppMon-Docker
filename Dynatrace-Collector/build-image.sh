@@ -10,4 +10,4 @@ if [ $? -ne 0 ]; then
   exit 1
 fi 
 
-docker tag -f ${DOCKER_IMAGE_NAME}:${DOCKER_IMAGE_TAG} ${DOCKER_IMAGE_NAME}
+docker tag ${DOCKER_IMAGE_NAME}:${DOCKER_IMAGE_TAG} ${DOCKER_IMAGE_NAME}
