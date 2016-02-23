@@ -5,6 +5,7 @@ The `dynatrace/wsagent` Docker image contains the Dynatrace Web Server Agent (ma
 ## Supported Tags
 
 - `6.2`, `latest` [(Dockerfile)](https://github.com/dynaTrace/Dynatrace-Docker/blob/master/Dynatrace-WebServer-Agent/Dockerfile)
+- `6.2-slim`, `slim` [(Dockerfile)](https://github.com/dynaTrace/Dynatrace-Docker/blob/master/Dynatrace-WebServer-Agent/Dockerfile.slim)
 
 Please see the [Dynatrace/Dynatrace-Docker](https://github.com/dynaTrace/Dynatrace-Docker/tree/master/Dynatrace-WebServer-Agent) GitHub repository for further information on how to run, configure and build this image.
 
