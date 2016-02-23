@@ -10,7 +10,7 @@ The home of Dockerized components of the [Dynatrace Application Monitoring](http
 
 ## How to install Dynatrace?
 
-You can quickly bring up an entire Dockerized Dynatrace environment by using [Docker Compose](https://docs.docker.com/compose/) with the provided `docker-compose.yml` file like so:
+You can quickly bring up an entire Dockerized Dynatrace environment by using [Docker Compose](https://docs.docker.com/compose/) using any of the provided `docker-compose.yml` files like so:
 
 ```
 DT_SERVER_LICENSE_KEY_FILE_URL=http://repo.internal/dtlicense.key \

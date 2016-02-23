@@ -1,0 +1,33 @@
+dtserver:
+  container_name: "dtserver"
+  hostname: "docker-dtserver"
+  image: "dynatrace/server:6.2-slim"
+  environment:
+    NAME: "dtserver"
+    HOST_NAME: "docker-dtserver"
+    LICENSE_KEY_FILE_URL: "${DT_SERVER_LICENSE_KEY_FILE_URL}"
+  ports:
+    - "2020:2020" # Dynatrace Clients (TCP)
+    - "2021:2021" # Dynatrace Clients (TCP with SSL)
+    - "8020:8020" # Dynatrace Web Server (HTTP)
+    - "8021:8021" # Dynatrace Web Server (HTTPS)
+    - "9911:9911" # Dynatrace Web UI (HTTPS)
+    - "9998:9998" # Dynatrace Agents (TCP)
+  volumes:
+    - "/tmp/log/dynatrace/servers/dtserver:/dynatrace/log/server/dtserver"
+
+dtwsagent:
+  container_name: "dtwsagent"
+  hostname: "docker-dtwsagent"
+  image: "dynatrace/wsagent:6.2-slim"
+  volumes:
+    - /dynatrace
+    - "/tmp/log/dynatrace/wsagents/dtwsagent:/dynatrace/log"
+
+dtagent:
+  container_name: "dtagent"
+  hostname: "docker-dtagent"
+  image: "dynatrace/agent:6.2-slim"
+  volumes:
+    - /dynatrace
+    - "/tmp/log/dynatrace/agents/dtagent:/dynatrace/log/agent"
