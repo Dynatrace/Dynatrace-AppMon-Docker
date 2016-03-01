@@ -1,12 +1,12 @@
-![Apache HTTPD Logo](https://github.com/dynaTrace/Dynatrace-Docker/blob/images/apache-httpd-logo.png)
+![Apache HTTPD Logo](https://github.com/Dynatrace/Dynatrace-Docker/blob/images/apache-httpd-logo.png)
 
-# Dynatrace Web Server Agent Example: Apache HTTPD
+# Dynatrace Agent Example: Apache HTTPD
 
-This project contains exemplary integrations of the [Dynatrace Application Monitoring](http://www.dynatrace.com/en/products/application-monitoring.html) enterprise solution with a [Dockerized Apache HTTPD](https://hub.docker.com/_/httpd/) process for deep end-to-end application monitoring.
+This project contains exemplary integrations of the [Dynatrace Application Monitoring](http://www.dynatrace.com/docker) enterprise solution with a [Dockerized Apache HTTPD](https://hub.docker.com/_/httpd/) process for deep end-to-end application monitoring.
 
 ## How to install Dynatrace?
 
-You can quickly bring up an entire Dockerized Dynatrace environment by using [Docker Compose](https://docs.docker.com/compose/) with the [provided `docker-compose.yml` file](https://github.com/dynaTrace/Dynatrace-Docker/blob/master/docker-compose.yml) like so:
+You can quickly bring up an entire Dockerized Dynatrace environment by using [Docker Compose](https://docs.docker.com/compose/) with the [provided `docker-compose.yml` file](https://github.com/Dynatrace/Dynatrace-Docker/blob/master/docker-compose.yml) like so:
 
 ```
 DT_SERVER_LICENSE_KEY_FILE_URL=http://repo.internal/dtlicense.key \
@@ -24,33 +24,33 @@ In the example above, you have to let `DT_SERVER_LICENSE_KEY_FILE_URL` point to 
 With the Dockerized Dynatrace environment running, we can now easily instrument an application process without having to alter that process' Docker image. Here is what an examplary integration in `run-container.sh` looks like:
 
 <pre><code>#!/bin/bash
-HTTPD_LOAD_MODULE="dtagent_module \${DTWSAGENT_ENV_LIB64}"
+HTTPD_LOAD_MODULE="dtagent_module \${DTAGENT_ENV_LIB64}"
 
 echo "Starting Apache HTTPD - Example"
 docker run --rm \
   --name httpd-example \
-  <strong>--volumes-from dtwsagent</strong> \                                            # <strong>1)</strong>
+  <strong>--volumes-from dtagent</strong> \                                              # <strong>1)</strong>
   <strong>--link dtcollector</strong> \                                                  # <strong>2)</strong>
-  <strong>--link dtwsagent</strong> \                                                    # <strong>3)</strong>
-  <strong>--env AGENT_NAME=httpd-agent</strong> \                                        # <strong>4)</strong>
+  <strong>--link dtagent</strong> \                                                      # <strong>3)</strong>
+  <strong>--env WSAGENT_NAME=httpd-agent</strong> \                                        # <strong>4)</strong>
   --publish-all \
   httpd \
-  sh -c "<strong>\${DTWSAGENT_ENV_DT}/run-wsagent-master.sh</strong> && \                # <strong>5)</strong>
+  sh -c "<strong>\${DTAGENT_ENV_DT}/run-wsagent.sh</strong> && \                         # <strong>5)</strong>
          (<strong>echo LoadModule ${HTTPD_LOAD_MODULE} >> conf/httpd.conf</strong>) && \ # <strong>6)</strong>
          httpd-foreground"
 </code></pre>
 
 ### Behind the Scenes
 
-1) We mount the agent installation directory from the `dtwsagent` container into the web server process' container via `--volumes-from dtwsagent`.
+1) We mount the agent installation directory from the `dtagent` container into the web server process' container via `--volumes-from dtagent`.
 
 2) **Convenience**: We link the web server process' container against the `dtcollector` container via `--link dtcollector`. This way, we inherit the other container's environment so that we can auto-discover the location of the Dynatrace Collector in Docker.
 
-3) **Convenience**: We link the web server process' container against the `dtwsagent` container via `--link dtwsagent`. This way, we inherit the other container's environment variables `DTWSAGENT_ENV_DT` and `DTWSAGENT_ENV_LIB64` and can thus quickly deduce a `LoadModule` declaration without having to know much about the environment.
+3) **Convenience**: We link the web server process' container against the `dtagent` container via `--link dtagent`. This way, we inherit the other container's environment variables `DTAGENT_ENV_DT` and `DTAGENT_ENV_LIB64` and can thus quickly deduce a `LoadModule` declaration without having to know much about the environment.
 
-4) We set the `dtwsagent`'s name to `httpd-agent`, thereby overriding the default value of `dtwsagent`.
+4) We set the Web Server Agent's name to `httpd-agent`, thereby overriding the default value of `dtwsagent`.
 
-5) We run to the Dynatrace Web Server Agent (master agent) process by invoking `run-wsagent-master.sh`, which has been shared by the `dtwsagent` container in step **1)**. The master agent relays application monitoring data from the web server process to the Dynatrace Collector.
+5) We run the Dynatrace Web Server Agent process by invoking `run-wsagent.sh`, which has been shared by the `dtagent` container in step **1)**. This process relays application monitoring data from the web server process to a Dynatrace Collector.
 
 6) We place a `LoadModule` declaration inside Apache's `httpd.conf` before we invoke the actual web server process ([see here for the original Dockerfile](https://github.com/docker-library/httpd/blob/1f1f7d39d5fe5aebeedea6872786b4e3ce0ebcc9/2.4/Dockerfile)).
 
@@ -58,10 +58,9 @@ docker run --rm \
 
 See the following Dockerized Dynatrace components and examples for more information:
 
-- [Dockerized Dynatrace Server](https://github.com/dynaTrace/Dynatrace-Docker/tree/master/Dynatrace-Server)
-- [Dockerized Dynatrace Collector](https://github.com/dynaTrace/Dynatrace-Docker/tree/master/Dynatrace-Collector)
-- [Dockerized Dynatrace Agent](https://github.com/dynaTrace/Dynatrace-Docker/tree/master/Dynatrace-Agent) and [Examples](https://github.com/dynaTrace/Dynatrace-Docker/tree/master/Dynatrace-Agent-Examples)
-- [Dockerized Dynatrace Web Server Agent](https://github.com/dynaTrace/Dynatrace-Docker/tree/master/Dynatrace-WebServer-Agent) and [Examples](https://github.com/dynaTrace/Dynatrace-Docker/tree/master/Dynatrace-WebServer-Agent-Examples)
+- [Dockerized Dynatrace Server](https://github.com/Dynatrace/Dynatrace-Docker/tree/master/Dynatrace-Server)
+- [Dockerized Dynatrace Collector](https://github.com/Dynatrace/Dynatrace-Docker/tree/master/Dynatrace-Collector)
+- [Dockerized Dynatrace Agent](https://github.com/Dynatrace/Dynatrace-Docker/tree/master/Dynatrace-Agent) and [Examples](https://github.com/Dynatrace/Dynatrace-Docker/tree/master/Dynatrace-Agent-Examples)
 
 ## Problems? Questions? Suggestions?
 

@@ -28,14 +28,6 @@ dtcollector:
   volumes:
     - "/tmp/log/dynatrace/collectors/dtcollector:/dynatrace/log/collector/dtcollector"
 
-dtwsagent:
-  container_name: "dtwsagent"
-  hostname: "docker-dtwsagent"
-  image: "dynatrace/wsagent:6.2"
-  volumes:
-    - /dynatrace
-    - "/tmp/log/dynatrace/wsagents/dtwsagent:/dynatrace/log"
-
 dtagent:
   container_name: "dtagent"
   hostname: "docker-dtagent"

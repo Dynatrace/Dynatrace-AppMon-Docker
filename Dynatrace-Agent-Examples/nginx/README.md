@@ -1,12 +1,12 @@
-![NGINX Logo](https://github.com/dynaTrace/Dynatrace-Docker/blob/images/nginx-logo.png)
+![NGINX Logo](https://github.com/Dynatrace/Dynatrace-Docker/blob/images/nginx-logo.png)
 
-# Dynatrace WebServer Agent Example: NGINX
+# Dynatrace Agent Example: NGINX
 
-This project contains exemplary integrations of the [Dynatrace Application Monitoring](http://www.dynatrace.com/en/products/application-monitoring.html) enterprise solution with a [Dockerized NGINX](https://hub.docker.com/_/nginx/) process for deep end-to-end application monitoring.
+This project contains exemplary integrations of the [Dynatrace Application Monitoring]http://www.dynatrace.com/docker) enterprise solution with a [Dockerized NGINX](https://hub.docker.com/_/nginx/) process for deep end-to-end application monitoring.
 
 ## How to install Dynatrace?
 
-You can quickly bring up an entire Dockerized Dynatrace environment by using [Docker Compose](https://docs.docker.com/compose/) with the [provided `docker-compose.yml` file](https://github.com/dynaTrace/Dynatrace-Docker/blob/master/docker-compose.yml) like so:
+You can quickly bring up an entire Dockerized Dynatrace environment by using [Docker Compose](https://docs.docker.com/compose/) with the [provided `docker-compose.yml` file](https://github.com/Dynatrace/Dynatrace-Docker/blob/master/docker-compose.yml) like so:
 
 ```
 DT_SERVER_LICENSE_KEY_FILE_URL=http://repo.internal/dtlicense.key \
@@ -27,27 +27,27 @@ With the Dockerized Dynatrace environment running, we can now easily instrument 
 echo "Starting NGINX - Example"
 docker run --rm \
   --name nginx-example \
-  <strong>--volumes-from dtwsagent</strong> \                             # <strong>1)</strong>
-  <strong>--link dtcollector</strong> \                                   # <strong>2)</strong>
-  <strong>--link dtwsagent</strong> \                                     # <strong>3)</strong>
-  <strong>--env AGENT_NAME=nginx-agent</strong> \                         # <strong>4)</strong>
+  <strong>--volumes-from dtagent</strong> \                        # <strong>1)</strong>
+  <strong>--link dtcollector</strong> \                            # <strong>2)</strong>
+  <strong>--link dtagent</strong> \                                # <strong>3)</strong>
+  <strong>--env WSAGENT_NAME=nginx-agent</strong> \                # <strong>4)</strong>
   --publish-all \
   nginx \
-  sh -c "<strong>\${DTWSAGENT_ENV_DT}/run-wsagent-master.sh</strong> && \ # <strong>4)</strong>
-          <strong>LD_PRELOAD=\${DTWSAGENT_ENV_LIB64}</strong> nginx"      # <strong>5)</strong>
+  sh -c "<strong>\${DTAGENT_ENV_DT}/run-wsagent.sh</strong> && \   # <strong>5)</strong>
+          <strong>LD_PRELOAD=\${DTAGENT_ENV_LIB64}</strong> nginx" # <strong>6)</strong>
 </code></pre>
 
 ### Behind the Scenes
 
-1) We mount the agent installation directory from the `dtwsagent` container into the web server process' container via `--volumes-from dtwsagent`.
+1) We mount the agent installation directory from the `dtagent` container into the web server process' container via `--volumes-from dtagent`.
 
 2) **Convenience**: We link the web server process' container against the `dtcollector` container via `--link dtcollector`. This way, we inherit the other container's environment so that we can auto-discover the location of the Dynatrace Collector in Docker.
 
-3) **Convenience**: We link the web server process' container against the `dtwsagent` container via `--link dtwsagent`. This way, we inherit the other container's environment variables `DTWSAGENT_ENV_DT` and `DTWSAGENT_ENV_LIB64` and can thus quickly deduce an `LD_PRELOAD` declaration without having to know much about the environment.
+3) **Convenience**: We link the web server process' container against the `dtagent` container via `--link dtagent`. This way, we inherit the other container's environment variables `DTAGENT_ENV_DT` and `DTAGENT_ENV_LIB64` and can thus quickly deduce an `LD_PRELOAD` declaration without having to know much about the environment.
 
-4) We set the `dtwsagent`'s name to `nginx-agent`, thereby overriding the default value of `dtwsagent`.
+4) We set the Web Server Agent's name to `nginx-agent`, thereby overriding the default value of `dtwsagent`.
 
-5) We attach to the master agent by invoking `attach-to-wsagent-master.sh`, which has been shared by the `dtwsagent` container in step **1)**. This is required to allow the master and the slave agents to communicate via UDP.
+5) We run the Dynatrace Web Server Agent process by invoking `run-wsagent.sh`, which has been shared by the `dtagent` container in step **1)**. This process relays application monitoring data from the web server process to a Dynatrace Collector.
 
 6) We set `LD_PRELOAD` before we invoke the actual application process ([see here for the original Dockerfile](https://github.com/nginxinc/docker-nginx/blob/a8b6da8425c4a41a5dedb1fb52e429232a55ad41/Dockerfile)).
 
@@ -55,10 +55,9 @@ docker run --rm \
 
 See the following Dockerized Dynatrace components and examples for more information:
 
-- [Dockerized Dynatrace Server](https://github.com/dynaTrace/Dynatrace-Docker/tree/master/Dynatrace-Server)
-- [Dockerized Dynatrace Collector](https://github.com/dynaTrace/Dynatrace-Docker/tree/master/Dynatrace-Collector)
-- [Dockerized Dynatrace Agent](https://github.com/dynaTrace/Dynatrace-Docker/tree/master/Dynatrace-Agent) and [Examples](https://github.com/dynaTrace/Dynatrace-Docker/tree/master/Dynatrace-Agent-Examples)
-- [Dockerized Dynatrace Web Server Agent](https://github.com/dynaTrace/Dynatrace-Docker/tree/master/Dynatrace-WebServer-Agent) and [Examples](https://github.com/dynaTrace/Dynatrace-Docker/tree/master/Dynatrace-WebServer-Agent-Examples)
+- [Dockerized Dynatrace Server](https://github.com/Dynatrace/Dynatrace-Docker/tree/master/Dynatrace-Server)
+- [Dockerized Dynatrace Collector](https://github.com/Dynatrace/Dynatrace-Docker/tree/master/Dynatrace-Collector)
+- [Dockerized Dynatrace Agent](https://github.com/Dynatrace/Dynatrace-Docker/tree/master/Dynatrace-Agent) and [Examples](https://github.com/Dynatrace/Dynatrace-Docker/tree/master/Dynatrace-Agent-Examples)
 
 ## Problems? Questions? Suggestions?
 

@@ -1,7 +1,0 @@
-dtwsagent:
-  container_name: "${DT_WSAGENT_NAME}"
-  hostname: "docker-${DT_WSAGENT_NAME}"
-  image: "dynatrace/wsagent:6.2"
-  volumes:
-    - /dynatrace
-    - "/tmp/log/dynatrace/wsagents/${DT_WSAGENT_NAME}:/dynatrace/log"

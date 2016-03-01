@@ -19,10 +19,9 @@ docker-compose up
 
 See the following Dockerized Dynatrace components for more information:
 
-- [Dockerized Dynatrace Server](https://github.com/dynaTrace/Dynatrace-Docker/tree/master/Dynatrace-Server)
-- [Dockerized Dynatrace Collector](https://github.com/dynaTrace/Dynatrace-Docker/tree/master/Dynatrace-Collector)
-- [Dockerized Dynatrace Agent](https://github.com/dynaTrace/Dynatrace-Docker/tree/master/Dynatrace-Agent)
-- [Dockerized Dynatrace Web Server Agent](https://github.com/dynaTrace/Dynatrace-Docker/tree/master/Dynatrace-WebServer-Agent)
+- [Dockerized Dynatrace Server](https://github.com/Dynatrace/Dynatrace-Docker/tree/master/Dynatrace-Server)
+- [Dockerized Dynatrace Collector](https://github.com/Dynatrace/Dynatrace-Docker/tree/master/Dynatrace-Collector)
+- [Dockerized Dynatrace Agent](https://github.com/Dynatrace/Dynatrace-Docker/tree/master/Dynatrace-Agent)
 
 ### Licensing
 
@@ -32,9 +31,8 @@ In the example above, you have to let `DT_SERVER_LICENSE_KEY_FILE_URL` point to 
 
 See the following integrations for more information:
 
-- [Dockerized Dynatrace Agent: Examples](https://github.com/dynaTrace/Dynatrace-Docker/tree/master/Dynatrace-Agent-Examples)
-- [Dockerized Dynatrace Web Server Agent: Examples](https://github.com/dynaTrace/Dynatrace-Docker/tree/master/Dynatrace-WebServer-Agent-Examples)
-- [Dockerized easyTravel Application](https://github.com/dynaTrace/Dynatrace-easyTravel-Docker)
+- [Dockerized Dynatrace Agent: Examples](https://github.com/Dynatrace/Dynatrace-Docker/tree/master/Dynatrace-Agent-Examples)
+- [Dockerized easyTravel Application](https://github.com/Dynatrace/Dynatrace-easyTravel-Docker)
 
 ![Dockerized Application](https://github.com/dynaTrace/Dynatrace-Docker/blob/images/dockerized-application.png)
 

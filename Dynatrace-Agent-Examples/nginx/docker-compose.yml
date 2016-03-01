@@ -4,12 +4,12 @@ nginx:
   ports:
   - 80
   volumes_from:
-  - dtwsagent
+  - dtagent
   external_links:
   - dtcollector
-  - dtwsagent
+  - dtagent
   environment:
-    AGENT_NAME: nginx-agent
+    WSAGENT_NAME: nginx-agent
   environment:
     LD_PRELOAD: "/dynatrace/agent/lib64/libdtagent.so"
-  command: sh -c "/dynatrace/run-wsagent-master.sh && nginx -g 'daemon off;'"
+  command: sh -c "/dynatrace/run-wsagent.sh && nginx -g 'daemon off;'"
