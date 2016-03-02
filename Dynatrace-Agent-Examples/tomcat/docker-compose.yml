@@ -3,10 +3,10 @@ tomcat:
   image: tomcat
   ports:
   - 8080
+  environment:
+    CATALINA_OPTS: "-agentpath:/dynatrace/agent/lib64/libdtagent.so=name=tomcat-agent,collector=docker-dtcollector"
   volumes_from:
   - dtagent
   external_links:
   - dtcollector
-  environment:
-    CATALINA_OPTS: "-agentpath:/dynatrace/agent/lib64/libdtagent.so=name=tomcat-agent,collector=docker-dtcollector"
   command: catalina.sh run

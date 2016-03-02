@@ -3,9 +3,9 @@ dtserver:
   hostname: "docker-dtserver"
   image: "dynatrace/server:6.2-slim"
   environment:
-    NAME: "dtserver"
+    DT_SERVER_NAME: "dtserver"
+    DT_SERVER_LICENSE_KEY_FILE_URL: "${DT_SERVER_LICENSE_KEY_FILE_URL}"
     HOST_NAME: "docker-dtserver"
-    LICENSE_KEY_FILE_URL: "${DT_SERVER_LICENSE_KEY_FILE_URL}"
   ports:
     - "2020:2020" # Dynatrace Clients (TCP)
     - "2021:2021" # Dynatrace Clients (TCP with SSL)

@@ -29,10 +29,10 @@ HTTPD_LOAD_MODULE="dtagent_module \${DTAGENT_ENV_LIB64}"
 echo "Starting Apache HTTPD - Example"
 docker run --rm \
   --name httpd-example \
-  <strong>--volumes-from dtagent</strong> \                                              # <strong>1)</strong>
-  <strong>--link dtcollector</strong> \                                                  # <strong>2)</strong>
-  <strong>--link dtagent</strong> \                                                      # <strong>3)</strong>
-  <strong>--env WSAGENT_NAME=httpd-agent</strong> \                                        # <strong>4)</strong>
+  <strong>--env DT_AGENT_NAME=httpd-agent</strong> \                                     # <strong>1)</strong>
+  <strong>--volumes-from dtagent</strong> \                                              # <strong>2)</strong>
+  <strong>--link dtcollector</strong> \                                                  # <strong>3)</strong>
+  <strong>--link dtagent</strong> \                                                      # <strong>4)</strong>
   --publish-all \
   httpd \
   sh -c "<strong>\${DTAGENT_ENV_DT}/run-wsagent.sh</strong> && \                         # <strong>5)</strong>
@@ -42,13 +42,13 @@ docker run --rm \
 
 ### Behind the Scenes
 
-1) We mount the agent installation directory from the `dtagent` container into the web server process' container via `--volumes-from dtagent`.
+1) We set the agent's name to `httpd-agent`, thereby overriding the default value of `dtagent`.
 
-2) **Convenience**: We link the web server process' container against the `dtcollector` container via `--link dtcollector`. This way, we inherit the other container's environment so that we can auto-discover the location of the Dynatrace Collector in Docker.
+2) We mount the agent installation directory from the `dtagent` container into the web server process' container via `--volumes-from dtagent`.
 
-3) **Convenience**: We link the web server process' container against the `dtagent` container via `--link dtagent`. This way, we inherit the other container's environment variables `DTAGENT_ENV_DT` and `DTAGENT_ENV_LIB64` and can thus quickly deduce a `LoadModule` declaration without having to know much about the environment.
+3) **Convenience**: We link the web server process' container against the `dtcollector` container via `--link dtcollector`. This way, we inherit the other container's environment so that we can auto-discover the location of the Dynatrace Collector in Docker.
 
-4) We set the Web Server Agent's name to `httpd-agent`, thereby overriding the default value of `dtwsagent`.
+4) **Convenience**: We link the web server process' container against the `dtagent` container via `--link dtagent`. This way, we inherit the other container's environment variables `DTAGENT_ENV_DT` and `DTAGENT_ENV_LIB64` and can thus quickly deduce a `LoadModule` declaration without having to know much about the environment.
 
 5) We run the Dynatrace Web Server Agent process by invoking `run-wsagent.sh`, which has been shared by the `dtagent` container in step **1)**. This process relays application monitoring data from the web server process to a Dynatrace Collector.
 
@@ -58,9 +58,9 @@ docker run --rm \
 
 See the following Dockerized Dynatrace components and examples for more information:
 
-- [Dockerized Dynatrace Server](https://github.com/Dynatrace/Dynatrace-Docker/tree/master/Dynatrace-Server)
-- [Dockerized Dynatrace Collector](https://github.com/Dynatrace/Dynatrace-Docker/tree/master/Dynatrace-Collector)
 - [Dockerized Dynatrace Agent](https://github.com/Dynatrace/Dynatrace-Docker/tree/master/Dynatrace-Agent) and [Examples](https://github.com/Dynatrace/Dynatrace-Docker/tree/master/Dynatrace-Agent-Examples)
+- [Dockerized Dynatrace Collector](https://github.com/Dynatrace/Dynatrace-Docker/tree/master/Dynatrace-Collector)
+- [Dockerized Dynatrace Server](https://github.com/Dynatrace/Dynatrace-Docker/tree/master/Dynatrace-Server)
 
 ## Problems? Questions? Suggestions?
 
@@ -68,5 +68,5 @@ This offering is [Dynatrace Community Supported](https://community.dynatrace.com
 
 ## License
 
-Licensed under the MIT License. See the LICENSE file for details.
+Licensed under the MIT License. See the [LICENSE](https://github.com/Dynatrace/Dynatrace-Docker/blob/master/Dynatrace-Agent-Examples/httpd/LICENSE) file for details.
 [![analytics](https://www.google-analytics.com/collect?v=1&t=pageview&_s=1&dl=https%3A%2F%2Fgithub.com%2FdynaTrace&dp=%2FDynatrace-Docker%2FDynatrace-WebServer-Agent-Examples%2Fhttpd&dt=Dynatrace-Docker%2FDynatrace-WebServer-Agent-Examples%2Fhttpd&_u=Dynatrace~&cid=github.com%2FdynaTrace&tid=UA-54510554-5&aip=1)]()

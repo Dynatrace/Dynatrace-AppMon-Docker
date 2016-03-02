@@ -20,13 +20,13 @@ docker run \
   --name ${NAME} \
   --hostname ${HOST_NAME} \
   --link dtserver \
-  --env NAME="${NAME}" \
-  --env HOST_NAME="${HOST_NAME}" \
-  --env SERVER="${SERVER}" \
+  --env DT_COLLECTOR_NAME="${NAME}" \
+  --env DT_COLLECTOR_SERVER="${SERVER}" \
   --env JVM_XMS="${JVM_XMS}" \
   --env JVM_XMX="${JVM_XMX}" \
   --env JVM_PERM_SIZE="${JVM_PERM_SIZE}" \
   --env JVM_MAX_PERM_SIZE="${JVM_MAX_PERM_SIZE}" \
+  --env HOST_NAME="${HOST_NAME}" \
   --volume ${HOST_LOG_DIR}:/dynatrace/log/collector/${NAME} \
   --publish-all \
   dynatrace/collector:6.2

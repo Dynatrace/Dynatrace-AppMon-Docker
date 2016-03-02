@@ -3,13 +3,13 @@ httpd:
   image: httpd
   ports:
   - 80
+  environment:
+    DT_AGENT_NAME: httpd-agent
   volumes_from:
   - dtagent
   external_links:
-  - dtcollector
   - dtagent
-  environment:
-    WSAGENT_NAME: httpd-agent
+  - dtcollector
   command: >
     sh -c " \
       /dynatrace/run-wsagent.sh && \

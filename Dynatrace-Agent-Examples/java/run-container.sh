@@ -6,7 +6,7 @@ echo "Starting Java - Example"
 docker run --rm \
   --name java-example \
   --volumes-from dtagent \
-  --link dtcollector \
   --link dtagent \
+  --link dtcollector \
   dynatrace/java-example \
   sh -c "java ${DT_AGENT_PATH} JavaTest"

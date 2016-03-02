@@ -2,10 +2,10 @@
 echo "Starting NGINX - Example"
 docker run --rm \
   --name nginx-example \
+  --env DT_AGENT_NAME=nginx-agent \
   --volumes-from dtagent \
-  --link dtcollector \
   --link dtagent \
-  --env WSAGENT_NAME=nginx-agent \
+  --link dtcollector \
   --publish-all \
   nginx \
   sh -c "\${DTAGENT_ENV_DT}/run-wsagent.sh && \

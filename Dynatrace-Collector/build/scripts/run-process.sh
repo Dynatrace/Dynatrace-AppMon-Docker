@@ -1,5 +1,5 @@
 #!/bin/bash
-NAME=${NAME:-"dtcollector"}
+NAME=${DT_COLLECTOR_NAME:-"dtcollector"}
 AGENT_PORT=${AGENT_PORT:-"9998"}
 
 # We attempt to auto-discover the Dynatrace Server through the environment
@@ -12,7 +12,7 @@ AGENT_PORT=${AGENT_PORT:-"9998"}
 # through the environment.
 SERVER_HOST_NAME=${DTSERVER_ENV_HOST_NAME:-"docker-dtserver"}
 SERVER_COLLECTOR_PORT=${DTSERVER_ENV_COLLECTOR_PORT:-"6698"}
-SERVER=${SERVER:-"${SERVER_HOST_NAME}:${SERVER_COLLECTOR_PORT}"}
+SERVER=${DT_COLLECTOR_SERVER:-"${SERVER_HOST_NAME}:${SERVER_COLLECTOR_PORT}"}
 
 # Wait for the server to start serving collectors.
 wait-for-cmd.sh "nc -z `echo ${SERVER} | sed 's/:/ /'`" 360

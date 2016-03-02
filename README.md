@@ -1,8 +1,8 @@
-![Docker Logo](https://github.com/dynaTrace/Dynatrace-Docker/blob/images/docker-logo.png)
+![Docker Logo](https://github.com/Dynatrace/Dynatrace-Docker/blob/images/docker-logo.png)
 
 # Dynatrace-Docker
 
-The home of Dockerized components of the [Dynatrace Application Monitoring](http://www.dynatrace.com/en/ecosystem/docker.html) enterprise solution. All components are available on the [Docker Hub](https://hub.docker.com/u/dynatrace/).
+The home of Dockerized components of the [Dynatrace Application Monitoring](http://www.dynatrace.com/docker) enterprise solution. All components are available on the [Docker Hub](https://hub.docker.com/u/dynatrace/).
 
 ## What is Dynatrace?
 
@@ -10,7 +10,7 @@ The home of Dockerized components of the [Dynatrace Application Monitoring](http
 
 ## How to install Dynatrace?
 
-You can quickly bring up an entire Dockerized Dynatrace environment by using [Docker Compose](https://docs.docker.com/compose/) using any of the provided `docker-compose.yml` files like so:
+You can quickly bring up an entire Dockerized Dynatrace environment by using [Docker Compose](https://docs.docker.com/compose/) with any of the provided `docker-compose.yml` files like so:
 
 ```
 DT_SERVER_LICENSE_KEY_FILE_URL=http://repo.internal/dtlicense.key \
@@ -34,13 +34,13 @@ See the following integrations for more information:
 - [Dockerized Dynatrace Agent: Examples](https://github.com/Dynatrace/Dynatrace-Docker/tree/master/Dynatrace-Agent-Examples)
 - [Dockerized easyTravel Application](https://github.com/Dynatrace/Dynatrace-easyTravel-Docker)
 
-![Dockerized Application](https://github.com/dynaTrace/Dynatrace-Docker/blob/images/dockerized-application.png)
+![Dockerized Application](https://github.com/Dynatrace/Dynatrace-Docker/blob/images/dockerized-application.png)
 
 ## How to Monitor your Docker Containers?
 
 Want to see all your Docker Metrics in one place? See the [Dynatrace Docker Monitor Plugin](https://community.dynatrace.com/community/display/DL/Docker+Monitor+Plugin) for more information.
 
-![Docker Monitor Plugin](https://github.com/dynaTrace/Dynatrace-Docker/blob/images/docker-monitor-plugin.png)
+![Docker Monitor Plugin](https://github.com/Dynatrace/Dynatrace-Docker/blob/images/docker-monitor-plugin.png)
 
 ## Problems? Questions? Suggestions?
 
