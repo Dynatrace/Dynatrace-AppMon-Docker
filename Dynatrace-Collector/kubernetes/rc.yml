@@ -1,0 +1,19 @@
+apiVersion: v1
+kind: ReplicationController
+metadata:
+  name: dtcollector-rc
+spec:
+  replicas: 1
+  selector:
+    app: dtcollector
+  template: 
+    metadata:
+      labels:
+        app: dtcollector
+        tier: dtcollector
+    spec:
+      containers:
+      - name: dtcollector
+        image: dynatrace/collector:6.2
+        ports:
+        - containerPort: 9998
