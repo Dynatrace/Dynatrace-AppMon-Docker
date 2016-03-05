@@ -7,10 +7,10 @@ SERVER=${DT_COLLECTOR_SERVER}
 # Make sure that the following attributes are set in accordance to the
 # Memory Configuration section of the Collector Configuration docs at
 # https://community.dynatrace.com/community/display/DOCDT62/Collector+Configuration.
-JVM_XMS=${DT_COLLECTOR_JVM_XMS:-"2G"}
-JVM_XMX=${DT_COLLECTOR_JVM_XMX:-"2G"}
-JVM_PERM_SIZE=${DT_COLLECTOR_JVM_PERM_SIZE:-"128m"}
-JVM_MAX_PERM_SIZE=${DT_COLLECTOR_JVM_MAX_PERM_SIZE:-"128m"}
+JVM_XMS=${DT_COLLECTOR_JVM_XMS}
+JVM_XMX=${DT_COLLECTOR_JVM_XMX}
+JVM_PERM_SIZE=${DT_COLLECTOR_JVM_PERM_SIZE}
+JVM_MAX_PERM_SIZE=${DT_COLLECTOR_JVM_MAX_PERM_SIZE}
 
 echo "Creating Dynatrace Collector log directory at ${HOST_LOG_DIR}"
 mkdir -p ${HOST_LOG_DIR}
@@ -22,10 +22,10 @@ docker run \
   --link dtserver \
   --env DT_COLLECTOR_NAME="${NAME}" \
   --env DT_COLLECTOR_SERVER="${SERVER}" \
-  --env JVM_XMS="${JVM_XMS}" \
-  --env JVM_XMX="${JVM_XMX}" \
-  --env JVM_PERM_SIZE="${JVM_PERM_SIZE}" \
-  --env JVM_MAX_PERM_SIZE="${JVM_MAX_PERM_SIZE}" \
+  --env DT_COLLECTOR_JVM_XMS="${JVM_XMS}" \
+  --env DT_COLLECTOR_JVM_XMX="${JVM_XMX}" \
+  --env DT_COLLECTOR_JVM_PERM_SIZE="${JVM_PERM_SIZE}" \
+  --env DT_COLLECTOR_JVM_MAX_PERM_SIZE="${JVM_MAX_PERM_SIZE}" \
   --env HOST_NAME="${HOST_NAME}" \
   --volume ${HOST_LOG_DIR}:/dynatrace/log/collector/${NAME} \
   --publish-all \

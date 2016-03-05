@@ -2,6 +2,11 @@
 NAME=${DT_COLLECTOR_NAME:-"dtcollector"}
 AGENT_PORT=${AGENT_PORT:-"9998"}
 
+JVM_XMS=${DT_COLLECTOR_JVM_XMS:-"2G"}
+JVM_XMX=${DT_COLLECTOR_JVM_XMX:-"2G"}
+JVM_PERM_SIZE=${DT_COLLECTOR_JVM_PERM_SIZE:-"128m"}
+JVM_MAX_PERM_SIZE=${DT_COLLECTOR_JVM_MAX_PERM_SIZE:-"128m"}
+
 # We attempt to auto-discover the Dynatrace Server through the environment
 # when the container has been --linked to a 'dynatrace/server' container
 # instance with a link alias 'dtserver'.
@@ -16,11 +21,6 @@ SERVER=${DT_COLLECTOR_SERVER:-"${SERVER_HOST_NAME}:${SERVER_COLLECTOR_PORT}"}
 
 # Wait for the server to start serving collectors.
 wait-for-cmd.sh "nc -z `echo ${SERVER} | sed 's/:/ /'`" 360
-
-JVM_XMS=${JVM_XMS:-"2G"}
-JVM_XMX=${JVM_XMX:-"2G"}
-JVM_PERM_SIZE=${JVM_PERM_SIZE:-"128m"}
-JVM_MAX_PERM_SIZE=${JVM_MAX_PERM_SIZE:-"128m"}
 
 ${DT}/dtcollector -instance ${NAME} \
                   -listen ${AGENT_PORT} \
