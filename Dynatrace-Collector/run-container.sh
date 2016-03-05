@@ -1,5 +1,6 @@
 #!/bin/bash
 NAME=${DT_COLLECTOR_NAME:-"dtcollector"}
+GROUP_NAME=${DT_COLLECTOR_GROUP_NAME}
 HOST_NAME=${DT_COLLECTOR_HOST_NAME:-"docker-${NAME}"}
 HOST_LOG_DIR=${DT_COLLECTOR_HOST_LOG_DIR:-"/tmp/log/dynatrace/collectors/${NAME}"}
 SERVER=${DT_COLLECTOR_SERVER}
@@ -21,6 +22,7 @@ docker run \
   --hostname ${HOST_NAME} \
   --link dtserver \
   --env DT_COLLECTOR_NAME="${NAME}" \
+  --env DT_COLLECTOR_GROUP_NAME="${GROUP_NAME}" \
   --env DT_COLLECTOR_SERVER="${SERVER}" \
   --env DT_COLLECTOR_JVM_XMS="${JVM_XMS}" \
   --env DT_COLLECTOR_JVM_XMX="${JVM_XMX}" \

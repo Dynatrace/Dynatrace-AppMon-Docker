@@ -26,6 +26,7 @@ You can override the default configuration by providing the following *environme
 | Environment Variable      | Defaults                        | Description
 |:--------------------------|:--------------------------------|:-----------
 | DT_COLLECTOR_NAME         | "dtcollector"                   | A name that applies to both the collector and the container instance.
+| DT_COLLECTOR_GROUP_NAME   | n/a                             | An optional name of the collector group the collector shall be a member of.
 | DT_COLLECTOR_HOST_LOG_DIR | "/tmp/log/${DT_COLLECTOR_NAME}" | A directory on the host the collector logs shall be mapped to.
 | DT_COLLECTOR_HOST_NAME    | "docker-${DT_COLLECTOR_NAME}"   | A hostname that applies to the container instance (within Docker).
 | DT_COLLECTOR_SERVER       | n/a                             | An optional "host:port" combination to a Dynatrace Server. A [Dynatrace Server](https://github.com/Dynatrace/Dynatrace-Docker/tree/master/Dynatrace-Server) running in Docker will be auto-discovered if the collector container links to the server container via `--link dtserver`.
