@@ -8,7 +8,6 @@ httpd:
   volumes_from:
   - dtagent
   external_links:
-  - dtagent
   - dtcollector
   command: >
     sh -c " \

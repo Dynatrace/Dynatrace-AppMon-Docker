@@ -9,6 +9,5 @@ nginx:
   volumes_from:
   - dtagent
   external_links:
-  - dtagent
   - dtcollector
   command: sh -c "/dynatrace/run-wsagent.sh && nginx -g 'daemon off;'"
