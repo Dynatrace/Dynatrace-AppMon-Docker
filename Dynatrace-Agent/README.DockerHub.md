@@ -4,10 +4,10 @@ The `dynatrace/agent` Docker image contains the Dynatrace Agent component of the
 
 ## Supported Tags
 
-- `6.2`, `latest` [(Dockerfile)](https://github.com/Dynatrace/Dynatrace-Docker/blob/master/Dynatrace-Agent/Dockerfile)
-- `6.2-slim`, `slim` [(Dockerfile)](https://github.com/Dynatrace/Dynatrace-Docker/blob/master/Dynatrace-Agent/Dockerfile.slim)
+- `6.2`, `latest` [(Dockerfile)](https://github.com/Dynatrace/Dynatrace-Docker/blob/6.2/Dynatrace-Agent/Dockerfile)
+- `6.2-slim`, `slim` [(Dockerfile)](https://github.com/Dynatrace/Dynatrace-Docker/blob/6.2/Dynatrace-Agent/Dockerfile.slim)
 
-Please see the [Dynatrace/Dynatrace-Docker](https://github.com/Dynatrace/Dynatrace-Docker/tree/master/Dynatrace-Agent) GitHub repository for further information on how to run, configure and build this image.
+Please see the [Dynatrace/Dynatrace-Docker](https://github.com/Dynatrace/Dynatrace-Docker/tree/6.2/Dynatrace-Agent) GitHub repository for further information on how to run, configure and build this image.
 
 ## Problems? Questions? Suggestions?
 
@@ -15,4 +15,4 @@ This offering is [Dynatrace Community Supported](https://community.dynatrace.com
 
 ## License
 
-Licensed under the MIT License. See the [LICENSE file](https://github.com/Dynatrace/Dynatrace-Docker/blob/master/LICENSE) for details.
+Licensed under the MIT License. See the [LICENSE file](https://github.com/Dynatrace/Dynatrace-Docker/blob/6.2/Dynatrace-Agent/LICENSE) for details.

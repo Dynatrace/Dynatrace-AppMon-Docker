@@ -6,7 +6,7 @@ This project contains exemplary integrations of the [Dynatrace Application Monit
 
 ## How to install Dynatrace?
 
-You can quickly bring up an entire Dockerized Dynatrace environment by using [Docker Compose](https://docs.docker.com/compose/) with the [provided `docker-compose.yml` file](https://github.com/Dynatrace/Dynatrace-Docker/blob/master/docker-compose.yml) like so:
+You can quickly bring up an entire Dockerized Dynatrace environment by using [Docker Compose](https://docs.docker.com/compose/) with the [provided `docker-compose.yml` file](https://github.com/Dynatrace/Dynatrace-Docker/blob/6.2/docker-compose.yml) like so:
 
 ```
 DT_SERVER_LICENSE_KEY_FILE_URL=http://repo.internal/dtlicense.key \
@@ -55,9 +55,9 @@ docker run --rm \
 
 See the following Dockerized Dynatrace components and examples for more information:
 
-- [Dockerized Dynatrace Agent](https://github.com/Dynatrace/Dynatrace-Docker/tree/master/Dynatrace-Agent) and [Examples](https://github.com/Dynatrace/Dynatrace-Docker/tree/master/Dynatrace-Agent-Examples)
-- [Dockerized Dynatrace Collector](https://github.com/Dynatrace/Dynatrace-Docker/tree/master/Dynatrace-Collector)
-- [Dockerized Dynatrace Server](https://github.com/Dynatrace/Dynatrace-Docker/tree/master/Dynatrace-Server)
+- [Dockerized Dynatrace Agent](https://github.com/Dynatrace/Dynatrace-Docker/tree/6.2/Dynatrace-Agent) and [Examples](https://github.com/Dynatrace/Dynatrace-Docker/tree/6.2/Dynatrace-Agent-Examples)
+- [Dockerized Dynatrace Collector](https://github.com/Dynatrace/Dynatrace-Docker/tree/6.2/Dynatrace-Collector)
+- [Dockerized Dynatrace Server](https://github.com/Dynatrace/Dynatrace-Docker/tree/6.2/Dynatrace-Server)
 
 ## Problems? Questions? Suggestions?
 
@@ -65,5 +65,5 @@ This offering is [Dynatrace Community Supported](https://community.dynatrace.com
 
 ## License
 
-Licensed under the MIT License. See the [LICENSE](https://github.com/Dynatrace/Dynatrace-Docker/blob/master/Dynatrace-Agent-Examples/nginx/LICENSE) file for details.
+Licensed under the MIT License. See the [LICENSE](https://github.com/Dynatrace/Dynatrace-Docker/blob/6.2/Dynatrace-Agent-Examples/nginx/LICENSE) file for details.
 [![analytics](https://www.google-analytics.com/collect?v=1&t=pageview&_s=1&dl=https%3A%2F%2Fgithub.com%2FdynaTrace&dp=%2FDynatrace-Docker%2FDynatrace-WebServer-Agent-Examples%2Fnginx&dt=Dynatrace-Docker%2FDynatrace-WebServer-Agent-Examples%2Fnginx&_u=Dynatrace~&cid=github.com%2FdynaTrace&tid=UA-54510554-5&aip=1)]()

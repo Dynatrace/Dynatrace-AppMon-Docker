@@ -6,10 +6,10 @@ The `dynatrace/server` Docker image contains the Dynatrace Server component of t
 
 ## Supported Tags
 
-- `6.2`, `latest` [(Dockerfile)](https://github.com/Dynatrace/Dynatrace-Docker/blob/master/Dynatrace-Server/Dockerfile)
-- `6.2-slim`, `slim` [(Dockerfile)](https://github.com/Dynatrace/Dynatrace-Docker/blob/master/Dynatrace-Server/Dockerfile.slim)
+- `6.2`, `latest` [(Dockerfile)](https://github.com/Dynatrace/Dynatrace-Docker/blob/6.2/Dynatrace-Server/Dockerfile)
+- `6.2-slim`, `slim` [(Dockerfile)](https://github.com/Dynatrace/Dynatrace-Docker/blob/6.2/Dynatrace-Server/Dockerfile.slim)
 
-Please see the [Dynatrace/Dynatrace-Docker](https://github.com/Dynatrace/Dynatrace-Docker/tree/master/Dynatrace-Server) GitHub repository for further information on how to run, configure and build this image.
+Please see the [Dynatrace/Dynatrace-Docker](https://github.com/Dynatrace/Dynatrace-Docker/tree/6.2/Dynatrace-Server) GitHub repository for further information on how to run, configure and build this image.
 
 ## Problems? Questions? Suggestions?
 
@@ -17,4 +17,4 @@ This offering is [Dynatrace Community Supported](https://community.dynatrace.com
 
 ## License
 
-Licensed under the MIT License. See the [LICENSE file](https://github.com/Dynatrace/Dynatrace-Docker/blob/master/LICENSE) for details.
+Licensed under the MIT License. See the [LICENSE file](https://github.com/Dynatrace/Dynatrace-Docker/blob/6.2/Dynatrace-Server/LICENSE) for details.

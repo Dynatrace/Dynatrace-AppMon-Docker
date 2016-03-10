@@ -2,7 +2,7 @@
 
 # Dynatrace-Agent
 
-This project contains files for building and running the Dynatrace Agent component of the [Dynatrace Application Monitoring](http://www.dynatrace.com/docker) enterprise solution for deep end-to-end application monitoring in Docker. Ready-made images are available on the [Docker Hub](https://hub.docker.com/r/dynatrace/agent/). Please refer to the [Dynatrace Agent Examples](https://github.com/Dynatrace/Dynatrace-Docker/tree/master/Dynatrace-Agent-Examples) project for exemplary integrations into Dockerized application processes.
+This project contains files for building and running the Dynatrace Agent component of the [Dynatrace Application Monitoring](http://www.dynatrace.com/docker) enterprise solution for deep end-to-end application monitoring in Docker. Ready-made images are available on the [Docker Hub](https://hub.docker.com/r/dynatrace/agent/). Please refer to the [Dynatrace Agent Examples](https://github.com/Dynatrace/Dynatrace-Docker/tree/6.2/Dynatrace-Agent-Examples) project for exemplary integrations into Dockerized application processes.
 
 <br>
 
@@ -27,7 +27,7 @@ You can override the default configuration by providing the following *environme
 |:----------------------|:----------------------------|:-----------
 | DT_AGENT_NAME         | "dtagent"                   | A name that applies to both the agent and the container instance.
 | DT_AGENT_HOST_LOG_DIR | "/tmp/log/${DT_AGENT_NAME}" | A directory on the host the agent logs shall be mapped to.
-| DT_AGENT_COLLECTOR    | n/a                         | An optional "host:port" combination to a [Dynatrace Collector](https://github.com/Dynatrace/Dynatrace-Docker/tree/master/Dynatrace-Collector). A Dynatrace Collector running in Docker will be auto-discovered if the application container which has the agent applied links to the collector container via `--link dtcollector`.
+| DT_AGENT_COLLECTOR    | n/a                         | An optional "host:port" combination to a [Dynatrace Collector](https://github.com/Dynatrace/Dynatrace-Docker/tree/6.2/Dynatrace-Collector). A Dynatrace Collector running in Docker will be auto-discovered if the application container which has the agent applied links to the collector container via `--link dtcollector`.
 
 ### Example
 
@@ -69,9 +69,9 @@ While we strongly recommend using our ready-made images on the [Docker Hub](http
 
 See the following Dockerized Dynatrace components and examples for more information:
 
-- [Dockerized Dynatrace Agent](https://github.com/Dynatrace/Dynatrace-Docker/tree/master/Dynatrace-Agent) and [Examples](https://github.com/Dynatrace/Dynatrace-Docker/tree/master/Dynatrace-Agent-Examples)
-- [Dockerized Dynatrace Collector](https://github.com/Dynatrace/Dynatrace-Docker/tree/master/Dynatrace-Collector)
-- [Dockerized Dynatrace Server](https://github.com/Dynatrace/Dynatrace-Docker/tree/master/Dynatrace-Server)
+- [Dockerized Dynatrace Agent](https://github.com/Dynatrace/Dynatrace-Docker/tree/6.2/Dynatrace-Agent) and [Examples](https://github.com/Dynatrace/Dynatrace-Docker/tree/6.2/Dynatrace-Agent-Examples)
+- [Dockerized Dynatrace Collector](https://github.com/Dynatrace/Dynatrace-Docker/tree/6.2/Dynatrace-Collector)
+- [Dockerized Dynatrace Server](https://github.com/Dynatrace/Dynatrace-Docker/tree/6.2/Dynatrace-Server)
 
 ## Problems? Questions? Suggestions?
 
@@ -79,5 +79,5 @@ This offering is [Dynatrace Community Supported](https://community.dynatrace.com
 
 ## License
 
-Licensed under the MIT License. See the [LICENSE](https://github.com/Dynatrace/Dynatrace-Docker/blob/master/LICENSE) file for details.
+Licensed under the MIT License. See the [LICENSE](https://github.com/Dynatrace/Dynatrace-Docker/blob/6.2/Dynatrace-Agent/LICENSE) file for details.
 [![analytics](https://www.google-analytics.com/collect?v=1&t=pageview&_s=1&dl=https%3A%2F%2Fgithub.com%2FdynaTrace&dp=%2FDynatrace-Docker%2FDynatrace-Agent&dt=Dynatrace-Docker%2FDynatrace-Agent&_u=Dynatrace~&cid=github.com%2FdynaTrace&tid=UA-54510554-5&aip=1)]()
