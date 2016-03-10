@@ -2,7 +2,7 @@ FROM alpine:3.3
 
 MAINTAINER Martin Etmajer <martin.etmajer@dynatrace.com>
 
-ENV VERSION             "6.2"
+ENV VERSION             "6.3"
 ENV INSTALLER_FILE_NAME "dynatrace-server-linux-x86.jar"
 ENV INSTALLER_URL       "http://downloads.dynatracesaas.com/${VERSION}/${INSTALLER_FILE_NAME}"
 
@@ -12,8 +12,6 @@ ENV COLLECTOR_PORT_SSL  "6699"
 
 ENV  DT_INSTALL_DEPS "openjdk8-jre-base"
 ENV  DT_RUNTIME_DEPS "bash curl"
-COPY build/scripts/pull-license-key-file.sh /
-COPY build/scripts/run-process.sh /
 RUN  apk add --no-cache ${DT_INSTALL_DEPS} ${DT_RUNTIME_DEPS} && \
      curl -L -o /tmp/${INSTALLER_FILE_NAME} ${INSTALLER_URL} && \
      java -jar /tmp/${INSTALLER_FILE_NAME} -b 64 -t ${DT} -y && \
@@ -35,6 +33,9 @@ RUN  apk add --no-cache ${GLIBC_RUNTIME_DEPS} && \
 
 # Make sure that hostname resolution looks up /etc/hosts prior to /etc/resolv.conf
 RUN echo 'hosts: files mdns4_minimal [NOTFOUND=return] dns mdns4' >> /etc/nsswitch.conf
+
+COPY build/scripts/pull-license-key-file.sh /
+COPY build/scripts/run-process.sh /
 
 # Dynatrace Clients (TCP)
 EXPOSE 2020

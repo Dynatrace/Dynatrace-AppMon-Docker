@@ -4,8 +4,10 @@ The `dynatrace/collector` Docker image contains the Dynatrace Collector componen
 
 ## Supported Tags
 
-- `6.2`, `latest` [(Dockerfile)](https://github.com/Dynatrace/Dynatrace-Docker/blob/master/Dynatrace-Collector/Dockerfile)
-- `6.2-slim`, `slim` [(Dockerfile)](https://github.com/Dynatrace/Dynatrace-Docker/blob/master/Dynatrace-Collector/Dockerfile.slim)
+- `6.2` [(Dockerfile)](https://github.com/Dynatrace/Dynatrace-Docker/blob/6.2/Dynatrace-Collector/Dockerfile)
+- `6.3`, `latest` [(Dockerfile)](https://github.com/Dynatrace/Dynatrace-Docker/blob/master/Dynatrace-Collector/Dockerfile)
+- `6.2-slim` [(Dockerfile)](https://github.com/Dynatrace/Dynatrace-Docker/blob/6.2/Dynatrace-Collector/Dockerfile.slim)
+- `6.3-slim`, `slim` [(Dockerfile)](https://github.com/Dynatrace/Dynatrace-Docker/blob/master/Dynatrace-Collector/Dockerfile.slim)
 
 Please see the [Dynatrace/Dynatrace-Docker](https://github.com/Dynatrace/Dynatrace-Docker/tree/master/Dynatrace-Collector) GitHub repository for further information on how to run, configure and build this image.
 

@@ -14,6 +14,6 @@ spec:
     spec:
       containers:
       - name: dtcollector
-        image: dynatrace/collector:6.2
+        image: dynatrace/collector:6.3
         ports:
         - containerPort: 9998

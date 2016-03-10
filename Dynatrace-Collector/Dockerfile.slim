@@ -2,7 +2,7 @@ FROM alpine:3.3
 
 MAINTAINER Martin Etmajer <martin.etmajer@dynatrace.com>
 
-ENV VERSION             "6.2"
+ENV VERSION             "6.3"
 ENV INSTALLER_FILE_NAME "dynatrace-collector-linux-x86.jar"
 ENV INSTALLER_URL       "http://downloads.dynatracesaas.com/${VERSION}/${INSTALLER_FILE_NAME}"
 
@@ -11,7 +11,6 @@ ENV AGENT_PORT          "9998"
 
 ENV  DT_INSTALL_DEPS "curl openjdk8-jre-base"
 ENV  DT_RUNTIME_DEPS "bash"
-COPY build/scripts/run-process.sh /
 RUN  apk add --no-cache ${DT_INSTALL_DEPS} ${DT_RUNTIME_DEPS} && \
      curl -L -o /tmp/${INSTALLER_FILE_NAME} ${INSTALLER_URL} && \
      java -jar /tmp/${INSTALLER_FILE_NAME} -b 64 -t ${DT} -y && \
@@ -33,6 +32,8 @@ RUN echo 'hosts: files mdns4_minimal [NOTFOUND=return] dns mdns4' >> /etc/nsswit
 ENV  WAIT_FOR_CMD_RUNTIME_DEPS "netcat-openbsd"
 COPY build/scripts/wait-for-cmd.sh /usr/local/bin
 RUN  apk add --no-cache ${WAIT_FOR_CMD_RUNTIME_DEPS}
+
+COPY build/scripts/run-process.sh /
 
 # Dynatrace Agents (TCP)
 EXPOSE 9998
