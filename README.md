@@ -13,8 +13,19 @@ The home of Dockerized components of the [Dynatrace Application Monitoring](http
 You can quickly bring up an entire Dockerized Dynatrace environment by using [Docker Compose](https://docs.docker.com/compose/) with any of the provided `docker-compose.yml` files like so:
 
 ```
-DT_SERVER_LICENSE_KEY_FILE_URL=http://repo.internal/dtlicense.key \
+git clone https://github.com/Dynatrace/Dynatrace-Docker.git
+cd Dynatrace-Docker
 docker-compose up
+```
+
+### Licensing
+
+The example above leaves your Dynatrace environment without a proper license. However, you can conveniently have a license provisioned at container runtime by specifying a URL to a [Dynatrace License Key File](http://bit.ly/dttrial-docker-github) in the `DT_SERVER_LICENSE_KEY_FILE_URL` environment variable. If you don't happen to have a web server available to serve the license file to you, [Netcat](https://en.wikipedia.org/wiki/Netcat) can conveniently serve it from your command line, exactly once, via `nc -l 1337 < dtlicense.key`, where `1337` is an available port on your local machine. A `sudo` may be required depending on which port you eventually decide to choose.
+
+```
+git clone https://github.com/Dynatrace/Dynatrace-Docker.git
+cd Dynatrace-Docker
+DT_SERVER_LICENSE_KEY_FILE_URL=http://$YOUR_IP:1337 docker-compose up
 ```
 
 See the following Dockerized Dynatrace components for more information:
