@@ -2,32 +2,27 @@ FROM alpine:3.3
 
 MAINTAINER Martin Etmajer <martin.etmajer@dynatrace.com>
 
-ENV VERSION               "6.3"
-ENV INSTALLER32_FILE_NAME "dynatrace-wsagent-linux-x86.tar"
-ENV INSTALLER64_FILE_NAME "dynatrace-wsagent-linux-x64.tar"
-ENV INSTALLER32_URL       "http://downloads.dynatracesaas.com/${VERSION}/${INSTALLER32_FILE_NAME}"
-ENV INSTALLER64_URL       "http://downloads.dynatracesaas.com/${VERSION}/${INSTALLER64_FILE_NAME}"
+ENV VERSION                 "6.3"
+ENV NODE_INSTALLER64_URL    "http://downloads.dynatracesaas.com/${VERSION}/dynatrace-nodejsagent-linux-x64.tgz"
+ENV WSAGENT_INSTALLER32_URL "http://downloads.dynatracesaas.com/${VERSION}/dynatrace-wsagent-linux-x86.tar"
+ENV WSAGENT_INSTALLER64_URL "http://downloads.dynatracesaas.com/${VERSION}/dynatrace-wsagent-linux-x64.tar"
 
-ENV DT                    "/dynatrace"
-ENV BIN64                 "${DT}/agent/lib64/dtwsagent"
-ENV INI                   "${DT}/agent/conf/dtwsagent.ini"
-ENV LIB32                 "${DT}/agent/lib/libdtagent.so"
-ENV LIB64                 "${DT}/agent/lib64/libdtagent.so"
-ENV SLAVE_AGENT_PORT      "8001"
+ENV DT                      "/dynatrace"
+ENV BIN64                   "${DT}/agent/lib64/dtwsagent"
+ENV INI                     "${DT}/agent/conf/dtwsagent.ini"
+ENV LIB32                   "${DT}/agent/lib/libdtagent.so"
+ENV LIB64                   "${DT}/agent/lib64/libdtagent.so"
+ENV SLAVE_AGENT_PORT        "8001"
 
 ENV  DT_INSTALL_DEPS "curl openjdk8-jre-base"
-RUN  apk add --no-cache ${DT_INSTALL_DEPS} && \
-     cd /tmp && \
-     curl -L -o ./${INSTALLER64_FILE_NAME} ${INSTALLER64_URL} && \
-     tar xf ./${INSTALLER64_FILE_NAME} && \
-     sh ./dynatrace-wsagent-*.sh && \
-     mv ./dynatrace-${VERSION} ${DT} && \
-     rm -rf /tmp/* && \
-     curl -L -o ./${INSTALLER32_FILE_NAME} ${INSTALLER32_URL} && \
-     tar xf ./${INSTALLER32_FILE_NAME} && \
-     sh ./dynatrace-wsagent-*.sh && \
-     mv ./dynatrace-${VERSION}/agent/lib ${DT}/agent && \
-     rm -rf /tmp/* && \
+ENV  DT_RUNTIME_DEPS "bash"
+COPY build/scripts/install-node-agent.sh /usr/bin
+COPY build/scripts/install-wsagent.sh /usr/bin
+RUN  apk add --no-cache ${DT_INSTALL_DEPS} ${DT_RUNTIME_DEPS} && \
+     mkdir -p ${DT} && \
+     install-wsagent.sh ${WSAGENT_INSTALLER32_URL} && \
+     install-wsagent.sh ${WSAGENT_INSTALLER64_URL} && \
+     install-node-agent.sh ${NODE_INSTALLER64_URL} && \
      apk del ${DT_INSTALL_DEPS}
 ADD  build/bin/dtnginx_offsets.json.tar.gz ${DT}/agent/conf
 COPY build/scripts/run-wsagent.sh ${DT}
