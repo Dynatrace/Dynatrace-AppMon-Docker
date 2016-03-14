@@ -24,7 +24,7 @@ In the example above, you have to let `DT_SERVER_LICENSE_KEY_FILE_URL` point to 
 With the Dockerized Dynatrace environment running, we can now easily instrument an application process without having to alter that process' Docker image. Here is what an examplary integration in `run-container.sh` looks like:
 
 <pre><code>#!/bin/bash
-HTTPD_LOAD_MODULE="dtagent_module \${DTAGENT_ENV_LIB64}"
+HTTPD_LOAD_MODULE="dtagent_module \${DTAGENT_ENV_AGENT_LIB64}"
 
 echo "Starting Apache HTTPD - Example"
 docker run --rm \
@@ -48,7 +48,7 @@ docker run --rm \
 
 3) **Convenience**: We link the web server process' container against the `dtcollector` container via `--link dtcollector`. This way, we inherit the other container's environment so that we can auto-discover the location of the Dynatrace Collector in Docker.
 
-4) **Convenience**: We link the web server process' container against the `dtagent` container via `--link dtagent`. This way, we inherit the other container's environment variables `DTAGENT_ENV_DT` and `DTAGENT_ENV_LIB64` and can thus quickly deduce a `LoadModule` declaration without having to know much about the environment.
+4) **Convenience**: We link the web server process' container against the `dtagent` container via `--link dtagent`. This way, we inherit the other container's environment variables `DTAGENT_ENV_DT` and `DTAGENT_ENV_AGENT_LIB64` and can thus quickly deduce a `LoadModule` declaration without having to know much about the environment.
 
 5) We run the Dynatrace Web Server Agent process by invoking `run-wsagent.sh`, which has been shared by the `dtagent` container in step **1)**. This process relays application monitoring data from the web server process to a Dynatrace Collector.
 

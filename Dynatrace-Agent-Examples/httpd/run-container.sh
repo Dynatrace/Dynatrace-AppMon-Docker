@@ -1,5 +1,5 @@
 #!/bin/bash
-HTTPD_LOAD_MODULE="dtagent_module \${DTAGENT_ENV_LIB64}"
+HTTPD_LOAD_MODULE="dtagent_module \${DTAGENT_ENV_AGENT_LIB64}"
 
 echo "Starting Apache HTTPD - Example"
 docker run --rm \

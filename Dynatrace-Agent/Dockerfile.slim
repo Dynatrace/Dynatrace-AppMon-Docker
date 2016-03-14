@@ -8,10 +8,11 @@ ENV WSAGENT_INSTALLER32_URL "http://downloads.dynatracesaas.com/${VERSION}/dynat
 ENV WSAGENT_INSTALLER64_URL "http://downloads.dynatracesaas.com/${VERSION}/dynatrace-wsagent-linux-x64.tar"
 
 ENV DT                      "/dynatrace"
-ENV BIN64                   "${DT}/agent/lib64/dtwsagent"
-ENV INI                     "${DT}/agent/conf/dtwsagent.ini"
-ENV LIB32                   "${DT}/agent/lib/libdtagent.so"
-ENV LIB64                   "${DT}/agent/lib64/libdtagent.so"
+ENV AGENT_LIB32             "${DT}/agent/lib/libdtagent.so"
+ENV AGENT_LIB64             "${DT}/agent/lib64/libdtagent.so"
+ENV NODE_AGENT              "${DT}/agent/nodejs/nodejsagent.js"
+ENV WSAGENT_BIN64           "${DT}/agent/lib64/dtwsagent"
+ENV WSAGENT_INI             "${DT}/agent/conf/dtwsagent.ini"
 ENV SLAVE_AGENT_PORT        "8001"
 
 ENV  DT_INSTALL_DEPS "curl openjdk8-jre-base"
