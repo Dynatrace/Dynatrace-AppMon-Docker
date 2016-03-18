@@ -25,7 +25,7 @@ With the Dockerized Dynatrace environment running, we can now easily instrument 
 
 <pre><code>#!/bin/bash
 DT_AGENT_NAME=${TOMCAT_DT_AGENT_NAME:-"tomcat-agent"}
-DT_AGENT_PATH="-agentpath:\${DTAGENT_ENV_LIB64}=name=${TOMCAT_DT_AGENT_NAME},collector=\${DTCOLLECTOR_ENV_HOST_NAME}"
+DT_AGENT_PATH="-agentpath:\${DTAGENT_ENV_AGENT_LIB64}=name=${TOMCAT_DT_AGENT_NAME},collector=\${DTCOLLECTOR_ENV_HOST_NAME}"
 echo "Starting Apache Tomcat - Example"
 docker run --rm \
   --name tomcat-example \
@@ -41,7 +41,7 @@ docker run --rm \
 
 1) We mount the agent installation directory from the `dtagent` container into the application process' container via `--volumes-from dtagent`.
 
-2) **Convenience**: We link the application process' container against the `dtcollector` and `dtagent` containers via `--link dtcollector` and `--link dtagent`, respectively. This way, we inherit the other containers' environment variables `DTCOLLECTOR_ENV_HOST_NAME` and `DTAGENT_ENV_LIB64` and can thus quickly deduce an `-agentpath` declaration without having to know much about the environment.
+2) **Convenience**: We link the application process' container against the `dtcollector` and `dtagent` containers via `--link dtcollector` and `--link dtagent`, respectively. This way, we inherit the other containers' environment variables `DTCOLLECTOR_ENV_HOST_NAME` and `DTAGENT_ENV_AGENT_LIB64` and can thus quickly deduce an `-agentpath` declaration without having to know much about the environment.
 
 3) We set Tomcat's `CATALINA_OPTS` before we invoke the actual application process ([see here for the original Dockerfile](https://github.com/docker-library/tomcat/blob/e36c4044b7ece1361f124aaf3560c2efd888b62f/8-jre8/Dockerfile)).
 

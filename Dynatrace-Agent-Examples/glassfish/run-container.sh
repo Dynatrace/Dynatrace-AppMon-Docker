@@ -2,7 +2,7 @@
 GF_DOMAIN_XML_FILE="glassfish/domains/domain1/config/domain.xml"
 
 DT_AGENT_NAME=${GF_DT_AGENT_NAME:-"glassfish-agent"}
-DT_AGENT_PATH="-agentpath:\${DTAGENT_ENV_LIB64}=name=${DT_AGENT_NAME},collector=\${DTCOLLECTOR_ENV_HOST_NAME}"
+DT_AGENT_PATH="-agentpath:\${DTAGENT_ENV_AGENT_LIB64}=name=${DT_AGENT_NAME},collector=\${DTCOLLECTOR_ENV_HOST_NAME}"
 DT_AGENT_INSTALL_DEPS="xmlstarlet"
 
 echo "Starting GlassFish - Example"

@@ -9,4 +9,4 @@ docker run --rm \
   --publish-all \
   nginx \
   sh -c "\${DTAGENT_ENV_DT}/run-wsagent.sh && \
-         LD_PRELOAD=\${DTAGENT_ENV_LIB64} nginx -g 'daemon off;'"
+         LD_PRELOAD=\${DTAGENT_ENV_AGENT_LIB64} nginx -g 'daemon off;'"

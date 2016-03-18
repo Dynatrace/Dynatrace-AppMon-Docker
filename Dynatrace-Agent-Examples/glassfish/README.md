@@ -27,7 +27,7 @@ With the Dockerized Dynatrace environment running, we can now easily instrument 
 GF_DOMAIN_XML_FILE="glassfish/domains/domain1/config/domain.xml"
 
 DT_AGENT_NAME=${GF_DT_AGENT_NAME:-"glassfish-agent"}
-DT_AGENT_PATH="-agentpath:\${DTAGENT_ENV_LIB64}=name=${DT_AGENT_NAME},collector=\${DTCOLLECTOR_ENV_HOST_NAME}"
+DT_AGENT_PATH="-agentpath:\${DTAGENT_ENV_AGENT_LIB64}=name=${DT_AGENT_NAME},collector=\${DTCOLLECTOR_ENV_HOST_NAME}"
 DT_AGENT_INSTALL_DEPS="xmlstarlet"
 
 echo "Starting GlassFish - Example"
@@ -50,7 +50,7 @@ docker run --rm \
 
 1) We mount the agent installation directory from the `dtagent` container into the application process' container via `--volumes-from dtagent`.
 
-2) **Convenience**: We link the application process' container against the `dtcollector` and `dtagent` containers via `--link dtcollector` and `--link dtagent`, respectively. This way, we inherit the other containers' environment variables `DTCOLLECTOR_ENV_HOST_NAME` and `DTAGENT_ENV_LIB64` and can thus quickly deduce an `-agentpath` declaration without having to know much about the environment.
+2) **Convenience**: We link the application process' container against the `dtcollector` and `dtagent` containers via `--link dtcollector` and `--link dtagent`, respectively. This way, we inherit the other containers' environment variables `DTCOLLECTOR_ENV_HOST_NAME` and `DTAGENT_ENV_AGENT_LIB64` and can thus quickly deduce an `-agentpath` declaration without having to know much about the environment.
 
 3) We use the `xmlstarlet` package to configure GlassFish with the Dynatrace Agent through one of its `domain.xml` files and cleanly uninstall the package again afterwards. Unfortunately, with GlassFish, we cannot pass the `-agentpath JVM Option` via `JAVA_OPTS`.
 

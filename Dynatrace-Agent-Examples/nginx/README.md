@@ -27,14 +27,14 @@ With the Dockerized Dynatrace environment running, we can now easily instrument 
 echo "Starting NGINX - Example"
 docker run --rm \
   --name nginx-example \
-  <strong>--env WSAGENT_NAME=nginx-agent</strong> \                # <strong>1)</strong>
-  <strong>--volumes-from dtagent</strong> \                        # <strong>2)</strong>
-  <strong>--link dtcollector</strong> \                            # <strong>3)</strong>
-  <strong>--link dtagent</strong> \                                # <strong>4)</strong>
+  <strong>--env WSAGENT_NAME=nginx-agent</strong> \                      # <strong>1)</strong>
+  <strong>--volumes-from dtagent</strong> \                              # <strong>2)</strong>
+  <strong>--link dtcollector</strong> \                                  # <strong>3)</strong>
+  <strong>--link dtagent</strong> \                                      # <strong>4)</strong>
   --publish-all \
   nginx \
-  sh -c "<strong>\${DTAGENT_ENV_DT}/run-wsagent.sh</strong> && \   # <strong>5)</strong>
-          <strong>LD_PRELOAD=\${DTAGENT_ENV_LIB64}</strong> nginx" # <strong>6)</strong>
+  sh -c "<strong>\${DTAGENT_ENV_DT}/run-wsagent.sh</strong> && \         # <strong>5)</strong>
+          <strong>LD_PRELOAD=\${DTAGENT_ENV_AGENT_LIB64}</strong> nginx" # <strong>6)</strong>
 </code></pre>
 
 ### Behind the Scenes
@@ -45,7 +45,7 @@ docker run --rm \
 
 3) **Convenience**: We link the web server process' container against the `dtcollector` container via `--link dtcollector`. This way, we inherit the other container's environment so that we can auto-discover the location of the Dynatrace Collector in Docker.
 
-4) **Convenience**: We link the web server process' container against the `dtagent` container via `--link dtagent`. This way, we inherit the other container's environment variables `DTAGENT_ENV_DT` and `DTAGENT_ENV_LIB64` and can thus quickly deduce an `LD_PRELOAD` declaration without having to know much about the environment.
+4) **Convenience**: We link the web server process' container against the `dtagent` container via `--link dtagent`. This way, we inherit the other container's environment variables `DTAGENT_ENV_DT` and `DTAGENT_ENV_AGENT_LIB64` and can thus quickly deduce an `LD_PRELOAD` declaration without having to know much about the environment.
 
 5) We run the Dynatrace Web Server Agent process by invoking `run-wsagent.sh`, which has been shared by the `dtagent` container in step **1)**. This process relays application monitoring data from the web server process to a Dynatrace Collector.
 
