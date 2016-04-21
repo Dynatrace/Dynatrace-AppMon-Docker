@@ -53,6 +53,24 @@ Want to see all your Docker Metrics in one place? See the [Dynatrace Docker Moni
 
 ![Docker Monitor Plugin](https://github.com/Dynatrace/Dynatrace-Docker/blob/images/docker-monitor-plugin.png)
 
+## Resource Requirements
+
+When running Docker on Windows or a Mac via the [Docker Toolbox](https://www.docker.com/products/docker-toolbox), make sure your [Docker Machine](https://docs.docker.com/machine/overview/) has sufficient resources available to run Dynatrace AppMon together with your Dockerized application:
+
+1) Stop the Docker Machine in VirtualBox
+
+![Power off Docker Machine](https://github.com/Dynatrace/Dynatrace-Docker/blob/images/docker-machine-power-off.png)
+
+2) Give your Docker Machine at least 2 CPUs
+
+![Configure Docker Machine CPUs](https://github.com/Dynatrace/Dynatrace-Docker/blob/images/docker-machine-cpu-settings.png)
+
+3) Give your Docker Machine at least 4 GB of RAM
+
+![Configure Docker Machine RAM](https://github.com/Dynatrace/Dynatrace-Docker/blob/images/docker-machine-mem-settings.png)
+
+4) Finally, start your Docker Quickstart Terminal for the changes to take effect.
+
 ## Problems? Questions? Suggestions?
 
 This offering is [Dynatrace Community Supported](https://community.dynatrace.com/community/display/DL/Support+Levels#SupportLevels-Communitysupported/NotSupportedbyDynatrace(providedbyacommunitymember)). Feel free to share any problems, questions and suggestions with your peers on the Dynatrace Community's [Application Monitoring & UEM Forum](https://answers.dynatrace.com/spaces/146/index.html).
