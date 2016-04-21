@@ -63,11 +63,11 @@ When running Docker on Windows or a Mac via the [Docker Toolbox](https://www.doc
 
 2) Give your Docker Machine at least 2 CPUs
 
-![Power off Docker Machine](https://github.com/Dynatrace/Dynatrace-Docker/blob/images/docker-machine-cpu-settings.png)
+![Configure Docker Machine CPUs](https://github.com/Dynatrace/Dynatrace-Docker/blob/images/docker-machine-cpu-settings.png)
 
 3) Give your Docker Machine at least 4 GB of RAM
 
-![Power off Docker Machine](https://github.com/Dynatrace/Dynatrace-Docker/blob/images/docker-machine-mem-settings.png)
+![Configure Docker Machine RAM](https://github.com/Dynatrace/Dynatrace-Docker/blob/images/docker-machine-mem-settings.png)
 
 ## Problems? Questions? Suggestions?
 
