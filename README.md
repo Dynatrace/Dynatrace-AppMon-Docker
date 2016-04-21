@@ -69,6 +69,8 @@ When running Docker on Windows or a Mac via the [Docker Toolbox](https://www.doc
 
 ![Configure Docker Machine RAM](https://github.com/Dynatrace/Dynatrace-Docker/blob/images/docker-machine-mem-settings.png)
 
+4) Finally, start your Docker Quickstart Terminal for the changes to take effect.
+
 ## Problems? Questions? Suggestions?
 
 This offering is [Dynatrace Community Supported](https://community.dynatrace.com/community/display/DL/Support+Levels#SupportLevels-Communitysupported/NotSupportedbyDynatrace(providedbyacommunitymember)). Feel free to share any problems, questions and suggestions with your peers on the Dynatrace Community's [Application Monitoring & UEM Forum](https://answers.dynatrace.com/spaces/146/index.html).
