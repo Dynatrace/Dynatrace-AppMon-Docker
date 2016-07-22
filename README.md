@@ -43,7 +43,7 @@ In the example above, you have to let `DT_SERVER_LICENSE_KEY_FILE_URL` point to 
 See the following integrations for more information:
 
 - [Dockerized Dynatrace Agent: Examples](https://github.com/Dynatrace/Dynatrace-Docker/tree/master/Dynatrace-Agent-Examples)
-- [Dockerized easyTravel Application](https://github.com/Dynatrace/Dynatrace-easyTravel-Docker)
+- [Dockerized easyTravel Application](https://github.com/Dynatrace-Innovationlab/easyTravel-Docker)
 
 ![Dockerized Application](https://github.com/Dynatrace/Dynatrace-Docker/blob/images/dockerized-application.png)
 
