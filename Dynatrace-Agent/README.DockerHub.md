@@ -5,9 +5,11 @@ The `dynatrace/agent` Docker image contains the Dynatrace Agent component of the
 ## Supported Tags
 
 - `6.2` [(Dockerfile)](https://github.com/Dynatrace/Dynatrace-Docker/blob/6.2/Dynatrace-Agent/Dockerfile)
-- `6.3`, `latest` [(Dockerfile)](https://github.com/Dynatrace/Dynatrace-Docker/blob/master/Dynatrace-Agent/Dockerfile)
+- `6.3` [(Dockerfile)](https://github.com/Dynatrace/Dynatrace-Docker/blob/6.3/Dynatrace-Agent/Dockerfile)
+- `6.5`, `latest` [(Dockerfile)](https://github.com/Dynatrace/Dynatrace-Docker/blob/master/Dynatrace-Agent/Dockerfile)
 - `6.2-slim` [(Dockerfile)](https://github.com/Dynatrace/Dynatrace-Docker/blob/6.2/Dynatrace-Agent/Dockerfile.slim)
-- `6.3-slim`, `slim` [(Dockerfile)](https://github.com/Dynatrace/Dynatrace-Docker/blob/master/Dynatrace-Agent/Dockerfile.slim)
+- `6.3-slim` [(Dockerfile)](https://github.com/Dynatrace/Dynatrace-Docker/blob/6.3/Dynatrace-Agent/Dockerfile.slim)
+- `6.5-slim`, `slim` [(Dockerfile)](https://github.com/Dynatrace/Dynatrace-Docker/blob/master/Dynatrace-Agent/Dockerfile.slim)
 
 Please see the [Dynatrace/Dynatrace-Docker](https://github.com/Dynatrace/Dynatrace-Docker/tree/master/Dynatrace-Agent) GitHub repository for further information on how to run, configure and build this image.
 

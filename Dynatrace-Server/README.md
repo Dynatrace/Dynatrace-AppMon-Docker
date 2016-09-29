@@ -23,7 +23,7 @@ The `run-container.sh` script runs a Docker container using `docker run` and add
 
 ### Configuration
 
-You can override the default configuration by providing the following *environment variables* to the script. Please examine the [Dynatrace Server Configuration](https://community.dynatrace.com/community/display/DOCDT62/Server+Configuration) page for more information on the various settings.
+You can override the default configuration by providing the following *environment variables* to the script. Please examine the [Dynatrace Server Configuration](https://community.dynatrace.com/community/display/DOCDT65/Server+Configuration) page for more information on the various settings.
 
 | Environment Variable           | Defaults                     | Description
 |:-------------------------------|:-----------------------------|:-----------

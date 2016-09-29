@@ -1,7 +1,7 @@
 dtserver:
   container_name: "dtserver"
   hostname: "docker-dtserver"
-  image: "dynatrace/server:6.3-slim"
+  image: "dynatrace/server:6.5-slim"
   environment:
     DT_SERVER_NAME: "dtserver"
     DT_SERVER_LICENSE_KEY_FILE_URL: "${DT_SERVER_LICENSE_KEY_FILE_URL}"
@@ -19,7 +19,7 @@ dtserver:
 dtcollector:
   container_name: "dtcollector"
   hostname: "docker-dtcollector"
-  image: "dynatrace/collector:6.3-slim"
+  image: "dynatrace/collector:6.5-slim"
   links:
     - dtserver
   environment:
@@ -31,7 +31,7 @@ dtcollector:
 dtagent:
   container_name: "dtagent"
   hostname: "docker-dtagent"
-  image: "dynatrace/agent:6.3-slim"
+  image: "dynatrace/agent:6.5-slim"
   volumes:
     - /dynatrace
     - "/tmp/log/dynatrace/agents/dtagent:/dynatrace/log/agent"

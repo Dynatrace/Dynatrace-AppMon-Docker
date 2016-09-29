@@ -1,7 +1,7 @@
 dtagent:
   container_name: "dtagent"
   hostname: "docker-dtagent"
-  image: "dynatrace/agent:6.3"
+  image: "dynatrace/agent:6.5"
   environment:
     DT_AGENT_NAME: "dtagent"
   volumes:

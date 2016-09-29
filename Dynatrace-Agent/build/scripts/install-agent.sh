@@ -4,6 +4,6 @@ INSTALLER_FILE_NAME=`basename ${INSTALLER_URL}`
 
 cd /tmp
 curl -L -O ${INSTALLER_URL}
-tar -xvzf ./${INSTALLER_FILE_NAME}
-cp -R ./dynatrace-oneagent-${VERSION}/* ${DT}
+java -jar ./${INSTALLER_FILE_NAME} -y
+cp -R ./dynatrace-${VERSION}/* ${DT}
 rm -rf /tmp/*

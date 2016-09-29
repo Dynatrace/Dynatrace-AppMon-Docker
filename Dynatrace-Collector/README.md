@@ -21,7 +21,7 @@ The `run-container.sh` script runs a Docker container using `docker run` and add
 
 ### Configuration
 
-You can override the default configuration by providing the following *environment variables* to the script. Please examine the [Dynatrace Collector Configuration](https://community.dynatrace.com/community/display/DOCDT62/Collector+Configuration) page for more information on the various settings.
+You can override the default configuration by providing the following *environment variables* to the script. Please examine the [Dynatrace Collector Configuration](https://community.dynatrace.com/community/display/DOCDT65/Collector+Configuration) page for more information on the various settings.
 
 | Environment Variable      | Defaults                        | Description
 |:--------------------------|:--------------------------------|:-----------
@@ -50,11 +50,11 @@ Creates a Dockerized Dynatrace Collector instance named `dtcollector` which conn
 
 ### Example
 
-Creates a Dockerized Dynatrace Collector instance named `dtcollector-1` which connects to *AcmeCo's Dynatrace Server* instance running at `dtserver.acmeco.internal:6698`. Make sure to remove `--link dtserver` from `run-container.sh` beforehand:
+Creates a Dockerized Dynatrace Collector instance named `dtcollector-1` which connects to *AcmeCo's Dynatrace Server* instance running at `dtserver.acmeco.internal:6699`. Make sure to remove `--link dtserver` from `run-container.sh` beforehand:
 
 ```
 DT_COLLECTOR_NAME=dtcollector-1 \
-DT_COLLECTOR_SERVER=dtserver.acmeco.internal:6698 \
+DT_COLLECTOR_SERVER=dtserver.acmeco.internal:6699 \
 ./run-container.sh
 ```
 

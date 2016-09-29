@@ -21,4 +21,4 @@ docker run \
   --publish 8021:8021 \
   --publish 9911:9911 \
   --publish 9998:9998 \
-  dynatrace/server:6.3
+  dynatrace/server:6.5

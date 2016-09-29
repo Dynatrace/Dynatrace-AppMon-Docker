@@ -16,7 +16,7 @@ JVM_MAX_PERM_SIZE=${DT_COLLECTOR_JVM_MAX_PERM_SIZE:-"128m"}
 # Auto-discovery can be overridden by providing the $SERVER variable
 # through the environment.
 SERVER_HOST_NAME=${DTSERVER_ENV_HOST_NAME:-"docker-dtserver"}
-SERVER_COLLECTOR_PORT=${DTSERVER_ENV_COLLECTOR_PORT:-"6698"}
+SERVER_COLLECTOR_PORT=${DTSERVER_ENV_COLLECTOR_PORT_SSL:-"6699"}
 SERVER=${DT_COLLECTOR_SERVER:-"${SERVER_HOST_NAME}:${SERVER_COLLECTOR_PORT}"}
 
 # Wait for the server to start serving collectors.

@@ -7,7 +7,7 @@ SERVER=${DT_COLLECTOR_SERVER}
 
 # Make sure that the following attributes are set in accordance to the
 # Memory Configuration section of the Collector Configuration docs at
-# https://community.dynatrace.com/community/display/DOCDT62/Collector+Configuration.
+# https://community.dynatrace.com/community/display/DOCDT65/Collector+Configuration.
 JVM_XMS=${DT_COLLECTOR_JVM_XMS}
 JVM_XMX=${DT_COLLECTOR_JVM_XMX}
 JVM_PERM_SIZE=${DT_COLLECTOR_JVM_PERM_SIZE}
@@ -31,4 +31,4 @@ docker run \
   --env HOST_NAME="${HOST_NAME}" \
   --volume ${HOST_LOG_DIR}:/dynatrace/log/collector/${NAME} \
   --publish-all \
-  dynatrace/collector:6.3
+  dynatrace/collector:6.5

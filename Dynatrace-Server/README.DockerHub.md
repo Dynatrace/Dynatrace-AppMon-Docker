@@ -7,9 +7,11 @@ The `dynatrace/server` Docker image contains the Dynatrace Server component of t
 ## Supported Tags
 
 - `6.2` [(Dockerfile)](https://github.com/Dynatrace/Dynatrace-Docker/blob/6.2/Dynatrace-Server/Dockerfile)
-- `6.3`, `latest` [(Dockerfile)](https://github.com/Dynatrace/Dynatrace-Docker/blob/master/Dynatrace-Server/Dockerfile)
+- `6.3` [(Dockerfile)](https://github.com/Dynatrace/Dynatrace-Docker/blob/6.3/Dynatrace-Server/Dockerfile)
+- `6.5`, `latest` [(Dockerfile)](https://github.com/Dynatrace/Dynatrace-Docker/blob/master/Dynatrace-Server/Dockerfile)
 - `6.2-slim` [(Dockerfile)](https://github.com/Dynatrace/Dynatrace-Docker/blob/6.2/Dynatrace-Server/Dockerfile.slim)
-- `6.3-slim`, `slim` [(Dockerfile)](https://github.com/Dynatrace/Dynatrace-Docker/blob/master/Dynatrace-Server/Dockerfile.slim)
+- `6.3-slim` [(Dockerfile)](https://github.com/Dynatrace/Dynatrace-Docker/blob/6.3/Dynatrace-Server/Dockerfile.slim)
+- `6.5-slim`, `slim` [(Dockerfile)](https://github.com/Dynatrace/Dynatrace-Docker/blob/master/Dynatrace-Server/Dockerfile.slim)
 
 Please see the [Dynatrace/Dynatrace-Docker](https://github.com/Dynatrace/Dynatrace-Docker/tree/master/Dynatrace-Server) GitHub repository for further information on how to run, configure and build this image.
 
