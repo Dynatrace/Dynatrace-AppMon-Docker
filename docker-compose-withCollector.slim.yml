@@ -16,6 +16,18 @@ dtserver:
   volumes:
     - "/tmp/log/dynatrace/servers/dtserver:/dynatrace/log/server/dtserver"
 
+dtcollector:
+  container_name: "dtcollector"
+  hostname: "docker-dtcollector"
+  image: "dynatrace/collector:6.5-slim"
+  links:
+    - dtserver
+  environment:
+    DT_COLLECTOR_NAME: "dtcollector"
+    HOST_NAME: "docker-dtcollector"
+  volumes:
+    - "/tmp/log/dynatrace/collectors/dtcollector:/dynatrace/log/collector/dtcollector"
+
 dtagent:
   container_name: "dtagent"
   hostname: "docker-dtagent"
