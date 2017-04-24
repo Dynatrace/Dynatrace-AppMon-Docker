@@ -1,17 +1,30 @@
-dtserver:
-  container_name: "dtserver"
-  hostname: "docker-dtserver"
-  image: "dynatrace/server:6.5"
-  environment:
-    DT_SERVER_NAME: "dtserver"
-    DT_SERVER_LICENSE_KEY_FILE_URL: "${DT_SERVER_LICENSE_KEY_FILE_URL}"
-    HOST_NAME: "docker-dtserver"
-  ports:
-    - "2020:2020" # Dynatrace Clients (TCP)
-    - "2021:2021" # Dynatrace Clients (TCP with SSL)
-    - "8020:8020" # Dynatrace Web Server (HTTP)
-    - "8021:8021" # Dynatrace Web Server (HTTPS)
-    - "9911:9911" # Dynatrace Web UI (HTTPS)
-    - "9998:9998" # Dynatrace Agents (TCP)
-  volumes:
-    - "/tmp/log/dynatrace/servers/dtserver:/dynatrace/log/server/dtserver"
+version: "3"
+services:
+    dtserver:
+      build: 
+        context: ./Dynatrace-Server
+        args:
+        - DT_HOME=${DT_HOME}      
+        - VERSION=${VERSION}
+        - BUILD_VERSION=${BUILD_VERSION} 
+      container_name: "${DT_SERVER_NAME}"
+      image: "dynatrace/server:7.0"
+      env_file:
+        - ../.env
+      environment:
+        - DT_SERVER_LICENSE_KEY_FILE_URL
+      ports:
+        - "2020:2020" # Dynatrace Clients (TCP)
+        - "2021:2021" # Dynatrace Clients (TCP with SSL)
+        - "8020:8020" # Dynatrace Web Server (HTTP)
+        - "8021:8021" # Dynatrace Web Server (HTTPS)
+        - "9911:9911" # Dynatrace Web UI (HTTPS)
+        - "9998:9998" # Dynatrace Agents (TCP)
+      volumes:
+        - "/tmp/log/dynatrace/servers/dtserver:${DT_HOME}/log/server/dtserver"
+      networks:
+        - appmon
+                
+networks:
+    appmon:
+        driver: bridge

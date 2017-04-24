@@ -1,5 +1,5 @@
 #DOCKERFILE FOR DYNATRACE AGENT
-FROM alpine:3.5
+FROM debian:jessie
 
 LABEL maintainer "Martin Etmajer <martin.etmajer@dynatrace.com>"
 LABEL maintainer2 "Blazej Tomaszewski <blazej.tomaszewski@dynatrace.com>"
@@ -19,20 +19,21 @@ ENV NODE_AGENT_INSTALLER_URL=https://s3.amazonaws.com/downloads.dynatracesaas.co
 
 ENV SLAVE_AGENT_PORT=8001
 
-ENV DT_INSTALL_DEPS=curl\ openjdk8-jre-base
-ENV DT_RUNTIME_DEPS=bash
+ENV DT_INSTALL_DEPS=curl\ default-jre-headless
+ENV DT_RUNTIME_DEPS=procps
 COPY /build/scripts/install-agent.sh /usr/bin
 COPY /build/scripts/install-node-agent.sh /usr/bin
 COPY /build/scripts/install-wsagent.sh /usr/bin
 
-RUN  apk update && apk add --no-cache ${DT_INSTALL_DEPS} ${DT_RUNTIME_DEPS} && \
+RUN  apt-get update -y && apt-get install -y --no-install-recommends ${DT_INSTALL_DEPS} ${DT_RUNTIME_DEPS} && \
      mkdir -p ${DT_HOME} && \
      /usr/bin/install-agent.sh ${AGENT_INSTALLER_URL} && \
      /usr/bin/install-wsagent.sh ${WSAGENT_INSTALLER32_URL} && \
      /usr/bin/install-wsagent.sh ${WSAGENT_INSTALLER64_URL} && \
-     /usr/bin/install-node-agent.sh ${NODE_AGENT_INSTALLER_URL} && \ 
-	 apk del ${DT_INSTALL_DEPS}
-	 
+     /usr/bin/install-node-agent.sh ${NODE_AGENT_INSTALLER_URL} && \  
+	 rm -rf /tmp/* && \
+     apt-get remove --purge -y ${DT_INSTALL_DEPS} && \
+     rm -rf /var/lib/apt/lists/*
 ADD  /build/bin/dtnginx_offsets.json.tar.gz ${DT_HOME}/agent/conf
 COPY /build/scripts/run-wsagent.sh ${DT_HOME}
 

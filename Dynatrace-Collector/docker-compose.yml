@@ -1,11 +1,24 @@
-dtcollector:
-  container_name: "dtcollector"
-  hostname: "docker-dtcollector"
-  image: "dynatrace/collector:6.5"
-  external_links:
-    - dtserver
-  environment:
-    DT_COLLECTOR_NAME: "dtcollector"
-    HOST_NAME: "docker-dtcollector"
-  volumes:
-    - "/tmp/log/dynatrace/collectors/dtcollector:/dynatrace/log/collector/dtcollector"
+version: "3"
+services:
+    dtcollector:
+      build: 
+        context: ./Dynatrace-Collector
+        args:
+        - DT_HOME=${DT_HOME}
+        - VERSION=${VERSION}
+        - BUILD_VERSION=${BUILD_VERSION}
+      container_name: "${DT_COLLECTOR_NAME}"
+      image: "dynatrace/collector:7.0"
+      env_file:
+        - ../.env
+      environment:
+        - DT_HOME
+        - DT_SERVER_LICENSE_KEY_FILE_URL
+      volumes:
+        - /tmp/log/dynatrace/collectors/dtcollector:${DT_HOME}/log/collector/dtcollector
+      networks:
+        - appmon
+                
+networks:
+    appmon:
+        driver: bridge

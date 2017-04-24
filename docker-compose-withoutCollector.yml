@@ -1,0 +1,54 @@
+version: "3"
+services:
+    dtserver:
+      build: 
+        context: ./Dynatrace-Server
+        args:
+        - DT_HOME=${DT_HOME}      
+        - VERSION=${VERSION}
+        - BUILD_VERSION=${BUILD_VERSION} 
+      container_name: "${DT_SERVER_NAME}"
+      image: "dynatrace/server:7.0"
+      environment:
+        - DT_HOME
+        - DT_SERVER_LICENSE_KEY_FILE_URL
+      ports:
+        - "2020:2020" # Dynatrace Clients (TCP)
+        - "2021:2021" # Dynatrace Clients (TCP with SSL)
+        - "8020:8020" # Dynatrace Web Server (HTTP)
+        - "8021:8021" # Dynatrace Web Server (HTTPS)
+        - "9911:9911" # Dynatrace Web UI (HTTPS)
+        - "9998:9998" # Dynatrace Agents (TCP)
+      volumes:
+        - /tmp/log/dynatrace/servers/dtserver:${DT_HOME}/log/server/dtserver
+      networks:
+        - appmon
+
+    dtagent:
+      build: 
+        context: ./Dynatrace-Agent
+        args:
+        - DT_HOME=${DT_HOME}
+        - VERSION=${VERSION}
+        - BUILD_VERSION=${BUILD_VERSION}
+      container_name: "${DT_AGENT_NAME}"
+      image: "dynatrace/agent:7.0"
+      environment:
+        - DT_HOME
+        - DT_AGENT_COLLECTOR="${DT_COLLECTOR_NAME}:9998"
+        - AGENT_LIB32
+        - AGENT_LIB64
+        - NODE_AGENT_LIB32
+        - NODE_AGENT_LIB64
+        - WSAGENT_BIN64
+        - WSAGENT_INI
+      volumes:
+        - ${DT_HOME}
+        - ${DT_HOME}/agent/lib64
+        - /tmp/log/dynatrace/agents/dtagent:${DT_HOME}/log/agent
+      networks:
+        - appmon
+        
+networks:
+    appmon:
+        driver: bridge

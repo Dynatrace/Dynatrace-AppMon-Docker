@@ -1,5 +1,5 @@
 #DOCKERFILE FOR DYNATRACE SERVER
-FROM alpine:3.5
+FROM debian:jessie
 
 LABEL maintainer "Martin Etmajer <martin.etmajer@dynatrace.com>"
 LABEL maintainer2 "Blazej Tomaszewski <blazej.tomaszewski@dynatrace.com>"
@@ -14,37 +14,22 @@ ENV INSTALLER_URL=https://s3.amazonaws.com/downloads.dynatracesaas.com/${VERSION
 ENV COLLECTOR_PORT=6698
 ENV COLLECTOR_PORT_SSL=6699
 
-ENV DT_INSTALL_DEPS=openjdk8-jre-base
-ENV DT_RUNTIME_DEPS=bash\ curl
+ENV DT_INSTALL_DEPS=openjdk-8-jre-headless
+ENV DT_RUNTIME_DEPS=curl\ procps
 
-RUN apk update && apk add --no-cache ${DT_INSTALL_DEPS} ${DT_RUNTIME_DEPS} && \
+RUN echo "deb http://http.debian.net/debian jessie-backports main" > /etc/apt/sources.list.d/jessie-backports.list && \ 
+	apt-get update -y && apt-get install -y --no-install-recommends -t jessie-backports ${DT_INSTALL_DEPS} ${DT_RUNTIME_DEPS} && \
     curl --insecure -L -o /tmp/${INSTALLER_FILE_NAME} ${INSTALLER_URL} && \
 	java -jar /tmp/${INSTALLER_FILE_NAME} -b 64 -t ${DT_HOME} -y && \
-	apk del ${DT_INSTALL_DEPS} && \
-	rm -rf /tmp/*
-RUN sed -i '/^-memory/,/^unsupported/c\-memory\ndemo' ${DT_HOME}/dtserver.ini && \
-	sed -i '/^-memory/,/^unsupported/c\-memory\ndemo' ${DT_HOME}/dtfrontendserver.ini && \
-	echo '-Dcom.dynatrace.diagnostics.filestore.numStorageThreads=1' >> ${DT_HOME}/dtserver.ini
+    apt-get remove --purge -y ${DT_INSTALL_DEPS} && \
+    rm -rf /var/lib/apt/lists/* /tmp/*
 	
+COPY /build/config/dtfrontendserver.ini ${DT_HOME}
+COPY /build/config/dtserver.ini ${DT_HOME}
 COPY /build/config/server.config.xml ${DT_HOME}/server/conf
-
-ENV GLIBC_RUNTIME_DEPS=libgcc
-
-COPY build/bin/glibc-2.21-r2.apk /tmp
-COPY build/bin/glibc-bin-2.21-r2.apk /tmp
-
-RUN apk add --no-cache ${GLIBC_RUNTIME_DEPS} && \
-	apk add --allow-untrusted /tmp/glibc-2.21-r2.apk && \
-	apk add --allow-untrusted /tmp/glibc-bin-2.21-r2.apk && \
-	/usr/glibc/usr/bin/ldconfig /lib /usr/glibc/usr/lib && \
-	rm -rf /tmp/*
-
-# Make sure that hostname resolution looks up /etc/hosts prior to /etc/resolv.conf
-RUN echo 'hosts: files mdns4_minimal [NOTFOUND=return] dns mdns4' >> /etc/nsswitch.conf
 
 COPY /build/scripts/pull-license-key-file.sh ${DT_HOME}
 COPY /build/scripts/run-server-process.sh ${DT_HOME}
-
 
 # Dynatrace Clients (TCP)
 EXPOSE 2020

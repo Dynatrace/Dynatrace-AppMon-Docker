@@ -1,16 +1,25 @@
-httpd:
-  container_name: httpd
-  image: httpd
-  ports:
-  - 80
-  environment:
-    DT_AGENT_NAME: httpd-agent
-  volumes_from:
-  - dtagent
-  external_links:
-  - dtcollector
-  command: >
-    sh -c " \
-      /dynatrace/run-wsagent.sh && \
-      (echo LoadModule dtagent_module /dynatrace/agent/lib64/libdtagent.so >> conf/httpd.conf) && \
-      httpd-foreground"
+version: "2.1"
+services:
+    httpd:
+      container_name: httpd
+      image: httpd
+      ports:
+      - 80
+      env_file:
+        - ../../.env
+      environment:
+        DT_AGENT_NAME: httpd
+        DT_AGENT_COLLECTOR: ${DT_COLLECTOR_NAME}
+      volumes_from:
+      - container:dtagent
+      command: >
+        sh -c " \
+          ${DT_HOME}/run-wsagent.sh && \
+          (echo LoadModule dtagent_module ${DT_HOME}${AGENT_LIB64} >> conf/httpd.conf) && \
+          httpd-foreground"
+          
+
+networks:
+  default:
+    external:
+        name: dynatracedocker_appmon

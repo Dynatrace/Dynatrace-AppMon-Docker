@@ -3,6 +3,7 @@ services:
     dtserver:
       build: 
         context: ./Dynatrace-Server
+        dockerfile: Dockerfile-debian
         args:
         - DT_HOME=${DT_HOME}
         - VERSION=${VERSION}
@@ -27,6 +28,7 @@ services:
     dtcollector:
       build: 
         context: ./Dynatrace-Collector
+        dockerfile: Dockerfile-debian
         args:
         - DT_HOME=${DT_HOME}
         - VERSION=${VERSION}
@@ -44,6 +46,7 @@ services:
     dtagent:
       build: 
         context: ./Dynatrace-Agent
+        dockerfile: Dockerfile-debian
         args:
         - DT_HOME=${DT_HOME}
         - VERSION=${VERSION}

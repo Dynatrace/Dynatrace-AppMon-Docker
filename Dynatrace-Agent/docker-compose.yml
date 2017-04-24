@@ -1,9 +1,32 @@
+version: "3"
+services:
 dtagent:
-  container_name: "dtagent"
-  hostname: "docker-dtagent"
-  image: "dynatrace/agent:6.5"
-  environment:
-    DT_AGENT_NAME: "dtagent"
-  volumes:
-    - /dynatrace
-    - "/tmp/log/dynatrace/agents/dtagent:/dynatrace/log/agent"
+      build: 
+        context: ./Dynatrace-Agent
+        args:
+        - DT_HOME=${DT_HOME}
+        - VERSION=${VERSION}
+        - BUILD_VERSION=${BUILD_VERSION}
+      container_name: "${DT_AGENT_NAME}"
+      image: "dynatrace/agent:7.0"
+      env_file:
+        - ../.env
+      environment:
+        - DT_HOME
+        - DT_AGENT_COLLECTOR="${DT_COLLECTOR_NAME}:9998"
+        - AGENT_LIB32
+        - AGENT_LIB64
+        - NODE_AGENT_LIB32
+        - NODE_AGENT_LIB64
+        - WSAGENT_BIN64
+        - WSAGENT_INI
+      volumes:
+        - ${DT_HOME}
+        - ${DT_HOME}/agent/lib64
+        - /tmp/log/dynatrace/agents/dtagent:${DT_HOME}/log/agent
+      networks:
+        - appmon
+                
+networks:
+    appmon:
+        driver: bridge

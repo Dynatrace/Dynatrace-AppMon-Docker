@@ -1,0 +1,23 @@
+version: "2.1"
+services:
+    glassfish:
+        container_name: glassfish-agent
+        build: 
+            context: .
+            args:
+                - DT_AGENT_PATH="-agentpath:${DT_HOME}${AGENT_LIB64}=name=glassfish-agent,collector=${DT_COLLECTOR_NAME}"
+        image: glassfish-agent
+        env_file:
+            - ../../.env
+        environment:
+            - DT_AGENT_NAME="glassfish-agent"
+            - DT_HOME
+            - AGENT_LIB64
+            - DT_COLLECTOR_NAME
+        volumes_from:
+            - container:dtagent
+
+networks:
+    default:
+        external:
+            name: dynatracedocker_appmon

@@ -1,13 +1,20 @@
-nginx:
-  container_name: nginx
-  image: nginx
-  ports:
-  - 80
-  environment:
-    DT_AGENT_NAME: nginx-agent
-    LD_PRELOAD: "/dynatrace/agent/lib64/libdtagent.so"
-  volumes_from:
-  - dtagent
-  external_links:
-  - dtcollector
-  command: sh -c "/dynatrace/run-wsagent.sh && nginx -g 'daemon off;'"
+version: "2.1"
+services:
+    nginx:
+      container_name: nginx
+      image: nginx
+      ports:
+      - 80
+      env_file:
+        - ../../.env
+      environment:
+        - DT_AGENT_NAME=nginx-agent
+        - LD_PRELOAD=${DT_HOME}${AGENT_LIB64}
+      volumes_from:
+        - container:dtagent
+      command: sh -c "${DT_HOME}/run-wsagent.sh && nginx -g 'daemon off;'"
+
+networks:
+  default:
+    external:
+        name: dynatracedocker_appmon

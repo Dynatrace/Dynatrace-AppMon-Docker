@@ -18,9 +18,21 @@ cd Dynatrace-Docker
 docker-compose up
 ```
 
+It will install Dynatrace Server, Dynatrace Collector and Dynatrace Master Agent. Then, you can install your [Agents](https://github.com/Dynatrace/Dynatrace-Docker/tree/master/Dynatrace-Agent-Examples). 
+
+
+
+## Configuration
+
+All required environment variables are collected in the default file ".env", that is used by all components.
+
+Ports configuration is static and you can find it in main docker-compose.yml files. Port exposure is included in Dynatrace Server's Dockerfile file.
+
 ### Licensing
 
-The example above leaves your Dynatrace environment without a proper license. However, you can conveniently have a license provisioned at container runtime by specifying a URL to a [Dynatrace License Key File](http://bit.ly/dttrial-docker-github) in the `DT_SERVER_LICENSE_KEY_FILE_URL` environment variable. If you don't happen to have a web server available to serve the license file to you, [Netcat](https://en.wikipedia.org/wiki/Netcat) can conveniently serve it from your command line, exactly once, via `nc -l 1337 < dtlicense.key`, where `1337` is an available port on your local machine. A `sudo` may be required depending on which port you eventually decide to choose.
+The example above leaves your Dynatrace environment without a proper license. However, you can add your license by editing .env file and put it as value for DT_SERVER_LICENSE_KEY_FILE_URL variable.
+
+Also, you can conveniently have a license provisioned at container runtime by specifying a URL to a [Dynatrace License Key File](http://bit.ly/dttrial-docker-github) in the `DT_SERVER_LICENSE_KEY_FILE_URL` environment variable. If you don't happen to have a web server available to serve the license file to you, [Netcat](https://en.wikipedia.org/wiki/Netcat) can conveniently serve it from your command line, exactly once, via `nc -l 1337 < dtlicense.key`, where `1337` is an available port on your local machine. A `sudo` may be required depending on which port you eventually decide to choose.
 
 ```
 git clone https://github.com/Dynatrace/Dynatrace-Docker.git
@@ -28,13 +40,7 @@ cd Dynatrace-Docker
 DT_SERVER_LICENSE_KEY_FILE_URL=http://$YOUR_IP:1337 docker-compose up
 ```
 
-See the following Dockerized Dynatrace components for more information:
-
-- [Dockerized Dynatrace Server](https://github.com/Dynatrace/Dynatrace-Docker/tree/master/Dynatrace-Server)
-- [Dockerized Dynatrace Collector](https://github.com/Dynatrace/Dynatrace-Docker/tree/master/Dynatrace-Collector)
-- [Dockerized Dynatrace Agent](https://github.com/Dynatrace/Dynatrace-Docker/tree/master/Dynatrace-Agent)
-
-### Licensing
+### Obtaining a License
 
 In the example above, you have to let `DT_SERVER_LICENSE_KEY_FILE_URL` point to a valid Dynatrace License Key file. If you don't have a license yet, you can [obtain a Dynatrace Free Trial License here](http://bit.ly/dttrial-docker-github). However, you don't need to have your license file hosted by a server: if you can run a console, [Netcat](https://en.wikipedia.org/wiki/Netcat) can conveniently serve it for you on port `80` via `sudo nc -l 80 < dtlicense.key`.
 

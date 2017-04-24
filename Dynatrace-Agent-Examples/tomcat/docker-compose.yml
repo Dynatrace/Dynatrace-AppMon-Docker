@@ -1,12 +1,20 @@
-tomcat:
-  container_name: tomcat
-  image: tomcat
-  ports:
-  - 8080
-  environment:
-    CATALINA_OPTS: "-agentpath:/dynatrace/agent/lib64/libdtagent.so=name=tomcat-agent,collector=docker-dtcollector"
-  volumes_from:
-  - dtagent
-  external_links:
-  - dtcollector
-  command: catalina.sh run
+version: "2.1"
+services:
+    tomcat:
+      container_name: tomcat
+      image: tomcat
+      ports:
+      - 8080
+      env_file:
+        - ../../.env
+      environment:
+        - DT_AGENT_NAME=tomcat-agent
+        - CATALINA_OPTS="-agentpath:${DT_HOME}${AGENT_LIB64}=name=tomcat-agent,collector=${DT_COLLECTOR_NAME}"
+      volumes_from:
+      - container:dtagent
+      command: catalina.sh run
+
+networks:
+  default:
+    external:
+        name: dynatracedocker_appmon

@@ -1,32 +1,49 @@
-FROM debian:wheezy
+#DOCKERFILE FOR DYNATRACE COLLECTOR
+FROM alpine:3.5
 
-MAINTAINER Martin Etmajer <martin.etmajer@dynatrace.com>
+LABEL maintainer "Martin Etmajer <martin.etmajer@dynatrace.com>"
+LABEL maintainer2 "Blazej Tomaszewski <blazej.tomaszewski@dynatrace.com>"
 
-ENV VERSION             "6.5"
-ENV INSTALLER_FILE_NAME "dynatrace-collector-6.5.0.1289-linux-x86.jar"
-ENV INSTALLER_URL       "http://files.dynatrace.com/downloads/OnPrem/dynaTrace/${VERSION}/6.5.0.1289/${INSTALLER_FILE_NAME}"
+ARG DT_HOME
+ARG BUILD_VERSION
+ARG VERSION
 
-ENV DT                  "/dynatrace"
-ENV AGENT_PORT          "9998"
+ENV INSTALLER_FILE_NAME=dynatrace-collector-${BUILD_VERSION}-linux-x86.jar
+ENV INSTALLER_URL=https://s3.amazonaws.com/downloads.dynatracesaas.com/${VERSION}/EAP/${INSTALLER_FILE_NAME}
 
-ENV  DT_INSTALL_DEPS "curl openjdk-7-jre-headless"
-ENV  DT_RUNTIME_DEPS "procps"
-RUN  apt-get update && \
-     apt-get install -y --no-install-recommends ${DT_INSTALL_DEPS} ${DT_RUNTIME_DEPS} && \
-     curl -L -o /tmp/${INSTALLER_FILE_NAME} ${INSTALLER_URL} && \
-     java -jar /tmp/${INSTALLER_FILE_NAME} -b 64 -t ${DT} -y && \
-     apt-get remove --purge -y ${DT_INSTALL_DEPS} && \
-     rm -rf /var/lib/apt/lists/* /tmp/*
+ENV AGENT_PORT=9998
 
-ENV  WAIT_FOR_CMD_RUNTIME_DEPS "netcat"
-COPY build/scripts/wait-for-cmd.sh /usr/local/bin
-RUN  apt-get update && \
-     apt-get install -y ${WAIT_FOR_CMD_RUNTIME_DEPS} && \
-     rm -rf /var/lib/apt/lists/* /tmp/*
+ENV DT_INSTALL_DEPS=curl\ openjdk8-jre-base
+ENV DT_RUNTIME_DEPS=bash
 
-COPY build/scripts/run-process.sh /
+RUN apk update && apk add --no-cache ${DT_INSTALL_DEPS} ${DT_RUNTIME_DEPS} && \
+    curl --insecure -L -o /tmp/${INSTALLER_FILE_NAME} ${INSTALLER_URL} && \
+	java -jar /tmp/${INSTALLER_FILE_NAME} -b 64 -t ${DT_HOME} -y && \
+	apk del ${DT_INSTALL_DEPS} && \
+	rm -rf /tmp/*
+	
+ENV GLIBC_RUNTIME_DEPS=libgcc
+
+COPY build/bin/glibc-2.21-r2.apk /tmp
+COPY build/bin/glibc-bin-2.21-r2.apk /tmp
+
+RUN apk add --no-cache ${GLIBC_RUNTIME_DEPS} && \
+	apk add --allow-untrusted /tmp/glibc-2.21-r2.apk && \
+	apk add --allow-untrusted /tmp/glibc-bin-2.21-r2.apk && \
+	/usr/glibc/usr/bin/ldconfig /lib /usr/glibc/usr/lib && \
+	rm -rf /tmp/*
+	
+# Make sure that hostname resolution looks up /etc/hosts prior to /etc/resolv.conf
+RUN echo 'hosts: files mdns4_minimal [NOTFOUND=return] dns mdns4' >> /etc/nsswitch.conf
+
+ENV WAIT_FOR_CMD_RUNTIME_DEPS=netcat-openbsd
+COPY /build/scripts/wait-for-cmd.sh /usr/local/bin
+RUN apk add --no-cache ${WAIT_FOR_CMD_RUNTIME_DEPS}
+
+COPY /build/scripts/run-collector-process.sh ${DT_HOME}
 
 # Dynatrace Agents (TCP)
 EXPOSE 9998
 
-CMD /run-process.sh
+ENV DT_HOME=${DT_HOME}
+CMD [ "sh", "-c", "${DT_HOME}/run-collector-process.sh" ]
