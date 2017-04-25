@@ -4,10 +4,11 @@ services:
       container_name: nginx
       image: nginx
       ports:
-      - 80
+        - 80
       env_file:
         - ../../.env
       environment:
+        - COMPOSE_PROJECT_NAME
         - DT_AGENT_NAME=nginx-agent
         - LD_PRELOAD=${DT_HOME}${AGENT_LIB64}
       volumes_from:
@@ -17,4 +18,4 @@ services:
 networks:
   default:
     external:
-        name: dynatracedocker_appmon
+        name: ${COMPOSE_PROJECT_NAME}_appmon

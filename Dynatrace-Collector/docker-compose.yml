@@ -1,24 +1,25 @@
 version: "3"
 services:
     dtcollector:
-      build: 
-        context: ./Dynatrace-Collector
+      build:
+        context: .
         args:
-        - DT_HOME=${DT_HOME}
-        - VERSION=${VERSION}
-        - BUILD_VERSION=${BUILD_VERSION}
+          - DT_HOME=${DT_HOME}
+          - VERSION=${VERSION}
+          - BUILD_VERSION=${BUILD_VERSION}
       container_name: "${DT_COLLECTOR_NAME}"
       image: "dynatrace/collector:7.0"
       env_file:
         - ../.env
       environment:
+        - COMPOSE_PROJECT_NAME
         - DT_HOME
         - DT_SERVER_LICENSE_KEY_FILE_URL
       volumes:
         - /tmp/log/dynatrace/collectors/dtcollector:${DT_HOME}/log/collector/dtcollector
       networks:
         - appmon
-                
+
 networks:
     appmon:
         driver: bridge

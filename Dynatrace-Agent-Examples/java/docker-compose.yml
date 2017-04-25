@@ -1,16 +1,17 @@
 version: "2.1"
 services:
     java:
-      container_name: javaexample  
+      container_name: javaexample
       build:
         context: .
-        args: 
-        - AGENT_LIB64_PATH=${DT_HOME}${AGENT_LIB64}
-        - DT_COLLECTOR_NAME=${DT_COLLECTOR_NAME}
+        args:
+          - AGENT_LIB64_PATH=${DT_HOME}${AGENT_LIB64}
+          - DT_COLLECTOR_NAME=${DT_COLLECTOR_NAME}
       image: "dynatrace/javaexample"
       env_file:
         - ../../.env
       environment:
+        - COMPOSE_PROJECT_NAME
         - DT_AGENT_NAME=java-agent
       volumes_from:
         - container:dtagent
@@ -18,4 +19,4 @@ services:
 networks:
   default:
     external:
-        name: dynatracedocker_appmon
+        name: ${COMPOSE_PROJECT_NAME}_appmon

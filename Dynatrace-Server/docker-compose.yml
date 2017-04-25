@@ -1,17 +1,18 @@
 version: "3"
 services:
     dtserver:
-      build: 
-        context: ./Dynatrace-Server
+      build:
+        context: .
         args:
-        - DT_HOME=${DT_HOME}      
-        - VERSION=${VERSION}
-        - BUILD_VERSION=${BUILD_VERSION} 
+          - DT_HOME=${DT_HOME}
+          - VERSION=${VERSION}
+          - BUILD_VERSION=${BUILD_VERSION}
       container_name: "${DT_SERVER_NAME}"
       image: "dynatrace/server:7.0"
       env_file:
         - ../.env
       environment:
+        - COMPOSE_PROJECT_NAME
         - DT_SERVER_LICENSE_KEY_FILE_URL
       ports:
         - "2020:2020" # Dynatrace Clients (TCP)
@@ -24,7 +25,7 @@ services:
         - "/tmp/log/dynatrace/servers/dtserver:${DT_HOME}/log/server/dtserver"
       networks:
         - appmon
-                
+
 networks:
     appmon:
         driver: bridge

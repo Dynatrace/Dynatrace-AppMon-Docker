@@ -1,16 +1,17 @@
 version: "3"
 services:
     dtserver:
-      build: 
+      build:
         context: ./Dynatrace-Server
         dockerfile: Dockerfile-debian
         args:
-        - DT_HOME=${DT_HOME}
-        - VERSION=${VERSION}
-        - BUILD_VERSION=${BUILD_VERSION}
+          - DT_HOME=${DT_HOME}
+          - VERSION=${VERSION}
+          - BUILD_VERSION=${BUILD_VERSION}
       container_name: "${DT_SERVER_NAME}"
       image: "dynatrace/server:7.0"
       environment:
+        - COMPOSE_PROJECT_NAME
         - DT_HOME
         - DT_SERVER_LICENSE_KEY_FILE_URL
       ports:
@@ -26,16 +27,17 @@ services:
         - appmon
 
     dtcollector:
-      build: 
+      build:
         context: ./Dynatrace-Collector
         dockerfile: Dockerfile-debian
         args:
-        - DT_HOME=${DT_HOME}
-        - VERSION=${VERSION}
-        - BUILD_VERSION=${BUILD_VERSION}
+          - DT_HOME=${DT_HOME}
+          - VERSION=${VERSION}
+          - BUILD_VERSION=${BUILD_VERSION}
       container_name: "${DT_COLLECTOR_NAME}"
       image: "dynatrace/collector:7.0"
       environment:
+        - COMPOSE_PROJECT_NAME
         - DT_HOME
         - DT_SERVER_LICENSE_KEY_FILE_URL
       volumes:
@@ -44,16 +46,17 @@ services:
         - appmon
 
     dtagent:
-      build: 
+      build:
         context: ./Dynatrace-Agent
         dockerfile: Dockerfile-debian
         args:
-        - DT_HOME=${DT_HOME}
-        - VERSION=${VERSION}
-        - BUILD_VERSION=${BUILD_VERSION}
+          - DT_HOME=${DT_HOME}
+          - VERSION=${VERSION}
+          - BUILD_VERSION=${BUILD_VERSION}
       container_name: "${DT_AGENT_NAME}"
       image: "dynatrace/agent:7.0"
       environment:
+        - COMPOSE_PROJECT_NAME
         - DT_HOME
         - DT_AGENT_COLLECTOR="${DT_COLLECTOR_NAME}:9998"
         - AGENT_LIB32
@@ -68,8 +71,7 @@ services:
         - /tmp/log/dynatrace/agents/dtagent:${DT_HOME}/log/agent
       networks:
         - appmon
-        
+
 networks:
     appmon:
         driver: bridge
-        

@@ -21,7 +21,6 @@ docker-compose up
 It will install Dynatrace Server, Dynatrace Collector and Dynatrace Master Agent. Then, you can install your [Agents](https://github.com/Dynatrace/Dynatrace-Docker/tree/master/Dynatrace-Agent-Examples). 
 
 
-
 ## Configuration
 
 All required environment variables are collected in the default file ".env", that is used by all components.

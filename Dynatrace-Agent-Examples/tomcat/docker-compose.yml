@@ -4,10 +4,11 @@ services:
       container_name: tomcat
       image: tomcat
       ports:
-      - 8080
+        - 8080
       env_file:
         - ../../.env
       environment:
+        - COMPOSE_PROJECT_NAME
         - DT_AGENT_NAME=tomcat-agent
         - CATALINA_OPTS="-agentpath:${DT_HOME}${AGENT_LIB64}=name=tomcat-agent,collector=${DT_COLLECTOR_NAME}"
       volumes_from:
@@ -17,4 +18,4 @@ services:
 networks:
   default:
     external:
-        name: dynatracedocker_appmon
+        name: ${COMPOSE_PROJECT_NAME}_appmon
