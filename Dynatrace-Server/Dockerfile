@@ -7,6 +7,7 @@ LABEL maintainer2 "Blazej Tomaszewski <blazej.tomaszewski@dynatrace.com>"
 ARG DT_HOME
 ARG BUILD_VERSION
 ARG VERSION
+ARG DT_SERVER_LICENSE_KEY_FILE_URL
 
 ENV INSTALLER_FILE_NAME=dynatrace-server-${BUILD_VERSION}-linux-x86.jar
 ENV INSTALLER_URL=https://s3.amazonaws.com/downloads.dynatracesaas.com/${VERSION}/EAP/${INSTALLER_FILE_NAME}
@@ -25,7 +26,7 @@ RUN apk update && apk add --no-cache ${DT_INSTALL_DEPS} ${DT_RUNTIME_DEPS} && \
 RUN sed -i '/^-memory/,/^unsupported/c\-memory\ndemo' ${DT_HOME}/dtserver.ini && \
 	sed -i '/^-memory/,/^unsupported/c\-memory\ndemo' ${DT_HOME}/dtfrontendserver.ini && \
 	echo '-Dcom.dynatrace.diagnostics.filestore.numStorageThreads=1' >> ${DT_HOME}/dtserver.ini
-	
+
 COPY /build/config/server.config.xml ${DT_HOME}/server/conf
 
 ENV GLIBC_RUNTIME_DEPS=libgcc
@@ -45,7 +46,6 @@ RUN echo 'hosts: files mdns4_minimal [NOTFOUND=return] dns mdns4' >> /etc/nsswit
 COPY /build/scripts/pull-license-key-file.sh ${DT_HOME}
 COPY /build/scripts/run-server-process.sh ${DT_HOME}
 
-
 # Dynatrace Clients (TCP)
 EXPOSE 2020
 # Dynatrace Clients (TCP with SSL)
@@ -64,4 +64,5 @@ EXPOSE 9911
 EXPOSE 9998
 
 ENV DT_HOME=${DT_HOME}
-CMD [ "sh", "-c", "${DT_HOME}/run-server-process.sh" ]
+ENV DT_SERVER_LICENSE_KEY_FILE_URL=${DT_SERVER_LICENSE_KEY_FILE_URL}
+CMD [ "sh", "-c", "${DT_HOME}/pull-license-key-file.sh ; ${DT_HOME}/run-server-process.sh" ]
