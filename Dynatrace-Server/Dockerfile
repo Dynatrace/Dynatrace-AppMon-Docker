@@ -10,10 +10,7 @@ ARG VERSION
 ARG DT_SERVER_LICENSE_KEY_FILE_URL
 
 ENV INSTALLER_FILE_NAME=dynatrace-server-${BUILD_VERSION}-linux-x86.jar
-ENV INSTALLER_URL=https://s3.amazonaws.com/downloads.dynatracesaas.com/${VERSION}/EAP/${INSTALLER_FILE_NAME}
-
-ENV COLLECTOR_PORT=6698
-ENV COLLECTOR_PORT_SSL=6699
+ENV INSTALLER_URL=https://files.dynatrace.com/downloads/OnPrem/dynaTrace/${VERSION}/${BUILD_VERSION}/${INSTALLER_FILE_NAME}
 
 ENV DT_INSTALL_DEPS=openjdk8-jre-base
 ENV DT_RUNTIME_DEPS=bash\ curl
@@ -45,23 +42,6 @@ RUN echo 'hosts: files mdns4_minimal [NOTFOUND=return] dns mdns4' >> /etc/nsswit
 
 COPY /build/scripts/pull-license-key-file.sh ${DT_HOME}
 COPY /build/scripts/run-server-process.sh ${DT_HOME}
-
-# Dynatrace Clients (TCP)
-EXPOSE 2020
-# Dynatrace Clients (TCP with SSL)
-EXPOSE 2021
-# Dynatrace Collectors (TCP)
-EXPOSE 6698
-# Dynatrace Collectors (TCP with SSL)
-EXPOSE 6699
-# Dynatrace Web Server (HTTP)
-EXPOSE 8020
-# Dynatrace Web Server (HTTPS)
-EXPOSE 8021
-# Dynatrace Web UI (HTTPS)
-EXPOSE 9911
-# Dynatrace Agents (TCP)
-EXPOSE 9998
 
 ENV DT_HOME=${DT_HOME}
 ENV DT_SERVER_LICENSE_KEY_FILE_URL=${DT_SERVER_LICENSE_KEY_FILE_URL}

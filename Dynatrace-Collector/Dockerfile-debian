@@ -9,14 +9,12 @@ ARG BUILD_VERSION
 ARG VERSION
 
 ENV INSTALLER_FILE_NAME=dynatrace-collector-${BUILD_VERSION}-linux-x86.jar
-ENV INSTALLER_URL=https://s3.amazonaws.com/downloads.dynatracesaas.com/${VERSION}/EAP/${INSTALLER_FILE_NAME}
-
-ENV AGENT_PORT=9998
+ENV INSTALLER_URL=https://files.dynatrace.com/downloads/OnPrem/dynaTrace/${VERSION}/${BUILD_VERSION}/${INSTALLER_FILE_NAME}
 
 ENV DT_INSTALL_DEPS=openjdk-8-jre-headless
 ENV DT_RUNTIME_DEPS=curl\ procps
 
-RUN echo "deb http://http.debian.net/debian jessie-backports main" > /etc/apt/sources.list.d/jessie-backports.list && \ 
+RUN echo "deb http://http.debian.net/debian jessie-backports main" > /etc/apt/sources.list.d/jessie-backports.list && \
 	apt-get update -y && apt-get install -y --no-install-recommends -t jessie-backports ${DT_INSTALL_DEPS} ${DT_RUNTIME_DEPS} && \
     mkdir -p ${DT_HOME} && \
     curl --insecure -L -o /tmp/${INSTALLER_FILE_NAME} ${INSTALLER_URL} && \
@@ -33,9 +31,6 @@ RUN apt-get update && \
     rm -rf /var/lib/apt/lists/* /tmp/*
 
 COPY /build/scripts/run-collector-process.sh ${DT_HOME}
-
-# Dynatrace Agents (TCP)
-EXPOSE 9998
 
 ENV DT_HOME=${DT_HOME}
 CMD [ "sh", "-c", "${DT_HOME}/run-collector-process.sh" ]

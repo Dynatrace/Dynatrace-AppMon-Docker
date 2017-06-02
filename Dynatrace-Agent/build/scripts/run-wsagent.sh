@@ -10,8 +10,8 @@ LOG_LEVEL=${DT_AGENT_LOG_LEVEL:-"info"}
 #
 # Auto-discovery can be overridden by providing the $COLLECTOR variable through
 # the environment.
-COLLECTOR_HOST_NAME=${DTCOLLECTOR_NAME:-"dtcollector"}
-COLLECTOR_PORT=${DTCOLLECTOR_ENV_AGENT_PORT:-"9998"}
+COLLECTOR_HOST_NAME=${DT_COLLECTOR_NAME:-"dtcollector"}
+COLLECTOR_PORT=${APPMON_COLLECTOR_PORT:-"9998"}
 COLLECTOR=${DT_AGENT_COLLECTOR:-"${COLLECTOR_HOST_NAME}:${COLLECTOR_PORT}"}
 
 # Attempt to auto-discover the Dynatrace Web Server Agent binary through

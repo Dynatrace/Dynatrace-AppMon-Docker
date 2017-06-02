@@ -16,14 +16,14 @@ JVM_MAX_PERM_SIZE=${DT_COLLECTOR_JVM_MAX_PERM_SIZE:-"128m"}
 # Auto-discovery can be overridden by providing the $SERVER variable
 # through the environment.
 SERVER_HOST_NAME=${DT_SERVER_NAME:-"dtserver"}
-SERVER_COLLECTOR_PORT=${COLLECTOR_PORT_SSL:-"6699"}
+SERVER_COLLECTOR_PORT=${APPMON_COLLECTOR_SERVER_SSL_PORT:-"6699"}
 SERVER=${DT_COLLECTOR_SERVER:-"${SERVER_HOST_NAME}:${SERVER_COLLECTOR_PORT}"}
 
 # Wait for the server to start serving collectors.
 wait-for-cmd.sh "nc -z `echo ${SERVER} | sed 's/:/ /'`" 360
 
 ${DT_HOME}/dtcollector -instance ${NAME} \
-                  -listen ${AGENT_PORT} \
+                  -listen ${APPMON_COLLECTOR_PORT} \
                   -server ${SERVER} \
                   -group ${GROUP_NAME} \
                   -Xms${JVM_XMS} \

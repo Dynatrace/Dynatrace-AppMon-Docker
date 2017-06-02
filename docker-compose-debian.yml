@@ -15,13 +15,22 @@ services:
         - COMPOSE_PROJECT_NAME
         - DT_HOME
         - DT_SERVER_LICENSE_KEY_FILE_URL
+        - APPMON_COLLECTOR_SERVER_SSL_PORT
       ports:
-        - "2020:2020" # Dynatrace Clients (TCP)
-        - "2021:2021" # Dynatrace Clients (TCP with SSL)
-        - "8020:8020" # Dynatrace Web Server (HTTP)
-        - "8021:8021" # Dynatrace Web Server (HTTPS)
-        - "9911:9911" # Dynatrace Web UI (HTTPS)
-        - "9998:9998" # Dynatrace Agents (TCP)
+        # Browser to server ports NonSSL 8020 SSL 8021 (to start the Webstart Client)
+        - "${APPMON_WEB_CLIENT_NONSSL_PORT:-8020}:8020"
+        - "${APPMON_WEB_CLIENT_SSL_PORT:-8021}:8021"
+        # 8040  Non SSL Collector to server port for Web Base Agents (or direct agent to server)
+        # 8041  SSL Collector to server port for Web Base Agents (or direct agent to server)
+        - "${APPMON_ONEAGENT_NONSSL_SERVER_PORT:-8040}:8040"
+        - "${APPMON_ONEAGENT_SSL_SERVER_PORT:-8041}:8041"
+        # 2021 Client to Frontend Server - non SSL
+        - "${APPMON_CLIENT_NONSSL_PORT:-2021}:2021"
+        # 8023 Client to Frontend Server - encrypted via HTTP tunnel
+        - "${APPMON_CLIENT_SSL_PORT:-8023}:8023"
+        # 6699 Collector to Server SSL
+        - "${APPMON_COLLECTOR_SERVER_SSL_PORT:-6699}:6699"
+        # 9998 - Legacy Agent to server embedded Collector (default)
       volumes:
         - /tmp/log/dynatrace/servers/dtserver:${DT_HOME}/log/server/dtserver
       networks:
@@ -41,10 +50,21 @@ services:
         - COMPOSE_PROJECT_NAME
         - DT_HOME
         - DT_SERVER_LICENSE_KEY_FILE_URL
+        - APPMON_COLLECTOR_PORT
+        - APPMON_ONEAGENT_NONSSL_PORT
+        - APPMON_ONEAGENT_SSL_PORT
+        - APPMON_COLLECTOR_SERVER_SSL_PORT
       volumes:
         - /tmp/log/dynatrace/collectors/dtcollector:${DT_HOME}/log/collector/dtcollector
       networks:
         - appmon
+      ports:
+        # 9998 - Legacy Agent to Collector
+        - "${APPMON_COLLECTOR_PORT:-9998}:9998"
+        # 8042 One Agent to Collector non SSL
+        - "${APPMON_ONEAGENT_NONSSL_PORT:-8042}:8042"
+        # 8043 One Agent to Collector SSL
+        - "${APPMON_ONEAGENT_SSL_PORT:-8043}:8043"
 
     dtagent:
       build:

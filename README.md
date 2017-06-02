@@ -18,14 +18,14 @@ cd Dynatrace-Docker
 docker-compose up
 ```
 
-It will install Dynatrace Server, Dynatrace Collector and Dynatrace Master Agent. Then, you can install your [Agents](https://github.com/Dynatrace/Dynatrace-Docker/tree/EAP_7.0.0.2346/Dynatrace-Agent-Examples). 
+It will install Dynatrace Server, Dynatrace Collector and Dynatrace Master Agent. Then, you can install your [Agents](https://github.com/Dynatrace/Dynatrace-Docker/tree/EAP_7.0.0.2346/Dynatrace-Agent-Examples).
 
 
 ## Configuration
 
-All required environment variables are collected in the default file ".env", that is used by all components.
+Configuration relies on supplying docker-compose with environment variables defined in .env file. Some variables need to be passed to Dockerfile via ARG for correct building an Server image, that's way it is recommended to change variables only from .env file.
 
-Ports configuration is static and you can find it in main docker-compose.yml files. Port exposure is included in Dynatrace Server's Dockerfile file.
+Port configuration documentation is available [here](https://community-staging.dynalabs.io/support/doc/appmon/installation/set-up-communication-connections/).
 
 ### Licensing
 

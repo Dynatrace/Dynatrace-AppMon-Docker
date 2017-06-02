@@ -3,6 +3,7 @@ services:
 dtagent:
       build:
         context: .
+        dockerfile: Dockerfile
         args:
           - DT_HOME=${DT_HOME}
           - VERSION=${VERSION}
