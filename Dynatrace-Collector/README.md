@@ -7,10 +7,11 @@ This project contains files for building and running the Dynatrace Collector com
 <br>
 
 ---
-**TL;DR**: you can quickly spawn a `dynatrace/collector` instance with an anticipated default configuration by invoking:
+**TL;DR**: you can quickly spawn a `dtcollector` instance with an anticipated default configuration by invoking:
 
 ```
-docker-compose up
+docker-compose up -d
+docker-compose logs -f
 ```
 ---
 <br>
@@ -33,7 +34,7 @@ Please examine the [Dynatrace Collector Configuration](https://community-staging
 | BUILD_VERSION         | "7.0.0.2469"                | Build version
 
 
-Ports are also defined in .env file based on current [Communication Connections](https://community.dynatrace.com/community/display/DOCDT65/Set+up+Communication+Connections)
+Ports are also defined in .env file based on current [Communication Connections](https://community-staging.dynalabs.io/support/doc/appmon/installation/set-up-communication-connections/)
 
 List of used ports for collector:
 ```
@@ -44,7 +45,7 @@ APPMON_COLLECTOR_SERVER_SSL_PORT=6699
 ```
 
 
-The following *environment variables* together form the memory configuration of the Dynatrace Collector, as described in the [Memory Configuration](https://community.dynatrace.com/community/display/DOCDT62/Collector+Configuration#CollectorConfiguration-MemoryConfiguration) section of the [Dynatrace Collector Configuration](https://community.dynatrace.com/community/display/DOCDT62/Collector+Configuration) page:
+The following *environment variables* together form the memory configuration of the Dynatrace Collector, as described in the [Memory Configuration](https://community-staging.dynalabs.io/support/doc/appmon/installation/set-up-system-components/set-up-collectors/#configure-memory) section of the [Dynatrace Collector Configuration](https://community-staging.dynalabs.io/support/doc/appmon/installation/set-up-system-components/set-up-collectors/) page:
 
 | Environment Variable           | Defaults | Description
 |:-------------------------------|:---------|:-----------
@@ -78,9 +79,9 @@ docker-compose up
 
 See the following Dockerized Dynatrace components and examples for more information:
 
-- [Dockerized Dynatrace Agent](https://github.com/Dynatrace/Dynatrace-Docker/tree/master/Dynatrace-Agent) and [Examples](https://github.com/Dynatrace/Dynatrace-Docker/tree/master/Dynatrace-Agent-Examples)
-- [Dockerized Dynatrace Collector](https://github.com/Dynatrace/Dynatrace-Docker/tree/master/Dynatrace-Collector)
-- [Dockerized Dynatrace Server](https://github.com/Dynatrace/Dynatrace-Docker/tree/master/Dynatrace-Server)
+- [Dockerized Dynatrace Agent](https://github.com/Dynatrace/Dynatrace-Docker/tree/7.0_GA/Dynatrace-Agent) and [Examples](https://github.com/Dynatrace/Dynatrace-Docker/tree/7.0_GA/Dynatrace-Agent-Examples)
+- [Dockerized Dynatrace Collector](https://github.com/Dynatrace/Dynatrace-Docker/tree/7.0_GA/Dynatrace-Collector)
+- [Dockerized Dynatrace Server](https://github.com/Dynatrace/Dynatrace-Docker/tree/7.0_GA/Dynatrace-Server)
 
 ## Problems? Questions? Suggestions?
 
