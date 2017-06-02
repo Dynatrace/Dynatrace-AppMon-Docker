@@ -7,7 +7,7 @@ This project contains files for building and running the Dynatrace Server compon
 **Note**: the `dynatrace/server` image has been designed to run in low-traffic, resource-constrained **demo and trial environments**. Dynatrace does not support its use in production or pre-production grade environments of any kind.
 
 
-## Run a container via `docker-compose.yml`
+## Run a container
 
 [Docker Compose](https://docs.docker.com/compose/) is a tool for defining and running multi-container applications, where an application's services are configured in `docker-compose.yml` files. Typically, you would run an application via `docker-compose [-f docker-compose.yml] up`.
 
@@ -26,7 +26,7 @@ Configuration relies on supplying docker-compose with environment variables defi
 | VERSION               | "7.0"                       | GA version
 | BUILD_VERSION         | "7.0.0.2469"                | Build version
 
-Ports are also defined in .env file based on current [Communication Connections](https://community.dynatrace.com/community/display/DOCDT65/Set+up+Communication+Connections)
+Ports are also defined in .env file based on current [Communication Connections](https://community-staging.dynalabs.io/support/doc/appmon/installation/set-up-communication-connections/)
 
 List of used ports for server:
 ```
@@ -42,10 +42,10 @@ APPMON_COLLECTOR_SERVER_SSL_PORT=6699
 
 ## Run a container
 
-[Docker Compose](https://docs.docker.com/compose/) is a tool for defining and running multi-container applications, where an application's services are configured in `docker-compose.yml` files. Typically, you would run an application via `docker-compose [-f docker-compose.yml] up`.
+[Docker Compose](https://docs.docker.com/compose/) is a tool for defining and running multi-container applications, where an application's services are configured in `docker-compose.yml` files. Typically, you would run an application via `docker-compose [-f docker-compose.yml] up [-d]`.
 
 
-Depending on what base image you want (slim alpine or bigger debian) you can switch it in docker-compose.yml file by changing the value for `dockerfile` attribute, e.g:
+Depending on what base image you want (slim alpine or bigger debian) you can switch it in docker-compose.yml file by changing the value for `dockerfile` attribute in `docker-compose.yml` file, e.g:
 
 ```
 dockerfile: Dockerfile-debian
@@ -56,7 +56,8 @@ dockerfile: Dockerfile-debian
 Creates a Dockerized Dynatrace Server instance named `dtserver`:
 
 ```
-docker-compose up
+docker-compose up -d
+docker-compose logs -f
 ```
 
 ### Licensing
@@ -69,9 +70,9 @@ The examples above leave your Dynatrace environment without a proper license. Ho
 
 See the following Dockerized Dynatrace components and examples for more information:
 
-- [Dockerized Dynatrace Agent](https://github.com/Dynatrace/Dynatrace-Docker/tree/master/Dynatrace-Agent) and [Examples](https://github.com/Dynatrace/Dynatrace-Docker/tree/master/Dynatrace-Agent-Examples)
-- [Dockerized Dynatrace Collector](https://github.com/Dynatrace/Dynatrace-Docker/tree/master/Dynatrace-Collector)
-- [Dockerized Dynatrace Server](https://github.com/Dynatrace/Dynatrace-Docker/tree/master/Dynatrace-Server)
+- [Dockerized Dynatrace Agent](https://github.com/Dynatrace/Dynatrace-Docker/tree/7.0_GA/Dynatrace-Agent) and [Examples](https://github.com/Dynatrace/Dynatrace-Docker/tree/7.0_GA/Dynatrace-Agent-Examples)
+- [Dockerized Dynatrace Collector](https://github.com/Dynatrace/Dynatrace-Docker/tree/7.0_GA/Dynatrace-Collector)
+- [Dockerized Dynatrace Server](https://github.com/Dynatrace/Dynatrace-Docker/tree/7.0_GA/Dynatrace-Server)
 
 ## Problems? Questions? Suggestions?
 
