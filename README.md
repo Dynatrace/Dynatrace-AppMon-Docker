@@ -17,15 +17,29 @@ git clone https://github.com/Dynatrace/Dynatrace-Docker.git
 cd Dynatrace-Docker
 docker-compose up
 ```
+in case of using branch:
+```
+git clone https://github.com/Dynatrace/Dynatrace-Docker.git -b <BRANCH_NAME>
+cd Dynatrace-Docker
+docker-compose up
+```
+In order to be able to work further on the same instance with Appmon running in the background use deamon option:
+```
+docker-compose up -d
+```
+Logs can be displayed by:
+```
+docker-compose logs -f
+```
 
-It will install Dynatrace Server, Dynatrace Collector and Dynatrace Master Agent. Then, you can install your [Agents](https://github.com/Dynatrace/Dynatrace-Docker/tree/EAP_7.0.0.2346/Dynatrace-Agent-Examples).
+`docker-compose up` will install Dynatrace Server, Dynatrace Collector and Dynatrace Master Agent. Then, you can install your [Agents](https://github.com/Dynatrace/Dynatrace-Docker/tree/7.0_GA/Dynatrace-Agent-Examples).
 
 
 ## Configuration
 
 Configuration relies on supplying docker-compose with environment variables defined in .env file. Some variables need to be passed to Dockerfile via ARG for correct building an Server image, that's way it is recommended to change variables only from .env file.
 
-Port configuration documentation is available [here](https://community-staging.dynalabs.io/support/doc/appmon/installation/set-up-communication-connections/).
+Ports can be also configured in .env file. By default it uses values from [Communication Connections Documentation](https://community-staging.dynalabs.io/support/doc/appmon/installation/set-up-communication-connections/).
 
 ### Licensing
 
@@ -47,7 +61,7 @@ In the example above, you have to let `DT_SERVER_LICENSE_KEY_FILE_URL` point to 
 
 See the following integrations for more information:
 
-- [Dockerized Dynatrace Agent: Examples](https://github.com/Dynatrace/Dynatrace-Docker/tree/EAP_7.0.0.2346/Dynatrace-Agent-Examples)
+- [Dockerized Dynatrace Agent: Examples](https://github.com/Dynatrace/Dynatrace-Docker/tree/7.0_GA/Dynatrace-Agent-Examples)
 - [Dockerized easyTravel Application](https://github.com/Dynatrace-Innovationlab/easyTravel-Docker)
 
 ![Dockerized Application](https://github.com/Dynatrace/Dynatrace-Docker/blob/images/dockerized-application.png)
