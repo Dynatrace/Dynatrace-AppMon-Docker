@@ -20,11 +20,11 @@ The home of Dockerized components of the [Dynatrace Application Monitoring](http
 
 ## How it works
 
-Execution of `run-appmon-docker.sh` script will install full Appmon version on java based image and then it will create containers that will run Appmon Server and Appmon Collector in separated containers without the need of installing any java packages. As the result, you will see two new directories created on your host - installer and installation. The host maps volumes set in installer container. The first volume `installer` will contain Appmon java jar package and other scripts or profiles copied before installation. The second one `installation` will contain your Appmon installation.
+Execution of `run-appmon-docker.sh` script will install full Appmon version on java based image and then it will create containers that will run Appmon Server and Appmon Collector in separated containers without the need of installing any java packages. As the result, you will see two new directories created on your host - `installer` and `installation`. The host maps volumes set in `installer` container. The first volume `installer` will contain Appmon java jar package and other scripts or profiles copied before installation. The second one `installation` will contain your Appmon installation.
 
-Every other container should map 'installation' volume (in practice, they will copy content of this volume) and use it for its purpose. It allows to have one installation and many isolated Servers or Collectors configured.
+Every other container should map `installation` volume (in practice, they will copy content of this volume) and use it for its purpose. It allows to have one installation and many isolated Servers or Collectors configured.
 
-If -r options is enabled it means that 'rerun' mode is turned on and it will stop and remove all docker-compose containers and images, and remove installation directory where appmon were previously installed.
+If `-r` options is enabled it means that `rerun` mode is turned on and it will stop and remove all docker-compose containers and images, and remove installation directory where appmon were previously installed.
 
 
 ## How to start
