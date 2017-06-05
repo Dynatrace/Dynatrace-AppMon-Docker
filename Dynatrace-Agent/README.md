@@ -4,16 +4,19 @@
 
 This project contains files for building and running the Dynatrace Agent component of the [Dynatrace Application Monitoring](http://www.dynatrace.com/docker) enterprise solution for deep end-to-end application monitoring in Docker. Ready-made images are available on the [Docker Hub](https://hub.docker.com/r/dynatrace/agent/). Please refer to the [Dynatrace Agent Examples](https://github.com/Dynatrace/Dynatrace-Docker/tree/7.0_GA/Dynatrace-Agent-Examples) project for exemplary integrations into Dockerized application processes.
 
-<br>
+## Run a container
 
----
-**TL;DR**: you can quickly spawn a `dynatrace/agent` instance with an anticipated default configuration by invoking:
+[Docker Compose](https://docs.docker.com/compose/) is a tool for defining and running multi-container applications, where an application's services are configured in `docker-compose.yml` files. Typically, you would run an application via
 
 ```
-docker-compose up
+docker-compose [-f docker-compose.yml] up [-d]
 ```
----
-<br>
+
+Depending on what base image you want (slim alpine or bigger debian) you can switch it in docker-compose.yml file by changing the value for `dockerfile` attribute, e.g:
+
+```
+dockerfile: Dockerfile-debian
+```
 
 ### Configuration
 
@@ -34,20 +37,6 @@ Configuration relies on supplying docker-compose with environment variables defi
 | VERSION               | "7.0"                       | GA version
 | BUILD_VERSION         | "7.0.0.2469"                | Build version
 
-
-## Run a container
-
-[Docker Compose](https://docs.docker.com/compose/) is a tool for defining and running multi-container applications, where an application's services are configured in `docker-compose.yml` files. Typically, you would run an application via
-
-```
-docker-compose [-f docker-compose.yml] up [-d]
-```
-
-Depending on what base image you want (slim alpine or bigger debian) you can switch it in docker-compose.yml file by changing the value for `dockerfile` attribute, e.g:
-
-```
-dockerfile: Dockerfile-debian
-```
 
 
 ## Problems? Questions? Suggestions?
