@@ -13,7 +13,7 @@ docker-compose up -d
 docker-compose logs -f
 ```
 
-Depending on what base image you want (slim alpine or bigger debian) you can switch it in docker-compose.yml file by changing the value for `dockerfile` attribute, e.g:
+Depending on what base image you want (slim alpine or bigger debian) you can switch it in `docker-compose.yml` file by changing the value for `dockerfile` attribute, e.g:
 
 ```
 dockerfile: Dockerfile-debian
