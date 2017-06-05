@@ -12,7 +12,7 @@ This project contains files for building and running the Dynatrace Server compon
 [Docker Compose](https://docs.docker.com/compose/) is a tool for defining and running multi-container applications, where an application's services are configured in `docker-compose.yml` files. Typically, you would run an application via `docker-compose [-f docker-compose.yml] up [-d]`.
 
 
-Depending on what base image you want (slim alpine or bigger debian) you can switch it in docker-compose.yml file by changing the value for `dockerfile` attribute in `docker-compose.yml` file, e.g:
+Depending on what base image you want (slim alpine or bigger debian) you can switch it in `docker-compose.yml` file by changing the value for `dockerfile` attribute, e.g:
 
 ```
 dockerfile: Dockerfile-debian
