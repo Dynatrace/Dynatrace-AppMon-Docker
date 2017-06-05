@@ -41,6 +41,8 @@ Configuration relies on supplying docker-compose with environment variables defi
 
 Ports can be also configured in .env file. By default it uses values from [Communication Connections Documentation](https://community-staging.dynalabs.io/support/doc/appmon/installation/set-up-communication-connections/).
 
+Please see each component's README file for more specific details about configuration.
+
 ### Licensing
 
 The example above leaves your Dynatrace environment without a proper license. However, you can add your license by editing .env file and put it as value for DT_SERVER_LICENSE_KEY_FILE_URL variable.
