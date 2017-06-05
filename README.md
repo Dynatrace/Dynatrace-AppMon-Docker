@@ -4,99 +4,106 @@
 
 The home of Dockerized components of the [Dynatrace Application Monitoring](http://www.dynatrace.com/docker) enterprise solution. All components are available on the [Docker Hub](https://hub.docker.com/u/dynatrace/).
 
+
 ## What is Dynatrace?
 
 [Dynatrace Application Monitoring](http://www.dynatrace.com/en/products/application-monitoring.html), with its [PurePath technology](http://www.dynatrace.com/en_us/application-performance-management/products/purepath-technology.html), is the world's leading application monitoring solution - trusted by more than 7500 customers around the globe. It supports all your major technology stacks and integrates into your Continuous Delivery pipelines to allow you to build world-class, high-quality software.
 
-## How to install Dynatrace?
 
-You can quickly bring up an entire Dockerized Dynatrace environment by using [Docker Compose](https://docs.docker.com/compose/) with any of the provided `docker-compose.yml` files like so:
+## Developed and tested on
 
+1. docker-compose version 1.13.0, build 1719ceb
+2. docker-py version: 2.2.1
+3. wget latest
+4. xmlstarlet
+
+
+## How it works
+
+Execution of run-appmon-docker.sh script will install full Appmon version on java based image and then it will create containers that will run Appmon Server and Appmon Collector in separated containers without the need of installing any java packages. As the result, you will see two new directories created on your host - installer and installation. The host maps volumes set in installer container. The first volume `installer` will contain Appmon java jar package and other scripts or profiles copied before installation. The second one `installation` will contain your Appmon installation.
+
+Every other container should map 'installation' volume (in practice, they will copy content of this volume) and use it for its purpose. It allows to have one installation and many isolated Servers or Collectors configured.
+
+If -r options is enabled it means that 'rerun' mode is turned on and it will stop and remove all docker-compose containers and images, and remove installation directory where appmon were previously installed.
+
+
+## How to start
+
+1. Run `run-appmon-docker.sh` script
 ```
-git clone https://github.com/Dynatrace/Dynatrace-Docker.git
-cd Dynatrace-Docker
-docker-compose up
+sudo ./run-appmon-docker.sh
 ```
-in case of using branch:
-```
-git clone https://github.com/Dynatrace/Dynatrace-Docker.git -b <BRANCH_NAME>
-cd Dynatrace-Docker
-docker-compose up
-```
-In order to be able to work further on the same instance with Appmon running in the background use deamon option:
-```
-docker-compose up -d
-```
-Logs can be displayed by:
-```
-docker-compose logs -f
-```
+Options:
+-r - it will removed your docker-compose containers, images, volumes and networks created by docker-compose and run it (as a deamon) from scratch (but keeping previously downloaded appmon jar package if exists). IMPORTANT! Needs sudo privileges!
+-b - it will execute 'docker-compose up -d' with --build option
+-t - it will execute tests verifying if installation finished successfully and services are running
 
-`docker-compose up` will install Dynatrace Server, Dynatrace Collector and Dynatrace Master Agent. Then, you can install your [Agents](https://github.com/Dynatrace/Dynatrace-Docker/tree/7.0_GA/Dynatrace-Agent-Examples).
-
-
-## Configuration
-
-Configuration relies on supplying docker-compose with environment variables defined in .env file. Some variables need to be passed to Dockerfile via ARG for correct building an Server image, that's way it is recommended to change variables only from .env file.
-
-Ports can be also configured in .env file. By default it uses values from [Communication Connections Documentation](https://community-staging.dynalabs.io/support/doc/appmon/installation/set-up-communication-connections/).
-
-Please see each component's README file for more specific details about configuration.
-
-### Licensing
-
-The example above leaves your Dynatrace environment without a proper license. However, you can add your license by editing .env file and put it as value for DT_SERVER_LICENSE_KEY_FILE_URL variable.
-
-Also, you can conveniently have a license provisioned at container runtime by specifying a URL to a [Dynatrace License Key File](http://bit.ly/dttrial-docker-github) in the `DT_SERVER_LICENSE_KEY_FILE_URL` environment variable. If you don't happen to have a web server available to serve the license file to you, [Netcat](https://en.wikipedia.org/wiki/Netcat) can conveniently serve it from your command line, exactly once, via `nc -l 1337 < dtlicense.key`, where `1337` is an available port on your local machine. A `sudo` may be required depending on which port you eventually decide to choose.
-
-```
-git clone https://github.com/Dynatrace/Dynatrace-Docker.git
-cd Dynatrace-Docker
-DT_SERVER_LICENSE_KEY_FILE_URL=http://$YOUR_IP:1337 docker-compose up
-```
-
-### Obtaining a License
-
-In the example above, you have to let `DT_SERVER_LICENSE_KEY_FILE_URL` point to a valid Dynatrace License Key file. If you don't have a license yet, you can [obtain a Dynatrace Free Trial License here](http://bit.ly/dttrial-docker-github). However, you don't need to have your license file hosted by a server: if you can run a console, [Netcat](https://en.wikipedia.org/wiki/Netcat) can conveniently serve it for you on port `80` via `sudo nc -l 80 < dtlicense.key`.
-
-## How to Monitor your Dockerized Application?
-
-See the following integrations for more information:
-
-- [Dockerized Dynatrace Agent: Examples](https://github.com/Dynatrace/Dynatrace-Docker/tree/7.0_GA/Dynatrace-Agent-Examples)
-- [Dockerized easyTravel Application](https://github.com/Dynatrace-Innovationlab/easyTravel-Docker)
-
-![Dockerized Application](https://github.com/Dynatrace/Dynatrace-Docker/blob/images/dockerized-application.png)
-
-## How to Monitor your Docker Containers?
-
-Want to see all your Docker Metrics in one place? See the [Dynatrace Docker Monitor Plugin](https://community.dynatrace.com/community/display/DL/Docker+Monitor+Plugin) for more information.
-
-![Docker Monitor Plugin](https://github.com/Dynatrace/Dynatrace-Docker/blob/images/docker-monitor-plugin.png)
-
-## Resource Requirements
-
-When running Docker on Windows or a Mac via the [Docker Toolbox](https://www.docker.com/products/docker-toolbox), make sure your [Docker Machine](https://docs.docker.com/machine/overview/) has sufficient resources available to run Dynatrace AppMon together with your Dockerized application:
-
-1) Stop the Docker Machine in VirtualBox
-
-![Power off Docker Machine](https://github.com/Dynatrace/Dynatrace-Docker/blob/images/docker-machine-power-off.png)
-
-2) Give your Docker Machine at least 2 CPUs
-
-![Configure Docker Machine CPUs](https://github.com/Dynatrace/Dynatrace-Docker/blob/images/docker-machine-cpu-settings.png)
-
-3) Give your Docker Machine at least 4 GB of RAM
-
-![Configure Docker Machine RAM](https://github.com/Dynatrace/Dynatrace-Docker/blob/images/docker-machine-mem-settings.png)
-
-4) Finally, start your Docker Quickstart Terminal for the changes to take effect.
-
-## Problems? Questions? Suggestions?
-
-This offering is [Dynatrace Community Supported](https://community.dynatrace.com/community/display/DL/Support+Levels#SupportLevels-Communitysupported/NotSupportedbyDynatrace(providedbyacommunitymember)). Feel free to share any problems, questions and suggestions with your peers on the Dynatrace Community's [Application Monitoring & UEM Forum](https://answers.dynatrace.com/spaces/146/index.html).
 
 ## License
 
-Licensed under the MIT License. See the [LICENSE](https://github.com/Dynatrace/Dynatrace-Docker/blob/master/LICENSE) file for details.
-[![analytics](https://www.google-analytics.com/collect?v=1&t=pageview&_s=1&dl=https%3A%2F%2Fgithub.com%2FdynaTrace&dp=%2FDynatrace-Docker&dt=Dynatrace-Docker&_u=Dynatrace~&cid=github.com%2FdynaTrace&tid=UA-54510554-5&aip=1)]()
+In order to activate Appmon application you need to copy your license to `license` directory.
+
+License should have `dtlicense.lic` filename pattern.
+
+
+## System Profiles
+
+In order to detect agents, a general System Profile is attached in `profiles` directory by default. If you want to use your custom one, you need to copy it there as well.
+
+`MyGeneralSystemProfile` detects agents which name contains `agent` word.
+
+
+## Connecting Agents
+
+In order to connect agent you need to run docker-compose up including destination path of your agent, e.g.:
+```
+docker-compose -f images/agent-examples/tomcat/docker-compose.yml up -d
+```
+-d means that it will run as a daemon process.
+
+## Restarting
+
+If you have already installed Appmon application on your docker containers, you can:
+1. Run run-appmon-docker.sh script: 
+```
+./run-appmon-docker.sh
+```
+2. Execute: 
+```
+docker-compose up -d or docker-compose start -d
+```
+
+## Cleaning
+
+1. Server/Collectors:
+
+a) run `clean-docker.sh` script:
+```
+sudo ./clean-docker.sh
+```
+Options:
+-a - it will also remove installer directory with downloaded Appmon jar package.
+
+IMPORTANT! Needs sudo privileges and be executed in docker-compose directory!
+
+b) Execute from your docker-compose directory:
+```
+docker-compose down --rmi all
+sudo rm -rf installation
+```
+It will remove all containers, images, networks and volumes created by your docker-compose.
+
+2. Agents
+
+You need manually remove your agents using docker CLI.
+
+
+## Troubleshooting
+```
+docker-compose logs
+docker-compose logs installer
+docker-compose logs appmon_server
+docker-compose logs appmon_collector
+docker-compose logs appmon_java_agent
+```
+optionally: -f for constant follow logs

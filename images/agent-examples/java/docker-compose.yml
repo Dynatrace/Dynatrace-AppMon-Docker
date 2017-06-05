@@ -1,0 +1,21 @@
+version: "2.1"
+services:
+    java:
+      image: java
+      container_name: appmon_java_agent
+      hostname: appmon_java_agent
+      build:
+        context: .
+      env_file:
+        - ../../../.env
+      environment:
+        - COMPOSE_PROJECT_NAME
+        - COLLECTOR_NAME=${COLLECTOR_NAME:-"appmon_collector"}
+      volumes:
+          - ../../../installation:$DT_HOME
+      command: java -agentpath:$DT_HOME/agent/lib64/libdtagent.so=name=java-agent,collector=$COLLECTOR_NAME JavaTest
+
+networks:
+  default:
+    external:
+        name: ${COMPOSE_PROJECT_NAME}_appmon_net

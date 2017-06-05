@@ -1,0 +1,26 @@
+version: "2.1"
+services:
+    httpd:
+      image: httpd
+      hostname: appmon_httpd_agent
+      container_name: appmon_httpd_agent
+      ports:
+        - 80
+      env_file:
+        - ../../../.env
+      environment:
+        - COMPOSE_PROJECT_NAME
+        - AGENT_NAME=httpd-agent
+        - COLLECTOR_NAME=${COLLECTOR_NAME:-"appmon_collector"}
+      volumes:
+        - ../../../installation:$DT_HOME
+      command: >
+        sh -c " \
+          $DT_HOME/run-wsagent.sh && \
+          (echo LoadModule dtagent_module $DT_HOME/agent/lib64/libdtagent.so >> conf/httpd.conf) && \
+          httpd-foreground"
+
+networks:
+  default:
+    external:
+        name: ${COMPOSE_PROJECT_NAME}_appmon_net

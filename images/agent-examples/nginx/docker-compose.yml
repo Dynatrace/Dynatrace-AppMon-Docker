@@ -1,0 +1,22 @@
+version: "2.1"
+services:
+    nginx:
+      image: nginx
+      hostname: appmon_nginx_agent
+      container_name: appmon_nginx_agent
+      ports:
+        - 80
+      env_file:
+        - ../../../.env
+      environment:
+        - COMPOSE_PROJECT_NAME
+        - AGENT_NAME=nginx-agent
+        - COLLECTOR_NAME=${COLLECTOR_NAME:-"appmon_collector"}
+      volumes:
+        - ../../../installation:$DT_HOME
+      command: sh -c "$DT_HOME/run-wsagent.sh && nginx -g 'daemon off;'"
+
+networks:
+  default:
+    external:
+        name: ${COMPOSE_PROJECT_NAME}_appmon_net

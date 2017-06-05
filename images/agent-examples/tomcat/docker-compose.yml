@@ -1,0 +1,22 @@
+version: "2.1"
+services:
+    tomcat:
+      image: tomcat
+      hostname: appmon_tomcat_agent
+      container_name: appmon_tomcat_agent
+      ports:
+        - 8080
+      env_file:
+        - ../../../.env
+      environment:
+        - COMPOSE_PROJECT_NAME
+        - COLLECTOR_NAME=${COLLECTOR_NAME:-"appmon_collector"}
+        - CATALINA_OPTS="-agentpath:$DT_HOME/agent/lib64/libdtagent.so=name=tomcat-agent,collector=$COLLECTOR_NAME"
+      volumes:
+        - ../../../installation:$DT_HOME
+      command: catalina.sh run
+
+networks:
+  default:
+    external:
+        name: ${COMPOSE_PROJECT_NAME}_appmon_net

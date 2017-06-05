@@ -1,0 +1,23 @@
+version: "2.1"
+services:
+    glassfish:
+        image: glassfish
+        container_name: appmon_glassfish_agent
+        hostname: appmon_glassfish_agent
+        build:
+          context: .
+          args:
+            - AGENT_PATH="-agentpath:$DT_HOME/agent/lib64/libdtagent.so=name=glassfish-agent,collector=$COLLECTOR_NAME"
+        env_file:
+          - ../../../.env
+        environment:
+          - COMPOSE_PROJECT_NAME
+          - DT_HOME
+          - COLLECTOR_NAME=${COLLECTOR_NAME:-"appmon_collector"}
+        volumes:
+          - ../../../installation:$DT_HOME
+
+networks:
+  default:
+    external:
+        name: ${COMPOSE_PROJECT_NAME}_appmon_net
