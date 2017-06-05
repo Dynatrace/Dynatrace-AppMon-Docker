@@ -20,7 +20,7 @@ The home of Dockerized components of the [Dynatrace Application Monitoring](http
 
 ## How it works
 
-Execution of run-appmon-docker.sh script will install full Appmon version on java based image and then it will create containers that will run Appmon Server and Appmon Collector in separated containers without the need of installing any java packages. As the result, you will see two new directories created on your host - installer and installation. The host maps volumes set in installer container. The first volume `installer` will contain Appmon java jar package and other scripts or profiles copied before installation. The second one `installation` will contain your Appmon installation.
+Execution of `run-appmon-docker.sh` script will install full Appmon version on java based image and then it will create containers that will run Appmon Server and Appmon Collector in separated containers without the need of installing any java packages. As the result, you will see two new directories created on your host - installer and installation. The host maps volumes set in installer container. The first volume `installer` will contain Appmon java jar package and other scripts or profiles copied before installation. The second one `installation` will contain your Appmon installation.
 
 Every other container should map 'installation' volume (in practice, they will copy content of this volume) and use it for its purpose. It allows to have one installation and many isolated Servers or Collectors configured.
 
@@ -34,9 +34,9 @@ If -r options is enabled it means that 'rerun' mode is turned on and it will sto
 sudo ./run-appmon-docker.sh
 ```
 Options:
--r - it will removed your docker-compose containers, images, volumes and networks created by docker-compose and run it (as a deamon) from scratch (but keeping previously downloaded appmon jar package if exists). IMPORTANT! Needs sudo privileges!
--b - it will execute 'docker-compose up -d' with --build option
--t - it will execute tests verifying if installation finished successfully and services are running
+`-r` - it will removed your docker-compose containers, images, volumes and networks created by docker-compose and run it (as a deamon) from scratch (but keeping previously downloaded appmon jar package if exists). IMPORTANT! Needs sudo privileges!
+`-b` - it will execute 'docker-compose up -d' with --build option
+`-t` - it will execute tests verifying if installation finished successfully and services are running
 
 
 ## License
@@ -59,7 +59,7 @@ In order to connect agent you need to run docker-compose up including destinatio
 ```
 docker-compose -f images/agent-examples/tomcat/docker-compose.yml up -d
 ```
--d means that it will run as a daemon process.
+`-d` means that it will run as a daemon process.
 
 ## Restarting
 
@@ -82,7 +82,7 @@ a) run `clean-docker.sh` script:
 sudo ./clean-docker.sh
 ```
 Options:
--a - it will also remove installer directory with downloaded Appmon jar package.
+`-a` - it will also remove installer directory with downloaded Appmon jar package.
 
 IMPORTANT! Needs sudo privileges and be executed in docker-compose directory!
 
@@ -106,4 +106,4 @@ docker-compose logs appmon_server
 docker-compose logs appmon_collector
 docker-compose logs appmon_java_agent
 ```
-optionally: -f for constant follow logs
+optionally: `-f` for constant follow logs
