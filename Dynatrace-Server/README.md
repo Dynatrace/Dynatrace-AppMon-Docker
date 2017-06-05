@@ -9,7 +9,23 @@ This project contains files for building and running the Dynatrace Server compon
 
 ## Run a container
 
-[Docker Compose](https://docs.docker.com/compose/) is a tool for defining and running multi-container applications, where an application's services are configured in `docker-compose.yml` files. Typically, you would run an application via `docker-compose [-f docker-compose.yml] up`.
+[Docker Compose](https://docs.docker.com/compose/) is a tool for defining and running multi-container applications, where an application's services are configured in `docker-compose.yml` files. Typically, you would run an application via `docker-compose [-f docker-compose.yml] up [-d]`.
+
+
+Depending on what base image you want (slim alpine or bigger debian) you can switch it in docker-compose.yml file by changing the value for `dockerfile` attribute in `docker-compose.yml` file, e.g:
+
+```
+dockerfile: Dockerfile-debian
+```
+
+### Examples
+
+Creates a Dockerized Dynatrace Server instance named `dtserver`:
+
+```
+docker-compose up -d
+docker-compose logs -f
+```
 
 
 ### Configuration
@@ -40,25 +56,6 @@ APPMON_COLLECTOR_PORT=9998
 APPMON_COLLECTOR_SERVER_SSL_PORT=6699
 ```
 
-## Run a container
-
-[Docker Compose](https://docs.docker.com/compose/) is a tool for defining and running multi-container applications, where an application's services are configured in `docker-compose.yml` files. Typically, you would run an application via `docker-compose [-f docker-compose.yml] up [-d]`.
-
-
-Depending on what base image you want (slim alpine or bigger debian) you can switch it in docker-compose.yml file by changing the value for `dockerfile` attribute in `docker-compose.yml` file, e.g:
-
-```
-dockerfile: Dockerfile-debian
-```
-
-### Examples
-
-Creates a Dockerized Dynatrace Server instance named `dtserver`:
-
-```
-docker-compose up -d
-docker-compose logs -f
-```
 
 ### Licensing
 
