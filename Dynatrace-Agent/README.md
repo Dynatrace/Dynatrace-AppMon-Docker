@@ -12,7 +12,7 @@ This project contains files for building and running the Dynatrace Agent compone
 docker-compose [-f docker-compose.yml] up [-d]
 ```
 
-Depending on what base image you want (slim alpine or bigger debian) you can switch it in docker-compose.yml file by changing the value for `dockerfile` attribute, e.g:
+Depending on what base image you want (slim alpine or bigger debian) you can switch it in `docker-compose.yml` file by changing the value for `dockerfile` attribute, e.g:
 
 ```
 dockerfile: Dockerfile-debian
