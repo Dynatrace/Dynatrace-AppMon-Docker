@@ -3,13 +3,13 @@ services:
     dtcollector:
       build:
         context: .
-        dockerfile: Dockerfile
+        dockerfile: Dockerfile-debian
         args:
           - DT_HOME=${DT_HOME}
           - VERSION=${VERSION}
           - BUILD_VERSION=${BUILD_VERSION}
       container_name: "${DT_COLLECTOR_NAME}"
-      image: "dynatrace/collector:7.0-slim"
+      image: "dynatrace/collector:7.0-full"
       environment:
         - COMPOSE_PROJECT_NAME
         - DT_HOME
