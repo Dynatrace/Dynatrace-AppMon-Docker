@@ -6,16 +6,31 @@ This project contains files for building and running the Dynatrace Server compon
 
 **Note**: the `dynatrace/server` image has been designed to run in low-traffic, resource-constrained **demo and trial environments**. Dynatrace does not support its use in production or pre-production grade environments of any kind.
 
+## Build image
+```
+docker-compose [-f docker-compose-debian.yml] build
+```
 
 ## Run a container
 
-[Docker Compose](https://docs.docker.com/compose/) is a tool for defining and running multi-container applications, where an application's services are configured in `docker-compose.yml` files. Typically, you would run an application via `docker-compose [-f docker-compose.yml] up [-d]`.
+[Docker Compose](https://docs.docker.com/compose/) is a tool for defining and running multi-container applications, where an application's services are configured in `docker-compose.yml` files. Typically, you want to use `docker-compose [-f docker-compose-debian.yml] up [-d]`.
 
-
-Depending on what base image you want (slim alpine or bigger debian) you can switch it in `docker-compose.yml` file by changing the value for `dockerfile` attribute, e.g:
-
+### Other commands:
+In order to create container
 ```
-dockerfile: Dockerfile-debian
+docker-compose [-f docker-compose-debian.yml] create
+```
+In order to run already built container:
+```
+docker-compose [-f docker-compose-debian.yml] start
+```
+In order to build unbuilt image(s), (re)create container(s) and run them
+```
+docker-compose [-f docker-compose-debian.yml] up [-d]
+```
+In order to build unbuilt image(s), (re)create container(s) and run them with *rebuilding*
+```
+docker-compose [-f docker-compose-debian.yml] up [-d] --build
 ```
 
 ### Examples
@@ -26,7 +41,6 @@ Creates a Dockerized Dynatrace Server instance named `dtserver`:
 docker-compose up -d
 docker-compose logs -f
 ```
-
 
 ### Configuration
 
