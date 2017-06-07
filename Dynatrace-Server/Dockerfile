@@ -24,7 +24,7 @@ RUN sed -i '/^-memory/,/^unsupported/c\-memory\ndemo' ${DT_HOME}/dtserver.ini &&
 	sed -i '/^-memory/,/^unsupported/c\-memory\ndemo' ${DT_HOME}/dtfrontendserver.ini && \
 	echo '-Dcom.dynatrace.diagnostics.filestore.numStorageThreads=1' >> ${DT_HOME}/dtserver.ini
 
-COPY /build/config/server.config.xml ${DT_HOME}/server/conf
+COPY build/config/server.config.xml ${DT_HOME}/server/conf
 
 ENV GLIBC_RUNTIME_DEPS=libgcc
 
