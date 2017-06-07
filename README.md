@@ -35,33 +35,61 @@ docker-compose logs -f
 `docker-compose up` will install Dynatrace Server, Dynatrace Collector and Dynatrace Master Agent. Then, you can install your [Agents](https://github.com/Dynatrace/Dynatrace-Docker/tree/7.0_GA/Dynatrace-Agent-Examples).
 
 
-## How to build image?
+## How to build images?
+
+In order to build slim version:
 ```
-docker-compose [-f docker-compose-debian.yml] build
+docker-compose build
+```
+In order to build full version:
+```
+docker-compose -f docker-compose-debian.yml build
 ```
 
-## How to manage containers?
+## How to run containers?
 
-[Docker Compose](https://docs.docker.com/compose/) is a tool for defining and running multi-container applications, where an application's services are configured in `docker-compose.yml` files. 
+[Docker Compose](https://docs.docker.com/compose/) is a tool for defining and running multi-container applications, where an application's services are configured in `docker-compose.yml` files. Typically, you want to use:
 
+```
+docker-compose up -d
+```
+or
+```
+docker-compose up -d --build
+```
 
 ### Other commands:
 
+*NOTE*:
+`[]` - is optional
+`-f` - uses alternative docker-compose.yml file
+`-d` - run as deamon
+
+If you want to run slim version(s) you can skip -f option.
+
 In order to create container(s)
 ```
-docker-compose [-f docker-compose-debian.yml] create
+docker-compose create
+docker-compose -f docker-compose-debian.yml create
 ```
-In order to run already created container(s):
+In order to run already created container(s)
 ```
-docker-compose [-f docker-compose-debian.yml] start
+docker-compose start
+docker-compose -f docker-compose-debian.yml start
 ```
-In order to build unbuilt image(s), (re)create container(s) and run them
+In order to build unbuilt image(s), (re)create container(s) and run them in deamon mode
 ```
-docker-compose [-f docker-compose-debian.yml] up [-d]
+docker-compose up -d
+docker-compose -f docker-compose-debian.yml up -d
 ```
-In order to rebuild image(s), (re)create container(s) and run them
+In order to rebuild image(s), (re)create container(s) and run them in deamon mode
 ```
-docker-compose [-f docker-compose-debian.yml] up [-d] --build
+docker-compose up -d --build
+docker-compose -f docker-compose-debian.yml up -d --build
+```
+If you run as deamon and you want to see logs, you can follow each service logs using
+```
+docker-compose logs -f
 ```
 
 
