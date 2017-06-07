@@ -35,6 +35,12 @@ docker-compose logs -f
 `docker-compose up` will install Dynatrace Server, Dynatrace Collector and Dynatrace Master Agent. Then, you can install your [Agents](https://github.com/Dynatrace/Dynatrace-Docker/tree/7.0_GA/Dynatrace-Agent-Examples).
 
 
+## How to build images?
+
+```
+docker-compose build
+```
+
 ## Configuration
 
 Configuration relies on supplying docker-compose with environment variables defined in .env file. Some variables need to be passed to Dockerfile via ARG for correct building an Server image, that's way it is recommended to change variables only from .env file.
