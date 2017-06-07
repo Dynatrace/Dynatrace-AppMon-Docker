@@ -40,8 +40,8 @@ RUN apk add --no-cache ${GLIBC_RUNTIME_DEPS} && \
 # Make sure that hostname resolution looks up /etc/hosts prior to /etc/resolv.conf
 RUN echo 'hosts: files mdns4_minimal [NOTFOUND=return] dns mdns4' >> /etc/nsswitch.conf
 
-COPY /build/scripts/pull-license-key-file.sh ${DT_HOME}
-COPY /build/scripts/run-server-process.sh ${DT_HOME}
+COPY build/scripts/pull-license-key-file.sh ${DT_HOME}
+COPY build/scripts/run-server-process.sh ${DT_HOME}
 
 ENV DT_HOME=${DT_HOME}
 ENV DT_SERVER_LICENSE_KEY_FILE_URL=${DT_SERVER_LICENSE_KEY_FILE_URL}
