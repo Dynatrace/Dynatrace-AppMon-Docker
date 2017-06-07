@@ -20,7 +20,7 @@ In order to create container
 ```
 docker-compose [-f docker-compose-debian.yml] create
 ```
-In order to run already built container:
+In order to run already created container:
 ```
 docker-compose [-f docker-compose-debian.yml] start
 ```
