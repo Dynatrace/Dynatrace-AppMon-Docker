@@ -21,9 +21,9 @@ ENV SLAVE_AGENT_PORT=8001
 
 ENV DT_INSTALL_DEPS=curl\ openjdk8-jre-base
 ENV DT_RUNTIME_DEPS=bash
-COPY /build/scripts/install-agent.sh /usr/bin
-COPY /build/scripts/install-node-agent.sh /usr/bin
-COPY /build/scripts/install-wsagent.sh /usr/bin
+COPY build/scripts/install-agent.sh /usr/bin
+COPY build/scripts/install-node-agent.sh /usr/bin
+COPY build/scripts/install-wsagent.sh /usr/bin
 
 RUN  apk update && apk add --no-cache ${DT_INSTALL_DEPS} ${DT_RUNTIME_DEPS} && \
      mkdir -p ${DT_HOME} && \
@@ -33,7 +33,7 @@ RUN  apk update && apk add --no-cache ${DT_INSTALL_DEPS} ${DT_RUNTIME_DEPS} && \
      /usr/bin/install-node-agent.sh ${NODE_AGENT_INSTALLER_URL} && \
 	 apk del ${DT_INSTALL_DEPS}
 
-ADD  /build/bin/dtnginx_offsets.json.tar.gz ${DT_HOME}/agent/conf
-COPY /build/scripts/run-wsagent.sh ${DT_HOME}
+ADD  build/bin/dtnginx_offsets.json.tar.gz ${DT_HOME}/agent/conf
+COPY build/scripts/run-wsagent.sh ${DT_HOME}
 
 CMD while true; do sleep 1; done
