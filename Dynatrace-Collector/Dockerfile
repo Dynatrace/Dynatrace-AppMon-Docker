@@ -35,10 +35,10 @@ RUN apk add --no-cache ${GLIBC_RUNTIME_DEPS} && \
 RUN echo 'hosts: files mdns4_minimal [NOTFOUND=return] dns mdns4' >> /etc/nsswitch.conf
 
 ENV WAIT_FOR_CMD_RUNTIME_DEPS=netcat-openbsd
-COPY /build/scripts/wait-for-cmd.sh /usr/local/bin
+COPY build/scripts/wait-for-cmd.sh /usr/local/bin
 RUN apk add --no-cache ${WAIT_FOR_CMD_RUNTIME_DEPS}
 
-COPY /build/scripts/run-collector-process.sh ${DT_HOME}
+COPY build/scripts/run-collector-process.sh ${DT_HOME}
 
 ENV DT_HOME=${DT_HOME}
 CMD [ "sh", "-c", "${DT_HOME}/run-collector-process.sh" ]
