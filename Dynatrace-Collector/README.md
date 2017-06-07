@@ -26,7 +26,7 @@ In order to build unbuilt image(s), (re)create container(s) and run them
 ```
 docker-compose [-f docker-compose-debian.yml] up [-d]
 ```
-In order to rebuild image(s), (re)create container(s) and run them with *rebuilding*
+In order to rebuild image(s), (re)create container(s) and run them
 ```
 docker-compose [-f docker-compose-debian.yml] up [-d] --build
 ```
