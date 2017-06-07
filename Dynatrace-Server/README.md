@@ -38,12 +38,12 @@ docker-compose up -d --build
 
 If you want to run slim version(s) you can skip -f option.
 
-In order to create container
+In order to create container(s)
 ```
 docker-compose create
 docker-compose -f docker-compose-debian.yml create
 ```
-In order to run already created container:
+In order to run already created container(s)
 ```
 docker-compose start
 docker-compose -f docker-compose-debian.yml start
@@ -58,7 +58,7 @@ In order to rebuild image(s), (re)create container(s) and run them in deamon mod
 docker-compose up -d --build
 docker-compose -f docker-compose-debian.yml up -d --build
 ```
-If you run as deamon and you want to see logs, you can follow each service logs using:
+If you run as deamon and you want to see logs, you can follow each service logs using
 ```
 docker-compose logs -f
 ```
