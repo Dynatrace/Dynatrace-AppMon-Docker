@@ -33,7 +33,7 @@ docker-compose [-f docker-compose-debian.yml] up [-d] --build
 
 ### Examples
 
-Creates a Dockerized Dynatrace Server instance named `dtcollector`:
+Creates a Dockerized Dynatrace Collector instance named `dtcollector`:
 
 ```
 docker-compose up -d
