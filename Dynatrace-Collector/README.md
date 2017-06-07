@@ -4,20 +4,42 @@
 
 This project contains files for building and running the Dynatrace Collector component of the [Dynatrace Application Monitoring](http://www.dynatrace.com/docker) enterprise solution for deep end-to-end application monitoring in Docker. Ready-made images are available on the [Docker Hub](https://hub.docker.com/r/dynatrace/collector/).
 
+## Build image
+```
+docker-compose [-f docker-compose-debian.yml] build
+```
+
 ## Run a container
 
-[Docker Compose](https://docs.docker.com/compose/) is a tool for defining and running multi-container applications, where an application's services are configured in `docker-compose.yml` files. Typically, you would run an application via `docker-compose [-f docker-compose.yml] up`.
+[Docker Compose](https://docs.docker.com/compose/) is a tool for defining and running multi-container applications, where an application's services are configured in `docker-compose.yml` files. Typically, you want to use `docker-compose [-f docker-compose-debian.yml] up [-d]`.
+
+### Other commands:
+In order to create container
+```
+docker-compose [-f docker-compose-debian.yml] create
+```
+In order to run already built container:
+```
+docker-compose [-f docker-compose-debian.yml] start
+```
+In order to build unbuilt image(s), (re)create container(s) and run them
+```
+docker-compose [-f docker-compose-debian.yml] up [-d]
+```
+In order to build unbuilt image(s), (re)create container(s) and run them with *rebuilding*
+```
+docker-compose [-f docker-compose-debian.yml] up [-d] --build
+```
+
+### Examples
+
+Creates a Dockerized Dynatrace Server instance named `dtcollector`:
 
 ```
 docker-compose up -d
 docker-compose logs -f
 ```
 
-Depending on what base image you want (slim alpine or bigger debian) you can switch it in `docker-compose.yml` file by changing the value for `dockerfile` attribute, e.g:
-
-```
-dockerfile: Dockerfile-debian
-```
 
 ### Configuration
 
