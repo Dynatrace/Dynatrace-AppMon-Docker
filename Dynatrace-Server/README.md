@@ -7,35 +7,53 @@ This project contains files for building and running the Dynatrace Server compon
 **Note**: the `dynatrace/server` image has been designed to run in low-traffic, resource-constrained **demo and trial environments**. Dynatrace does not support its use in production or pre-production grade environments of any kind.
 
 ## Build image
+
+In order to build slim version:
 ```
-docker-compose [-f docker-compose-debian.yml] build
+docker-compose build
+```
+In order to build full version:
+```
+docker-compose -f docker-compose-debian.yml build
 ```
 
 ## Run a container
 
-[Docker Compose](https://docs.docker.com/compose/) is a tool for defining and running multi-container applications, where an application's services are configured in `docker-compose.yml` files. Typically, you want to use `docker-compose [-f docker-compose-debian.yml] up [-d]`.
+[Docker Compose](https://docs.docker.com/compose/) is a tool for defining and running multi-container applications, where an application's services are configured in `docker-compose.yml` files. Typically, you want to use:
+
+```
+docker-compose up -d
+```
 
 ### Other commands:
+
+*NOTE*:
+`[]` - is optional
+`-f` - uses alternative docker-compose.yml file
+`-d` - run as deamon
+
+If you want to run slim version(s) you can skip -f option.
+
 In order to create container
 ```
-docker-compose [-f docker-compose-debian.yml] create
+docker-compose create
 ```
 In order to run already created container:
 ```
-docker-compose [-f docker-compose-debian.yml] start
+docker-compose start
 ```
-In order to build unbuilt image(s), (re)create container(s) and run them
+In order to build unbuilt image(s), (re)create container(s) and run them in deamon mode
 ```
-docker-compose [-f docker-compose-debian.yml] up [-d]
+docker-compose up -d
 ```
-In order to rebuild image(s), (re)create container(s) and run them
+In order to rebuild image(s), (re)create container(s) and run them in deamon mode
 ```
-docker-compose [-f docker-compose-debian.yml] up [-d] --build
+docker-compose up -d --build
 ```
 
 ### Examples
 
-Creates a Dockerized Dynatrace Server instance named `dtserver`:
+Creates a Dockerized Dynatrace Server instance named `dtserver` in deamon mode and then follow each service logs:
 
 ```
 docker-compose up -d
