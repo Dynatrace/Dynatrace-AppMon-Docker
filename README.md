@@ -35,11 +35,35 @@ docker-compose logs -f
 `docker-compose up` will install Dynatrace Server, Dynatrace Collector and Dynatrace Master Agent. Then, you can install your [Agents](https://github.com/Dynatrace/Dynatrace-Docker/tree/7.0_GA/Dynatrace-Agent-Examples).
 
 
-## How to build images?
+## How to build image?
+```
+docker-compose [-f docker-compose-debian.yml] build
+```
 
+## How to manage containers?
+
+[Docker Compose](https://docs.docker.com/compose/) is a tool for defining and running multi-container applications, where an application's services are configured in `docker-compose.yml` files. 
+
+
+### Other commands:
+
+In order to create container(s)
 ```
-docker-compose build
+docker-compose [-f docker-compose-debian.yml] create
 ```
+In order to run already created container(s):
+```
+docker-compose [-f docker-compose-debian.yml] start
+```
+In order to build unbuilt image(s), (re)create container(s) and run them
+```
+docker-compose [-f docker-compose-debian.yml] up [-d]
+```
+In order to rebuild image(s), (re)create container(s) and run them
+```
+docker-compose [-f docker-compose-debian.yml] up [-d] --build
+```
+
 
 ## Configuration
 
