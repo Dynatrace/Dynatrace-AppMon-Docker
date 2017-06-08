@@ -9,7 +9,7 @@ services:
           - VERSION=${VERSION}
           - BUILD_VERSION=${BUILD_VERSION}
       container_name: "${DT_COLLECTOR_NAME}"
-      image: "dynatrace/collector:7.0-full"
+      image: "dynatrace/collector:7.0-debian"
       environment:
         - COMPOSE_PROJECT_NAME
         - DT_HOME

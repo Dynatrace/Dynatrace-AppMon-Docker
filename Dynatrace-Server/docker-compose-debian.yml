@@ -10,7 +10,7 @@ services:
           - BUILD_VERSION=${BUILD_VERSION}
           - DT_SERVER_LICENSE_KEY_FILE_URL=${DT_SERVER_LICENSE_KEY_FILE_URL}
       container_name: "${DT_SERVER_NAME}"
-      image: "dynatrace/server:7.0-full"
+      image: "dynatrace/server:7.0"
       environment:
         - COMPOSE_PROJECT_NAME
         - DT_SERVER_LICENSE_KEY_FILE_URL

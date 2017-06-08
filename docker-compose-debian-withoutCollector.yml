@@ -10,7 +10,7 @@ services:
           - BUILD_VERSION=${BUILD_VERSION}
           - DT_SERVER_LICENSE_KEY_FILE_URL=${DT_SERVER_LICENSE_KEY_FILE_URL}
       container_name: "${DT_SERVER_NAME}"
-      image: "dynatrace/server:7.0-full"
+      image: "dynatrace/server:7.0-debian"
       environment:
         - COMPOSE_PROJECT_NAME
         - DT_HOME
@@ -45,7 +45,7 @@ services:
           - VERSION=${VERSION}
           - BUILD_VERSION=${BUILD_VERSION}
       container_name: "${DT_AGENT_NAME}"
-      image: "dynatrace/agent:7.0-full"
+      image: "dynatrace/agent:7.0-debian"
       environment:
         - COMPOSE_PROJECT_NAME
         - DT_HOME

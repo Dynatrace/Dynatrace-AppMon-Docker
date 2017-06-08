@@ -9,7 +9,7 @@ services:
           - VERSION=${VERSION}
           - BUILD_VERSION=${BUILD_VERSION}
       container_name: "${DT_AGENT_NAME}"
-      image: "dynatrace/agent:7.0-slim"
+      image: "dynatrace/agent:7.0"
       env_file:
         - ../.env
       environment:
