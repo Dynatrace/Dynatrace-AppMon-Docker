@@ -1,16 +1,16 @@
 ![Docker Logo](https://github.com/Dynatrace/Dynatrace-Docker/blob/images/docker-logo.png)
 
-# Dynatrace-Docker
+# Dynatrace-Docker for AppMon
 
 The home of Dockerized components of the [Dynatrace Application Monitoring](http://www.dynatrace.com/docker) enterprise solution. All components are available on the [Docker Hub](https://hub.docker.com/u/dynatrace/).
 
-## What is Dynatrace?
+## What is Dynatrace AppMon?
 
 [Dynatrace Application Monitoring](http://www.dynatrace.com/en/products/application-monitoring.html), with its [PurePath technology](http://www.dynatrace.com/en_us/application-performance-management/products/purepath-technology.html), is the world's leading application monitoring solution - trusted by more than 7500 customers around the globe. It supports all your major technology stacks and integrates into your Continuous Delivery pipelines to allow you to build world-class, high-quality software.
 
-## How to install Dynatrace?
+## How to install Dynatrace AppMon?
 
-You can quickly bring up an entire Dockerized Dynatrace environment by using [Docker Compose](https://docs.docker.com/compose/) with any of the provided `docker-compose.yml` files like so:
+You can quickly bring up an entire Dockerized Dynatrace AppMon environment by using [Docker Compose](https://docs.docker.com/compose/) with any of the provided `docker-compose.yml` files like so:
 
 ```
 git clone https://github.com/Dynatrace/Dynatrace-Docker.git
@@ -103,7 +103,7 @@ Please see each component's README file for more specific details about configur
 
 ### Licensing
 
-The example above leaves your Dynatrace environment without a proper license. However, you can add your license by editing .env file and put it as value for DT_SERVER_LICENSE_KEY_FILE_URL variable.
+The example above leaves your Dynatrace AppMon environment without a proper license. However, you can add your license by editing .env file and put it as value for DT_SERVER_LICENSE_KEY_FILE_URL variable.
 
 Also, you can conveniently have a license provisioned at container runtime by specifying a URL to a [Dynatrace License Key File](http://bit.ly/dttrial-docker-github) in the `DT_SERVER_LICENSE_KEY_FILE_URL` environment variable. If you don't happen to have a web server available to serve the license file to you, [Netcat](https://en.wikipedia.org/wiki/Netcat) can conveniently serve it from your command line, exactly once, via `nc -l 1337 < dtlicense.key`, where `1337` is an available port on your local machine. A `sudo` may be required depending on which port you eventually decide to choose.
 
@@ -115,13 +115,13 @@ DT_SERVER_LICENSE_KEY_FILE_URL=http://$YOUR_IP:1337 docker-compose up
 
 ### Obtaining a License
 
-In the example above, you have to let `DT_SERVER_LICENSE_KEY_FILE_URL` point to a valid Dynatrace License Key file. If you don't have a license yet, you can [obtain a Dynatrace Free Trial License here](http://bit.ly/dttrial-docker-github). However, you don't need to have your license file hosted by a server: if you can run a console, [Netcat](https://en.wikipedia.org/wiki/Netcat) can conveniently serve it for you on port `80` via `sudo nc -l 80 < dtlicense.key`.
+In the example above, you have to let `DT_SERVER_LICENSE_KEY_FILE_URL` point to a valid Dynatrace AppMon License Key file. If you don't have a license yet, you can [obtain a Dynatrace AppMon Free Trial License here](http://bit.ly/dttrial-docker-github). However, you don't need to have your license file hosted by a server: if you can run a console, [Netcat](https://en.wikipedia.org/wiki/Netcat) can conveniently serve it for you on port `80` via `sudo nc -l 80 < dtlicense.key`.
 
 ## How to Monitor your Dockerized Application?
 
 See the following integrations for more information:
 
-- [Dockerized Dynatrace Agent: Examples](https://github.com/Dynatrace/Dynatrace-Docker/tree/7.0_GA/Dynatrace-Agent-Examples)
+- [Dockerized AppMon Agent: Examples](https://github.com/Dynatrace/Dynatrace-Docker/tree/7.0_GA/Dynatrace-Agent-Examples)
 - [Dockerized easyTravel Application](https://github.com/Dynatrace-Innovationlab/easyTravel-Docker)
 
 ![Dockerized Application](https://github.com/Dynatrace/Dynatrace-Docker/blob/images/dockerized-application.png)
