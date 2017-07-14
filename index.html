@@ -12,7 +12,7 @@
   <body>
     <section class="page-header">
       <div class="company-logo"></div>
-      <h1 class="project-name">Dynatrace in Docker</h1>
+      <h1 class="project-name">Dynatrace AppMon in Docker</h1>
       <h2 class="project-tagline">The home of Dockerized components of the Dynatrace Application Monitoring enterprise solution.</h2>
       <a href="https://github.com/dynaTrace/Dynatrace-Docker" class="btn">View on GitHub</a>
       <a href="https://github.com/dynaTrace/Dynatrace-Docker/archive/v6.5.zip" class="btn">Download for v6.5 .zip</a>
@@ -21,17 +21,17 @@
     <section class="main-content">
       <p class="technology-logo"><img src="https://raw.githubusercontent.com/dynaTrace/Dynatrace-Docker/gh-pages/images/docker-logo.png" alt="Docker Logo"></p>
       <h1>
-      <a id="dynatrace-docker" class="anchor" href="#dynatrace-docker" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Dynatrace-Docker</h1>
+      <a id="dynatrace-docker" class="anchor" href="#dynatrace-docker" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Dynatrace-Docker for AppMon</h1>
       <p>The home of Dockerized components of the <a href="http://www.dynatrace.com/en/ecosystem/docker.html">Dynatrace Application Monitoring</a> enterprise solution. All components are available on the <a href="https://hub.docker.com/u/dynatrace/">Docker Hub</a>.</p>
       <h2>
-      <a id="what-is-dynatrace" class="anchor" href="#what-is-dynatrace" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>What is Dynatrace?</h2>
+      <a id="what-is-dynatrace" class="anchor" href="#what-is-dynatrace" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>What is Dynatrace AppMon?</h2>
       <p><a href="http://www.dynatrace.com/en/products/application-monitoring.html">Dynatrace Application Monitoring</a>, with its <a href="http://www.dynatrace.com/en_us/application-performance-management/products/purepath-technology.html">PurePath technology</a>, is the world's leading application monitoring solution - trusted by more than 7500 customers around the globe. It supports all your major technology stacks and integrates into your Continuous Delivery pipelines to allow you to build world-class, high-quality software.</p>
       <h2>
-      <a id="how-to-install-dynatrace" class="anchor" href="#how-to-install-dynatrace" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>How to install Dynatrace?</h2>
-      <p>You can quickly bring up an entire Dockerized Dynatrace environment by using <a href="https://docs.docker.com/compose/">Docker Compose</a> with the provided <code>docker-compose.yml</code> file like so:</p>
+      <a id="how-to-install-dynatrace" class="anchor" href="#how-to-install-dynatrace" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>How to install Dynatrace AppMon?</h2>
+      <p>You can quickly bring up an entire Dockerized Dynatrace AppMon environment by using <a href="https://docs.docker.com/compose/">Docker Compose</a> with the provided <code>docker-compose.yml</code> file like so:</p>
       <pre><code>DT_SERVER_LICENSE_KEY_FILE_URL=http://repo.internal/dtlicense.key \
 docker-compose up</code></pre>
-      <p>See the following Dockerized Dynatrace components for more information:</p>
+      <p>See the following Dockerized Dynatrace AppMon components for more information:</p>
       <ul>
         <li><a href="https://github.com/dynaTrace/Dynatrace-Docker/tree/master/Dynatrace-Server">Dockerized Dynatrace Server</a></li>
         <li><a href="https://github.com/dynaTrace/Dynatrace-Docker/tree/master/Dynatrace-Collector">Dockerized Dynatrace Collector</a></li>
@@ -39,12 +39,12 @@ docker-compose up</code></pre>
       </ul>
       <h3>
       <a id="licensing" class="anchor" href="#licensing" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Licensing</h3>
-      <p>In the example above, you have to let <code>DT_SERVER_LICENSE_KEY_FILE_URL</code> point to a valid Dynatrace License Key file. If you don't have a license yet, you can <a href="http://bit.ly/dttrial-docker-github">obtain a Dynatrace Free Trial License here</a>. However, you don't need to have your license file hosted by a server: if you can run a console, <a href="https://en.wikipedia.org/wiki/Netcat">Netcat</a> can conveniently serve it for you on port <code>80</code> via <code>sudo nc -l 80 &lt; dtlicense.key</code>.</p>
+      <p>In the example above, you have to let <code>DT_SERVER_LICENSE_KEY_FILE_URL</code> point to a valid Dynatrace AppMon License Key file. If you don't have a license yet, you can <a href="http://bit.ly/dttrial-docker-github">obtain a Dynatrace AppMon Free Trial License here</a>. However, you don't need to have your license file hosted by a server: if you can run a console, <a href="https://en.wikipedia.org/wiki/Netcat">Netcat</a> can conveniently serve it for you on port <code>80</code> via <code>sudo nc -l 80 &lt; dtlicense.key</code>.</p>
       <h2>
       <a id="how-to-monitor-your-dockerized-application" class="anchor" href="#how-to-monitor-your-dockerized-application" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>How to Monitor your Dockerized Application?</h2>
       <p>See the following integrations for more information:</p>
       <ul>
-        <li><a href="https://github.com/dynaTrace/Dynatrace-Docker/tree/master/Dynatrace-Agent-Examples">Dockerized Dynatrace Agent: Examples</a></li>
+        <li><a href="https://github.com/dynaTrace/Dynatrace-Docker/tree/master/Dynatrace-Agent-Examples">Dockerized Dynatrace AppMon Agent: Examples</a></li>
         <li><a href="https://github.com/dynaTrace/Dynatrace-easyTravel-Docker">Dockerized easyTravel Application</a></li>
       </ul>
       <p><img src="https://raw.githubusercontent.com/dynaTrace/Dynatrace-Docker/images/dockerized-application.png" alt="Dockerized Application"></p>
