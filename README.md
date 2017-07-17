@@ -2,7 +2,7 @@
 
 # Dynatrace-Docker for AppMon
 
-The home of Dockerized components of the [Dynatrace Application Monitoring](http://www.dynatrace.com/docker) enterprise solution. All components are available on the [Docker Hub](https://hub.docker.com/u/dynatrace/).
+The home of Dockerized components of the [Dynatrace Application Monitoring](http://www.dynatrace.com/en/products/application-monitoring.html) enterprise solution. All components are available on the [Docker Hub](https://hub.docker.com/u/dynatrace/).
 
 ## What is Dynatrace AppMon?
 
