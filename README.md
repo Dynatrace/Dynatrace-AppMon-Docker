@@ -8,6 +8,8 @@ The home of Dockerized components of the [Dynatrace Application Monitoring](http
 
 [Dynatrace Application Monitoring](http://www.dynatrace.com/en/products/application-monitoring.html), with its [PurePath technology](http://www.dynatrace.com/en_us/application-performance-management/products/purepath-technology.html), is the world's leading application monitoring solution - trusted by more than 7500 customers around the globe. It supports all your major technology stacks and integrates into your Continuous Delivery pipelines to allow you to build world-class, high-quality software.
 
+If you are looking for monitoring containerized applications in dynamic Docker environments, please visit [Dynatrace SaaS Docker monitoring](https://www.dynatrace.com/technologies/cloud-and-microservices/docker-monitoring).
+
 ## How to install Dynatrace AppMon?
 
 You can quickly bring up an entire Dockerized Dynatrace AppMon environment by using [Docker Compose](https://docs.docker.com/compose/) with any of the provided `docker-compose.yml` files like so:
