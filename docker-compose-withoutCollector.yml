@@ -19,6 +19,8 @@ services:
         # Browser to server ports NonSSL 8020 SSL 8021 (to start the Webstart Client)
         - "${APPMON_WEB_CLIENT_NONSSL_PORT:-8020}:8020"
         - "${APPMON_WEB_CLIENT_SSL_PORT:-8021}:8021"
+        # 9911 AppMon Web
+        - "${APPMON_WEB_SSL_PORT:-9911}:9911"
         # 8040  Non SSL Collector to server port for Web Base Agents (or direct agent to server)
         # 8041  SSL Collector to server port for Web Base Agents (or direct agent to server)
         - "${APPMON_ONEAGENT_NONSSL_SERVER_PORT:-8040}:8040"
