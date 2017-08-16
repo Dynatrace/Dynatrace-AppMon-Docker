@@ -1,6 +1,6 @@
-![Docker Logo](https://github.com/Dynatrace/Dynatrace-Docker/blob/images/docker-logo.png)
+![Docker Logo](https://github.com/Dynatrace/Dynatrace-AppMon-Docker/blob/images/docker-logo.png)
 
-# Dynatrace-Docker for AppMon
+# Dynatrace-AppMon-Docker for AppMon
 
 The home of Dockerized components of the [Dynatrace Application Monitoring](http://www.dynatrace.com/en/products/application-monitoring.html) enterprise solution. All components are available on the [Docker Hub](https://hub.docker.com/u/dynatrace/).
 
@@ -15,14 +15,14 @@ If you are looking for monitoring containerized applications in dynamic Docker e
 You can quickly bring up an entire Dockerized Dynatrace AppMon environment by using [Docker Compose](https://docs.docker.com/compose/) with any of the provided `docker-compose.yml` files like so:
 
 ```
-git clone https://github.com/Dynatrace/Dynatrace-Docker.git
-cd Dynatrace-Docker
+git clone https://github.com/Dynatrace/Dynatrace-AppMon-Docker.git
+cd Dynatrace-AppMon-Docker
 docker-compose up
 ```
 in case of using branch:
 ```
-git clone https://github.com/Dynatrace/Dynatrace-Docker.git -b <BRANCH_NAME>
-cd Dynatrace-Docker
+git clone https://github.com/Dynatrace/Dynatrace-AppMon-Docker.git -b <BRANCH_NAME>
+cd Dynatrace-AppMon-Docker
 docker-compose up
 ```
 In order to be able to work further on the same instance with Appmon running in the background use deamon option:
@@ -34,7 +34,7 @@ Logs can be displayed by:
 docker-compose logs -f
 ```
 
-`docker-compose up` will install Dynatrace Server, Dynatrace Collector and Dynatrace Master Agent. Then, you can install your [Agents](https://github.com/Dynatrace/Dynatrace-Docker/tree/7.0_GA/Dynatrace-Agent-Examples).
+`docker-compose up` will install Dynatrace Server, Dynatrace Collector and Dynatrace Master Agent. Then, you can install your [Agents](https://github.com/Dynatrace/Dynatrace-AppMon-Docker/tree/7.0_GA/Dynatrace-Agent-Examples).
 
 
 ## How to build images?
