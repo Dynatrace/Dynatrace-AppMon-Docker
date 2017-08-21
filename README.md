@@ -120,6 +120,7 @@ DT_SERVER_LICENSE_KEY_FILE_URL=http://$YOUR_IP:1337 docker-compose up
 In the example above, you have to let `DT_SERVER_LICENSE_KEY_FILE_URL` point to a valid Dynatrace AppMon License Key file. If you don't have a license yet, you can [obtain a Dynatrace AppMon Free Trial License here](http://bit.ly/dttrial-docker-github). However, you don't need to have your license file hosted by a server: if you can run a console, [Netcat](https://en.wikipedia.org/wiki/Netcat) can conveniently serve it for you on port `80` via `sudo nc -l 80 < dtlicense.key`.
 
 ## How to Monitor your Dockerized Application?
+[Performance Clinic](https://www.youtube.com/watch?v=B_oWkBjH-Uk&list=PLqt2rd0eew1bmDn54E2_M2uvbhm_WxY_6&index=37)
 
 See the following integrations for more information:
 
