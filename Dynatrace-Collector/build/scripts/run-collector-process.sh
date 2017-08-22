@@ -20,6 +20,7 @@ SERVER_COLLECTOR_PORT=${APPMON_COLLECTOR_SERVER_SSL_PORT:-"6699"}
 SERVER=${DT_COLLECTOR_SERVER:-"${SERVER_HOST_NAME}:${SERVER_COLLECTOR_PORT}"}
 
 # Wait for the server to start serving collectors.
+echo Wait command: "nc -z `echo ${SERVER} | sed 's/:/ /'`"
 wait-for-cmd.sh "nc -z `echo ${SERVER} | sed 's/:/ /'`" 360
 
 ${DT_HOME}/dtcollector -instance ${NAME} \
