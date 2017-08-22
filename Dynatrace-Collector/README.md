@@ -102,6 +102,26 @@ The following *environment variables* together form the memory configuration of 
 | DT_COLLECTOR_JVM_MAX_PERM_SIZE | "128m"   | The collector's maximum Java permanent generation size.
 
 
+## Running container with docker run
+
+You can reuse .env file to run containter directly using docker run command. 
+DT_SERVER_NAME and DT_COLLECTOR_SERVER should point to your AppMon server.
+
+```
+export DT_COLLECTOR_NAME=dt-collector-docker1
+
+docker run -d --name ${DT_COLLECTOR_NAME} \
+  --env DT_COLLECTOR_NAME=${DT_COLLECTOR_NAME} \
+  --env-file .env \
+  --hostname dt-collector-docker.cloud \
+  -p 9998:9998 \
+  --volume /opt/dynatrace/${DT_COLLECTOR_NAME}/log:/opt/dynatrace/log/collector/ \
+  --volume /opt/dynatrace/${DT_COLLECTOR_NAME}/instances:/opt/dynatrace/collector/instances/${DT_COLLECTOR_NAME} \
+  --publish-all \
+   dynatrace/collector:7.0 
+
+```
+
 ## Dockerized Dynatrace Components
 
 See the following Dockerized Dynatrace components and examples for more information:
