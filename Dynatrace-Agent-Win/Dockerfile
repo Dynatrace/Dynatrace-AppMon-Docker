@@ -13,4 +13,4 @@ COPY ["./Scripts","/Scripts"]
 RUN	C:\Scripts\install-agent.ps1
 RUN	C:\Scripts\install-wsagent.ps1
 
-ENTRYPOINT ["C:\\Scripts\\run-wsagent.ps1"]
+ENTRYPOINT ["C:\\Scripts\\run-wsagent.cmd"]

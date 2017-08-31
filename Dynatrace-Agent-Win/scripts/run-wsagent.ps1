@@ -14,8 +14,6 @@ If (!($env:DT_COLLECTOR_NAME)) { $env:DT_COLLECTOR_NAME = "dtcollector" }
 If (!($env:APPMON_COLLECTOR_PORT)) { $env:APPMON_COLLECTOR_PORT = "9998" }
 $COLLECTOR = $env:DT_COLLECTOR_NAME + ":" + $env:APPMON_COLLECTOR_PORT
 
-
-$WSAGENT_BIN = $env:DT_HOME + "\agent\lib\dtwsagent.exe"
 $WSAGENT_INI = $env:DT_HOME + "\agent\conf\dtwsagent.ini"
 
 $dtwsagent = Get-Content $WSAGENT_INI
@@ -28,6 +26,5 @@ New-ItemProperty -Path HKLM:\SOFTWARE\Wow6432Node\dynaTrace\Agent\Whitelist\1 -P
 New-ItemProperty -Path HKLM:\SOFTWARE\Wow6432Node\dynaTrace\Agent\Whitelist\1 -PropertyType String -Name "server" -Value "$env:DT_COLLECTOR_NAME"
 New-ItemProperty -Path HKLM:\SOFTWARE\Wow6432Node\dynaTrace\Agent\Whitelist\1 -PropertyType String -Name "port" -Value "$env:APPMON_COLLECTOR_PORT"
 
-Start-Process -FilePath $WSAGENT_BIN -ArgumentList '-service'
-
-C:\ServiceMonitor.exe w3svc
+Start-Service -Name "Dynatrace Web Server Agent $env:VERSION"
+Start-Service -Name "W3SVC"
