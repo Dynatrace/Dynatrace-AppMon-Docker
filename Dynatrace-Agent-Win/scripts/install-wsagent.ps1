@@ -1,8 +1,8 @@
 Import-Module WebAdministration
-New-WebGlobalModule -Name IISmoduleX86 -Image "$env:DT_HOME\agent\lib\dtagent.dll" -Precondition "bitness32"
-New-WebGlobalModule -Name IISmoduleX64 -Image "$env:DT_HOME\agent\lib64\dtagent.dll" -Precondition "bitness64"
-Enable-WebGlobalModule -Name IISmoduleX86 -Precondition "bitness32"
-Enable-WebGlobalModule -Name IISmoduleX64 -Precondition "bitness64"
+New-WebGlobalModule -Name "dynaTrace IIS Webserver Agent" -Image "$env:DT_HOME\agent\lib\dtagent.dll" -Precondition "bitness32"
+New-WebGlobalModule -Name "dynaTrace IIS Webserver Agent (x64)" -Image "$env:DT_HOME\agent\lib64\dtagent.dll" -Precondition "bitness64"
+Disable-WebGlobalModule -Name "dynaTrace IIS Webserver Agent"
+Disable-WebGlobalModule -Name "dynaTrace IIS Webserver Agent (x64)"
 
 New-Item -Path HKLM:\SOFTWARE\Wow6432Node\dynaTrace
 New-Item -Path HKLM:\SOFTWARE\Wow6432Node\dynaTrace\Agent

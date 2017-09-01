@@ -33,8 +33,9 @@ Configuration relies on supplying docker-compose with environment variables defi
 | DT_HOME               | "c:\dynatrace"            | Path to dynatrace installation directory
 | DT_AGENT_NAME         | "dtagent"                   | A name that applies to both the agent and the container instance.
 | DT_COLLECTOR_NAME     | "dtcollector"               | A name that applies to both the collector and the container instance.
-| VERSION               | "7.0"                       | GA version
-| BUILD_VERSION         | "7.0.0.2469"                | Build version
+| DT_VERSION            | "7.0"                       | GA version
+| DT_BUILD_VERSION      | "7.0.0.2469"                | Build version
+| DT_ENABLE_AGENT       | "True"                      | Enable/Disable agent on container.
 
 
 

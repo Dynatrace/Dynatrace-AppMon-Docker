@@ -6,8 +6,8 @@ services:
         dockerfile: Dockerfile
         args:
           - DT_HOME=${DT_HOME}
-          - VERSION=${VERSION}
-          - BUILD_VERSION=${BUILD_VERSION}
+          - DT_VERSION=${DT_VERSION}
+          - DT_BUILD_VERSION=${DT_BUILD_VERSION}
       container_name: "${DT_AGENT_NAME}"
       image: "dynatrace/agent-win:7.0"
       env_file:

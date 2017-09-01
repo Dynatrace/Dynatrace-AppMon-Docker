@@ -26,5 +26,8 @@ New-ItemProperty -Path HKLM:\SOFTWARE\Wow6432Node\dynaTrace\Agent\Whitelist\1 -P
 New-ItemProperty -Path HKLM:\SOFTWARE\Wow6432Node\dynaTrace\Agent\Whitelist\1 -PropertyType String -Name "server" -Value "$env:DT_COLLECTOR_NAME"
 New-ItemProperty -Path HKLM:\SOFTWARE\Wow6432Node\dynaTrace\Agent\Whitelist\1 -PropertyType String -Name "port" -Value "$env:APPMON_COLLECTOR_PORT"
 
+Import-Module WebAdministration
+Enable-WebGlobalModule -Name "dynaTrace IIS Webserver Agent"
+Enable-WebGlobalModule -Name "dynaTrace IIS Webserver Agent (x64)"
+
 Start-Service -Name "Dynatrace Web Server Agent $env:VERSION"
-Start-Service -Name "W3SVC"
