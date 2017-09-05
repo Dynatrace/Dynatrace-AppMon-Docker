@@ -1,0 +1,19 @@
+version: "3"
+services:
+    dtagent:
+      build:
+        context: .
+        dockerfile: Dockerfile
+        args:
+          - DT_HOME=${DT_HOME}
+          - DT_VERSION=${DT_VERSION}
+          - DT_BUILD_VERSION=${DT_BUILD_VERSION}
+      container_name: "${DT_AGENT_NAME}"
+      image: "dynatrace/agent-win:7.0"
+      env_file:
+        - .\.env
+
+networks:
+  default:
+    external:
+      name: nat
