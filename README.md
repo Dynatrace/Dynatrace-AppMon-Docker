@@ -99,7 +99,7 @@ docker-compose logs -f
 
 Configuration relies on supplying docker-compose with environment variables defined in .env file. Some variables need to be passed to Dockerfile via ARG for correct building an Server image, that's way it is recommended to change variables only from .env file.
 
-Ports can be also configured in .env file. By default it uses values from [Communication Connections Documentation](https://community-staging.dynalabs.io/support/doc/appmon/installation/set-up-communication-connections/).
+Ports can be also configured in .env file. By default it uses values from [Communication Connections Documentation](https://www.dynatrace.com/support/doc/appmon/installation/set-up-communication-connections/).
 
 Please see each component's README file for more specific details about configuration.
 
@@ -120,7 +120,8 @@ DT_SERVER_LICENSE_KEY_FILE_URL=http://$YOUR_IP:1337 docker-compose up
 In the example above, you have to let `DT_SERVER_LICENSE_KEY_FILE_URL` point to a valid Dynatrace AppMon License Key file. If you don't have a license yet, you can [obtain a Dynatrace AppMon Free Trial License here](http://bit.ly/dttrial-docker-github). However, you don't need to have your license file hosted by a server: if you can run a console, [Netcat](https://en.wikipedia.org/wiki/Netcat) can conveniently serve it for you on port `80` via `sudo nc -l 80 < dtlicense.key`.
 
 ## How to Monitor your Dockerized Application?
-[Performance Clinic](https://www.youtube.com/watch?v=B_oWkBjH-Uk&list=PLqt2rd0eew1bmDn54E2_M2uvbhm_WxY_6&index=37)
+[Performance Clinic - Agents](https://www.youtube.com/watch?v=B_oWkBjH-Uk&list=PLqt2rd0eew1bmDn54E2_M2uvbhm_WxY_6&index=37)
+[Performance Clinic - Collector](https://www.youtube.com/watch?v=UyRCJ-Xi3a4&list=PLqt2rd0eew1bmDn54E2_M2uvbhm_WxY_6&index=74)
 
 See the following integrations for more information:
 
