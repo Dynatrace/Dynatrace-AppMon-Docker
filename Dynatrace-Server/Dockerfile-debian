@@ -9,7 +9,7 @@ ARG BUILD_VERSION
 ARG VERSION
 ARG DT_SERVER_LICENSE_KEY_FILE_URL
 
-ENV INSTALLER_FILE_NAME=dynatrace-server-${BUILD_VERSION}-linux-x86.jar
+ENV INSTALLER_FILE_NAME=dynatrace-full-${BUILD_VERSION}-linux-x86-64.jar
 ENV INSTALLER_URL=https://files.dynatrace.com/downloads/OnPrem/dynaTrace/${VERSION}/${BUILD_VERSION}/${INSTALLER_FILE_NAME}
 
 ENV DT_INSTALL_DEPS=openjdk-8-jre-headless
