@@ -15,7 +15,7 @@ ENV DT_INSTALL_DEPS=curl\ openjdk8-jre-base
 ENV DT_RUNTIME_DEPS=bash
 
 RUN apk update && apk add --no-cache ${DT_INSTALL_DEPS} ${DT_RUNTIME_DEPS} && \
-    curl --insecure -L -o /tmp/${INSTALLER_FILE_NAME} ${INSTALLER_URL} && \
+    curl ${CURL_INSECURE:+"--insecure"} -L -o /tmp/${INSTALLER_FILE_NAME} ${INSTALLER_URL} && \
 	java -jar /tmp/${INSTALLER_FILE_NAME} -b 64 -t ${DT_HOME} -y && \
 	apk del ${DT_INSTALL_DEPS} && \
 	rm -rf /tmp/*

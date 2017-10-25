@@ -17,7 +17,7 @@ ENV DT_RUNTIME_DEPS=curl\ procps
 RUN echo "deb http://http.debian.net/debian jessie-backports main" > /etc/apt/sources.list.d/jessie-backports.list && \
 	apt-get update -y && apt-get install -y --no-install-recommends -t jessie-backports ${DT_INSTALL_DEPS} ${DT_RUNTIME_DEPS} && \
     mkdir -p ${DT_HOME} && \
-    curl --insecure -L -o /tmp/${INSTALLER_FILE_NAME} ${INSTALLER_URL} && \
+    curl ${CURL_INSECURE:+"--insecure"} -L -o /tmp/${INSTALLER_FILE_NAME} ${INSTALLER_URL} && \
 	java -jar /tmp/${INSTALLER_FILE_NAME} -b 64 -t ${DT_HOME} -y && \
     apt-get remove --purge -y ${DT_INSTALL_DEPS} && \
     rm -rf /var/lib/apt/lists/* /tmp/*
