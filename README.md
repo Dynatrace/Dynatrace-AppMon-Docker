@@ -103,6 +103,8 @@ Ports can be also configured in .env file. By default it uses values from [Commu
 
 Please see each component's README file for more specific details about configuration.
 
+If you want to *not* validate CA certificate for curl commands, you may want to initialize `CURL_INSECURE` variable to any value for image build.
+
 ### Licensing
 
 The example above leaves your Dynatrace AppMon environment without a proper license. However, you can add your license by editing .env file and put it as value for DT_SERVER_LICENSE_KEY_FILE_URL variable.
