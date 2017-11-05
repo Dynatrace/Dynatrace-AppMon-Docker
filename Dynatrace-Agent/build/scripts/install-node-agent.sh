@@ -1,5 +1,5 @@
 #!/bin/bash
-BINSTALLER_URL="$1"
+INSTALLER_URL="$1"
 INSTALLER_FILE_NAME=`basename ${INSTALLER_URL}`
 
 cd /tmp
