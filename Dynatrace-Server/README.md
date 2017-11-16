@@ -6,76 +6,50 @@ This project contains files for building and running the Dynatrace Server compon
 
 **Note**: the `dynatrace/server` image has been designed to run in low-traffic, resource-constrained **demo and trial environments**. Dynatrace does not support its use in production or pre-production grade environments of any kind.
 
-## Build image
+## How to install Dynatrace AppMon Server?
 
-In order to build slim version:
-```
-docker-compose build
-```
-In order to build full version:
-```
-docker-compose -f docker-compose-debian.yml build
-```
+*By default, we use root user for running containers. It is a bad practice so, if you can, you should run them as non-root. Go to the `Running Dynatrace Appmon Server as non-root` paragraph for running and configuration instructions.*
 
-## Run a container
+### Running Dynatrace Appmon Server as root
 
-[Docker Compose](https://docs.docker.com/compose/) is a tool for defining and running multi-container applications, where an application's services are configured in `docker-compose.yml` files. Typically, you want to use:
+If you don't need to use a non-root or dedicated user to run Dynatrace Appmon Server, you can quickly bring up an entire Dockerized Dynatrace AppMon environment by using [Docker Compose](https://docs.docker.com/compose/) with the provided `docker-compose.yml` file like so :
 
 ```
+git clone https://github.com/Dynatrace/Dynatrace-AppMon-Docker.git
+cd Dynatrace-AppMon-Docker/Dynatrace-Server
 docker-compose up -d
 ```
-or
-```
-docker-compose up -d --build
-```
-
-### Other commands:
-
-*NOTE*:
-`[]` - is optional
-`-f` - uses alternative docker-compose.yml file
-`-d` - run as deamon
-
-If you want to run slim version(s) you can skip -f option.
-
-In order to create container(s)
-```
-docker-compose create
-docker-compose -f docker-compose-debian.yml create
-```
-In order to run already created container(s)
-```
-docker-compose start
-docker-compose -f docker-compose-debian.yml start
-```
-In order to build unbuilt image(s), (re)create container(s) and run them in deamon mode
-```
-docker-compose up -d
-docker-compose -f docker-compose-debian.yml up -d
-```
-In order to rebuild image(s), (re)create container(s) and run them in deamon mode
-```
-docker-compose up -d --build
-docker-compose -f docker-compose-debian.yml up -d --build
-```
-If you run as deamon and you want to see logs, you can follow each service logs using
+In order to browse logs produced by the service you can use:
 ```
 docker-compose logs -f
 ```
+
+### Running Dynatrace Appmon Server as non-root
+
+For the security reasons, as Docker co-uses the host kernel, all Dynatrace Appmon services are recommended to be run as non-root user. Therefore, you should operate on dedicated user on your host machine and **set `CUID` (User ID) and `CGID` (Group ID) variables in `.env` file for your user**. By default it uses root. During image builds, user with the same ids will be created and used for running containers. 
+
+After you change user/group id variables, you may run Dynatrace Appmon Server in two ways:
+* executing `run-dtserver-as-nonroot.sh` script as dedicated user. This user should be able to run docker services (he should be added to the docker group). Example: `./run-dtserver-as-nonroot.sh -f docker-compose-debian.yml -b`, where `-b` states for docker-compose's `--build`
+
+or
+* running `docker-compose up` **after** making sure that host directory for `DT_SERVER_LOG_PATH_ON_HOST` is created and ownership is set to your dedicated user. Otherwise logs will not be available for you on host machine and service might not run due to permission denied error. 
+ 
 
 ### Configuration
 
 Configuration relies on supplying docker-compose with environment variables defined in .env file. Some variables need to be passed to Dockerfile via ARG for correct building an Server image, that's way it is recommended to change variables only in .env file.
 
-
-| Environment Variable  | Defaults                    | Description
-|:----------------------|:------------------------------------------------|:-----------
-| COMPOSE_PROJECT_NAME  | "dynatracedocker"           | A name of the Project. Also used for network naming.
-| DT_HOME               | "/opt/dynatrace"            | Path to dynatrace installation directory
-| DT_SERVER_NAME        | "dtserver"                  | A name that applies to both the server and the container instance.
-| DT_SERVER_LICENSE_KEY_FILE_URL     | N/A            | A URL to a Dynatrace License Key file (optional). If the variable remains unset, a license key has to be provided through the Dynatrace Client.
-| VERSION               | "7.0"                       | GA version
-| BUILD_VERSION         | "7.0.0.2469"                | Build version
+| Environment Variable          | Defaults                    | Description
+|:------------------------------|:----------------------------|:-----------
+| COMPOSE_PROJECT_NAME          | "dynatracedocker"           | A name of the Project. Also used for network naming.
+| DT_HOME                       | "/opt/dynatrace"            | Path to dynatrace installation directory
+| DT_SERVER_NAME                | "dtserver"                  | A name that applies to both the server and the container instance.
+| DT_SERVER_LICENSE_KEY_FILE_URL     | N/A                    | A URL to a Dynatrace License Key file (optional). If the variable remains unset, a license key has to be provided through the Dynatrace Client.
+| VERSION                       | "7.0"                       | GA version
+| BUILD_VERSION                 | "7.0.0.2469"                | Build version
+| CUID                          | 0                           | User ID of the user that is used in the docker container
+| CGID                          | 0                           | Group ID of the user that is used in the docker container
+| DT_SERVER_LOG_PATH_ON_HOST    | /tmp/log/dynatrace/servers/dtserver                           | Log path on the host
 
 Ports are also defined in .env file based on current [Communication Connections](https://community-staging.dynalabs.io/support/doc/appmon/installation/set-up-communication-connections/)
 
@@ -92,12 +66,9 @@ APPMON_COLLECTOR_PORT=9998
 APPMON_COLLECTOR_SERVER_SSL_PORT=6699
 ```
 
-
 ### Licensing
 
 The examples above leave your Dynatrace environment without a proper license. However, you can conveniently have a license provisioned at container runtime by specifying a URL to a [Dynatrace License Key File](http://bit.ly/dttrial-docker-github) in the `DT_SERVER_LICENSE_KEY_FILE_URL` environment variable. If you don't happen to have a web server available to serve the license file to you, [Netcat](https://en.wikipedia.org/wiki/Netcat) can conveniently serve it from your command line, exactly once, via `nc -l 1337 < dtlicense.key`, where `1337` is an available port on your local machine. A `sudo` may be required depending on which port you eventually decide to choose.
-
-
 
 ## Dockerized Dynatrace Components
 

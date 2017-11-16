@@ -12,99 +12,49 @@ If you are looking for monitoring containerized applications in dynamic Docker e
 
 ## How to install Dynatrace AppMon?
 
-You can quickly bring up an entire Dockerized Dynatrace AppMon environment by using [Docker Compose](https://docs.docker.com/compose/) with any of the provided `docker-compose.yml` files like so:
+*By default, we use root user for running containers. It is a bad practice so, if you can, you should run them as non-root. Go to the `Running Dynatrace Appmon containers as non-root` paragraph for running and configuration instructions.*
+
+### Running Dynatrace Appmon services as root
+
+If you don't need to use a non-root or dedicated user to run Dynatrace Appmon docker containers, you can quickly bring up an entire Dockerized Dynatrace AppMon environment by using [Docker Compose](https://docs.docker.com/compose/) with any of the provided `docker-compose.yml` files  like so :
 
 ```
 git clone https://github.com/Dynatrace/Dynatrace-AppMon-Docker.git
 cd Dynatrace-AppMon-Docker
-docker-compose up
-```
-in case of using branch:
-```
-git clone https://github.com/Dynatrace/Dynatrace-AppMon-Docker.git -b <BRANCH_NAME>
-cd Dynatrace-AppMon-Docker
-docker-compose up
-```
-In order to be able to work further on the same instance with Appmon running in the background use deamon option:
-```
 docker-compose up -d
 ```
-Logs can be displayed by:
+This will install and run all Appmon services like Server, Collector and Master Agent in daemon mode in single containers joined the same subnetwork. Then, you can install your [Agents](https://github.com/Dynatrace/Dynatrace-AppMon-Docker/tree/master/Dynatrace-Agent-Examples) (see Configuration part for further details).
+In order to browse logs produced by these services you can use:
 ```
 docker-compose logs -f
 ```
 
-`docker-compose up` will install Dynatrace Server, Dynatrace Collector and Dynatrace Master Agent. Then, you can install your [Agents](https://github.com/Dynatrace/Dynatrace-AppMon-Docker/tree/7.0_GA/Dynatrace-Agent-Examples).
+### Running Dynatrace Appmon services as non-root
+
+For the security reasons, as Docker co-uses the host kernel, all Dynatrace Appmon services are recommended to be run as non-root user. Therefore, you should operate on dedicated user on your host machine and **set `CUID` (User ID) and `CGID` (Group ID) variables in `.env` file for your user**. By default it uses root. During image builds, user with the same ids will be created and used for running containers. 
+
+After you change user/group id variables, you may run Dynatrace Appmon in two ways:
+* executing `run-as-nonroot.sh` script as dedicated user. This user should be able to run docker services (he should be added to the docker group). Example: `./run-as-nonroot.sh -f docker-compose-debian.yml -b`, where `-b` states for docker-compose's `--build` 
 
 
-## How to build images?
 
-In order to build slim version:
-```
-docker-compose build
-```
-In order to build full version:
-```
-docker-compose -f docker-compose-debian.yml build
-```
 
-## How to run containers?
-
-[Docker Compose](https://docs.docker.com/compose/) is a tool for defining and running multi-container applications, where an application's services are configured in `docker-compose.yml` files. Typically, you want to use:
-
-```
-docker-compose up -d
-```
 or
-```
-docker-compose up -d --build
-```
+* running `docker-compose up` **after** making sure that host directories for `DT_SERVER_LOG_PATH_ON_HOST`, `DT_COLLECTOR_LOG_PATH_ON_HOST` and `DT_AGENT_LOG_PATH_ON_HOST` are created and ownerships are set to your dedicated user. Otherwise logs will not be available for you on host machine and/or some service might not run due to permission denied error. 
+  
+#### Configuration
 
-### Other commands:
+Configuration relies on supplying `docker-compose` with environment variables defined in `.env` file. Some .env files variables need to be passed to `Dockerfile` via `ARG` for correct building component images, that's way it is recommended to change variables only from `.env` file.
 
-*NOTE*:
-`[]` - is optional
-`-f` - uses alternative docker-compose.yml file
-`-d` - run as deamon
+**Ports** can be also configured in .env file. By default it uses values from [Communication Connections Documentation](https://www.dynatrace.com/support/doc/appmon/installation/set-up-communication-connections/).
 
-If you want to run slim version(s) you can skip -f option.
+**Master Agent** (`dtagent`) service only prepares required libraries and installation scripts for triggering agents. Running and configuring agents is manual action done by the user. Examples are [here](https://github.com/Dynatrace/Dynatrace-AppMon-Docker/tree/master/Dynatrace-Agent-Examples).
+If you are not familiar with Appmon Agents concept, please read: [Agents Overview](https://www.dynatrace.com/support/doc/appmon/application-monitoring/agents/), [Agents Installation](https://www.dynatrace.com/support/doc/appmon/installation/install-agents/), [Agents Configuration](https://www.dynatrace.com/support/doc/appmon/installation/set-up-agents/)
 
-In order to create container(s)
-```
-docker-compose create
-docker-compose -f docker-compose-debian.yml create
-```
-In order to run already created container(s)
-```
-docker-compose start
-docker-compose -f docker-compose-debian.yml start
-```
-In order to build unbuilt image(s), (re)create container(s) and run them in deamon mode
-```
-docker-compose up -d
-docker-compose -f docker-compose-debian.yml up -d
-```
-In order to rebuild image(s), (re)create container(s) and run them in deamon mode
-```
-docker-compose up -d --build
-docker-compose -f docker-compose-debian.yml up -d --build
-```
-If you run as deamon and you want to see logs, you can follow each service logs using
-```
-docker-compose logs -f
-```
-
-
-## Configuration
-
-Configuration relies on supplying docker-compose with environment variables defined in .env file. Some variables need to be passed to Dockerfile via ARG for correct building an Server image, that's way it is recommended to change variables only from .env file.
-
-Ports can be also configured in .env file. By default it uses values from [Communication Connections Documentation](https://www.dynatrace.com/support/doc/appmon/installation/set-up-communication-connections/).
+If you *don't* want to validate CA certificate for curl commands, you may want to initialize `CURL_INSECURE` variable to any value for image build.
 
 Please see each component's README file for more specific details about configuration.
-
-If you want to *not* validate CA certificate for curl commands, you may want to initialize `CURL_INSECURE` variable to any value for image build.
-
+ 
 ### Licensing
 
 The example above leaves your Dynatrace AppMon environment without a proper license. However, you can add your license by editing .env file and put it as value for DT_SERVER_LICENSE_KEY_FILE_URL variable.
@@ -127,7 +77,7 @@ In the example above, you have to let `DT_SERVER_LICENSE_KEY_FILE_URL` point to 
 
 See the following integrations for more information:
 
-- [Dockerized AppMon Agent: Examples](https://github.com/Dynatrace/Dynatrace-Docker/tree/7.0_GA/Dynatrace-Agent-Examples)
+- [Dockerized AppMon Agent: Examples](https://github.com/Dynatrace/Dynatrace-AppMon-Docker/tree/master/Dynatrace-Agent-Examples)
 - [Dockerized easyTravel Application](https://github.com/Dynatrace-Innovationlab/easyTravel-Docker)
 
 ![Dockerized Application](https://github.com/Dynatrace/Dynatrace-Docker/blob/images/dockerized-application.png)

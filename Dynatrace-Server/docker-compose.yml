@@ -9,6 +9,8 @@ services:
           - VERSION=${VERSION}
           - BUILD_VERSION=${BUILD_VERSION}
           - DT_SERVER_LICENSE_KEY_FILE_URL=${DT_SERVER_LICENSE_KEY_FILE_URL}
+          - CUID=${CUID}
+          - CGID=${CGID}
       container_name: "${DT_SERVER_NAME}"
       image: "dynatrace/server:7.0"
       environment:
@@ -32,9 +34,10 @@ services:
         - "${APPMON_COLLECTOR_SERVER_SSL_PORT:-6699}:6699"
         # 9998 - Legacy Agent to server embedded Collector (default)
       volumes:
-        - "/tmp/log/dynatrace/servers/dtserver:${DT_HOME}/log/server/dtserver"
+        - "${DT_SERVER_LOG_PATH_ON_HOST}:${DT_HOME}/log/server/dtserver"
       networks:
         - appmon
+      user: "${CUID}:${CGID}"
 
 networks:
     appmon:

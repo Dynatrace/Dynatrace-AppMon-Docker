@@ -1,7 +1,6 @@
 FROM java:7
 
-LABEL maintainer "Martin Etmajer <martin.etmajer@dynatrace.com>"
-LABEL maintainer2 "Blazej Tomaszewski <blazej.tomaszewski@dynatrace.com>"
+LABEL maintainer="Blazej Tomaszewski <blazej.tomaszewski@dynatrace.com>"
 
 ARG AGENT_LIB64_PATH
 ARG DT_COLLECTOR_NAME

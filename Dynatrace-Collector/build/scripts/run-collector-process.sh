@@ -1,4 +1,5 @@
 #!/bin/bash
+
 NAME=${DT_COLLECTOR_NAME:-"dtcollector"}
 GROUP_NAME=${DT_COLLECTOR_GROUP_NAME}
 
@@ -18,6 +19,12 @@ JVM_MAX_PERM_SIZE=${DT_COLLECTOR_JVM_MAX_PERM_SIZE:-"128m"}
 SERVER_HOST_NAME=${DT_SERVER_NAME:-"dtserver"}
 SERVER_COLLECTOR_PORT=${APPMON_COLLECTOR_SERVER_SSL_PORT:-"6699"}
 SERVER=${DT_COLLECTOR_SERVER:-"${SERVER_HOST_NAME}:${SERVER_COLLECTOR_PORT}"}
+
+#getent passwd ${CGUID} > /dev/null 2&>1
+#result=$?;
+#
+#if [ $result -nq 0 ]; then
+#fi
 
 # Wait for the server to start serving collectors.
 echo Wait command: "nc -z `echo ${SERVER} | sed 's/:/ /'`"

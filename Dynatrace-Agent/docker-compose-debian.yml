@@ -25,9 +25,10 @@ services:
       volumes:
         - ${DT_HOME}
         - ${DT_HOME}/agent/lib64
-        - /tmp/log/dynatrace/agents/dtagent:${DT_HOME}/log/agent
+        - "${DT_AGENT_LOG_PATH_ON_HOST}:${DT_HOME}/log/agent"
       networks:
         - appmon
+      user: "${CUID}:${CGID}"
 
 networks:
     appmon:

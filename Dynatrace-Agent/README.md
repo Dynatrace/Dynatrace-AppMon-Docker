@@ -2,64 +2,36 @@
 
 # Dynatrace-Agent
 
-This project contains files for building and running the Dynatrace Agent component of the [Dynatrace Application Monitoring](http://www.dynatrace.com/docker) enterprise solution for deep end-to-end application monitoring in Docker. Ready-made images are available on the [Docker Hub](https://hub.docker.com/r/dynatrace/agent/). Please refer to the [Dynatrace Agent Examples](https://github.com/Dynatrace/Dynatrace-AppMon-Docker/tree/master/Dynatrace-Agent-Examples) project for exemplary integrations into Dockerized application processes.
+This project contains files for building and running the Dynatrace Master Agent component of the [Dynatrace Application Monitoring](http://www.dynatrace.com/docker) enterprise solution for deep end-to-end application monitoring in Docker. Ready-made images are available on the [Docker Hub](https://hub.docker.com/r/dynatrace/agent/). Please refer to the [Dynatrace Agent Examples](https://github.com/Dynatrace/Dynatrace-AppMon-Docker/tree/master/Dynatrace-Agent-Examples) project for exemplary integrations into Dockerized application processes.
 
-## Build image
+## How to install Dynatrace AppMon Master Agent?
 
-In order to build slim version:
-```
-docker-compose build
-```
-In order to build full version:
-```
-docker-compose -f docker-compose-debian.yml build
-```
+*By default, we use root user for running containers. It is a bad practice so, if you can, you should run them as non-root. Go to the `Running Dynatrace Appmon Master Agent as non-root` paragraph for running and configuration instructions.*
 
-## Run a container
+### Running Dynatrace Appmon Master Agent as root
 
-[Docker Compose](https://docs.docker.com/compose/) is a tool for defining and running multi-container applications, where an application's services are configured in `docker-compose.yml` files. Typically, you want to use:
+If you don't need to use a non-root or dedicated user to run Dynatrace Appmon Master Agent, you can quickly bring up an entire Dockerized Dynatrace AppMon environment by using [Docker Compose](https://docs.docker.com/compose/) with the provided `docker-compose.yml` file like so :
 
 ```
+git clone https://github.com/Dynatrace/Dynatrace-AppMon-Docker.git
+cd Dynatrace-AppMon-Docker/Dynatrace-Agent
 docker-compose up -d
 ```
-or
-```
-docker-compose up -d --build
-```
-
-### Other commands:
-
-*NOTE*:
-`[]` - is optional
-`-f` - uses alternative docker-compose.yml file
-`-d` - run as deamon
-
-If you want to run slim version(s) you can skip -f option.
-
-In order to create container(s)
-```
-docker-compose create
-docker-compose -f docker-compose-debian.yml create
-```
-In order to run already created container(s):
-```
-docker-compose start
-docker-compose -f docker-compose-debian.yml start
-```
-In order to build unbuilt image(s), (re)create container(s) and run them in deamon mode
-```
-docker-compose up -d
-docker-compose -f docker-compose-debian.yml up -d
-```
-In order to rebuild image(s), (re)create container(s) and run them in deamon mode
-```
-docker-compose up -d --build
-docker-compose -f docker-compose-debian.yml up -d --build
-```
-If you run as deamon and you want to see logs, you can follow each service logs using:
+In order to browse logs produced by the service you can use:
 ```
 docker-compose logs -f
 ```
+
+### Running Dynatrace Appmon Master Agent as non-root
+
+For the security reasons, as Docker co-uses the host kernel, all Dynatrace Appmon services are recommended to be run as non-root user. Therefore, you should operate on dedicated user on your host machine and **set `CUID` (User ID) and `CGID` (Group ID) variables in `.env` file for your user**. By default it uses root. During image builds, user with the same ids will be created and used for running containers. 
+
+After you change user/group id variables, you may run Dynatrace Appmon Master Agent in two ways:
+* executing `run-dtagent-as-nonroot.sh` script as dedicated user. This user should be able to run docker services (he should be added to the docker group). Example: `./run-dtagent-as-nonroot.sh -f docker-compose-debian.yml -b`, where `-b` states for docker-compose's `--build`
+
+or
+* running `docker-compose up` **after** making sure that host directory for `DT_AGENT_LOG_PATH_ON_HOST` is created and ownership is set to your dedicated user. Otherwise logs will not be available for you on host machine and service might not run due to permission denied error. 
+
 
 ### Configuration
 
@@ -79,7 +51,13 @@ Configuration relies on supplying docker-compose with environment variables defi
 | WSAGENT_INI           | "/agent/conf/dtwsagent.ini" | Relative path to dtwsagent.ini
 | VERSION               | "7.0"                       | GA version
 | BUILD_VERSION         | "7.0.0.2469"                | Build version
+| CUID                          | 0                           | User ID of the user that is used in the docker container
+| CGID                          | 0                           | Group ID of the user that is used in the docker container
+| DT_AGENT_LOG_PATH_ON_HOST    | /tmp/log/dynatrace/agents/dtagent                           | Log path on the host
 
+
+**Master Agent** (`dtagent`) service only prepares required libraries and installation scripts for triggering agents. Running and configuring agents is manual action done by the user. Examples are [here](https://github.com/Dynatrace/Dynatrace-AppMon-Docker/tree/master/Dynatrace-Agent-Examples).
+If you are not familiar with Appmon Agents concept, please read: [Agents Overview](https://www.dynatrace.com/support/doc/appmon/application-monitoring/agents/), [Agents Installation](https://www.dynatrace.com/support/doc/appmon/installation/install-agents/), [Agents Configuration](https://www.dynatrace.com/support/doc/appmon/installation/set-up-agents/)
 
 
 ## Problems? Questions? Suggestions?

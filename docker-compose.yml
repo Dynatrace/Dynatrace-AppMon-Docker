@@ -4,10 +4,12 @@ services:
       build:
         context: ./Dynatrace-Server
         args:
-        - DT_HOME=${DT_HOME}
-        - VERSION=${VERSION}
-        - BUILD_VERSION=${BUILD_VERSION}
-        - DT_SERVER_LICENSE_KEY_FILE_URL=${DT_SERVER_LICENSE_KEY_FILE_URL}
+          - DT_HOME=${DT_HOME}
+          - VERSION=${VERSION}
+          - BUILD_VERSION=${BUILD_VERSION}
+          - DT_SERVER_LICENSE_KEY_FILE_URL=${DT_SERVER_LICENSE_KEY_FILE_URL}
+          - CUID=${CUID}
+          - CGID=${CGID}
       container_name: "${DT_SERVER_NAME}"
       image: "dynatrace/server:7.0"
       environment:
@@ -33,9 +35,10 @@ services:
         - "${APPMON_COLLECTOR_SERVER_SSL_PORT:-6699}:6699"
         # 9998 - Legacy Agent to server embedded Collector (default)
       volumes:
-        - /tmp/log/dynatrace/servers/dtserver:${DT_HOME}/log/server/dtserver
+        - "${DT_SERVER_LOG_PATH_ON_HOST}:${DT_HOME}/log/server/dtserver"
       networks:
         - appmon
+      user: "${CUID}:${CGID}"
 
     dtcollector:
       build:
@@ -44,6 +47,8 @@ services:
           - DT_HOME=${DT_HOME}
           - VERSION=${VERSION}
           - BUILD_VERSION=${BUILD_VERSION}
+          - CUID=${CUID}
+          - CGID=${CGID}
       container_name: "${DT_COLLECTOR_NAME}"
       image: "dynatrace/collector:7.0"
       environment:
@@ -55,10 +60,6 @@ services:
         - APPMON_ONEAGENT_NONSSL_PORT
         - APPMON_ONEAGENT_SSL_PORT
         - APPMON_COLLECTOR_SERVER_SSL_PORT
-      volumes:
-        - /tmp/log/dynatrace/collectors/dtcollector:${DT_HOME}/log/collector/dtcollector
-      networks:
-        - appmon
       ports:
         # 9998 - Legacy Agent to Collector
         - "${APPMON_COLLECTOR_PORT:-9998}:9998"
@@ -66,6 +67,11 @@ services:
         - "${APPMON_ONEAGENT_NONSSL_PORT:-8042}:8042"
         # 8043 One Agent to Collector SSL
         - "${APPMON_ONEAGENT_SSL_PORT:-8043}:8043"
+      volumes:
+        - "${DT_COLLECTOR_LOG_PATH_ON_HOST}:${DT_HOME}/log/collector/dtcollector"
+      networks:
+        - appmon
+      user: "${CUID}:${CGID}"
 
     dtagent:
       build:
@@ -74,6 +80,8 @@ services:
           - DT_HOME=${DT_HOME}
           - VERSION=${VERSION}
           - BUILD_VERSION=${BUILD_VERSION}
+          - CUID=${CUID}
+          - CGID=${CGID}
       container_name: "${DT_AGENT_NAME}"
       image: "dynatrace/agent:7.0"
       environment:
@@ -89,9 +97,10 @@ services:
       volumes:
         - ${DT_HOME}
         - ${DT_HOME}/agent/lib64
-        - /tmp/log/dynatrace/agents/dtagent:${DT_HOME}/log/agent
+        - "${DT_AGENT_LOG_PATH_ON_HOST}:${DT_HOME}/log/agent"
       networks:
         - appmon
+      user: "${CUID}:${CGID}"
 
 networks:
     appmon:

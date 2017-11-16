@@ -1,13 +1,14 @@
 #DOCKERFILE FOR DYNATRACE SERVER
 FROM alpine:3.5
 
-LABEL maintainer "Martin Etmajer <martin.etmajer@dynatrace.com>"
-LABEL maintainer2 "Blazej Tomaszewski <blazej.tomaszewski@dynatrace.com>"
+LABEL maintainer="Blazej Tomaszewski <blazej.tomaszewski@dynatrace.com>"
 
 ARG DT_HOME
 ARG BUILD_VERSION
 ARG VERSION
 ARG DT_SERVER_LICENSE_KEY_FILE_URL
+ARG CUID
+ARG CGID
 
 ENV INSTALLER_FILE_NAME=dynatrace-full-${BUILD_VERSION}-linux-x86-64.jar
 ENV INSTALLER_URL=https://files.dynatrace.com/downloads/OnPrem/dynaTrace/${VERSION}/${BUILD_VERSION}/${INSTALLER_FILE_NAME}
@@ -18,6 +19,7 @@ ENV DT_RUNTIME_DEPS=bash\ curl
 RUN apk update && apk add --no-cache ${DT_INSTALL_DEPS} ${DT_RUNTIME_DEPS} && \
     curl ${CURL_INSECURE:+"--insecure"} -L -o /tmp/${INSTALLER_FILE_NAME} ${INSTALLER_URL} && \
 	java -jar /tmp/${INSTALLER_FILE_NAME} -b 64 -t ${DT_HOME} -y && \
+	mkdir -p ${DT_HOME}/log/server/dtserver && \
 	apk del ${DT_INSTALL_DEPS} && \
 	rm -rf /tmp/*
 RUN sed -i '/^-memory/,/^unsupported/c\-memory\ndemo' ${DT_HOME}/dtserver.ini && \
@@ -42,6 +44,12 @@ RUN echo 'hosts: files mdns4_minimal [NOTFOUND=return] dns mdns4' >> /etc/nsswit
 
 COPY build/scripts/pull-license-key-file.sh ${DT_HOME}
 COPY build/scripts/run-server-process.sh ${DT_HOME}
+COPY build/scripts/create-user.sh /tmp
+
+ENV CUID="${CUID:-0}"
+ENV CGID="${CGID:-0}"
+RUN /bin/sh -c /tmp/create-user.sh && rm -rf /tmp/*
+USER ${CUID}:${CGID}
 
 ENV DT_HOME=${DT_HOME}
 ENV DT_SERVER_LICENSE_KEY_FILE_URL=${DT_SERVER_LICENSE_KEY_FILE_URL}

@@ -1,12 +1,13 @@
 #DOCKERFILE FOR DYNATRACE AGENT
 FROM alpine:3.5
 
-LABEL maintainer "Martin Etmajer <martin.etmajer@dynatrace.com>"
-LABEL maintainer2 "Blazej Tomaszewski <blazej.tomaszewski@dynatrace.com>"
+LABEL maintainer="Blazej Tomaszewski <blazej.tomaszewski@dynatrace.com>"
 
 ARG DT_HOME
 ARG BUILD_VERSION
 ARG VERSION
+ARG CUID
+ARG CGID
 
 ENV AGENT_INSTALLER_NAME=dynatrace-agent-${BUILD_VERSION}-unix.jar
 ENV WSAGENT_INSTALLER32_NAME=dynatrace-wsagent-${BUILD_VERSION}-linux-x86-32.tar
@@ -21,6 +22,7 @@ ENV SLAVE_AGENT_PORT=8001
 
 ENV DT_INSTALL_DEPS=curl\ openjdk8-jre-base
 ENV DT_RUNTIME_DEPS=bash
+
 COPY build/scripts/install-agent.sh /usr/bin
 COPY build/scripts/install-node-agent.sh /usr/bin
 COPY build/scripts/install-wsagent.sh /usr/bin
@@ -31,9 +33,16 @@ RUN  apk update && apk add --no-cache ${DT_INSTALL_DEPS} ${DT_RUNTIME_DEPS} && \
      /usr/bin/install-wsagent.sh ${WSAGENT_INSTALLER32_URL} && \
      /usr/bin/install-wsagent.sh ${WSAGENT_INSTALLER64_URL} && \
      /usr/bin/install-node-agent.sh ${NODE_AGENT_INSTALLER_URL} && \
+	 mkdir -p ${DT_HOME}/log/agent && \
 	 apk del ${DT_INSTALL_DEPS}
 
 ADD  build/bin/dtnginx_offsets.json.tar.gz ${DT_HOME}/agent/conf
 COPY build/scripts/run-wsagent.sh ${DT_HOME}
+
+COPY build/scripts/create-user.sh /tmp
+ENV CUID="${CUID:-0}"
+ENV CGID="${CGID:-0}"
+RUN /bin/sh -c /tmp/create-user.sh && rm -rf /tmp/*
+USER ${CUID}:${CGID}
 
 CMD while true; do sleep 1; done

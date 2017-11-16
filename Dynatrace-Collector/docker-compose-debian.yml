@@ -8,6 +8,8 @@ services:
           - DT_HOME=${DT_HOME}
           - VERSION=${VERSION}
           - BUILD_VERSION=${BUILD_VERSION}
+          - CUID=${CUID}
+          - CGID=${CGID}
       container_name: "${DT_COLLECTOR_NAME}"
       image: "dynatrace/collector:7.0-debian"
       environment:
@@ -20,7 +22,7 @@ services:
         - APPMON_ONEAGENT_SSL_PORT
         - APPMON_COLLECTOR_SERVER_SSL_PORT
       volumes:
-        - /tmp/log/dynatrace/collectors/dtcollector:${DT_HOME}/log/collector/dtcollector
+        - "${DT_COLLECTOR_LOG_PATH_ON_HOST}:${DT_HOME}/log/collector/dtcollector"
       networks:
         - appmon
       ports:
@@ -30,6 +32,7 @@ services:
         - "${APPMON_ONEAGENT_NONSSL_PORT:-8042}:8042"
         # 8043 One Agent to Collector SSL
         - "${APPMON_ONEAGENT_SSL_PORT:-8043}:8043"
+      user: "${CUID}:${CGID}"
 
 networks:
     appmon:

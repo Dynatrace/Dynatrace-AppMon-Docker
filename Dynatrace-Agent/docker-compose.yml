@@ -8,6 +8,8 @@ services:
           - DT_HOME=${DT_HOME}
           - VERSION=${VERSION}
           - BUILD_VERSION=${BUILD_VERSION}
+          - CUID=${CUID}
+          - CGID=${CGID}
       container_name: "${DT_AGENT_NAME}"
       image: "dynatrace/agent:7.0"
       env_file:
@@ -25,9 +27,10 @@ services:
       volumes:
         - ${DT_HOME}
         - ${DT_HOME}/agent/lib64
-        - /tmp/log/dynatrace/agents/dtagent:${DT_HOME}/log/agent
+        - "${DT_AGENT_LOG_PATH_ON_HOST}:${DT_HOME}/log/agent"
       networks:
         - appmon
+      user: "${CUID}:${CGID}"
 
 networks:
     appmon:

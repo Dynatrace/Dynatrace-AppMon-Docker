@@ -1,7 +1,6 @@
 FROM glassfish:latest
 
-LABEL maintainer "Martin Etmajer <martin.etmajer@dynatrace.com>"
-LABEL maintainer2 "Blazej Tomaszewski <blazej.tomaszewski@dynatrace.com>"
+LABEL maintainer="Blazej Tomaszewski <blazej.tomaszewski@dynatrace.com>"
 
 ARG DT_AGENT_PATH
 
