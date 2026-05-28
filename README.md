@@ -1,4 +1,5 @@
-![Docker Logo](https://github.com/Dynatrace/Dynatrace-AppMon-Docker/blob/images/docker-logo.png)
+⚠️ This repository has been archived and is no longer maintained.
+The code is available for historical reference or archival purposes.![Docker Logo](https://github.com/Dynatrace/Dynatrace-AppMon-Docker/blob/images/docker-logo.png)
 
 # Dynatrace-AppMon-Docker for AppMon
 
