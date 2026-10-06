@@ -1,4 +1,13 @@
-⚠️ This repository has been archived and is no longer maintained.
+> [!IMPORTANT]
+> **This repository is archived and no longer maintained or supported.**
+>
+> - **Archived:** YYYY-MM-DD
+> - **Reason:** <AppMon product EOL / replaced / merged elsewhere — include a useful explanation>
+> - **Replacement:** <supported successor and migration guidance, or "None">
+>
+> Preserved for historical and migration reference only. No updates, including security updates, will be provided.
+> See the [Dynatrace Archive organization README](https://github.com/Dynatrace-Archive) for usage and security guidance.
+
 The code is available for historical reference or archival purposes.![Docker Logo](https://github.com/Dynatrace/Dynatrace-AppMon-Docker/blob/images/docker-logo.png)
 
 # Dynatrace-AppMon-Docker for AppMon
