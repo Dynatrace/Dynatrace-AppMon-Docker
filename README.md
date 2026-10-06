@@ -1,7 +1,7 @@
 > [!IMPORTANT]
 > **This repository is archived and no longer maintained or supported.**
 >
-> - **Archived:** YYYY-MM-DD
+> - **Archived:** 2026-10-06
 > - **Reason:** <AppMon product EOL / replaced / merged elsewhere — include a useful explanation>
 > - **Replacement:** <supported successor and migration guidance, or "None">
 >
